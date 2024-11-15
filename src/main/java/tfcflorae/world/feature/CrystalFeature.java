@@ -1,16 +1,18 @@
 package tfcflorae.world.feature;
 
 import com.mojang.serialization.Codec;
-import java.util.Random;
+
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.BlockStateConfiguration;
-import net.minecraft.world.level.material.Material;
+import net.minecraft.world.level.material.MapColor;
+
 
 public class CrystalFeature extends Feature<BlockStateConfiguration>
 {
@@ -23,13 +25,13 @@ public class CrystalFeature extends Feature<BlockStateConfiguration>
         * Places the given feature at the given location.
         * During world generation, features are provided with a 3x3 region of chunks, centered on the chunk being generated,
         * that they can safely generate into.
-        * @param pContext A context object with a reference to the level and the position the feature is being placed at
+        * @param context A context object with a reference to the level and the position the feature is being placed at
         */
     public boolean place(FeaturePlaceContext<BlockStateConfiguration> context)
     {
         final WorldGenLevel worldgenlevel = context.level();
         final BlockPos blockpos = context.origin();
-        final Random random = context.random();
+        final RandomSource random = context.random();
         BlockState state = (context.config()).state;
 
         if (!worldgenlevel.isEmptyBlock(blockpos))
@@ -39,7 +41,7 @@ public class CrystalFeature extends Feature<BlockStateConfiguration>
         else
         {
             BlockState blockstate = worldgenlevel.getBlockState(blockpos.above());
-            if (blockstate.getMaterial() != Material.STONE || blockstate != state)
+            if (blockstate.getMapColor(worldgenlevel, blockpos) != MapColor.STONE || blockstate != state)
             {
                 return false;
             }

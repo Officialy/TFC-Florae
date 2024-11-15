@@ -1,6 +1,8 @@
 package tfcflorae.world.feature;
 
-import java.util.Random;
+
+
+import net.minecraft.util.RandomSource;
 import org.jetbrains.annotations.Nullable;
 
 import net.minecraft.core.BlockPos;
@@ -20,7 +22,7 @@ import net.dries007.tfc.world.settings.RockSettings;
 
 public class FissureFeature extends Feature<FissureConfig>
 {
-    public static void placeFissure(WorldGenLevel level, BlockPos startPos, BlockPos centerPos, BlockPos.MutableBlockPos mutablePos, Random random, BlockState insideState, BlockState wallState, int minPieces, int maxPieces, int maxPieceLength, int minDepth, int radius, @Nullable FissureConfig.Decoration decoration)
+    public static void placeFissure(WorldGenLevel level, BlockPos startPos, BlockPos centerPos, BlockPos.MutableBlockPos mutablePos, RandomSource random, BlockState insideState, BlockState wallState, int minPieces, int maxPieces, int maxPieceLength, int minDepth, int radius, @Nullable FissureConfig.Decoration decoration)
     {
         // Carve a fissure down from this position, by carving a series of tubes straight down
         final int pieces = minPieces + random.nextInt(maxPieces - minPieces);
@@ -80,7 +82,7 @@ public class FissureFeature extends Feature<FissureConfig>
         }
     }
 
-    private static Direction randomBoundedDirection(Random random, BlockPos center, BlockPos target, int radius)
+    private static Direction randomBoundedDirection(RandomSource random, BlockPos center, BlockPos target, int radius)
     {
         // Adjust the branch to stay within a bounded region
         final Direction direction = Direction.Plane.HORIZONTAL.getRandomDirection(random);
@@ -127,7 +129,7 @@ public class FissureFeature extends Feature<FissureConfig>
     {
         final WorldGenLevel level = context.level();
         final BlockPos pos = context.origin();
-        final Random rand = context.random();
+        final RandomSource rand = context.random();
         final FissureConfig config = context.config();
 
         final BlockPos.MutableBlockPos mutablePos = new BlockPos.MutableBlockPos();

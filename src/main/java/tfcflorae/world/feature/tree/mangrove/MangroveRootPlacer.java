@@ -7,6 +7,7 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.util.RandomSource;
 import net.minecraft.util.valueproviders.IntProvider;
 import net.minecraft.world.level.LevelSimulatedReader;
 import net.minecraft.world.level.block.Blocks;
@@ -18,7 +19,7 @@ import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvi
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.Random;
+
 import java.util.function.BiConsumer;
 
 import net.dries007.tfc.common.TFCTags;
@@ -58,7 +59,7 @@ public class MangroveRootPlacer
         this.mangroveRootPlacement = mangroveRootPlacement;
     }
     
-    public boolean generate(LevelSimulatedReader level, BiConsumer<BlockPos, BlockState> replacer, Random random, BlockPos pos, BlockPos origin, RootedTreeConfig config)
+    public boolean generate(LevelSimulatedReader level, BiConsumer<BlockPos, BlockState> replacer, RandomSource random, BlockPos pos, BlockPos origin, RootedTreeConfig config)
     {
         ArrayList<BlockPos> positions = Lists.newArrayList();
         BlockPos.MutableBlockPos mutable = pos.mutable();
@@ -93,7 +94,7 @@ public class MangroveRootPlacer
         return TreeFeature.validTreePos(level, pos) || level.isStateAtPosition(pos, FluidHelpers::isAirOrEmptyFluid) || level.isStateAtPosition(pos, state -> state.is(TFCTags.Blocks.SINGLE_BLOCK_REPLACEABLE)) || level.isStateAtPosition(pos, state -> state.is(this.mangroveRootPlacement.canGrowThrough())) || level.isStateAtPosition(pos, state -> state.is(TFCBlocks.SALT_WATER.get())) || level.isStateAtPosition(pos, state -> state.is(TFCBlocks.RIVER_WATER.get())) || level.isStateAtPosition(pos, state -> state.is(TFCBlocks.SPRING_WATER.get()));
     }
 
-    private boolean canGrow(LevelSimulatedReader level, Random random, BlockPos pos, Direction direction, BlockPos origin, List<BlockPos> offshootPositions, int rootLength)
+    private boolean canGrow(LevelSimulatedReader level, RandomSource random, BlockPos pos, Direction direction, BlockPos origin, List<BlockPos> offshootPositions, int rootLength)
     {
         int length = this.mangroveRootPlacement.maxRootLength();
         if (rootLength != length && offshootPositions.size() <= length)
@@ -114,7 +115,7 @@ public class MangroveRootPlacer
         }
     }
 
-    protected List<BlockPos> getOffshootPositions(BlockPos pos, Direction direction, Random random, BlockPos origin)
+    protected List<BlockPos> getOffshootPositions(BlockPos pos, Direction direction, RandomSource random, BlockPos origin)
     {
         BlockPos below = pos.below();
         BlockPos offset = pos.relative(direction);
@@ -139,7 +140,7 @@ public class MangroveRootPlacer
         }
     }
 
-    protected void placeRoots(LevelSimulatedReader level, BiConsumer<BlockPos, BlockState> replacer, Random random, BlockPos pos, RootedTreeConfig config)
+    protected void placeRoots(LevelSimulatedReader level, BiConsumer<BlockPos, BlockState> replacer, RandomSource random, BlockPos pos, RootedTreeConfig config)
     {
         if (level.isStateAtPosition(pos, state -> state.is(this.mangroveRootPlacement.muddyRootsIn())))
         {
@@ -177,7 +178,7 @@ public class MangroveRootPlacer
         return state;
     }
 
-    public BlockPos trunkOffset(BlockPos pos, Random random)
+    public BlockPos trunkOffset(BlockPos pos, RandomSource random)
     {
         return pos.above(this.trunkOffsetY.sample(random));
     }

@@ -35,7 +35,7 @@ public class WalkTowardsWater extends Behavior<AgeableMob>
     @Override
     protected boolean checkExtraStartConditions(ServerLevel level, AgeableMob entity)
     {
-        return !entity.level.getFluidState(entity.blockPosition()).is(FluidTags.WATER);
+        return !entity.level().getFluidState(entity.blockPosition()).is(FluidTags.WATER);
     }
 
     @Override

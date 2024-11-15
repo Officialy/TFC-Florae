@@ -1,11 +1,12 @@
 package tfcflorae.world.carver;
 
 import com.mojang.serialization.Codec;
-import java.util.Random;
+
 import java.util.function.Function;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.chunk.CarvingMask;
@@ -32,7 +33,7 @@ public class CavernCaverFeature extends CaveWorldCarver
    }
 
    @Override
-   protected float getThickness(Random random)
+   protected float getThickness(RandomSource random)
    {
       return (random.nextFloat() * 2.0F + random.nextFloat()) * 2.0F;
    }
@@ -46,16 +47,16 @@ public class CavernCaverFeature extends CaveWorldCarver
    /**
     * Carves a single block, replacing it with the appropiate state if possible, and handles replacing exposed dirt with
     * grass.
-    * @param pPos The position to carve at. The method does not mutate this position.
-    * @param pCheckPos An additional mutable block position object to be used and modified by the method
-    * @param pReachedSurface Set to true if the block carved was the surface, which is checked as being either grass or
+    * @param biome The position to carve at. The method does not mutate this position.
+    * @param bool An additional mutable block position object to be used and modified by the method
+    * @param mutablePos Set to true if the block carved was the surface, which is checked as being either grass or
     * mycelium
     */
    @Override
    protected boolean carveBlock(CarvingContext context, CaveCarverConfiguration config, ChunkAccess chunk, Function<BlockPos, Holder<Biome>> biome, CarvingMask mask, BlockPos.MutableBlockPos mutablePos, BlockPos.MutableBlockPos mutablePos2, Aquifer aquifer, MutableBoolean bool)
    {
-      if (CarverHelpers.canReplaceBlock(chunk.getBlockState(mutablePos)))
-      {
+//      if (CarverHelpers.canReplaceBlock(chunk.getBlockState(mutablePos)))
+//      {
          BlockState blockstate;
          if (mutablePos.getY() <= context.getMinGenY() + 15)
          {
@@ -67,10 +68,10 @@ public class CavernCaverFeature extends CaveWorldCarver
          }
          chunk.setBlockState(mutablePos, blockstate, false);
          return true;
-      }
-      else
-      {
-         return false;
-      }
+//      }
+//      else
+//      {
+//         return false;
+//      }
    }
 }

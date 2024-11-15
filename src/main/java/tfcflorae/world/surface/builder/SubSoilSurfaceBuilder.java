@@ -302,7 +302,7 @@ public class SubSoilSurfaceBuilder implements SurfaceBuilder
 
     public static boolean isRiver(BiomeExtension biome)
     {
-        return biome == TFCBiomes.RIVER || biome == TFCBiomes.OCEANIC_MOUNTAIN_RIVER || biome == TFCBiomes.OLD_MOUNTAIN_RIVER || biome == TFCBiomes.MOUNTAIN_RIVER || biome == TFCBiomes.VOLCANIC_OCEANIC_MOUNTAIN_RIVER || biome == TFCBiomes.VOLCANIC_MOUNTAIN_RIVER;
+        return biome == TFCBiomes.RIVER;// || biome == TFCBiomes.OCEANIC_MOUNTAIN_RIVER || biome == TFCBiomes.OLD_MOUNTAIN_RIVER || biome == TFCBiomes.MOUNTAIN_RIVER || biome == TFCBiomes.VOLCANIC_OCEANIC_MOUNTAIN_RIVER || biome == TFCBiomes.VOLCANIC_MOUNTAIN_RIVER;
     }
 
     public static boolean isLow(BiomeExtension biome)

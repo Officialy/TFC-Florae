@@ -1,23 +1,6 @@
 package tfcflorae.world.surface.builder;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.tags.FluidTags;
-import net.minecraft.util.Mth;
-import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.Material;
-
-import java.util.Arrays;
-import java.util.EnumMap;
-import java.util.EnumSet;
-import java.util.List;
-import java.util.Set;
-
-import net.dries007.tfc.common.blocks.RiverWaterBlock;
-import net.dries007.tfc.common.blocks.TFCBlocks;
-import net.dries007.tfc.common.blocks.TFCMaterials;
-import net.dries007.tfc.common.blocks.rock.Rock;
 import net.dries007.tfc.common.blocks.soil.SoilBlockType;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.world.chunkdata.ChunkData;
@@ -87,7 +70,7 @@ public class ForestSurfaceBuilder implements SurfaceBuilder
         final SurfaceState COMPACT_DIRT = TFCFSoilSurfaceState.buildType(TFCFSoil.COMPACT_DIRT);
 
         final double randomGauss = Math.abs(context.random().nextGaussian()) * 0.1f;
-        final float noise = surfaceMaterialNoise.noise(context.pos().getX(), context.pos().getZ()) * 0.9f + context.random().nextFloat() * 0.1f;
+        final double noise = surfaceMaterialNoise.noise(context.pos().getX(), context.pos().getZ()) * 0.9f + context.random().nextFloat() * 0.1f;
 
         if (pos.getY() > context.getSeaLevel())
         {

@@ -1,12 +1,13 @@
 package tfcflorae.world.biome;
 
-import java.util.Random;
+
 
 import net.minecraft.util.Mth;
 
 import net.dries007.tfc.world.BiomeNoiseSampler;
 import net.dries007.tfc.world.biome.BiomeNoise;
 import net.dries007.tfc.world.noise.*;
+import net.minecraft.util.RandomSource;
 
 import static net.dries007.tfc.world.TFCChunkGenerator.SEA_LEVEL_Y;
 
@@ -38,12 +39,12 @@ public final class TFCFBiomeNoise
             .scaled(-0.2f, 0.8f)
             .ridged()
             .map(x -> {
-                final float x0 = 0.125f * (x + 1) * (x + 1) * (x + 1);
+                final double x0 = 0.125f * (x + 1) * (x + 1) * (x + 1);
                 return SEA_LEVEL_Y + baseHeight + scaleHeight * x0;
             });
 
         return (x, z) -> {
-            float height = baseNoise.noise(x, z);
+            double height = baseNoise.noise(x, z);
             return height;
         };
     }
@@ -126,7 +127,7 @@ public final class TFCFBiomeNoise
             .ridged();
 
         return (x, z) -> {
-            float height = baseNoise.noise(x, z);
+            double height = baseNoise.noise(x, z);
             if (height < BiomeNoise.hills(seed, minHeight, minHeight + 10).noise(x, z))
             {
                 height = BiomeNoise.hills(seed, minHeight, minHeight + 10).noise(x, z);
@@ -237,7 +238,7 @@ public final class TFCFBiomeNoise
             });*/
 
         return (x, z) -> {
-            float height = baseNoise.noise(x, z);
+            double height = baseNoise.noise(x, z);
             if (height > SEA_LEVEL_Y + 18)
             {
                 height = upperNoise.noise(x, z);
@@ -255,7 +256,7 @@ public final class TFCFBiomeNoise
      */
     public static Noise2D canyonCliffs(long seed, int minHeight, int maxHeight)
     {
-        final Random generator = new Random(seed);
+        final RandomSource generator = RandomSource.create(seed);
         final OpenSimplex2D warp = new OpenSimplex2D(seed).octaves(4).spread(0.03f).scaled(-100f, 100f);
         final Noise2D baseNoise = new OpenSimplex2D(seed + 1)
             .octaves(4)
@@ -272,13 +273,13 @@ public final class TFCFBiomeNoise
         //final Noise2D cliffHeightNoiseMiddle = new OpenSimplex2D(seed + 3).octaves(2).spread(0.01f).scaled(90, 100);
 
         return (x, z) -> {
-            float height = baseNoise.noise(x, z);
+            double height = baseNoise.noise(x, z);
             if (height > 70 + extra) // Only sample each cliff noise layer if the base noise could be influenced by it
             {
-                final float cliffHeight = cliffHeightNoiseLower.noise(x, z) - height;
+                final double cliffHeight = cliffHeightNoiseLower.noise(x, z) - height;
                 if (cliffHeight < 0)
                 {
-                    final float mappedCliffHeight = Mth.clampedMap(cliffHeight, 0, -1, 0, 1);
+                    final double mappedCliffHeight = Mth.clampedMap(cliffHeight, 0, -1, 0, 1);
                     height += mappedCliffHeight * cliffNoise.noise(x, z);
                 }
             }
@@ -302,7 +303,7 @@ public final class TFCFBiomeNoise
     public static Noise2D grandCanyon(long seed)
     {
         final OpenSimplex2D warp = new OpenSimplex2D(seed).octaves(2).spread(0.01f).scaled(-25f, 25f);
-        final Random generator = new Random(seed);
+        final RandomSource generator = RandomSource.create(seed);
         //final int rng = generator.nextInt(SEA_LEVEL_Y / 2);
 
         //Noise2D noise = new OpenSimplex2D(generator.nextLong()).octaves(4).spread(0.01f).scaled(SEA_LEVEL_Y - rng, SEA_LEVEL_Y + 96);
@@ -350,33 +351,33 @@ public final class TFCFBiomeNoise
         final Noise2D cliffHeightNoiseUpper = new OpenSimplex2D(seed + 3).octaves(2).spread(0.01f).scaled(25, 40);
 
         return (x, z) -> {
-            final Random generator = new Random((long) baseNoise.noise(x, z));
+            final RandomSource generator = RandomSource.create((long) baseNoise.noise(x, z));
             final int extra = (int) generator.nextGaussian() * 4;
-            float height = baseNoise.noise(x, z);
+            double height = baseNoise.noise(x, z);
             if (height > -245 + extra)
             {
-                final float cliffHeight = cliffHeightNoiseLower.noise(x, z) - height;
+                final double cliffHeight = cliffHeightNoiseLower.noise(x, z) - height;
                 if (cliffHeight < 0)
                 {
-                    final float mappedCliffHeight = Mth.clampedMap(cliffHeight, 0, -1, 0, 1);
+                    final double mappedCliffHeight = Mth.clampedMap(cliffHeight, 0, -1, 0, 1);
                     height += mappedCliffHeight * cliffNoise.noise(x, z);
                 }
             }
             if (height > -237 + extra)
             {
-                final float cliffHeight = cliffHeightNoiseMiddle.noise(x, z) - height;
+                final double cliffHeight = cliffHeightNoiseMiddle.noise(x, z) - height;
                 if (cliffHeight < 0)
                 {
-                    final float mappedCliffHeight = Mth.clampedMap(cliffHeight, 0, -1, 0, 1);
+                    final double mappedCliffHeight = Mth.clampedMap(cliffHeight, 0, -1, 0, 1);
                     height += mappedCliffHeight * cliffNoise.noise(x, z);
                 }
             }
             if (height > -230 + extra)
             {
-                final float cliffHeight = cliffHeightNoiseUpper.noise(x, z) - height;
+                final double cliffHeight = cliffHeightNoiseUpper.noise(x, z) - height;
                 if (cliffHeight < 0)
                 {
-                    final float mappedCliffHeight = Mth.clampedMap(cliffHeight, 0, -1, 0, 1);
+                    final double mappedCliffHeight = Mth.clampedMap(cliffHeight, 0, -1, 0, 1);
                     height += mappedCliffHeight * cliffNoise.noise(x, z);
                 }
             }
@@ -396,7 +397,7 @@ public final class TFCFBiomeNoise
                 .ridged() // Ridges are applied after octaves as it creates less directional artifacts this way
             )
             .map(x -> {
-                final float x0 = 0.125f * (x + 1) * (x + 1) * (x + 1); // Power scaled, flattens most areas but maximizes peaks
+                final double x0 = 0.125f * (x + 1) * (x + 1) * (x + 1); // Power scaled, flattens most areas but maximizes peaks
                 return SEA_LEVEL_Y + baseHeight + scaleHeight * x0; // Scale the entire thing to mountain ranges
             });
 
@@ -408,33 +409,33 @@ public final class TFCFBiomeNoise
         final Noise2D cliffHeightNoiseUpper = new OpenSimplex2D(seed + 3).octaves(2).spread(0.01f).scaled(120 - 20, 140 + 20);
 
         return (x, z) -> {
-            final Random generator = new Random((long) baseNoise.noise(x, z));
+            final RandomSource generator = RandomSource.create((long) baseNoise.noise(x, z));
             final int extra = (int) generator.nextGaussian() * 4;
-            float height = baseNoise.noise(x, z);
+            double height = baseNoise.noise(x, z);
             if (height > 75 + extra)
             {
-                final float cliffHeight = cliffHeightNoiseLower.noise(x, z) - height;
+                final double cliffHeight = cliffHeightNoiseLower.noise(x, z) - height;
                 if (cliffHeight < 0)
                 {
-                    final float mappedCliffHeight = Mth.clampedMap(cliffHeight, 0, -1, 0, 1);
+                    final double mappedCliffHeight = Mth.clampedMap(cliffHeight, 0, -1, 0, 1);
                     height += mappedCliffHeight * cliffNoise.noise(x, z);
                 }
             }
             if (height > 95 + extra)
             {
-                final float cliffHeight = cliffHeightNoiseMiddle.noise(x, z) - height;
+                final double cliffHeight = cliffHeightNoiseMiddle.noise(x, z) - height;
                 if (cliffHeight < 0)
                 {
-                    final float mappedCliffHeight = Mth.clampedMap(cliffHeight, 0, -1, 0, 1);
+                    final double mappedCliffHeight = Mth.clampedMap(cliffHeight, 0, -1, 0, 1);
                     height += mappedCliffHeight * cliffNoise.noise(x, z);
                 }
             }
             if (height > 120 + extra)
             {
-                final float cliffHeight = cliffHeightNoiseUpper.noise(x, z) - height;
+                final double cliffHeight = cliffHeightNoiseUpper.noise(x, z) - height;
                 if (cliffHeight < 0)
                 {
-                    final float mappedCliffHeight = Mth.clampedMap(cliffHeight, 0, -1, 0, 1);
+                    final double mappedCliffHeight = Mth.clampedMap(cliffHeight, 0, -1, 0, 1);
                     height += mappedCliffHeight * cliffNoise.noise(x, z);
                 }
             }
@@ -470,7 +471,7 @@ public final class TFCFBiomeNoise
                 .ridged() // Ridges are applied after octaves as it creates less directional artifacts this way
             )
             .map(x -> {
-                final float x0 = 0.125f * (x + 1) * (x + 1) * (x + 1); // Power scaled, flattens most areas but maximizes peaks
+                final double x0 = 0.125f * (x + 1) * (x + 1) * (x + 1); // Power scaled, flattens most areas but maximizes peaks
                 return SEA_LEVEL_Y + baseHeight + scaleHeight * x0; // Scale the entire thing to mountain ranges
             });
 
@@ -483,42 +484,42 @@ public final class TFCFBiomeNoise
         final Noise2D cliffHeightNoiseHighUpper = new OpenSimplex2D(seed + 3).octaves(2).spread(0.01f).scaled(110 - 20, 160 + 20);
 
         return (x, z) -> {
-            final Random generator = new Random((long) warp.noise(x, z));
+            final RandomSource generator = RandomSource.create((long) warp.noise(x, z));
             final int extra = (int) generator.nextGaussian() * 4;
-            float height = baseNoise.noise(x, z);
+            double height = baseNoise.noise(x, z);
             if (height > 70 + extra)
             {
-                final float cliffHeight = cliffHeightNoiseLower.noise(x, z) - height;
+                final double cliffHeight = cliffHeightNoiseLower.noise(x, z) - height;
                 if (cliffHeight < 0)
                 {
-                    final float mappedCliffHeight = Mth.clampedMap(cliffHeight, 0, -1, 0, 1);
+                    final double mappedCliffHeight = Mth.clampedMap(cliffHeight, 0, -1, 0, 1);
                     height += mappedCliffHeight * cliffNoise.noise(x, z);
                 }
             }
             if (height > 80 + extra)
             {
-                final float cliffHeight = cliffHeightNoiseMiddle.noise(x, z) - height;
+                final double cliffHeight = cliffHeightNoiseMiddle.noise(x, z) - height;
                 if (cliffHeight < 0)
                 {
-                    final float mappedCliffHeight = Mth.clampedMap(cliffHeight, 0, -1, 0, 1);
+                    final double mappedCliffHeight = Mth.clampedMap(cliffHeight, 0, -1, 0, 1);
                     height += mappedCliffHeight * cliffNoise.noise(x, z);
                 }
             }
             if (height > 90 + extra)
             {
-                final float cliffHeight = cliffHeightNoiseUpper.noise(x, z) - height;
+                final double cliffHeight = cliffHeightNoiseUpper.noise(x, z) - height;
                 if (cliffHeight < 0)
                 {
-                    final float mappedCliffHeight = Mth.clampedMap(cliffHeight, 0, -1, 0, 1);
+                    final double mappedCliffHeight = Mth.clampedMap(cliffHeight, 0, -1, 0, 1);
                     height += mappedCliffHeight * cliffNoise.noise(x, z);
                 }
             }
             if (height > 110 + extra)
             {
-                final float cliffHeight = cliffHeightNoiseHighUpper.noise(x, z) - height;
+                final double cliffHeight = cliffHeightNoiseHighUpper.noise(x, z) - height;
                 if (cliffHeight < 0)
                 {
-                    final float mappedCliffHeight = Mth.clampedMap(cliffHeight, 0, -1, 0, 1);
+                    final double mappedCliffHeight = Mth.clampedMap(cliffHeight, 0, -1, 0, 1);
                     height += mappedCliffHeight * cliffNoise.noise(x, z);
                 }
             }
@@ -542,7 +543,7 @@ public final class TFCFBiomeNoise
                 .ridged() // Ridges are applied after octaves as it creates less directional artifacts this way
             )
             .map(x -> {
-                final float x0 = 0.125f * (x + 1) * (x + 1) * (x + 1); // Power scaled, flattens most areas but maximizes peaks
+                final double x0 = 0.125f * (x + 1) * (x + 1) * (x + 1); // Power scaled, flattens most areas but maximizes peaks
                 return SEA_LEVEL_Y + baseHeight + scaleHeight * x0; // Scale the entire thing to mountain ranges
             });
 
@@ -555,43 +556,43 @@ public final class TFCFBiomeNoise
         final Noise2D cliffHeightNoiseHighUpper = new OpenSimplex2D(seed + 3).octaves(2).spread(0.01f).scaled(110 - 20, 160 + 20);
 
         return (x, z) -> {
-            /*final Random generator = new Random((long) warp.noise(x, z));
+            /*final RandomSource generator = new RandomSource((long) warp.noise(x, z));
             final int extra = (int) generator.nextGaussian() * 4;*/
-            final float extra = pits(seed + 1, -70, -50).noise(x, z);
-            float height = baseNoise.noise(x, z);
+            final double extra = pits(seed + 1, -70, -50).noise(x, z);
+            double height = baseNoise.noise(x, z);
             if (height > 70 + extra)
             {
-                final float cliffHeight = cliffHeightNoiseLower.noise(x, z) - height;
+                final double cliffHeight = cliffHeightNoiseLower.noise(x, z) - height;
                 if (cliffHeight < 0)
                 {
-                    final float mappedCliffHeight = Mth.clampedMap(cliffHeight, 0, -1, 0, 1);
+                    final double mappedCliffHeight = Mth.clampedMap(cliffHeight, 0, -1, 0, 1);
                     height += mappedCliffHeight * cliffNoise.noise(x, z);
                 }
             }
             if (height > 80 + extra)
             {
-                final float cliffHeight = cliffHeightNoiseMiddle.noise(x, z) - height;
+                final double cliffHeight = cliffHeightNoiseMiddle.noise(x, z) - height;
                 if (cliffHeight < 0)
                 {
-                    final float mappedCliffHeight = Mth.clampedMap(cliffHeight, 0, -1, 0, 1);
+                    final double mappedCliffHeight = Mth.clampedMap(cliffHeight, 0, -1, 0, 1);
                     height += mappedCliffHeight * cliffNoise.noise(x, z);
                 }
             }
             if (height > 90 + extra)
             {
-                final float cliffHeight = cliffHeightNoiseUpper.noise(x, z) - height;
+                final double cliffHeight = cliffHeightNoiseUpper.noise(x, z) - height;
                 if (cliffHeight < 0)
                 {
-                    final float mappedCliffHeight = Mth.clampedMap(cliffHeight, 0, -1, 0, 1);
+                    final double mappedCliffHeight = Mth.clampedMap(cliffHeight, 0, -1, 0, 1);
                     height += mappedCliffHeight * cliffNoise.noise(x, z);
                 }
             }
             if (height > 110 + extra)
             {
-                final float cliffHeight = cliffHeightNoiseHighUpper.noise(x, z) - height;
+                final double cliffHeight = cliffHeightNoiseHighUpper.noise(x, z) - height;
                 if (cliffHeight < 0)
                 {
-                    final float mappedCliffHeight = Mth.clampedMap(cliffHeight, 0, -1, 0, 1);
+                    final double mappedCliffHeight = Mth.clampedMap(cliffHeight, 0, -1, 0, 1);
                     height += mappedCliffHeight * cliffNoise.noise(x, z);
                 }
             }
@@ -615,7 +616,7 @@ public final class TFCFBiomeNoise
                 .ridged() // Ridges are applied after octaves as it creates less directional artifacts this way
             )
             .map(x -> {
-                final float x0 = 0.125f * (x + 1) * (x + 1) * (x + 1); // Power scaled, flattens most areas but maximizes peaks
+                final double x0 = 0.125f * (x + 1) * (x + 1) * (x + 1); // Power scaled, flattens most areas but maximizes peaks
                 return SEA_LEVEL_Y + baseHeight + scaleHeight * x0; // Scale the entire thing to mountain ranges
             });
 
@@ -628,43 +629,43 @@ public final class TFCFBiomeNoise
         final Noise2D cliffHeightNoiseHighUpper = new OpenSimplex2D(seed + 3).octaves(2).spread(0.01f).scaled(110 - 20, 160 + 20);
 
         return (x, z) -> {
-            /*final Random generator = new Random((long) warp.noise(x, z));
+            /*final RandomSource generator = new RandomSource((long) warp.noise(x, z));
             final int extra = (int) generator.nextGaussian() * 4;*/
-            final float extra = pits(seed + 1, -70, -50).noise(x, z);
-            float height = baseNoise.noise(x, z);
+            final double extra = pits(seed + 1, -70, -50).noise(x, z);
+            double height = baseNoise.noise(x, z);
             if (height > 70 + extra)
             {
-                final float cliffHeight = cliffHeightNoiseLower.noise(x, z) - height;
+                final double cliffHeight = cliffHeightNoiseLower.noise(x, z) - height;
                 if (cliffHeight < 0)
                 {
-                    final float mappedCliffHeight = Mth.clampedMap(cliffHeight, 0, -1, 0, 1);
+                    final double mappedCliffHeight = Mth.clampedMap(cliffHeight, 0, -1, 0, 1);
                     height += mappedCliffHeight * cliffNoise.noise(x, z);
                 }
             }
             if (height > 80 + extra)
             {
-                final float cliffHeight = cliffHeightNoiseMiddle.noise(x, z) - height;
+                final double cliffHeight = cliffHeightNoiseMiddle.noise(x, z) - height;
                 if (cliffHeight < 0)
                 {
-                    final float mappedCliffHeight = Mth.clampedMap(cliffHeight, 0, -1, 0, 1);
+                    final double mappedCliffHeight = Mth.clampedMap(cliffHeight, 0, -1, 0, 1);
                     height += mappedCliffHeight * cliffNoise.noise(x, z);
                 }
             }
             if (height > 90 + extra)
             {
-                final float cliffHeight = cliffHeightNoiseUpper.noise(x, z) - height;
+                final double cliffHeight = cliffHeightNoiseUpper.noise(x, z) - height;
                 if (cliffHeight < 0)
                 {
-                    final float mappedCliffHeight = Mth.clampedMap(cliffHeight, 0, -1, 0, 1);
+                    final double mappedCliffHeight = Mth.clampedMap(cliffHeight, 0, -1, 0, 1);
                     height += mappedCliffHeight * cliffNoise.noise(x, z);
                 }
             }
             if (height > 110 + extra)
             {
-                final float cliffHeight = cliffHeightNoiseHighUpper.noise(x, z) - height;
+                final double cliffHeight = cliffHeightNoiseHighUpper.noise(x, z) - height;
                 if (cliffHeight < 0)
                 {
-                    final float mappedCliffHeight = Mth.clampedMap(cliffHeight, 0, -1, 0, 1);
+                    final double mappedCliffHeight = Mth.clampedMap(cliffHeight, 0, -1, 0, 1);
                     height += mappedCliffHeight * cliffNoise.noise(x, z);
                 }
             }
@@ -688,7 +689,7 @@ public final class TFCFBiomeNoise
                 .ridged() // Ridges are applied after octaves as it creates less directional artifacts this way
             )
             .map(x -> {
-                final float x0 = 0.125f * (x + 1) * (x + 1) * (x + 1); // Power scaled, flattens most areas but maximizes peaks
+                final double x0 = 0.125f * (x + 1) * (x + 1) * (x + 1); // Power scaled, flattens most areas but maximizes peaks
                 return SEA_LEVEL_Y + baseHeight + scaleHeight * x0; // Scale the entire thing to mountain ranges
             });
 
@@ -701,43 +702,43 @@ public final class TFCFBiomeNoise
         final Noise2D cliffHeightNoiseHighUpper = new OpenSimplex2D(seed + 3).octaves(2).spread(0.01f).scaled(110 - 20, 160 + 20);
 
         return (x, z) -> {
-            /*final Random generator = new Random((long) warp.noise(x, z));
+            /*final RandomSource generator = new RandomSource((long) warp.noise(x, z));
             final int extra = (int) generator.nextGaussian() * 4;*/
-            final float extra = sawtoothCliffs(seed + 1, baseHeight, scaleHeight).noise(x, z);
-            float height = baseNoise.noise(x, z);
+            final double extra = sawtoothCliffs(seed + 1, baseHeight, scaleHeight).noise(x, z);
+            double height = baseNoise.noise(x, z);
             if (height > 70 + extra)
             {
-                final float cliffHeight = cliffHeightNoiseLower.noise(x, z) - height;
+                final double cliffHeight = cliffHeightNoiseLower.noise(x, z) - height;
                 if (cliffHeight < 0)
                 {
-                    final float mappedCliffHeight = Mth.clampedMap(cliffHeight, 0, -1, 0, 1);
+                    final double mappedCliffHeight = Mth.clampedMap(cliffHeight, 0, -1, 0, 1);
                     height += mappedCliffHeight * cliffNoise.noise(x, z);
                 }
             }
             if (height > 80 + extra)
             {
-                final float cliffHeight = cliffHeightNoiseMiddle.noise(x, z) - height;
+                final double cliffHeight = cliffHeightNoiseMiddle.noise(x, z) - height;
                 if (cliffHeight < 0)
                 {
-                    final float mappedCliffHeight = Mth.clampedMap(cliffHeight, 0, -1, 0, 1);
+                    final double mappedCliffHeight = Mth.clampedMap(cliffHeight, 0, -1, 0, 1);
                     height += mappedCliffHeight * cliffNoise.noise(x, z);
                 }
             }
             if (height > 90 + extra)
             {
-                final float cliffHeight = cliffHeightNoiseUpper.noise(x, z) - height;
+                final double cliffHeight = cliffHeightNoiseUpper.noise(x, z) - height;
                 if (cliffHeight < 0)
                 {
-                    final float mappedCliffHeight = Mth.clampedMap(cliffHeight, 0, -1, 0, 1);
+                    final double mappedCliffHeight = Mth.clampedMap(cliffHeight, 0, -1, 0, 1);
                     height += mappedCliffHeight * cliffNoise.noise(x, z);
                 }
             }
             if (height > 110 + extra)
             {
-                final float cliffHeight = cliffHeightNoiseHighUpper.noise(x, z) - height;
+                final double cliffHeight = cliffHeightNoiseHighUpper.noise(x, z) - height;
                 if (cliffHeight < 0)
                 {
-                    final float mappedCliffHeight = Mth.clampedMap(cliffHeight, 0, -1, 0, 1);
+                    final double mappedCliffHeight = Mth.clampedMap(cliffHeight, 0, -1, 0, 1);
                     height += mappedCliffHeight * cliffNoise.noise(x, z);
                 }
             }
@@ -761,7 +762,7 @@ public final class TFCFBiomeNoise
                 .ridged() // Ridges are applied after octaves as it creates less directional artifacts this way
             )
             .map(x -> {
-                final float x0 = 0.125f * (x + 1) * (x + 1) * (x + 1); // Power scaled, flattens most areas but maximizes peaks
+                final double x0 = 0.125f * (x + 1) * (x + 1) * (x + 1); // Power scaled, flattens most areas but maximizes peaks
                 return SEA_LEVEL_Y + baseHeight + scaleHeight * x0; // Scale the entire thing to mountain ranges
             });
 
@@ -774,43 +775,43 @@ public final class TFCFBiomeNoise
         final Noise2D cliffHeightNoiseHighUpper = new OpenSimplex2D(seed + 3).octaves(2).spread(0.01f).scaled(110 - 20, 160 + 20);
 
         return (x, z) -> {
-            /*final Random generator = new Random((long) warp.noise(x, z));
+            /*final RandomSource generator = new RandomSource((long) warp.noise(x, z));
             final int extra = (int) generator.nextGaussian() * 4;*/
-            final float extra = pits(seed + 1, -70, -50).noise(x, z);
-            float height = baseNoise.noise(x, z);
+            final double extra = pits(seed + 1, -70, -50).noise(x, z);
+            double height = baseNoise.noise(x, z);
             if (height > 70 + extra)
             {
-                final float cliffHeight = cliffHeightNoiseLower.noise(x, z) - height;
+                final double cliffHeight = cliffHeightNoiseLower.noise(x, z) - height;
                 if (cliffHeight < 0)
                 {
-                    final float mappedCliffHeight = Mth.clampedMap(cliffHeight, 0, -1, 0, 1);
+                    final double mappedCliffHeight = Mth.clampedMap(cliffHeight, 0, -1, 0, 1);
                     height += mappedCliffHeight * cliffNoise.noise(x, z);
                 }
             }
             if (height > 80 + extra)
             {
-                final float cliffHeight = cliffHeightNoiseMiddle.noise(x, z) - height;
+                final double cliffHeight = cliffHeightNoiseMiddle.noise(x, z) - height;
                 if (cliffHeight < 0)
                 {
-                    final float mappedCliffHeight = Mth.clampedMap(cliffHeight, 0, -1, 0, 1);
+                    final double mappedCliffHeight = Mth.clampedMap(cliffHeight, 0, -1, 0, 1);
                     height += mappedCliffHeight * cliffNoise.noise(x, z);
                 }
             }
             if (height > 90 + extra)
             {
-                final float cliffHeight = cliffHeightNoiseUpper.noise(x, z) - height;
+                final double cliffHeight = cliffHeightNoiseUpper.noise(x, z) - height;
                 if (cliffHeight < 0)
                 {
-                    final float mappedCliffHeight = Mth.clampedMap(cliffHeight, 0, -1, 0, 1);
+                    final double mappedCliffHeight = Mth.clampedMap(cliffHeight, 0, -1, 0, 1);
                     height += mappedCliffHeight * cliffNoise.noise(x, z);
                 }
             }
             if (height > 110 + extra)
             {
-                final float cliffHeight = cliffHeightNoiseHighUpper.noise(x, z) - height;
+                final double cliffHeight = cliffHeightNoiseHighUpper.noise(x, z) - height;
                 if (cliffHeight < 0)
                 {
-                    final float mappedCliffHeight = Mth.clampedMap(cliffHeight, 0, -1, 0, 1);
+                    final double mappedCliffHeight = Mth.clampedMap(cliffHeight, 0, -1, 0, 1);
                     height += mappedCliffHeight * cliffNoise.noise(x, z);
                 }
             }
@@ -836,22 +837,22 @@ public final class TFCFBiomeNoise
         final Noise2D cliffHeightNoiseMiddle = new OpenSimplex2D(seed + 3).octaves(2).spread(0.01f).scaled(70, 90);
 
         return (x, z) -> {
-            float height = baseNoise.noise(x, z);
+            double height = baseNoise.noise(x, z);
             if (height > 60)
             {
-                final float cliffHeight = cliffHeightNoiseLower.noise(x, z) - height;
+                final double cliffHeight = cliffHeightNoiseLower.noise(x, z) - height;
                 if (cliffHeight < 0)
                 {
-                    final float mappedCliffHeight = Mth.clampedMap(cliffHeight, 0, -1, 0, 1);
+                    final double mappedCliffHeight = Mth.clampedMap(cliffHeight, 0, -1, 0, 1);
                     height += mappedCliffHeight * cliffNoise.noise(x, z);
                 }
             }
             if (height > 70)
             {
-                final float cliffHeight = cliffHeightNoiseMiddle.noise(x, z) - height;
+                final double cliffHeight = cliffHeightNoiseMiddle.noise(x, z) - height;
                 if (cliffHeight < 0)
                 {
-                    final float mappedCliffHeight = Mth.clampedMap(cliffHeight, 0, -1, 0, 1);
+                    final double mappedCliffHeight = Mth.clampedMap(cliffHeight, 0, -1, 0, 1);
                     height += mappedCliffHeight * cliffNoise.noise(x, z);
                 }
             }
@@ -874,7 +875,7 @@ public final class TFCFBiomeNoise
                 .ridged() // Ridges are applied after octaves as it creates less directional artifacts this way
             )
             .map(x -> {
-                final float x0 = 0.125f * (x + 1) * (x + 1) * (x + 1); // Power scaled, flattens most areas but maximizes peaks
+                final double x0 = 0.125f * (x + 1) * (x + 1) * (x + 1); // Power scaled, flattens most areas but maximizes peaks
                 return SEA_LEVEL_Y + baseHeight + scaleHeight * x0; // Scale the entire thing to mountain ranges
             });
     }
@@ -914,7 +915,7 @@ public final class TFCFBiomeNoise
             .clamped(0, 1);
 
         final Noise2D lerpMapped = (x, z) -> {
-            float in = base.noise(x, z);
+            double in = base.noise(x, z);
             return Mth.lerp(lerp.noise(x, z), in, sharpHillsMap(in));
         };
 
@@ -928,10 +929,10 @@ public final class TFCFBiomeNoise
             .scaled(-0.75f, 0.7f, SEA_LEVEL_Y - 3, SEA_LEVEL_Y + 28);
     }
 
-    public static float sharpHillsMap(float in)
+    public static double sharpHillsMap(double in)
     {
-        final float in0 = 1.0f, in1 = 0.67f, in2 = 0.15f, in3 = -0.15f, in4 = -0.67f, in5 = -1.0f;
-        final float out0 = 1.0f, out1 = 0.7f, out2 = 0.5f, out3 = -0.5f, out4 = -0.7f, out5 = -1.0f;
+        final double in0 = 1.0f, in1 = 0.67f, in2 = 0.15f, in3 = -0.15f, in4 = -0.67f, in5 = -1.0f;
+        final double out0 = 1.0f, out1 = 0.7f, out2 = 0.5f, out3 = -0.5f, out4 = -0.7f, out5 = -1.0f;
 
         if (in > in1)
             return Mth.map(in, in1, in0, out1, out0);
@@ -1188,7 +1189,7 @@ public final class TFCFBiomeNoise
         final Noise2D carvingCenterNoise = new OpenSimplex2D(seed).octaves(2).spread(0.02f).scaled(SEA_LEVEL_Y - 3, SEA_LEVEL_Y + 3);
         final Noise2D carvingHeightNoise = new OpenSimplex2D(seed + 1).octaves(4).spread(0.15f).scaled(8, 14);
 
-        return BiomeNoiseSampler.fromHeightAndCarvingNoise(heightNoise, carvingCenterNoise, carvingHeightNoise);
+        return BiomeNoiseSampler.fromHeightNoise(heightNoise);//, carvingCenterNoise, carvingHeightNoise);
     }
 
     public static BiomeNoiseSampler carvingBadlands(long seed, Noise2D heightNoise)
@@ -1199,13 +1200,13 @@ public final class TFCFBiomeNoise
 
         return new BiomeNoiseSampler()
         {
-            private float surfaceHeight, center, height;
+            private double surfaceHeight, center, height;
 
             @Override
             public void setColumn(int x, int z)
             {
-                float h0 = Mth.clamp((0.5f - blobsNoise.noise(x, z)) * (1 / 0.3f), 0, 100);
-                float h1 = depthNoise.noise(x, z);
+                double h0 = Mth.clamp((0.5f - blobsNoise.noise(x, z)) * (1 / 0.3f), 0, 100);
+                double h1 = depthNoise.noise(x, z);
 
                 surfaceHeight = heightNoise.noise(x, z);
                 center = centerNoise.noise(x, z);
@@ -1221,7 +1222,7 @@ public final class TFCFBiomeNoise
             @Override
             public double noise(int y)
             {
-                float delta = Math.abs(center - y);
+                double delta = Math.abs(center - y);
                 return Mth.clamp(0.4f + 0.05f * (height - delta), 0, 20);
             }
         };
@@ -1235,13 +1236,13 @@ public final class TFCFBiomeNoise
 
         return new BiomeNoiseSampler()
         {
-            private float surfaceHeight, center, height;
+            private double surfaceHeight, center, height;
 
             @Override
             public void setColumn(int x, int z)
             {
-                float h0 = Mth.clamp((0.7f - blobsNoise.noise(x, z)) * (1 / 0.3f), 0, 1);
-                float h1 = depthNoise.noise(x, z);
+                double h0 = Mth.clamp((0.7f - blobsNoise.noise(x, z)) * (1 / 0.3f), 0, 1);
+                double h1 = depthNoise.noise(x, z);
 
                 surfaceHeight = heightNoise.noise(x, z);
                 center = centerNoise.noise(x, z);
@@ -1257,7 +1258,7 @@ public final class TFCFBiomeNoise
             @Override
             public double noise(int y)
             {
-                float delta = Math.abs(center - y);
+                double delta = Math.abs(center - y);
                 return Mth.clamp(0.4f + 0.05f * (height - delta), 0, 1);
             }
         };
@@ -1271,13 +1272,13 @@ public final class TFCFBiomeNoise
 
         return new BiomeNoiseSampler()
         {
-            private float surfaceHeight, center, height;
+            private double surfaceHeight, center, height;
 
             @Override
             public void setColumn(int x, int z)
             {
-                float h0 = Mth.clamp((0.7f - blobsNoise.noise(x, z)) * (1 / 0.3f), 0, 1);
-                float h1 = depthNoise.noise(x, z);
+                double h0 = Mth.clamp((0.7f - blobsNoise.noise(x, z)) * (1 / 0.3f), 0, 1);
+                double h1 = depthNoise.noise(x, z);
 
                 surfaceHeight = heightNoise.noise(x, z);
                 center = centerNoise.noise(x, z);
@@ -1293,7 +1294,7 @@ public final class TFCFBiomeNoise
             @Override
             public double noise(int y)
             {
-                float delta = Math.abs(center - y);
+                double delta = Math.abs(center - y);
                 return Mth.clamp(0.4f + 0.05f * (height - delta), 0, 1);
             }
         };
@@ -1307,13 +1308,13 @@ public final class TFCFBiomeNoise
 
         return new BiomeNoiseSampler()
         {
-            private float surfaceHeight, center, height;
+            private double surfaceHeight, center, height;
 
             @Override
             public void setColumn(int x, int z)
             {
-                float h0 = Mth.clamp((0.7f - blobsNoise.noise(x, z)) * (1 / 0.3f), 0, 1);
-                float h1 = depthNoise.noise(x, z);
+                double h0 = Mth.clamp((0.7f - blobsNoise.noise(x, z)) * (1 / 0.3f), 0, 1);
+                double h1 = depthNoise.noise(x, z);
 
                 surfaceHeight = heightNoise.noise(x, z);
                 center = centerNoise.noise(x, z);
@@ -1329,7 +1330,7 @@ public final class TFCFBiomeNoise
             @Override
             public double noise(int y)
             {
-                float delta = Math.abs(center - y);
+                double delta = Math.abs(center - y);
                 return Mth.clamp(0.4f + 0.05f * (height - delta), 0, 1);
             }
         };
@@ -1343,13 +1344,13 @@ public final class TFCFBiomeNoise
 
         return new BiomeNoiseSampler()
         {
-            private float surfaceHeight, center, height;
+            private double surfaceHeight, center, height;
 
             @Override
             public void setColumn(int x, int z)
             {
-                float h0 = Mth.clamp((0.7f - blobsNoise.noise(x, z)) * (1 / 0.3f), 0, 1);
-                float h1 = depthNoise.noise(x, z);
+                double h0 = Mth.clamp((0.7f - blobsNoise.noise(x, z)) * (1 / 0.3f), 0, 1);
+                double h1 = depthNoise.noise(x, z);
 
                 surfaceHeight = heightNoise.noise(x, z);
                 center = centerNoise.noise(x, z);
@@ -1365,7 +1366,7 @@ public final class TFCFBiomeNoise
             @Override
             public double noise(int y)
             {
-                float delta = Math.abs(center - y);
+                double delta = Math.abs(center - y);
                 return Mth.clamp(0.4f + 0.05f * (height - delta), 0, 1);
             }
         };
@@ -1379,13 +1380,13 @@ public final class TFCFBiomeNoise
 
         return new BiomeNoiseSampler()
         {
-            private float surfaceHeight, center, height;
+            private double surfaceHeight, center, height;
 
             @Override
             public void setColumn(int x, int z)
             {
-                float h0 = Mth.clamp((0.7f - blobsNoise.noise(x, z)) * (1 / 0.3f), 0, 1);
-                float h1 = depthNoise.noise(x, z);
+                double h0 = Mth.clamp((0.7f - blobsNoise.noise(x, z)) * (1 / 0.3f), 0, 1);
+                double h1 = depthNoise.noise(x, z);
 
                 surfaceHeight = heightNoise.noise(x, z);
                 center = centerNoise.noise(x, z);
@@ -1401,7 +1402,7 @@ public final class TFCFBiomeNoise
             @Override
             public double noise(int y)
             {
-                float delta = Math.abs(center - y);
+                double delta = Math.abs(center - y);
                 return Mth.clamp(0.4f + 0.05f * (height - delta), 0, 1);
             }
         };
@@ -1415,13 +1416,13 @@ public final class TFCFBiomeNoise
 
         return new BiomeNoiseSampler()
         {
-            private float surfaceHeight, center, height;
+            private double surfaceHeight, center, height;
 
             @Override
             public void setColumn(int x, int z)
             {
-                float h0 = Mth.clamp((0.7f - blobsNoise.noise(x, z)) * (1 / 0.3f), 0, 1);
-                float h1 = depthNoise.noise(x, z);
+                double h0 = Mth.clamp((0.7f - blobsNoise.noise(x, z)) * (1 / 0.3f), 0, 1);
+                double h1 = depthNoise.noise(x, z);
 
                 surfaceHeight = heightNoise.noise(x, z);
                 center = centerNoise.noise(x, z);
@@ -1437,7 +1438,7 @@ public final class TFCFBiomeNoise
             @Override
             public double noise(int y)
             {
-                float delta = Math.abs(center - y);
+                double delta = Math.abs(center - y);
                 return Mth.clamp(0.4f + 0.05f * (height - delta), 0, 1);
             }
         };
@@ -1451,13 +1452,13 @@ public final class TFCFBiomeNoise
 
         return new BiomeNoiseSampler()
         {
-            private float surfaceHeight, center, height;
+            private double surfaceHeight, center, height;
 
             @Override
             public void setColumn(int x, int z)
             {
-                float h0 = Mth.clamp((0.7f - blobsNoise.noise(x, z)) * (1 / 0.3f), 0, 1);
-                float h1 = depthNoise.noise(x, z);
+                double h0 = Mth.clamp((0.7f - blobsNoise.noise(x, z)) * (1 / 0.3f), 0, 1);
+                double h1 = depthNoise.noise(x, z);
 
                 surfaceHeight = heightNoise.noise(x, z);
                 center = centerNoise.noise(x, z);
@@ -1473,7 +1474,7 @@ public final class TFCFBiomeNoise
             @Override
             public double noise(int y)
             {
-                float delta = Math.abs(center - y);
+                double delta = Math.abs(center - y);
                 return Mth.clamp(0.4f + 0.05f * (height - delta), 0, 1);
             }
         };
@@ -1487,13 +1488,13 @@ public final class TFCFBiomeNoise
 
         return new BiomeNoiseSampler()
         {
-            private float surfaceHeight, center, height;
+            private double surfaceHeight, center, height;
 
             @Override
             public void setColumn(int x, int z)
             {
-                float h0 = Mth.clamp((0.7f - blobsNoise.noise(x, z)) * (1 / 0.3f), 0, 1);
-                float h1 = depthNoise.noise(x, z);
+                double h0 = Mth.clamp((0.7f - blobsNoise.noise(x, z)) * (1 / 0.3f), 0, 1);
+                double h1 = depthNoise.noise(x, z);
 
                 surfaceHeight = heightNoise.noise(x, z);
                 center = centerNoise.noise(x, z);
@@ -1509,7 +1510,7 @@ public final class TFCFBiomeNoise
             @Override
             public double noise(int y)
             {
-                float delta = Math.abs(center - y);
+                double delta = Math.abs(center - y);
                 return Mth.clamp(0.4f + 0.05f * (height - delta), 0, 1);
             }
         };
@@ -1523,13 +1524,13 @@ public final class TFCFBiomeNoise
 
         return new BiomeNoiseSampler()
         {
-            private float surfaceHeight, center, height;
+            private double surfaceHeight, center, height;
 
             @Override
             public void setColumn(int x, int z)
             {
-                float h0 = Mth.clamp((0.7f - blobsNoise.noise(x, z)) * (1 / 0.3f), 0, 1);
-                float h1 = depthNoise.noise(x, z);
+                double h0 = Mth.clamp((0.7f - blobsNoise.noise(x, z)) * (1 / 0.3f), 0, 1);
+                double h1 = depthNoise.noise(x, z);
 
                 surfaceHeight = heightNoise.noise(x, z);
                 center = centerNoise.noise(x, z);
@@ -1545,7 +1546,7 @@ public final class TFCFBiomeNoise
             @Override
             public double noise(int y)
             {
-                float delta = Math.abs(center - y);
+                double delta = Math.abs(center - y);
                 return Mth.clamp(0.4f + 0.05f * (height - delta), 0, 1);
             }
         };

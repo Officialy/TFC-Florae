@@ -18,7 +18,7 @@ public class LakeShoreSurfaceBuilder implements SurfaceBuilder
     @Override
     public void buildSurface(SurfaceBuilderContext context, int startY, int endY)
     {
-        final float noise = surfaceMaterialNoise.noise(context.pos().getX(), context.pos().getZ()) * 0.9f + context.random().nextFloat() * 0.1f;
+        final double noise = surfaceMaterialNoise.noise(context.pos().getX(), context.pos().getZ()) * 0.9f + context.random().nextFloat() * 0.1f;
         final NormalSurfaceBuilder surfaceBuilder = NormalSurfaceBuilder.INSTANCE;
         surfaceBuilder.buildSurface(context, startY, endY, noise < 0f ? SurfaceStates.GRAVEL : SurfaceStates.MUD, SurfaceStates.GRAVEL, SurfaceStates.SHORE_SANDSTONE);
     }

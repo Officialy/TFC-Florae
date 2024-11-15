@@ -1,6 +1,6 @@
 package tfcflorae.world.placement;
 
-import java.util.Random;
+
 import java.util.stream.Stream;
 
 import com.mojang.serialization.Codec;
@@ -8,6 +8,7 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.tags.FluidTags;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.levelgen.placement.PlacementContext;
 import net.minecraft.world.level.levelgen.placement.PlacementModifier;
 import net.minecraft.world.level.levelgen.placement.PlacementModifierType;
@@ -32,7 +33,7 @@ public class ShallowWaterPlacement extends PlacementModifier
     }
 
     @Override
-    public Stream<BlockPos> getPositions(PlacementContext context, Random random, BlockPos pos)
+    public Stream<BlockPos> getPositions(PlacementContext context, RandomSource random, BlockPos pos)
     {
         final BlockPos.MutableBlockPos mutablePos = new BlockPos.MutableBlockPos().set(pos);
         for (int i = 0; i < maxDepth; i++)

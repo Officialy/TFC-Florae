@@ -29,7 +29,6 @@ import tfcflorae.common.recipes.TFCFRecipeTypes;
 import tfcflorae.common.recipes.ingredients.TFCFIngredients;
 import tfcflorae.util.TFCFDispenserBehaviors;
 import tfcflorae.util.TFCFInteractionManager;
-import tfcflorae.world.ContinentalWorldType;
 import tfcflorae.world.carver.TFCFCarvers;
 import tfcflorae.world.feature.TFCFFeatures;
 import tfcflorae.world.placement.TFCFPlacements;
@@ -42,17 +41,17 @@ public class TFCFlorae
     public static final String MOD_VERSION = "${version}";
     public static final Logger LOGGER = LogUtils.getLogger();
 
-    public TFCFlorae()
+    public TFCFlorae(FMLJavaModLoadingContext mod)
     {
         LOGGER.info("Initializing TFC Florae");
         LOGGER.info("Options: Assertions Enabled = {}, Boostrap = {}, Test = {}, Debug Logging = {}", Helpers.ASSERTIONS_ENABLED, Helpers.BOOTSTRAP_ENVIRONMENT, Helpers.TEST_ENVIRONMENT, LOGGER.isDebugEnabled());
 
-        final IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
-
+        final var bus = mod.getModEventBus();
+        TFCFItems.ITEMS.register(bus);
         bus.addListener(this::setup);
         bus.addListener(TFCFEntities::onEntityAttributeCreation);
 
-        TFCFItems.ITEMS.register(bus);
+
         TFCFBlocks.BLOCKS.register(bus);
         TFCFContainerTypes.CONTAINERS.register(bus);
         TFCFEntities.ENTITIES.register(bus);
@@ -62,7 +61,7 @@ public class TFCFlorae
         TFCFSounds.SOUNDS.register(bus);
         TFCFParticles.PARTICLE_TYPES.register(bus);
         TFCFBlockEntities.BLOCK_ENTITIES.register(bus);
-        ContinentalWorldType.WORLD_TYPES.register(bus);
+//        ContinentalWorldType.WORLD_TYPES.register(bus);
 
         TFCFPlacements.PLACEMENT_MODIFIERS.register(bus);
         TFCFFeatures.FEATURES.register(bus);

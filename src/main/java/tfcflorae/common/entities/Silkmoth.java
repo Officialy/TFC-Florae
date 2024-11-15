@@ -286,7 +286,7 @@ public class Silkmoth extends Animal implements FlyingAnimal
         }
         else
         {
-            BlockEntity blockentity = this.level.getBlockEntity(this.nestPos);
+            BlockEntity blockentity = this.level().getBlockEntity(this.nestPos);
             return (blockentity instanceof SilkmothNestBlockEntity nest && nest.getBlockState().getValue(SilkmothNestBlock.PART) == Part.UPPER);
         }
     }
@@ -410,7 +410,7 @@ public class Silkmoth extends Animal implements FlyingAnimal
     {
         if (this.stayOutOfNestCountdown <= 0 && !this.silkmothPollinateGoal.isPollinating() && this.getTarget() == null)
         {
-            boolean flag = this.isTiredOfLookingForNectar() || this.level.isRaining() || this.level.isNight() || this.hasNectar();
+            boolean flag = this.isTiredOfLookingForNectar() || this.level().isRaining() || this.level().isNight() || this.hasNectar();
             return flag && !this.isNestNearFire();
         }
         else
@@ -446,7 +446,7 @@ public class Silkmoth extends Animal implements FlyingAnimal
     public void aiStep()
     {
         super.aiStep();
-        if (!this.level.isClientSide)
+        if (!this.level().isClientSide)
         {
             if (this.stayOutOfNestCountdown > 0)
             {
@@ -483,7 +483,7 @@ public class Silkmoth extends Animal implements FlyingAnimal
         }
         if (this.underWaterTicks > 20)
         {
-            this.hurt(DamageSource.DROWN, 1.0F);
+            this.hurt(damageSources().drown(), 1.0F);
         }
         if (!this.hasNectar())
         {
@@ -504,7 +504,7 @@ public class Silkmoth extends Animal implements FlyingAnimal
         }
         else
         {
-            BlockEntity blockentity = this.level.getBlockEntity(this.nestPos);
+            BlockEntity blockentity = this.level().getBlockEntity(this.nestPos);
             return blockentity instanceof SilkmothNestBlockEntity && ((SilkmothNestBlockEntity)blockentity).isFireNearby();
         }
     }
@@ -517,7 +517,7 @@ public class Silkmoth extends Animal implements FlyingAnimal
 
     boolean isTargetValid(BlockPos pPos)
     {
-        return this.level.isLoaded(pPos) && this.level.getBlockState(pPos).is(TFCFTags.Blocks.SILKMOTH_TARGET_BLOCKS);
+        return this.level().isLoaded(pPos) && this.level().getBlockState(pPos).is(TFCFTags.Blocks.SILKMOTH_TARGET_BLOCKS);
     }
 
     @Override
@@ -579,7 +579,7 @@ public class Silkmoth extends Animal implements FlyingAnimal
 
     public boolean isFlying()
     {
-        return !this.onGround;
+        return !this.onGround();
     }
 
     public void dropOffNectar()
@@ -597,7 +597,7 @@ public class Silkmoth extends Animal implements FlyingAnimal
         }
         else
         {
-            if (!this.level.isClientSide)
+            if (!this.level().isClientSide)
             {
                 this.silkmothPollinateGoal.stopPollinating();
             }
@@ -625,7 +625,7 @@ public class Silkmoth extends Animal implements FlyingAnimal
 
     private boolean doesNestHaveSpace(BlockPos pPos) 
     {
-        BlockEntity blockentity = this.level.getBlockEntity(pPos);
+        BlockEntity blockentity = this.level().getBlockEntity(pPos);
         if (blockentity instanceof SilkmothNestBlockEntity)
         {
             return !((SilkmothNestBlockEntity)blockentity).isFull();
@@ -646,7 +646,7 @@ public class Silkmoth extends Animal implements FlyingAnimal
     public class SilkmothGoToNestGoal extends Silkmoth.BaseSilkmothGoal
     {
         public static final int MAX_TRAVELLING_TICKS = 600;
-        int travellingTicks = Silkmoth.this.level.random.nextInt(10);
+        int travellingTicks = Silkmoth.this.level().random.nextInt(10);
         private static final int MAX_BLACKLISTED_TARGETS = 3;
         final List<BlockPos> blacklistedTargets = Lists.newArrayList();
         @Nullable private Path lastPath;
@@ -660,7 +660,7 @@ public class Silkmoth extends Animal implements FlyingAnimal
 
         public boolean canSilkmothUse()
         {
-            return Silkmoth.this.nestPos != null && !Silkmoth.this.hasRestriction() && Silkmoth.this.wantsToEnterNest() && !this.hasReachedTarget(Silkmoth.this.nestPos) && Silkmoth.this.level.getBlockState(Silkmoth.this.nestPos).is(BlockTags.BEEHIVES);
+            return Silkmoth.this.nestPos != null && !Silkmoth.this.hasRestriction() && Silkmoth.this.wantsToEnterNest() && !this.hasReachedTarget(Silkmoth.this.nestPos) && Silkmoth.this.level().getBlockState(Silkmoth.this.nestPos).is(BlockTags.BEEHIVES);
         }
 
         public boolean canSilkmothContinueToUse()
@@ -794,7 +794,7 @@ public class Silkmoth extends Animal implements FlyingAnimal
         {
             if (Silkmoth.this.hasNest() && Silkmoth.this.wantsToEnterNest() && Silkmoth.this.nestPos.closerToCenterThan(Silkmoth.this.position(), 2.0D))
             {
-                BlockEntity blockEntity = Silkmoth.this.level.getBlockEntity(Silkmoth.this.nestPos);
+                BlockEntity blockEntity = Silkmoth.this.level().getBlockEntity(Silkmoth.this.nestPos);
                 if (blockEntity instanceof SilkmothNestBlockEntity)
                 {
                     SilkmothNestBlockEntity nestBlockEntity = (SilkmothNestBlockEntity)blockEntity;
@@ -816,7 +816,7 @@ public class Silkmoth extends Animal implements FlyingAnimal
         @Override
         public void start()
         {
-            BlockEntity blockEntity = Silkmoth.this.level.getBlockEntity(Silkmoth.this.nestPos);
+            BlockEntity blockEntity = Silkmoth.this.level().getBlockEntity(Silkmoth.this.nestPos);
             if (blockEntity instanceof SilkmothNestBlockEntity)
             {
                 SilkmothNestBlockEntity nestBlockEntity = (SilkmothNestBlockEntity)blockEntity;
@@ -887,7 +887,7 @@ public class Silkmoth extends Animal implements FlyingAnimal
             {
                 return false;
             }
-            else if (Silkmoth.this.level.isRaining())
+            else if (Silkmoth.this.level().isRaining())
             {
                 return false;
             }
@@ -918,7 +918,7 @@ public class Silkmoth extends Animal implements FlyingAnimal
             {
                 return false;
             }
-            else if (Silkmoth.this.level.isRaining())
+            else if (Silkmoth.this.level().isRaining())
             {
                 return false;
             }
@@ -1071,7 +1071,7 @@ public class Silkmoth extends Animal implements FlyingAnimal
                         for(int l = k < j && k > -j ? j : 0; l <= j; l = l > 0 ? -l : 1 - l)
                         {
                             blockpos$mutableblockpos.setWithOffset(blockpos, k, i - 1, l);
-                            if (blockpos.closerThan(blockpos$mutableblockpos, p_28077_) && p_28076_.test(Silkmoth.this.level.getBlockState(blockpos$mutableblockpos)))
+                            if (blockpos.closerThan(blockpos$mutableblockpos, p_28077_) && p_28076_.test(Silkmoth.this.level().getBlockState(blockpos$mutableblockpos)))
                             {
                                 return Optional.of(blockpos$mutableblockpos);
                             }
@@ -1119,10 +1119,8 @@ public class Silkmoth extends Animal implements FlyingAnimal
         private List<BlockPos> findNearbyNestsWithSpace()
         {
             BlockPos blockpos = Silkmoth.this.blockPosition();
-            PoiManager poimanager = ((ServerLevel)Silkmoth.this.level).getPoiManager();
-            Stream<PoiRecord> stream = poimanager.getInRange((poiType) -> {
-                return poiType == TFCFBrain.MOTH_NEST.get();
-            }, blockpos, 20, PoiManager.Occupancy.ANY);
+            PoiManager poimanager = ((ServerLevel)Silkmoth.this.level()).getPoiManager();
+            Stream<PoiRecord> stream = poimanager.getInRange((poiType) -> poiType.get() == TFCFBrain.MOTH_NEST.get(), blockpos, 20, PoiManager.Occupancy.ANY);
             return stream.map(PoiRecord::getPos).filter(Silkmoth.this::doesNestHaveSpace).sorted(Comparator.comparingDouble((p_148811_) -> {
                 return p_148811_.distSqr(blockpos);
             })).collect(Collectors.toList());
@@ -1132,7 +1130,7 @@ public class Silkmoth extends Animal implements FlyingAnimal
     public class SilkmothGoToKnownTargetGoal extends Silkmoth.BaseSilkmothGoal
     {
         private static final int MAX_TRAVELLING_TICKS = 600;
-        int travellingTicks = Silkmoth.this.level.random.nextInt(10);
+        int travellingTicks = Silkmoth.this.level().random.nextInt(10);
 
         SilkmothGoToKnownTargetGoal()
         {
@@ -1227,7 +1225,7 @@ public class Silkmoth extends Animal implements FlyingAnimal
                 for(int i = 1; i <= 2; ++i)
                 {
                     BlockPos blockpos = Silkmoth.this.blockPosition().below(i);
-                    BlockState blockstate = Silkmoth.this.level.getBlockState(blockpos);
+                    BlockState blockstate = Silkmoth.this.level().getBlockState(blockpos);
                     Block block = blockstate.getBlock();
                     boolean flag = false;
                     IntegerProperty integerproperty = null;
@@ -1239,7 +1237,7 @@ public class Silkmoth extends Animal implements FlyingAnimal
                             if (!cropblock.isMaxAge(blockstate))
                             {
                                 flag = true;
-                                integerproperty = cropblock.getAgeProperty();
+                                integerproperty = CropBlock.AGE;
                             }
                         }
                         else if (block instanceof StemBlock)
@@ -1262,13 +1260,13 @@ public class Silkmoth extends Animal implements FlyingAnimal
                         }
                         else if (blockstate.is(Blocks.CAVE_VINES) || blockstate.is(Blocks.CAVE_VINES_PLANT))
                         {
-                            ((BonemealableBlock)blockstate.getBlock()).performBonemeal((ServerLevel)Silkmoth.this.level, Silkmoth.this.random, blockpos, blockstate);
+                            ((BonemealableBlock)blockstate.getBlock()).performBonemeal((ServerLevel)Silkmoth.this.level(), Silkmoth.this.random, blockpos, blockstate);
                         }
 
                         if (flag)
                         {
-                            Silkmoth.this.level.levelEvent(2005, blockpos, 0);
-                            Silkmoth.this.level.setBlockAndUpdate(blockpos, blockstate.setValue(integerproperty, Integer.valueOf(blockstate.getValue(integerproperty) + 1)));
+                            Silkmoth.this.level().levelEvent(2005, blockpos, 0);
+                            Silkmoth.this.level().setBlockAndUpdate(blockpos, blockstate.setValue(integerproperty, Integer.valueOf(blockstate.getValue(integerproperty) + 1)));
                             Silkmoth.this.incrementNumCropsGrownSincePollination();
                         }
                     }
@@ -1303,7 +1301,7 @@ public class Silkmoth extends Animal implements FlyingAnimal
             Vec3 vec3 = this.findPos();
             if (vec3 != null)
             {
-                Silkmoth.this.navigation.moveTo(Silkmoth.this.navigation.createPath(new BlockPos(vec3), 1), 1.0D);
+                Silkmoth.this.navigation.moveTo(Silkmoth.this.navigation.createPath(BlockPos.containing(vec3.x, vec3.y, vec3.z), 1), 1.0D);
             }
         }
 

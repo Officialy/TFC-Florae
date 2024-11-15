@@ -1,10 +1,11 @@
 package tfcflorae.world.feature;
 
 import java.util.List;
-import java.util.Random;
+
 import java.util.function.Supplier;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.Feature;
@@ -29,7 +30,7 @@ public class BouldersFeature extends Feature<BoulderConfig>
     {
         final WorldGenLevel level = context.level();
         final BlockPos pos = context.origin();
-        final Random random = context.random();
+        final RandomSource random = context.random();
         final BoulderConfig config = context.config();
 
         final ChunkDataProvider provider = ChunkDataProvider.get(context.chunkGenerator());
@@ -46,7 +47,7 @@ public class BouldersFeature extends Feature<BoulderConfig>
         return false;
     }
 
-    private void place(WorldGenLevel level, BlockPos pos, List<BlockState> states, Random random, FeaturePlaceContext<BoulderConfig> context)
+    private void place(WorldGenLevel level, BlockPos pos, List<BlockState> states, RandomSource random, FeaturePlaceContext<BoulderConfig> context)
     {
         final BlockPos.MutableBlockPos mutablePos = new BlockPos.MutableBlockPos();
 

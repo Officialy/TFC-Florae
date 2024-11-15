@@ -5,6 +5,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
@@ -25,7 +26,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 
 import java.util.List;
-import java.util.Random;
+
 import java.util.function.Supplier;
 
 import com.google.common.base.Preconditions;
@@ -98,7 +99,7 @@ public abstract class FruitingTallPlantBlock extends TFCTallGrassBlock implement
 
     @Override
     @SuppressWarnings("deprecation")
-    public void randomTick(BlockState state, ServerLevel level, BlockPos pos, Random random)
+    public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random)
     {
         if (getLifecycleForCurrentMonth() != getLifecycleForMonth(Calendars.SERVER.getCalendarMonthOfYear()))
         {
@@ -269,7 +270,7 @@ public abstract class FruitingTallPlantBlock extends TFCTallGrassBlock implement
         return true; // Not for the purposes of leaf decay, but for the purposes of seasonal updates
     }
 
-    public ItemStack getProductItem(Random random)
+    public ItemStack getProductItem(RandomSource random)
     {
         return new ItemStack(productItem.get());
     }

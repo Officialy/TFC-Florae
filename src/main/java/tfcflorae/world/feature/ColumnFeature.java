@@ -1,6 +1,7 @@
 package tfcflorae.world.feature;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
@@ -9,7 +10,7 @@ import net.minecraft.world.level.levelgen.feature.configurations.BlockColumnConf
 import net.minecraft.world.level.storage.loot.BuiltInLootTables;
 import tfcflorae.common.blocks.spidercave.WebbedChestBlock;
 
-import java.util.Random;
+
 
 import com.mojang.serialization.Codec;
 
@@ -25,7 +26,7 @@ public class ColumnFeature extends Feature<BlockColumnConfiguration>
     {
         final WorldGenLevel level = context.level();
         final BlockColumnConfiguration config = context.config();
-        final Random random = context.random();
+        final RandomSource random = context.random();
         
         int lSize = config.layers().size();
         int[] hSamples = new int[lSize];

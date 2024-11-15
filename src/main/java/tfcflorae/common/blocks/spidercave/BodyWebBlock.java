@@ -1,10 +1,11 @@
 package tfcflorae.common.blocks.spidercave;
 
 import java.util.Optional;
-import java.util.Random;
+
 import java.util.function.BiPredicate;
 import java.util.function.Predicate;
 
+import net.minecraft.util.RandomSource;
 import org.jetbrains.annotations.Nullable;
 
 import net.minecraft.core.Direction;
@@ -80,7 +81,7 @@ public class BodyWebBlock extends Block implements IForgeBlockExtension, IFluidL
     }
 
     @Override
-    public void tick(BlockState pState, ServerLevel pLevel, BlockPos pPos, Random pRandom)
+    public void tick(BlockState pState, ServerLevel pLevel, BlockPos pPos, RandomSource pRandom)
     {
         if (!this.canSurvive(pState, pLevel, pPos))
         {
@@ -195,7 +196,7 @@ public class BodyWebBlock extends Block implements IForgeBlockExtension, IFluidL
     @SuppressWarnings("deprecation")
     public FluidState getFluidState(BlockState state)
     {
-        return IFluidLoggable.super.getFluidState(state);
+        return IFluidLoggable.super.getFluidLoggedState(state);
     }
 
     public static DripstoneThickness calculateWebThickness(LevelReader p_154093_, BlockPos p_154094_, Direction p_154095_, boolean p_154096_)
@@ -357,12 +358,14 @@ public class BodyWebBlock extends Block implements IForgeBlockExtension, IFluidL
         }
         return Optional.empty();
     }
+/*
 
     @Override
     public OffsetType getOffsetType()
     {
         return OffsetType.XZ;
     }
+*/
 
     @Override
     @SuppressWarnings("deprecation")

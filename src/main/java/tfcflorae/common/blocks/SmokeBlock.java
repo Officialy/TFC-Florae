@@ -1,6 +1,6 @@
 package tfcflorae.common.blocks;
 
-import java.util.Random;
+
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
@@ -8,6 +8,7 @@ import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.FluidTags;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
@@ -34,7 +35,7 @@ public class SmokeBlock extends Block
     }
 
     @Override
-    public void animateTick(BlockState state, Level level, BlockPos pos, Random random)
+    public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random)
     {
         if (this.spawnParticles)
         {

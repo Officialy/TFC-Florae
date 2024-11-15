@@ -12,9 +12,11 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageSources;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -60,7 +62,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
+
 import java.util.function.Supplier;
 
 public abstract class SaguaroCactusBlock extends PlantBlock implements ILeavesBlock, IBushBlock, HoeOverlayBlock
@@ -160,8 +162,7 @@ public abstract class SaguaroCactusBlock extends PlantBlock implements ILeavesBl
     }
 
     @Override
-    public void tick(BlockState blockState, ServerLevel serverLevel, BlockPos blockPos, Random random)
-    {
+    public void tick(BlockState blockState, ServerLevel serverLevel, BlockPos blockPos, RandomSource pRandom) {
         if (!blockState.canSurvive(serverLevel, blockPos))
         {
             serverLevel.destroyBlock(blockPos, true);
@@ -179,7 +180,7 @@ public abstract class SaguaroCactusBlock extends PlantBlock implements ILeavesBl
         else
         {
             BlockState checkState = levelReader.getBlockState(blockPos.below());
-            return (checkState.is(this) || Helpers.isBlock(checkState, BlockTags.SAND) || Helpers.isBlock(checkState, TFCTags.Blocks.GRASS_PLANTABLE_ON) || Helpers.isBlock(checkState, TFCTags.Blocks.BUSH_PLANTABLE_ON)) && !levelReader.getBlockState(blockPos.above()).getMaterial().isLiquid();
+            return (checkState.is(this) || Helpers.isBlock(checkState, BlockTags.SAND) || Helpers.isBlock(checkState, TFCTags.Blocks.GRASS_PLANTABLE_ON) || Helpers.isBlock(checkState, TFCTags.Blocks.BUSH_PLANTABLE_ON)) && !levelReader.getBlockState(blockPos.above()).liquid();
         }
         return false;
         //return super.canSurvive(state, levelReader, blockPos);
@@ -250,7 +251,7 @@ public abstract class SaguaroCactusBlock extends PlantBlock implements ILeavesBl
     });
 
     @Override
-    public void randomTick(BlockState blockState, ServerLevel serverLevel, BlockPos blockPos, Random random)
+    public void randomTick(BlockState blockState, ServerLevel serverLevel, BlockPos blockPos, RandomSource random)
     {
         if (getLifecycleForCurrentMonth() != getLifecycleForMonth(Calendars.SERVER.getCalendarMonthOfYear()))
         {
@@ -267,7 +268,7 @@ public abstract class SaguaroCactusBlock extends PlantBlock implements ILeavesBl
     @Override
     public void entityInside(BlockState blockState, Level level, BlockPos blockPos, Entity entity)
     {
-        entity.hurt(DamageSource.CACTUS, 1.0f);
+        entity.hurt(entity.damageSources().cactus(), 1.0f);
     }
 
     @Override
@@ -283,20 +284,20 @@ public abstract class SaguaroCactusBlock extends PlantBlock implements ILeavesBl
     }*/
 
     /*@Override
-    public boolean isBonemealSuccess(Level level, Random random, BlockPos blockPos, BlockState blockState)
+    public boolean isBonemealSuccess(Level level, RandomSource random, BlockPos blockPos, BlockState blockState)
     {
         return (double) level.random.nextFloat() < 0.45D;
     }*/
 
     /*@Override
-    public void performBonemeal(ServerLevel serverLevel, Random random, BlockPos blockPos, BlockState blockState)
+    public void performBonemeal(ServerLevel serverLevel, RandomSource random, BlockPos blockPos, BlockState blockState)
     {
         generateCactus(this, serverLevel, random.nextBoolean(), blockPos, random, false);
     }*/
 
     private final static Direction[] NORTH_SOUTH = {Direction.NORTH, Direction.SOUTH};
     private final static Direction[] EAST_WEST = {Direction.EAST, Direction.WEST};
-    public boolean generateCactus(Block block, WorldGenLevel world, boolean northSouth, BlockPos pos, Random random, boolean isBig)
+    public boolean generateCactus(Block block, WorldGenLevel world, boolean northSouth, BlockPos pos, RandomSource random, boolean isBig)
     {
         if (!block.defaultBlockState().canSurvive(world, pos)) return false;
 
@@ -398,7 +399,7 @@ public abstract class SaguaroCactusBlock extends PlantBlock implements ILeavesBl
                 final ItemStack stack = player.getItemInHand(hand);
                 if (!(Helpers.isItem(stack, TFCTags.Items.KNIVES) || Helpers.isItem(stack, Items.STICK)))
                 {
-                    player.hurt(DamageSource.CACTUS, 2.0F);
+                    player.hurt(player.damageSources().cactus(), 2.0F);
                 }
                 ItemHandlerHelper.giveItemToPlayer(player, getProductItem(level.random));
                 level.setBlockAndUpdate(pos, stateAfterPicking(state));
@@ -514,7 +515,7 @@ public abstract class SaguaroCactusBlock extends PlantBlock implements ILeavesBl
         return true; // Not for the purposes of leaf decay, but for the purposes of seasonal updates
     }
 
-    public ItemStack getProductItem(Random random)
+    public ItemStack getProductItem(RandomSource random)
     {
         return new ItemStack(productItem.get());
     }

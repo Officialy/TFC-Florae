@@ -1,12 +1,13 @@
 package tfcflorae.world.feature;
 
 import java.util.Optional;
-import java.util.Random;
+
 
 import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.state.BlockState;
@@ -27,7 +28,7 @@ public class PointedDripstoneFeature extends Feature<PointedDripstoneConfig>
    {
       final WorldGenLevel level = context.level();
       final BlockPos pos = context.origin();
-      final Random random = context.random();
+      final RandomSource random = context.random();
       final PointedDripstoneConfig config = context.config();
 
       final Boolean hasSurface = config.hasSurface;
@@ -53,7 +54,7 @@ public class PointedDripstoneFeature extends Feature<PointedDripstoneConfig>
       }
    }
 
-   public static Optional<Direction> getTipDirection(BlockState inputState, LevelAccessor level, BlockPos blockPos, Random random)
+   public static Optional<Direction> getTipDirection(BlockState inputState, LevelAccessor level, BlockPos blockPos, RandomSource random)
    {
       boolean flag = DripstoneUtils.isDripstoneBase(level.getBlockState(blockPos.above()), inputState);
       boolean flag1 = DripstoneUtils.isDripstoneBase(level.getBlockState(blockPos.below()), inputState);
@@ -72,7 +73,7 @@ public class PointedDripstoneFeature extends Feature<PointedDripstoneConfig>
       return Optional.empty();
    }
 
-   public static void createPatchOfDripstoneBlocks(BlockState inputSurfaceState, Boolean hasSurface, LevelAccessor level, Random random, BlockPos blockPos, PointedDripstoneConfig config)
+   public static void createPatchOfDripstoneBlocks(BlockState inputSurfaceState, Boolean hasSurface, LevelAccessor level, RandomSource random, BlockPos blockPos, PointedDripstoneConfig config)
    {
       DripstoneUtils.placeDripstoneBlockIfPossible(inputSurfaceState, level, blockPos, hasSurface);
 

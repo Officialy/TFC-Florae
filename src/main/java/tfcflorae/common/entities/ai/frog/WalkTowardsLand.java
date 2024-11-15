@@ -36,7 +36,7 @@ public class WalkTowardsLand extends Behavior<PathfinderMob>
     @Override
     protected boolean checkExtraStartConditions(ServerLevel level, PathfinderMob entity)
     {
-        return entity.level.getFluidState(entity.blockPosition()).is(FluidTags.WATER);
+        return entity.level().getFluidState(entity.blockPosition()).is(FluidTags.WATER);
     }
 
     @Override

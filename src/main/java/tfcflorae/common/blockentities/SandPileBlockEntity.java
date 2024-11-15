@@ -1,5 +1,6 @@
 package tfcflorae.common.blockentities;
 
+import net.minecraft.core.registries.Registries;
 import org.jetbrains.annotations.Nullable;
 
 import net.minecraft.core.BlockPos;
@@ -56,8 +57,8 @@ public class SandPileBlockEntity extends TFCBlockEntity
     @Override
     protected void loadAdditional(CompoundTag tag)
     {
-        internalState = NbtUtils.readBlockState(tag.getCompound("internalState"));
-        aboveState = tag.contains("aboveState", Tag.TAG_COMPOUND) ? NbtUtils.readBlockState(tag.getCompound("aboveState")) : null;
+        internalState = NbtUtils.readBlockState(getLevel().holderLookup(Registries.BLOCK), tag.getCompound("internalState"));
+        aboveState = tag.contains("aboveState", Tag.TAG_COMPOUND) ? NbtUtils.readBlockState(getLevel().holderLookup(Registries.BLOCK), tag.getCompound("aboveState")) : null;
         super.loadAdditional(tag);
     }
 

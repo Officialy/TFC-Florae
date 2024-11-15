@@ -1,13 +1,13 @@
 package tfcflorae.world.feature;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 
 import java.util.List;
-import java.util.Random;
 import java.util.function.Supplier;
 
 import com.mojang.serialization.Codec;
@@ -31,7 +31,7 @@ public class BoulderDeepRockFeature extends Feature<RockConfig>
         final WorldGenLevel level = context.level();
         final BlockPos pos = context.origin();
         final RockConfig config = context.config();
-        final Random random = context.random();
+        final RandomSource random = context.random();
 
         final ChunkDataProvider provider = ChunkDataProvider.get(context.chunkGenerator());
         final ChunkData data = provider.get(level, pos);

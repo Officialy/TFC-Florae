@@ -1,9 +1,11 @@
 package tfcflorae.common.blocks.wood;
 
 import java.util.List;
-import java.util.Random;
+
 import java.util.function.Supplier;
 
+import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
 import org.jetbrains.annotations.Nullable;
 
 import com.google.common.base.Preconditions;
@@ -94,10 +96,10 @@ public abstract class TFCFLeavesBlock extends TFCLeavesBlock implements IBushBlo
 
     public static IntegerProperty getDistanceProperty(int maxDecayDistance)
     {
-        if (maxDecayDistance >= 7 && maxDecayDistance < 7 + TFCBlockStateProperties.DISTANCES.length)
+    /*    if (maxDecayDistance >= 7 && maxDecayDistance < 7 + TFCBlockStateProperties.DISTANCES.length)
         {
             return TFCBlockStateProperties.DISTANCES[maxDecayDistance - 7 + 1]; // we select one higher than max
-        }
+        }*/
         throw new IllegalArgumentException("No property set for distance: " + maxDecayDistance);
     }
 
@@ -177,7 +179,7 @@ public abstract class TFCFLeavesBlock extends TFCLeavesBlock implements IBushBlo
 
     @Override
     @SuppressWarnings("deprecation")
-    public void tick(BlockState state, ServerLevel level, BlockPos pos, Random rand)
+    public void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource rand)
     {
         super.tick(state, level, pos, rand);
         int distance = updateDistanceNew(level, pos);
@@ -209,7 +211,7 @@ public abstract class TFCFLeavesBlock extends TFCLeavesBlock implements IBushBlo
 
     @Override
     @SuppressWarnings("deprecation")
-    public void randomTick(BlockState state, ServerLevel level, BlockPos pos, Random random)
+    public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random)
     {
         super.randomTick(state, level, pos, random);
         if (state.getValue(getDistanceProperty()) > maxDecayDistance && !state.getValue(PERSISTENT))
@@ -273,7 +275,7 @@ public abstract class TFCFLeavesBlock extends TFCLeavesBlock implements IBushBlo
                 final float actualForestDensity = data.getForestDensity();
                 final float forestDensity = actualForestDensity == 0 ? 0.001F : actualForestDensity; // Cannot divide by 0.
 
-                if (random.nextFloat((Config.COMMON.leavesSaplingPlacementChance.get() / forestDensity) * rainfallInverted) == 0)
+                if (Mth.clamp(random.nextFloat(), 0, (Config.COMMON.leavesSaplingPlacementChance.get() / forestDensity) * rainfallInverted) == 0)
                 {
                     int x = pos.getX() + (int) Math.round(random.nextGaussian() * Config.COMMON.leavesSaplingSpreadDistance.get());
                     int z = pos.getZ() + (int) Math.round(random.nextGaussian() * Config.COMMON.leavesSaplingSpreadDistance.get());
@@ -439,7 +441,7 @@ public abstract class TFCFLeavesBlock extends TFCLeavesBlock implements IBushBlo
         return state.setValue(LIFECYCLE, Lifecycle.HEALTHY);
     }
 
-    public ItemStack getProductItem(Random random)
+    public ItemStack getProductItem(RandomSource random)
     {
         return new ItemStack(productItem.get());
     }

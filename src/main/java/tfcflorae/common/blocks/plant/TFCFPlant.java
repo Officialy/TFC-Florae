@@ -1,5 +1,7 @@
 package tfcflorae.common.blocks.plant;
 
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.material.MapColor;
 import org.jetbrains.annotations.Nullable;
 
 import java.awt.Color;
@@ -12,14 +14,13 @@ import java.util.function.Supplier;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.WaterLilyBlockItem;
+
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.material.Fluids;
-import net.minecraft.world.level.material.Material;
-import net.minecraft.world.level.material.MaterialColor;
+
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
 
 import net.dries007.tfc.common.blocks.ExtendedProperties;
@@ -494,8 +495,8 @@ public enum TFCFPlant implements RegistryPlant
     public enum BlockType
     {
         STANDARD((plant, type) -> PlantBlock.create(plant, fire(nonSolid(plant)))),
-        CACTUS((plant, type) -> TFCCactusBlock.create(plant, fire(solid().strength(0.25F).sound(SoundType.WOOL)).pathType(BlockPathTypes.DAMAGE_CACTUS))),
-        DRY((plant, type) -> DryPlantBlock.create(plant, fire(nonSolid(plant)))),
+        CACTUS((plant, type) -> TFCCactusBlock.create(plant, fire(solid().strength(0.25F).sound(SoundType.WOOL)).pathType(BlockPathTypes.DAMAGE_CAUTIOUS))),
+        DRY((plant, type) -> PlantBlock.create(plant, fire(nonSolid(plant)))),//todo DryPlantBlock.create(plant, fire(nonSolid(plant)))),
         CREEPING((plant, type) -> CreepingPlantBlock.create(plant, fire(nonSolid(plant).hasPostProcess(TFCFBlocks::always)))), // Post process ensures shape is updated after world gen
         EPIPHYTE((plant, type) -> EpiphytePlantBlock.create(plant, fire(nonSolid(plant).hasPostProcess(TFCFBlocks::always)))),
         SHORT_GRASS((plant, type) -> ShortGrassBlock.create(plant, fire(nonSolid(plant)))),
@@ -521,12 +522,12 @@ public enum TFCFPlant implements RegistryPlant
         TALL_LAND_WATER((plant, type) -> TallLandWaterPlantBlock.create(plant, TFCBlockStateProperties.SALT_WATER, nonSolid(plant))),
         TALL_LAND_WATER_FRESH((plant, type) -> TallLandWaterPlantBlock.create(plant, TFCBlockStateProperties.FRESH_WATER, nonSolid(plant))),
         POISONOUS_TALL_GRASS((plant, type) -> TFCFTallGrassBlock.create(plant, fire(nonSolid(plant)))),
-        SHORT_CACTUS((plant, type) -> ShortCactusBlock.create(plant, fire(solid().strength(0.25F).sound(SoundType.MOSS)).pathType(BlockPathTypes.DAMAGE_CACTUS))),
-        TFCF_CACTUS((plant, type) -> TFCFCactusBlock.create(plant, fire(solid().strength(0.25F).sound(SoundType.MOSS)).pathType(BlockPathTypes.DAMAGE_CACTUS))),
-        SAGUARO_CACTUS((plant, type) -> SaguaroCactusBlock.create(plant, fire(solid().strength(0.25F).sound(SoundType.MOSS).hasPostProcess(TFCFBlocks::always)).pathType(BlockPathTypes.DAMAGE_CACTUS).randomTicks(), plant.getProductItem(), plant.getStages(), TFCFClimateRanges.SEASONAL_PLANT.get(plant))),
-        PITAHAYA((plant, type) -> PitahayaBlock.create(plant, fire(solid().strength(0.25F).sound(SoundType.NETHER_WART).hasPostProcess(TFCFBlocks::always)).pathType(BlockPathTypes.DAMAGE_CACTUS).randomTicks(), plant.getProductItem(), plant.getStages(), TFCFClimateRanges.SEASONAL_PLANT.get(plant))),
-        SHORT_FRUITING_CACTUS((plant, type) -> ShortFruitingCactusBlock.create(plant, fire(solid().strength(0.25F).sound(SoundType.MOSS).hasPostProcess(TFCFBlocks::always)).pathType(BlockPathTypes.DAMAGE_CACTUS).randomTicks(), plant.getProductItem(), plant.getStages(), TFCFClimateRanges.SEASONAL_PLANT.get(plant))),
-        FRUITING_CACTUS((plant, type) -> TFCFFruitingCactusBlock.create(plant, fire(solid().strength(0.25F).sound(SoundType.MOSS).hasPostProcess(TFCFBlocks::always)).pathType(BlockPathTypes.DAMAGE_CACTUS).randomTicks(), plant.getProductItem(), plant.getStages(), TFCFClimateRanges.SEASONAL_PLANT.get(plant))),
+        SHORT_CACTUS((plant, type) -> ShortCactusBlock.create(plant, fire(solid().strength(0.25F).sound(SoundType.MOSS)).pathType(BlockPathTypes.DAMAGE_CAUTIOUS))),
+        TFCF_CACTUS((plant, type) -> TFCFCactusBlock.create(plant, fire(solid().strength(0.25F).sound(SoundType.MOSS)).pathType(BlockPathTypes.DAMAGE_CAUTIOUS))),
+        SAGUARO_CACTUS((plant, type) -> SaguaroCactusBlock.create(plant, fire(solid().strength(0.25F).sound(SoundType.MOSS).hasPostProcess(TFCFBlocks::always)).pathType(BlockPathTypes.DAMAGE_CAUTIOUS).randomTicks(), plant.getProductItem(), plant.getStages(), TFCFClimateRanges.SEASONAL_PLANT.get(plant))),
+        PITAHAYA((plant, type) -> PitahayaBlock.create(plant, fire(solid().strength(0.25F).sound(SoundType.NETHER_WART).hasPostProcess(TFCFBlocks::always)).pathType(BlockPathTypes.DAMAGE_CAUTIOUS).randomTicks(), plant.getProductItem(), plant.getStages(), TFCFClimateRanges.SEASONAL_PLANT.get(plant))),
+        SHORT_FRUITING_CACTUS((plant, type) -> ShortFruitingCactusBlock.create(plant, fire(solid().strength(0.25F).sound(SoundType.MOSS).hasPostProcess(TFCFBlocks::always)).pathType(BlockPathTypes.DAMAGE_CAUTIOUS).randomTicks(), plant.getProductItem(), plant.getStages(), TFCFClimateRanges.SEASONAL_PLANT.get(plant))),
+        FRUITING_CACTUS((plant, type) -> TFCFFruitingCactusBlock.create(plant, fire(solid().strength(0.25F).sound(SoundType.MOSS).hasPostProcess(TFCFBlocks::always)).pathType(BlockPathTypes.DAMAGE_CAUTIOUS).randomTicks(), plant.getProductItem(), plant.getStages(), TFCFClimateRanges.SEASONAL_PLANT.get(plant))),
         FUNGI((plant, type) -> FungiBlock.create(plant, plant, fire(nonSolid(plant)))),
         FUNGI_EPIPHYTE((plant, type) -> FungiEpiphyteBlock.create(plant, plant, fire(nonSolid(plant).hasPostProcess(TFCFBlocks::always)))),
         FUNGI_EPIPHYTE_SOLID((plant, type) -> FungiEpiphyteSolidBlock.create(plant, plant, fire(solid().strength(0.25F).hasPostProcess(TFCFBlocks::always)))),
@@ -534,16 +535,16 @@ public enum TFCFPlant implements RegistryPlant
         FRUITING_TALL_PLANT((plant, type) -> FruitingTallPlantBlock.create(plant, fire(nonSolid(plant).hasPostProcess(TFCFBlocks::always)).randomTicks(), plant.getProductItem(), plant.getStages(), TFCFClimateRanges.SEASONAL_PLANT.get(plant))),
         CACAO((plant, type) -> CacaoPodBlock.create(plant, fire(nonSolid(plant).hasPostProcess(TFCFBlocks::always)).randomTicks().strength(0.2F, 3.0F).sound(SoundType.BAMBOO).noOcclusion())),
 
-        BAMBOO((plant, type) -> BambooPlantBlock.create(plant, ExtendedProperties.of(Material.BAMBOO, MaterialColor.PLANT).randomTicks().instabreak().strength(1.0F).sound(SoundType.BAMBOO).noOcclusion().dynamicShape().hasPostProcess(TFCFBlocks::always), plant.stem(), plant.sapling())),
-        BAMBOO_SAPLING((plant, type) ->  BambooSaplingPlantBlock.create(plant, ExtendedProperties.of(Material.BAMBOO_SAPLING).randomTicks().instabreak().noCollission().strength(1.0F).sound(SoundType.BAMBOO_SAPLING).hasPostProcess(TFCFBlocks::always), plant.stem())),
+        BAMBOO((plant, type) -> BambooPlantBlock.create(plant, ExtendedProperties.of(Blocks.BAMBOO).mapColor(MapColor.PLANT).randomTicks().instabreak().strength(1.0F).sound(SoundType.BAMBOO).noOcclusion().dynamicShape().hasPostProcess(TFCFBlocks::always), plant.stem(), plant.sapling())),
+        BAMBOO_SAPLING((plant, type) ->  BambooSaplingPlantBlock.create(plant, ExtendedProperties.of(Blocks.BAMBOO_SAPLING).randomTicks().instabreak().noCollission().strength(1.0F).sound(SoundType.BAMBOO_SAPLING).hasPostProcess(TFCFBlocks::always), plant.stem())),
 
         // Water
         KELP((plant, type) -> TFCKelpBlock.create(nonSolidTallPlant(plant).lootFrom(plant.transform()).sound(SoundType.WET_GRASS), plant.transform(), Direction.UP, BodyPlantBlock.THIN_BODY_SHAPE, TFCBlockStateProperties.SALT_WATER)),
         KELP_TOP(((plant, type) -> TFCKelpTopBlock.create(nonSolidTallPlant(plant).sound(SoundType.WET_GRASS), plant.transform(), Direction.UP, BodyPlantBlock.TWISTING_THIN_SHAPE, TFCBlockStateProperties.SALT_WATER))),
         KELP_TREE((plant, type) -> KelpTreeBlock.create(kelp(plant), TFCBlockStateProperties.SALT_WATER)),
-        KELP_TREE_FLOWER((plant, type) -> KelpTreeFlowerBlock.create(kelp(plant), plant.transform())),
-        FLOATING((plant, type) -> FloatingWaterPlantBlock.create(plant, TFCFluids.SALT_WATER.source(), nonSolid(plant)), WaterLilyBlockItem::new),
-        FLOATING_FRESH((plant, type) -> FloatingWaterPlantBlock.create(plant, () -> Fluids.WATER, nonSolid(plant)), WaterLilyBlockItem::new),
+        KELP_TREE_FLOWER((plant, type) -> KelpTreeFlowerBlock.create(kelp(plant).properties(), plant.transform())),
+        FLOATING((plant, type) -> FloatingWaterPlantBlock.create(plant, TFCFluids.SALT_WATER.source(), nonSolid(plant))),// WaterLilyBlockItem::new),
+        FLOATING_FRESH((plant, type) -> FloatingWaterPlantBlock.create(plant, () -> Fluids.WATER, nonSolid(plant))),//, WaterLilyBlockItem::new),
         TALL_WATER((plant, type) -> TallWaterPlantBlock.create(plant, TFCBlockStateProperties.SALT_WATER, nonSolid(plant))),
         TALL_WATER_FRESH((plant, type) -> TallWaterPlantBlock.create(plant, TFCBlockStateProperties.FRESH_WATER, nonSolid(plant))),
         WATER((plant, type) -> WaterPlantBlock.create(plant, TFCBlockStateProperties.SALT_WATER, nonSolid(plant).sound(SoundType.WET_GRASS))),
@@ -571,7 +572,7 @@ public enum TFCFPlant implements RegistryPlant
          */
         public static BlockBehaviour.Properties solid()
         {
-            return Block.Properties.of(Material.REPLACEABLE_PLANT).noOcclusion().sound(SoundType.GRASS).randomTicks().hasPostProcess(TFCFBlocks::always);
+            return Block.Properties.copy(Blocks.GRASS).noOcclusion().sound(SoundType.GRASS).randomTicks().hasPostProcess(TFCFBlocks::always);
         }
 
         public static BlockBehaviour.Properties nonSolid(TFCFPlant plant)
@@ -581,7 +582,7 @@ public enum TFCFPlant implements RegistryPlant
 
         public static BlockBehaviour.Properties solidTallPlant()
         {
-            return BlockBehaviour.Properties.of(Material.PLANT, MaterialColor.PLANT).randomTicks().sound(SoundType.WEEPING_VINES).hasPostProcess(TFCFBlocks::always);
+            return BlockBehaviour.Properties.copy(Blocks.TALL_GRASS).mapColor(MapColor.PLANT).randomTicks().sound(SoundType.WEEPING_VINES).hasPostProcess(TFCFBlocks::always);
         }
 
         public static BlockBehaviour.Properties nonSolidTallPlant(TFCFPlant plant)
@@ -589,9 +590,9 @@ public enum TFCFPlant implements RegistryPlant
             return solidTallPlant().instabreak().noCollission().speedFactor(plant.speedFactor).hasPostProcess(TFCFBlocks::always);
         }
 
-        public static BlockBehaviour.Properties kelp(TFCFPlant plant)
+        public static ExtendedProperties kelp(TFCFPlant plant)
         {
-            return BlockBehaviour.Properties.of(Material.DIRT, MaterialColor.PLANT).noCollission().randomTicks().speedFactor(plant.speedFactor).strength(1.0f).sound(SoundType.WET_GRASS).hasPostProcess(TFCFBlocks::always);
+            return ExtendedProperties.of(Blocks.KELP).mapColor(MapColor.PLANT).noCollission().randomTicks().speedFactor(plant.speedFactor).strength(1.0f).sound(SoundType.WET_GRASS).hasPostProcess(TFCFBlocks::always);
         }
 
         public static ExtendedProperties fire(BlockBehaviour.Properties properties)

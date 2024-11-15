@@ -2,7 +2,7 @@ package tfcflorae.common.blockentities;
 
 import java.util.Arrays;
 import java.util.Locale;
-import java.util.Random;
+
 import java.util.concurrent.atomic.AtomicLong;
 
 import net.minecraft.Util;
@@ -18,7 +18,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
-import net.minecraft.world.level.levelgen.RandomSource;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.levelgen.WorldgenRandom;
 import net.dries007.tfc.common.blockentities.TFCBlockEntity;
 import net.dries007.tfc.util.Helpers;
@@ -145,7 +145,7 @@ public class MineralSheetBlockEntity extends TFCBlockEntity
         return "block/mineral/" + mineral.name().toLowerCase(Locale.ROOT) + "_" + suffix;
 	}
 
-	public String mineralName(Mineral mineral, Direction direction, Random random)
+	public String mineralName(Mineral mineral, Direction direction, RandomSource random)
 	{
         String suffix = String.valueOf(random.nextInt(4));
         //String suffix = String.valueOf(Mth.clamp(direction.ordinal(), 0, 3));

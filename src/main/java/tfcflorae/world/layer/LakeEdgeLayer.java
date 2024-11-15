@@ -23,7 +23,7 @@ public enum LakeEdgeLayer implements AdjacentTransformLayer
     public int apply(AreaContext context, int north, int east, int south, int west, int center)
     {
         Predicate<IntPredicate> matcher = p -> p.test(north) || p.test(east) || p.test(south) || p.test(west);
-        if (center != LAKE && !isRiver(center))
+        if (center != LAKE )// && !isRiver(center))
         {
             if (matcher.test(i -> i == LAKE))
             {

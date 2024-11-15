@@ -63,17 +63,19 @@ public abstract class ShortCactusBlock extends ShortGrassBlock
         return COLLISION_SHAPE;
     }
 
+/*
     @Override
     public OffsetType getOffsetType()
     {
         return OffsetType.NONE;
     }
+*/
 
     @SuppressWarnings("deprecation")
     @Override
     public void entityInside(BlockState state, Level level, BlockPos pos, Entity entity)
     {
-        entity.hurt(DamageSource.CACTUS, 1.0F);
+        entity.hurt(entity.damageSources().cactus(), 1.0F);
     }
 
     @Override

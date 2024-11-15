@@ -3,7 +3,7 @@ package tfcflorae.common.blocks.plant;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
+
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -12,6 +12,7 @@ import com.google.common.collect.ImmutableMap;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -27,6 +28,7 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.storage.loot.LootContext;
+import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -201,7 +203,7 @@ public abstract class TFCFVineBlock extends VineBlock implements IForgeBlockExte
     }
 
     @Override
-    public void randomTick(BlockState state, ServerLevel level, BlockPos pos, Random random)
+    public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random)
     {
         level.setBlockAndUpdate(pos, updateStateWithCurrentMonth(state));
         double tempThreshold = Config.COMMON.foliageDecayThreshold.get();
@@ -350,10 +352,10 @@ public abstract class TFCFVineBlock extends VineBlock implements IForgeBlockExte
         return isDead ? true : super.isAir(state); // Invisible when "dead"
     }
 
+
     @Override
-    public List<ItemStack> getDrops(BlockState state, LootContext.Builder builder)
-    {
-        return isDead ? Collections.emptyList() : super.getDrops(state, builder);
+    public List<ItemStack> getDrops(BlockState pState, LootParams.Builder pParams) {
+        return isDead ? Collections.emptyList() : super.getDrops(pState, pParams);
     }
 
     @Override

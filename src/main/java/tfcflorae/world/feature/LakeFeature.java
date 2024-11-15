@@ -1,16 +1,17 @@
 package tfcflorae.world.feature;
 
-import java.util.Random;
+
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.FluidTags;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
-import net.minecraft.world.level.material.Material;
+
 
 import com.mojang.serialization.Codec;
 
@@ -28,7 +29,7 @@ public class LakeFeature extends Feature<LakeConfig>
     {
         final WorldGenLevel level = context.level();
         BlockPos pos = context.origin();
-        final Random random = context.random();
+        final RandomSource random = context.random();
         final LakeConfig config = context.config();
 
         if (pos.getY() <= level.getMinBuildHeight() + 4)
@@ -78,12 +79,12 @@ public class LakeFeature extends Feature<LakeConfig>
                         boolean flag = !aBoolean[(k1 * 16 + k) * 8 + l2] && (k1 < 15 && aBoolean[((k1 + 1) * 16 + k) * 8 + l2] || k1 > 0 && aBoolean[((k1 - 1) * 16 + k) * 8 + l2] || k < 15 && aBoolean[(k1 * 16 + k + 1) * 8 + l2] || k > 0 && aBoolean[(k1 * 16 + (k - 1)) * 8 + l2] || l2 < 7 && aBoolean[(k1 * 16 + k) * 8 + l2 + 1] || l2 > 0 && aBoolean[(k1 * 16 + k) * 8 + (l2 - 1)]);
                         if (flag)
                         {
-                            Material material = level.getBlockState(pos.offset(k1, l2, k)).getMaterial();
-                            if (l2 >= 4 && material.isLiquid())
+                            BlockState state = level.getBlockState(pos.offset(k1, l2, k));
+                            if (l2 >= 4 && state.liquid())
                             {
                                 return false;
                             }
-                            if (l2 < 4 && !material.isSolid() && level.getBlockState(pos.offset(k1, l2, k)) != blockstate1)
+                            if (l2 < 4 && !state.isSolid() && level.getBlockState(pos.offset(k1, l2, k)) != blockstate1)
                             {
                                 return false;
                             }
@@ -127,7 +128,7 @@ public class LakeFeature extends Feature<LakeConfig>
                         if (flag2 && (l3 < 4 || random.nextInt(2) != 0))
                         {
                             BlockState blockstate = level.getBlockState(pos.offset(j2, l3, j3));
-                            if (blockstate.getMaterial().isSolid() && !blockstate.is(BlockTags.LAVA_POOL_STONE_CANNOT_REPLACE))
+                            if (blockstate.isSolid() && !blockstate.is(BlockTags.LAVA_POOL_STONE_CANNOT_REPLACE))
                             {
                                 BlockPos pos3 = pos.offset(j2, l3, j3);
                                 level.setBlock(pos3, blockstate2, 2);

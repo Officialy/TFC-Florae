@@ -10,6 +10,17 @@ import net.dries007.tfc.world.layer.framework.AreaContext;
 import tfcflorae.interfaces.TFCLayersMixinInterface;
 
 import static net.dries007.tfc.world.layer.TFCLayers.*;
+import static net.dries007.tfc.world.layer.TFCLayers.LAKE;
+import static net.dries007.tfc.world.layer.TFCLayers.LOWLANDS;
+import static net.dries007.tfc.world.layer.TFCLayers.LOW_CANYONS;
+import static net.dries007.tfc.world.layer.TFCLayers.MOUNTAINS;
+import static net.dries007.tfc.world.layer.TFCLayers.OCEAN;
+import static net.dries007.tfc.world.layer.TFCLayers.OCEANIC_MOUNTAINS;
+import static net.dries007.tfc.world.layer.TFCLayers.OLD_MOUNTAINS;
+import static net.dries007.tfc.world.layer.TFCLayers.RIVER;
+import static net.dries007.tfc.world.layer.TFCLayers.SHORE;
+import static net.dries007.tfc.world.layer.TFCLayers.VOLCANIC_MOUNTAINS;
+import static net.dries007.tfc.world.layer.TFCLayers.VOLCANIC_OCEANIC_MOUNTAINS;
 
 public enum EdgeRiverbankLayer implements AdjacentTransformLayer
 {
@@ -39,7 +50,7 @@ public enum EdgeRiverbankLayer implements AdjacentTransformLayer
     public int apply(AreaContext context, int north, int east, int south, int west, int center)
     {
         Predicate<IntPredicate> matcher = p -> p.test(north) || p.test(east) || p.test(south) || p.test(west);
-        if (matcher.test(i -> !isOceanOrMarker(i)))
+        /*if (matcher.test(i -> !isOceanOrMarker(i)))
         {
             if (center == RIVER_EDGE)
             {
@@ -79,7 +90,7 @@ public enum EdgeRiverbankLayer implements AdjacentTransformLayer
                 {
                     return GRAVEL_SHORE;
                 }
-                else if (matcher.test(i -> isOcean(i)))
+                else if (matcher.test(TFCLayers::isOcean))
                 {
                     return OCEAN;
                 }
@@ -159,7 +170,7 @@ public enum EdgeRiverbankLayer implements AdjacentTransformLayer
                     return VOLCANIC_OCEANIC_MOUNTAIN_RIVER;
                 }
             }
-        }
+        }*/
         return center;
     }
 

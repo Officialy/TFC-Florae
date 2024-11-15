@@ -8,6 +8,8 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.HolderSet;
 import net.minecraft.core.Registry;
 import net.minecraft.core.RegistryCodecs;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.util.RandomSource;
 import net.minecraft.util.valueproviders.IntProvider;
 import net.minecraft.world.level.LevelSimulatedReader;
 import net.minecraft.world.level.block.Block;
@@ -18,7 +20,7 @@ import net.minecraft.world.level.levelgen.feature.trunkplacers.TrunkPlacer;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.TrunkPlacerType;
 
 import java.util.List;
-import java.util.Random;
+
 import java.util.function.BiConsumer;
 
 import tfcflorae.world.feature.TFCFFeatures;
@@ -32,7 +34,7 @@ public class UpwardBranchingTrunk extends TrunkPlacer
             return placer.placeBranchPerLogProbability;
         }), IntProvider.NON_NEGATIVE_CODEC.fieldOf("extra_branch_length").forGetter(placer -> {
             return placer.extraBranchLength;
-        }), RegistryCodecs.homogeneousList(Registry.BLOCK_REGISTRY).fieldOf("can_grow_through").forGetter(placer -> {
+        }), RegistryCodecs.homogeneousList(Registries.BLOCK).fieldOf("can_grow_through").forGetter(placer -> {
             return placer.canGrowThrough;
         }))).apply(instance, UpwardBranchingTrunk::new);
     });
@@ -52,7 +54,7 @@ public class UpwardBranchingTrunk extends TrunkPlacer
         this.canGrowThrough = canGrowThrough;
     }
 
-    public List<FoliagePlacer.FoliageAttachment> placeTrunk(LevelSimulatedReader level, BiConsumer<BlockPos, BlockState> replacer, Random random, int height, BlockPos startPos, TreeConfiguration config)
+    public List<FoliagePlacer.FoliageAttachment> placeTrunk(LevelSimulatedReader level, BiConsumer<BlockPos, BlockState> replacer, RandomSource random, int height, BlockPos startPos, TreeConfiguration config)
     {
         List<FoliagePlacer.FoliageAttachment> attachments = Lists.newArrayList();
         BlockPos.MutableBlockPos mutable = new BlockPos.MutableBlockPos();
@@ -74,7 +76,7 @@ public class UpwardBranchingTrunk extends TrunkPlacer
         return attachments;
     }
 
-    private void placeBranch(LevelSimulatedReader level, BiConsumer<BlockPos, BlockState> replacer, Random random, int height, TreeConfiguration config, List<FoliagePlacer.FoliageAttachment> attachments, BlockPos.MutableBlockPos mutable, int yOffset, Direction direction, int length, int steps)
+    private void placeBranch(LevelSimulatedReader level, BiConsumer<BlockPos, BlockState> replacer, RandomSource random, int height, TreeConfiguration config, List<FoliagePlacer.FoliageAttachment> attachments, BlockPos.MutableBlockPos mutable, int yOffset, Direction direction, int length, int steps)
     {
         int y = yOffset + length;
         int x = mutable.getX();

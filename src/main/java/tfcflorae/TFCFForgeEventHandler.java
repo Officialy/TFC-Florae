@@ -1,7 +1,15 @@
 package tfcflorae;
 
+import com.mojang.logging.LogUtils;
+import net.dries007.tfc.common.blocks.TFCBlocks;
+import net.dries007.tfc.common.blocks.rock.LooseRockBlock;
+import net.dries007.tfc.common.blocks.rock.Rock;
+import net.dries007.tfc.common.blocks.soil.SoilBlockType;
+import net.dries007.tfc.common.blocks.wood.TFCSaplingBlock;
+import net.dries007.tfc.util.EnvironmentHelpers;
+import net.dries007.tfc.util.Helpers;
 import net.minecraft.core.BlockPos;
-import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.packs.PackType;
 import net.minecraft.server.packs.metadata.pack.PackMetadataSection;
 import net.minecraft.server.packs.repository.Pack;
@@ -14,7 +22,9 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.ToolActions;
@@ -25,8 +35,7 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.resource.PathResourcePack;
-
+import org.slf4j.Logger;
 import tfcflorae.common.TFCFTags;
 import tfcflorae.common.blocks.TFCFBlocks;
 import tfcflorae.common.blocks.rock.LooseFlintBlock;
@@ -39,26 +48,9 @@ import tfcflorae.common.blocks.wood.TFCFSaplingBlock;
 import tfcflorae.common.commands.TFCFCommands;
 import tfcflorae.common.items.TFCFItems;
 
-import net.dries007.tfc.common.blocks.TFCBlocks;
-import net.dries007.tfc.common.blocks.rock.LooseRockBlock;
-import net.dries007.tfc.common.blocks.rock.Rock;
-import net.dries007.tfc.common.blocks.soil.FarmlandBlock;
-import net.dries007.tfc.common.blocks.soil.IDirtBlock;
-import net.dries007.tfc.common.blocks.soil.IGrassBlock;
-import net.dries007.tfc.common.blocks.soil.ISoilBlock;
-import net.dries007.tfc.common.blocks.soil.SoilBlockType;
-import net.dries007.tfc.common.blocks.wood.TFCSaplingBlock;
-import net.dries007.tfc.util.EnvironmentHelpers;
-import net.dries007.tfc.util.Helpers;
-
+import javax.annotation.Nonnull;
 import java.io.IOException;
 import java.nio.file.Path;
-
-import javax.annotation.Nonnull;
-
-import org.slf4j.Logger;
-
-import com.mojang.logging.LogUtils;
 
 public class TFCFForgeEventHandler
 {
@@ -72,10 +64,10 @@ public class TFCFForgeEventHandler
         bus.addListener(TFCFForgeEventHandler::onItemExpireEvent);
         bus.addListener(TFCFForgeEventHandler::onPlayerRightClickBlock);
         bus.addListener(TFCFForgeEventHandler::registerCommands);
-        busMod.addListener(TFCFForgeEventHandler::onPackFinder);
+//        busMod.addListener(TFCFForgeEventHandler::onPackFinder);
     }
 
-    public static void onPackFinder(AddPackFindersEvent event)
+/* todo   public static void onPackFinder(AddPackFindersEvent event)
     {
         try
         {
@@ -97,7 +89,7 @@ public class TFCFForgeEventHandler
                 {
                     TFCFlorae.LOGGER.info("Injecting Florae override pack");
                     event.addRepositorySource((consumer, constructor) ->
-                        consumer.accept(constructor.create("builtin/tfcflorae_data", new TextComponent("TFC Florae Resources"), true, () -> pack, metadata, Pack.Position.TOP, PackSource.BUILT_IN, false))
+                        consumer.accept(constructor.create("builtin/tfcflorae_data", Component.literal("TFC Florae Resources"), true, () -> pack, metadata, Pack.Position.TOP, PackSource.BUILT_IN, false))
                     );
                 }
             }
@@ -106,7 +98,7 @@ public class TFCFForgeEventHandler
         {
             throw new RuntimeException(e);
         }
-    }
+    }*/
 
     public static void registerCommands(RegisterCommandsEvent event)
     {
@@ -116,11 +108,11 @@ public class TFCFForgeEventHandler
 
     public static void onItemExpireEvent(ItemExpireEvent event)
     {
-        if (!event.getEntityItem().isAlive()) return;
+        if (!event.getEntity().isAlive()) return;
 
-        ItemEntity item = event.getEntityItem();
+        ItemEntity item = event.getEntity();
         ItemStack itemStack = item.getItem();
-        Level level = item.getLevel();
+        Level level = item.level();
         BlockPos pos = item.blockPosition();
 
         if (level.isEmptyBlock(pos) || Helpers.isBlock(level.getBlockState(pos), TFCFTags.Blocks.SAPLING_CAN_REPLACE))
@@ -131,8 +123,8 @@ public class TFCFForgeEventHandler
                 if (block != null && block != Blocks.AIR && block.defaultBlockState().canSurvive((LevelReader)level, pos) && level.setBlockAndUpdate(pos, block.defaultBlockState()))
                 {
                     itemStack.shrink(1);
-                    event.getEntityItem().setItem(itemStack);
-                    if (event.getEntityItem().getItem().isEmpty())
+                    event.getEntity().setItem(itemStack);
+                    if (event.getEntity().getItem().isEmpty())
                     {
                         event.getEntity().remove(Entity.RemovalReason.KILLED);
                     }
@@ -148,12 +140,12 @@ public class TFCFForgeEventHandler
 
     public static void onPlayerRightClickBlock(PlayerInteractEvent.RightClickBlock event)
     {
-        final Level level = event.getWorld();
+        final Level level = event.getLevel();
         final BlockPos pos = event.getPos();
         final BlockState state = level.getBlockState(pos);
         final Block block = state.getBlock();
 
-        if (level.getBlockState(pos).getMaterial().isSolid() && (EnvironmentHelpers.isWorldgenReplaceable(level.getBlockState(pos.above())) || level.getBlockState(pos.above()).isAir()) && (level.getBlockState(pos.above()).getBlock() != TFCFBlocks.LOOSE_FLINT.get() || !(level.getBlockState(pos.above()).getBlock() instanceof LooseRockBlock)) && TFCFBlocks.LOOSE_FLINT.get().defaultBlockState().canSurvive(level, pos.above()))
+        if (level.getBlockState(pos).isSolid() && (EnvironmentHelpers.isWorldgenReplaceable(level.getBlockState(pos.above())) || level.getBlockState(pos.above()).isAir()) && (level.getBlockState(pos.above()).getBlock() != TFCFBlocks.LOOSE_FLINT.get() || !(level.getBlockState(pos.above()).getBlock() instanceof LooseRockBlock)) && TFCFBlocks.LOOSE_FLINT.get().defaultBlockState().canSurvive(level, pos.above()))
         {
             if (event.getHand() == InteractionHand.MAIN_HAND && (Helpers.isItem(event.getItemStack(), TFCFTags.Items.FLINT_KNAPPING) || event.getItemStack().getItem() == Items.FLINT || event.getItemStack().getItem() == TFCFBlocks.LOOSE_FLINT.get().asItem()))
             {

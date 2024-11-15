@@ -29,7 +29,7 @@ public enum AddCalderasLayer implements CenterTransformLayer
     @Override
     public int apply(AreaContext context, int value)
     {
-        if (value == INLAND_MARKER && isMountains(value) && !(value == SHRUBLANDS || value == VINICUNCA_MOUNTAINS) && context.random().nextInt(chance) == 0)
+        if (/*value == INLAND_MARKER &&*/ isMountains(value) && !(value == SHRUBLANDS || value == VINICUNCA_MOUNTAINS) && context.random().nextInt(chance) == 0)
         {
             return CALDERA_MARKER;
         }

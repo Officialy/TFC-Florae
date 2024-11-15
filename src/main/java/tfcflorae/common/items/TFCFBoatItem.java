@@ -32,7 +32,7 @@ public class TFCFBoatItem extends BoatItem
 
     public TFCFBoatItem(Supplier<? extends EntityType<TFCFBoat>> boat, Properties properties)
     {
-        super(Boat.Type.OAK, properties);
+        super(false, Boat.Type.OAK, properties);
         this.boat = boat;
     }
 
@@ -89,7 +89,7 @@ public class TFCFBoatItem extends BoatItem
                     if (!level.isClientSide)
                     {
                         level.addFreshEntity(boat);
-                        level.gameEvent(player, GameEvent.ENTITY_PLACE, new BlockPos(hitresult.getLocation()));
+                        level.gameEvent(player, GameEvent.ENTITY_PLACE, BlockPos.containing(hitresult.getLocation()));
                         if (!player.getAbilities().instabuild)
                         {
                             itemstack.shrink(1);

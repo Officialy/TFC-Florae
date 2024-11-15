@@ -1,11 +1,12 @@
 package tfcflorae.world.feature.plant;
 
-import java.util.Random;
+
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.WorldGenLevel;
-import net.minecraft.world.level.block.BambooBlock;
+import net.minecraft.world.level.block.BambooStalkBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BambooLeaves;
 import net.minecraft.world.level.levelgen.Heightmap;
@@ -23,10 +24,10 @@ import tfcflorae.common.blocks.soil.TFCFSoil;
 
 public class RedBambooFeature extends Feature<ProbabilityFeatureConfiguration>
 {
-    private static final BlockState BAMBOO_TRUNK = TFCFBlocks.PLANTS.get(TFCFPlant.RED_BAMBOO).get().defaultBlockState().setValue(BambooBlock.AGE, Integer.valueOf(1)).setValue(BambooBlock.LEAVES, BambooLeaves.NONE).setValue(BambooBlock.STAGE, Integer.valueOf(0));
-    private static final BlockState BAMBOO_FINAL_LARGE = BAMBOO_TRUNK.setValue(BambooBlock.LEAVES, BambooLeaves.LARGE).setValue(BambooBlock.STAGE, Integer.valueOf(1));
-    private static final BlockState BAMBOO_TOP_LARGE = BAMBOO_TRUNK.setValue(BambooBlock.LEAVES, BambooLeaves.LARGE);
-    private static final BlockState BAMBOO_TOP_SMALL = BAMBOO_TRUNK.setValue(BambooBlock.LEAVES, BambooLeaves.SMALL);
+    private static final BlockState BAMBOO_TRUNK = TFCFBlocks.PLANTS.get(TFCFPlant.RED_BAMBOO).get().defaultBlockState().setValue(BambooStalkBlock.AGE, Integer.valueOf(1)).setValue(BambooStalkBlock.LEAVES, BambooLeaves.NONE).setValue(BambooStalkBlock.STAGE, Integer.valueOf(0));
+    private static final BlockState BAMBOO_FINAL_LARGE = BAMBOO_TRUNK.setValue(BambooStalkBlock.LEAVES, BambooLeaves.LARGE).setValue(BambooStalkBlock.STAGE, Integer.valueOf(1));
+    private static final BlockState BAMBOO_TOP_LARGE = BAMBOO_TRUNK.setValue(BambooStalkBlock.LEAVES, BambooLeaves.LARGE);
+    private static final BlockState BAMBOO_TOP_SMALL = BAMBOO_TRUNK.setValue(BambooStalkBlock.LEAVES, BambooLeaves.SMALL);
 
     public RedBambooFeature(Codec<ProbabilityFeatureConfiguration> codec)
     {
@@ -39,7 +40,7 @@ public class RedBambooFeature extends Feature<ProbabilityFeatureConfiguration>
         int i = 0;
         BlockPos blockpos = context.origin();
         WorldGenLevel worldgenlevel = context.level();
-        Random random = context.random();
+        RandomSource random = context.random();
         ProbabilityFeatureConfiguration probabilityfeatureconfiguration = context.config();
         BlockPos.MutableBlockPos blockpos$mutableblockpos = blockpos.mutable();
         BlockPos.MutableBlockPos blockpos$mutableblockpos1 = blockpos.mutable();

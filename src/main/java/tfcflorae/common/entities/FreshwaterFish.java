@@ -89,7 +89,7 @@ public class FreshwaterFish extends Salmon implements AquaticMob
     @Override
     protected float getBlockSpeedFactor()
     {
-        return Helpers.isBlock(getLevel().getBlockState(blockPosition()), TFCTags.Blocks.PLANTS) ? 1.0F : super.getBlockSpeedFactor();
+        return Helpers.isBlock(level().getBlockState(blockPosition()), TFCTags.Blocks.PLANTS) ? 1.0F : super.getBlockSpeedFactor();
     }
 
 }

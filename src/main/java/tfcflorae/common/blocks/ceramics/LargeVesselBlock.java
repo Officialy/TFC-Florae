@@ -102,7 +102,7 @@ public class LargeVesselBlock extends SealableDeviceBlock
 
             if (!Helpers.isEmpty(inventory))
             {
-                tooltip.add(Helpers.translatable("tfc.tooltip.contents").withStyle(ChatFormatting.DARK_GREEN));
+                tooltip.add(Component.translatable("tfc.tooltip.contents").withStyle(ChatFormatting.DARK_GREEN));
                 Helpers.addInventoryTooltipInfo(inventory, tooltip);
             }
             addExtraInfo(tooltip, inventoryTag);

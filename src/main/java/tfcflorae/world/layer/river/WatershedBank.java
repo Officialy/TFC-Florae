@@ -1,3 +1,4 @@
+/*
 package tfcflorae.world.layer.river;
 
 import java.util.ArrayList;
@@ -7,7 +8,7 @@ import java.util.Set;
 
 import net.minecraft.util.Mth;
 import net.minecraft.world.level.ChunkPos;
-import net.minecraft.world.level.levelgen.RandomSource;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.levelgen.XoroshiroRandomSource;
 
 import it.unimi.dsi.fastutil.longs.LongArrayList;
@@ -18,11 +19,10 @@ import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
 
 import net.dries007.tfc.util.climate.OverworldClimateModel;
 import net.dries007.tfc.world.FastConcurrentCache;
-import net.dries007.tfc.world.layer.Plate;
 import net.dries007.tfc.world.layer.framework.TypedArea;
 import net.dries007.tfc.world.layer.framework.TypedAreaFactory;
 import net.dries007.tfc.world.river.MidpointFractal;
-import net.dries007.tfc.world.river.RiverFractal;
+import net.dries007.tfc.world.river.River;
 import net.dries007.tfc.world.river.RiverHelpers;
 
 import org.jetbrains.annotations.VisibleForTesting;
@@ -95,7 +95,7 @@ public abstract class WatershedBank
         this.plate = plate;
     }
 
-    public abstract List<RiverFractal> getRivers();
+    public abstract List<River> getRivers();
 
     public Plate getPlate()
     {
@@ -125,7 +125,7 @@ public abstract class WatershedBank
         }
 
         @Override
-        public List<RiverFractal> getRivers()
+        public List<River> getRivers()
         {
             return Collections.emptyList();
         }
@@ -134,7 +134,7 @@ public abstract class WatershedBank
     public static class Rivers extends WatershedBank
     {
         public final LongSet interior, sources;
-        private final List<RiverFractal> riverBanks;
+        private final List<River> riverBanks;
 
         public Rivers(Plate plate, LongSet interior, LongSet sources, RandomSource random, float sourceChance, float length, int depth, float feather)
         {
@@ -145,7 +145,7 @@ public abstract class WatershedBank
 
             // We need to have a consistent iteration order across sources, in order to deterministically generate a watershed from any given sample position
             // The easiest way to guarantee this, is to sort the sources.
-            final RiverFractal.MultiParallelBuilder context = new Builder();
+            final River.MultiParallelBuilder context = new Builder();
             sources.longStream().sorted().forEach(key -> {
                 final float x0 = RiverHelpers.unpackX(key) + 0.5f, z0 = RiverHelpers.unpackZ(key) + 0.5f;
                 if (random.nextFloat() < sourceChance)
@@ -159,7 +159,7 @@ public abstract class WatershedBank
                         long adj = RiverHelpers.pack(x0 + dx, z0 + dz);
                         if (this.interior.contains(adj))
                         {
-                            context.add(new RiverFractal.Builder(random, x0, z0, angle, length, depth, feather));
+                            context.add(new River.Builder(random, x0, z0, angle, length, depth, feather));
                             break;
                         }
                         angle += 0.25f * Mth.PI;
@@ -171,7 +171,7 @@ public abstract class WatershedBank
         }
 
         @Override
-        public List<RiverFractal> getRivers()
+        public List<River> getRivers()
         {
             return riverBanks;
         }
@@ -182,10 +182,10 @@ public abstract class WatershedBank
             return sources;
         }
 
-        class Builder extends RiverFractal.MultiParallelBuilder
+        class Builder extends River.MultiParallelBuilder
         {
             @Override
-            protected boolean isLegal(RiverFractal.Vertex prev, RiverFractal.Vertex vertex)
+            protected boolean isLegal(River.Vertex prev, River.Vertex vertex)
             {
                 final int x = RiverHelpers.floor(vertex.x()), z = RiverHelpers.floor(vertex.y());
                 final long key = RiverHelpers.pack(x, z);
@@ -196,19 +196,23 @@ public abstract class WatershedBank
 
     public static class Context
     {
-        /**
+        */
+/**
          * Parameters that are tweaked for best performance.
-         */
+         *//*
+
         private static final int PARTITION_BITS = 5;
         private static final int ZOOM_BITS = 7;
 
         private static final int WATERSHED_CACHE_BITS = 8;
         private static final int PARTITION_CACHE_BITS = 10;
 
-        /**
+        */
+/**
          * The diagonal from the center of a unit cell, to the corner.
          * Scale is partition coordinates.
-         */
+         *//*
+
         private static final float PARTITION_RADIUS = (float) Math.sqrt(2) / 2f;
         private static final int PARTITION_TO_ZOOM_BITS = ZOOM_BITS - PARTITION_BITS;
 
@@ -247,12 +251,14 @@ public abstract class WatershedBank
             return newRiverWidth; // Narrower the longer it gets
         }
 
-        /**
+        */
+/**
          * Input coordinates are biome quart positions.
          * Partition coordinates are quart positions shifted by {@link #PARTITION_BITS}.
          * WatershedBank coordinates are quart positions shifted by {@link #ZOOM_BITS}. (Based on the total amount of zoom layers used between plate layers and the final biome area.)
          * In order to compute the partition, we query the four adjacent watersheds, which may overlap the partition area.
-         */
+         *//*
+
         public List<MidpointFractal> getFractalsByPartition(int x, int z)
         {
             final int px = x >> PARTITION_BITS, pz = z >> PARTITION_BITS;
@@ -281,7 +287,7 @@ public abstract class WatershedBank
                 partition = new ArrayList<>(32);
                 for (WatershedBank shed : nearbySheds)
                 {
-                    for (RiverFractal river : shed.getRivers())
+                    for (River river : shed.getRivers())
                     {
                         for (MidpointFractal fractal : river.getFractals())
                         {
@@ -316,3 +322,4 @@ public abstract class WatershedBank
         }
     }
 }
+*/

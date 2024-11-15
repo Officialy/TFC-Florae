@@ -1,7 +1,6 @@
 package tfcflorae.common.blocks.plant;
 
-import java.util.Random;
-
+import net.minecraft.util.RandomSource;
 import org.jetbrains.annotations.Nullable;
 
 import net.dries007.tfc.common.blocks.ExtendedProperties;
@@ -67,7 +66,7 @@ public abstract class CacaoPodBlock extends EpiphytePlantBlock
     }
 
     @Override
-    public void randomTick(BlockState state, ServerLevel level, BlockPos pos, Random random)
+    public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random)
     {
         if (state.getValue(getPlant().getStageProperty()) > 1 && random.nextDouble() < TFCConfig.SERVER.plantGrowthChance.get())
         {

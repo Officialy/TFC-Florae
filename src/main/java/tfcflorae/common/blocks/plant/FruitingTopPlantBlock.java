@@ -1,7 +1,7 @@
 package tfcflorae.common.blocks.plant;
 
 import java.util.List;
-import java.util.Random;
+
 import java.util.function.Supplier;
 import java.util.function.ToIntFunction;
 
@@ -10,6 +10,7 @@ import com.google.common.base.Preconditions;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
 import net.minecraft.core.BlockPos;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -95,7 +96,7 @@ public class FruitingTopPlantBlock extends TopPlantBlock implements ILeavesBlock
 
     @Override
     @SuppressWarnings("deprecation")
-    public void randomTick(BlockState state, ServerLevel level, BlockPos pos, Random random)
+    public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random)
     {
         if (getLifecycleForCurrentMonth() != getLifecycleForMonth(Calendars.SERVER.getCalendarMonthOfYear()))
         {
@@ -255,7 +256,7 @@ public class FruitingTopPlantBlock extends TopPlantBlock implements ILeavesBlock
         return true; // Not for the purposes of leaf decay, but for the purposes of seasonal updates
     }
 
-    public ItemStack getProductItem(Random random)
+    public ItemStack getProductItem(RandomSource random)
     {
         return new ItemStack(productItem.get());
     }

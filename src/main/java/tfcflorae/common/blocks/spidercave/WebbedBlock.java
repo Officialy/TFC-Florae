@@ -1,7 +1,8 @@
 package tfcflorae.common.blocks.spidercave;
 
-import java.util.Random;
 
+
+import net.minecraft.util.RandomSource;
 import org.jetbrains.annotations.Nullable;
 
 import net.minecraft.core.BlockPos;
@@ -74,7 +75,7 @@ public class WebbedBlock extends Block implements IForgeBlockExtension, IFluidLo
     }
 
     @Override
-    public void tick(BlockState state, ServerLevel level, BlockPos pos, Random random)
+    public void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random)
     {
         if (!canSurvive(state, level, pos))
         {
@@ -99,7 +100,7 @@ public class WebbedBlock extends Block implements IForgeBlockExtension, IFluidLo
     @SuppressWarnings("deprecation")
     public FluidState getFluidState(BlockState state)
     {
-        return IFluidLoggable.super.getFluidState(state);
+        return IFluidLoggable.super.getFluidLoggedState(state);
     }
 
     @Nullable

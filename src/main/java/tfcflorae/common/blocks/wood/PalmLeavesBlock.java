@@ -1,8 +1,9 @@
 package tfcflorae.common.blocks.wood;
 
-import java.util.Random;
+
 import java.util.function.Supplier;
 
+import net.minecraft.util.RandomSource;
 import org.jetbrains.annotations.Nullable;
 
 import net.minecraft.core.BlockPos;
@@ -89,10 +90,10 @@ public abstract class PalmLeavesBlock extends TFCFLeavesBlock
 
     public static IntegerProperty getDistanceProperty(int maxDecayDistance)
     {
-        if (maxDecayDistance >= 7 && maxDecayDistance < 7 + TFCBlockStateProperties.DISTANCES.length)
+       /* if (maxDecayDistance >= 7 && maxDecayDistance < 7 + TFCBlockStateProperties.DISTANCES.length)
         {
             return TFCBlockStateProperties.DISTANCES[maxDecayDistance - 7 + 1]; // we select one higher than max
-        }
+        }*/
         throw new IllegalArgumentException("No property set for distance: " + maxDecayDistance);
     }
 
@@ -168,7 +169,7 @@ public abstract class PalmLeavesBlock extends TFCFLeavesBlock
 
     @Override
     @SuppressWarnings("deprecation")
-    public void tick(BlockState state, ServerLevel level, BlockPos pos, Random random)
+    public void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random)
     {
         super.tick(state, level, pos, random);
         if (!state.canSurvive(level, pos))
@@ -179,7 +180,7 @@ public abstract class PalmLeavesBlock extends TFCFLeavesBlock
 
     @Override
     @SuppressWarnings("deprecation")
-    public void randomTick(BlockState state, ServerLevel level, BlockPos pos, Random random)
+    public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random)
     {
         if (state.getValue(getDistanceProperty()) > 2 && !state.getValue(PERSISTENT))
         {
@@ -213,11 +214,13 @@ public abstract class PalmLeavesBlock extends TFCFLeavesBlock
         return FluidHelpers.fillWithFluid(state.setValue(DIRECTION, direction).setValue(CORNER_BLOCK, isCornerBlock(state, level, pos)).setValue(CENTER_BLOCK, isCenterBlock(state, level, pos)).setValue(TOP_BLOCK, isTopBlock(state, level, pos)), level.getBlockState(pos).getFluidState().getType());
     }
 
+/*
     @Override
     public OffsetType getOffsetType()
     {
         return OffsetType.XYZ;
     }
+*/
 
     // this is superficially the same as the StationaryBerryBushBlock onUpdate, we can condense them
     @Override

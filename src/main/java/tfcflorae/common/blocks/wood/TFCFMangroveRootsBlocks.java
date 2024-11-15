@@ -119,7 +119,7 @@ public class TFCFMangroveRootsBlocks extends Block implements IFluidLoggable
             final float modifier = TFCConfig.SERVER.leavesMovementModifier.get().floatValue();
             if (modifier < 1 && state.getValue(getFluidProperty()).getFluid() == Fluids.EMPTY)
             {
-                Helpers.slowEntityInBlock(entity, modifier, 5);
+                Helpers.slowEntityInsideBlocks(entity);//, modifier, 5);
             }
             if (Helpers.isEntity(entity, TFCTags.Entities.DESTROYED_BY_LEAVES))
             {
@@ -138,6 +138,6 @@ public class TFCFMangroveRootsBlocks extends Block implements IFluidLoggable
     @SuppressWarnings("deprecation")
     public FluidState getFluidState(BlockState state)
     {
-        return IFluidLoggable.super.getFluidState(state);
+        return IFluidLoggable.super.getFluidLoggedState(state);
     }
 }

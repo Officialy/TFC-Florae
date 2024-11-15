@@ -1,7 +1,10 @@
 package tfcflorae.world.feature.tree;
 
-import java.util.Random;
 
+
+import net.minecraft.core.registries.Registries;
+import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -40,7 +43,7 @@ public class TFCFTreeGrower extends TFCTreeGrower
     }
 
     @Override
-    public boolean growTree(ServerLevel level, ChunkGenerator generator, BlockPos originPos, BlockState state, Random random)
+    public boolean growTree(ServerLevel level, ChunkGenerator generator, BlockPos originPos, BlockState state, RandomSource random)
     {
         int x = originPos.getX();
         int z = originPos.getZ();
@@ -48,8 +51,8 @@ public class TFCFTreeGrower extends TFCTreeGrower
         BlockPos pos = new BlockPos(x, y, z);
 
         ConfiguredFeature<?, ?> feature = null;
-        final ConfiguredFeature<?, ?> smallTree = getNormalFeature(level.registryAccess().registryOrThrow(Registry.CONFIGURED_FEATURE_REGISTRY));
-        final ConfiguredFeature<?, ?> largeTree = getOldGrowthFeature(level.registryAccess().registryOrThrow(Registry.CONFIGURED_FEATURE_REGISTRY));
+        final ConfiguredFeature<?, ?> smallTree = getNormalFeature(level.registryAccess().registryOrThrow(Registries.CONFIGURED_FEATURE));
+        final ConfiguredFeature<?, ?> largeTree = getOldGrowthFeature(level.registryAccess().registryOrThrow(Registries.CONFIGURED_FEATURE));
 
         final ChunkDataProvider provider = ChunkDataProvider.get(level);
         final ChunkData data = provider.get(level, pos);
@@ -64,11 +67,11 @@ public class TFCFTreeGrower extends TFCTreeGrower
 
         if (forestType != ForestType.OLD_GROWTH)
         {
-            feature = forestType != ForestType.NONE && random.nextFloat((rainfallInverted * 1.2F) / forestDensity) == 0 ? largeTree : smallTree;
+            feature = forestType != ForestType.NONE && Mth.clamp(random.nextFloat(), 0, (rainfallInverted * 1.2F) / forestDensity) == 0 ? largeTree : smallTree;
         }
         else
         {
-            feature = random.nextFloat(rainfallInverted * 1.2F) == 0 ? largeTree : smallTree;
+            feature = Mth.clamp(random.nextFloat(),0, rainfallInverted * 1.2F) == 0 ? largeTree : smallTree;
         }
 
         /*if (!mayPlaceOn(level.getBlockState(pos.below())))

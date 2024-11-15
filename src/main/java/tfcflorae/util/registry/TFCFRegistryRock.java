@@ -6,12 +6,11 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SlabBlock;
 import net.minecraft.world.level.block.StairBlock;
 import net.minecraft.world.level.block.WallBlock;
-import net.minecraft.world.level.material.Material;
-import net.minecraft.world.level.material.MaterialColor;
 
 import net.dries007.tfc.common.blocks.rock.RockCategory;
 import net.dries007.tfc.util.registry.RegistryRock;
 
+import net.minecraft.world.level.material.MapColor;
 import tfcflorae.common.blocks.rock.TFCFRock;
 
 public interface TFCFRegistryRock extends RegistryRock
@@ -19,9 +18,9 @@ public interface TFCFRegistryRock extends RegistryRock
     RockCategory category();
 
     @Override
-    default MaterialColor color()
+    default MapColor color()
     {
-        return Material.STONE.getColor();
+        return MapColor.STONE;
     }
 
     /**

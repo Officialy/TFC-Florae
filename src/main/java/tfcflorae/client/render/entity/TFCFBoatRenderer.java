@@ -5,8 +5,9 @@ import java.util.Map;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.datafixers.util.Pair;
-import com.mojang.math.Quaternion;
-import com.mojang.math.Vector3f;
+import com.mojang.math.Axis;
+import net.minecraftforge.client.event.RenderNameTagEvent;
+import org.joml.Vector3f;
 
 import net.minecraft.client.model.BoatModel;
 import net.minecraft.client.model.ListModel;
@@ -19,7 +20,6 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.vehicle.Boat;
-import net.minecraftforge.client.event.RenderNameplateEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.Event;
 import tfcflorae.client.TFCFRenderHelpers;
@@ -39,7 +39,7 @@ public class TFCFBoatRenderer extends BoatRenderer
 
     public TFCFBoatRenderer(EntityRendererProvider.Context context, String name, boolean hasRaftModel)
     {
-        super(context);
+        super(context, false);
         this.hasRaftModel = hasRaftModel;
         this.name = name;
         this.location = Pair.of(TFCFHelpers.identifier("textures/entity/boat/" + name + ".png"), hasRaftModel ? new RaftModel(context.bakeLayer(boatName(name))) : new BoatModel(context.bakeLayer(boatName(name))));
@@ -61,7 +61,7 @@ public class TFCFBoatRenderer extends BoatRenderer
     {
         pMatrixStack.pushPose();
         pMatrixStack.translate(0.0D, 0.375D, 0.0D);
-        pMatrixStack.mulPose(Vector3f.YP.rotationDegrees(180.0F - pEntityYaw));
+        pMatrixStack.mulPose(Axis.YP.rotationDegrees(180.0F - pEntityYaw));
         float f = (float)pEntity.getHurtTime() - pPartialTicks;
         float f1 = pEntity.getDamage() - pPartialTicks;
         if (f1 < 0.0F)
@@ -71,20 +71,20 @@ public class TFCFBoatRenderer extends BoatRenderer
 
         if (f > 0.0F)
         {
-            pMatrixStack.mulPose(Vector3f.XP.rotationDegrees(Mth.sin(f) * f * f1 / 10.0F * (float)pEntity.getHurtDir()));
+            pMatrixStack.mulPose(Axis.XP.rotationDegrees(Mth.sin(f) * f * f1 / 10.0F * (float)pEntity.getHurtDir()));
         }
 
         float f2 = pEntity.getBubbleAngle(pPartialTicks);
         if (!Mth.equal(f2, 0.0F))
         {
-            pMatrixStack.mulPose(new Quaternion(new Vector3f(1.0F, 0.0F, 1.0F), pEntity.getBubbleAngle(pPartialTicks), true));
+            pMatrixStack.mulPose(Axis.of(new Vector3f(1.0F, 0.0F, 1.0F)).rotation(pEntity.getBubbleAngle(pPartialTicks)));;//todo test
         }
 
         Pair<ResourceLocation, ListModel<Boat>> pair = getModelWithLocationNew(pEntity);
         ResourceLocation resourcelocation = pair.getFirst();
         ListModel<Boat> listmodel = pair.getSecond();
         pMatrixStack.scale(-1.0F, -1.0F, 1.0F);
-        pMatrixStack.mulPose(Vector3f.YP.rotationDegrees(90.0F));
+        pMatrixStack.mulPose(Axis.YP.rotationDegrees(90.0F));
         listmodel.setupAnim(pEntity, pPartialTicks, 0.0F, -0.1F, 0.0F, 0.0F);
         VertexConsumer vertexconsumer = pBuffer.getBuffer(listmodel.renderType(resourcelocation));
         listmodel.renderToBuffer(pMatrixStack, vertexconsumer, pPackedLight, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
@@ -103,7 +103,7 @@ public class TFCFBoatRenderer extends BoatRenderer
 
         pMatrixStack.popPose();
 
-        RenderNameplateEvent renderNameplateEvent = new RenderNameplateEvent(pEntity, pEntity.getDisplayName(), this, pMatrixStack, pBuffer, pPackedLight, pPartialTicks);
+        RenderNameTagEvent renderNameplateEvent = new RenderNameTagEvent(pEntity, pEntity.getDisplayName(), this, pMatrixStack, pBuffer, pPackedLight, pPartialTicks);
         MinecraftForge.EVENT_BUS.post(renderNameplateEvent);
         if (renderNameplateEvent.getResult() != Event.Result.DENY && (renderNameplateEvent.getResult() == Event.Result.ALLOW || this.shouldShowName(pEntity)))
         {

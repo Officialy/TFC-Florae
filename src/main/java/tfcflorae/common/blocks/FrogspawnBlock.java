@@ -5,6 +5,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.BlockGetter;
@@ -23,7 +24,7 @@ import tfcflorae.client.TFCFSounds;
 import tfcflorae.common.entities.TFCFEntities;
 import tfcflorae.common.entities.Tadpole;
 
-import java.util.Random;
+
 
 public class FrogspawnBlock extends Block
 {
@@ -52,7 +53,7 @@ public class FrogspawnBlock extends Block
         level.scheduleTick(pos, this, hatchTime(level.getRandom()));
     }
 
-    private static int hatchTime(Random random)
+    private static int hatchTime(RandomSource random)
     {
         return random.nextInt(3600, 12000);
     }
@@ -64,7 +65,7 @@ public class FrogspawnBlock extends Block
     }
 
     @Override
-    public void tick(BlockState state, ServerLevel level, BlockPos pos, Random random)
+    public void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random)
     {
         if (!this.canSurvive(state, level, pos))
         {
@@ -92,7 +93,7 @@ public class FrogspawnBlock extends Block
         return fluidState.getType() == Fluids.WATER && topFluidState.getType() == Fluids.EMPTY;
     }
 
-    private void onHatch(ServerLevel level, BlockPos pos, Random random)
+    private void onHatch(ServerLevel level, BlockPos pos, RandomSource random)
     {
         this.hatch(level, pos);
         level.playSound(null, pos, TFCFSounds.BLOCK_FROGSPAWN_HATCH.get(), SoundSource.BLOCKS, 1.0F, 1.0F);
@@ -104,7 +105,7 @@ public class FrogspawnBlock extends Block
         level.destroyBlock(blockPos, false);
     }
 
-    private void createTadpole(ServerLevel level, BlockPos pos, Random random)
+    private void createTadpole(ServerLevel level, BlockPos pos, RandomSource random)
     {
         int i = random.nextInt(2, 6);
 
@@ -123,7 +124,7 @@ public class FrogspawnBlock extends Block
         }
     }
 
-    private double getSpawnOffset(Random random)
+    private double getSpawnOffset(RandomSource random)
     {
         return Mth.clamp(random.nextDouble(), 0.2F, 0.8F);
     }

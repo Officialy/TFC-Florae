@@ -1,6 +1,6 @@
 # Loader metadata
 modLoader = "javafml"
-loaderVersion = "[40,)"
+loaderVersion = "[47,)"
 license = "BSD 3"
 
 # TFC Florae
@@ -16,20 +16,20 @@ license = "BSD 3"
 [[dependencies.tfcflorae]]
 	modId = "tfc"
 	mandatory = true
-	versionRange = "[1.18.2-2.2.20,)"
+	versionRange = "[1.20.1-3.2.10,)"
 	side = "BOTH"
 	ordering = "AFTER"
 
 [[dependencies.tfcflorae]]
 	modId = "forge"
 	mandatory = true
-	versionRange = "[40,)"
+	versionRange = "[47,)"
 	side = "BOTH"
 	ordering = "AFTER"
 
 [[dependencies.tfcflorae]]
 	modId = "minecraft"
 	mandatory = true
-	versionRange = "[1.18.2,)"
+	versionRange = "[1.20.1,)"
 	side = "BOTH"
 	ordering = "AFTER"

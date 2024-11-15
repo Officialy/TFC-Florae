@@ -4,7 +4,10 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.renderer.GameRenderer;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.network.PacketDistributor;
 
 import net.dries007.tfc.client.screen.button.BarrelSealButton;
@@ -19,7 +22,7 @@ public class TFCFBarrelSealButton extends BarrelSealButton
 {
     private final TFCFBarrelBlockEntity barrel;
 
-    public TFCFBarrelSealButton(TFCFBarrelBlockEntity barrel, int guiLeft, int guiTop, OnTooltip onTooltip)
+    public TFCFBarrelSealButton(TFCFBarrelBlockEntity barrel, int guiLeft, int guiTop, Component onTooltip)
     {
         super(barrel, guiLeft, guiTop, onTooltip);
         this.barrel = barrel;
@@ -33,18 +36,18 @@ public class TFCFBarrelSealButton extends BarrelSealButton
     }
 
     @Override
-    public void renderButton(PoseStack poseStack, int mouseX, int mouseY, float partialTicks)
+    public void renderWidget(GuiGraphics poseStack, int mouseX, int mouseY, float partialTicks)
     {
         RenderSystem.setShader(GameRenderer::getPositionTexShader);
         RenderSystem.setShaderTexture(0, TFCFBarrelScreen.BACKGROUND);
         RenderSystem.setShaderColor(1f, 1f, 1f, 1f);
 
         final int v = barrel.getBlockState().getValue(TFCFBarrelBlock.SEALED) ? 0 : 20;
-        blit(poseStack, x, y, 236, v, 20, 20, 256, 256);
-
+        poseStack.blit(new ResourceLocation("minecraft:dirt"), getX(), getY(), 236, v, 20, 20, 256, 256);
+        //todo minecraft:dirt
         if (isHoveredOrFocused())
         {
-            renderToolTip(poseStack, mouseX, mouseY);
+            renderWidget(poseStack, mouseX, mouseY, partialTicks);
         }
     }
 }

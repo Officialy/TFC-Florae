@@ -85,11 +85,11 @@ public abstract class SmallDripleafPlantBlock extends TallWaterPlantBlock implem
         return state.rotate(mirror.getRotation(state.getValue(FACING)));
     }
 
-    @Override
+/*    @Override
     public BlockBehaviour.OffsetType getOffsetType()
     {
         return BlockBehaviour.OffsetType.XYZ;
-    }
+    }*/
 
     @Override
     public float getMaxVerticalOffset()

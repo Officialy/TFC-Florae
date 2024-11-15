@@ -6,15 +6,16 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.HolderSet;
 import net.minecraft.core.Registry;
 import net.minecraft.core.RegistryCodecs;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
 
 public record MangroveRootPlacement(HolderSet<Block> canGrowThrough, HolderSet<Block> muddyRootsIn, BlockStateProvider muddyRootsProvider, int maxRootWidth, int maxRootLength, float randomSkewChance)
 {
     public static final Codec<MangroveRootPlacement> CODEC = RecordCodecBuilder.create(instance -> {
-        return instance.group(RegistryCodecs.homogeneousList(Registry.BLOCK_REGISTRY).fieldOf("can_grow_through").forGetter(placer -> {
+        return instance.group(RegistryCodecs.homogeneousList(Registries.BLOCK).fieldOf("can_grow_through").forGetter(placer -> {
             return placer.canGrowThrough;
-        }), RegistryCodecs.homogeneousList(Registry.BLOCK_REGISTRY).fieldOf("muddy_roots_in").forGetter(placer -> {
+        }), RegistryCodecs.homogeneousList(Registries.BLOCK).fieldOf("muddy_roots_in").forGetter(placer -> {
             return placer.muddyRootsIn;
         }), BlockStateProvider.CODEC.fieldOf("muddy_roots_provider").forGetter(placer -> {
             return placer.muddyRootsProvider;

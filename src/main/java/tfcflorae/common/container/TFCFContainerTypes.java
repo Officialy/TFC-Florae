@@ -2,6 +2,9 @@ package tfcflorae.common.container;
 
 import java.util.function.Supplier;
 
+import net.dries007.tfc.util.KnappingType;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -32,7 +35,7 @@ import static tfcflorae.TFCFlorae.MOD_ID;
 @SuppressWarnings("RedundantTypeArguments")
 public class TFCFContainerTypes
 {
-    public static final DeferredRegister<MenuType<?>> CONTAINERS = DeferredRegister.create(ForgeRegistries.CONTAINERS, MOD_ID);
+    public static final DeferredRegister<MenuType<?>> CONTAINERS = DeferredRegister.create(Registries.MENU, MOD_ID);
 
     /*public static final RegistryObject<MenuType<LargeEarthenwareVesselContainer>> LARGE_EARTHENWARE_VESSEL = TFCFContainerTypes.<LargeEarthenwareVesselBlockEntity, LargeEarthenwareVesselContainer>registerBlock("large_earthenware_vessel", TFCFBlockEntities.LARGE_EARTHENWARE_VESSEL, LargeEarthenwareVesselContainer::create);
     public static final RegistryObject<MenuType<LargeKaoliniteVesselContainer>> LARGE_KAOLINITE_VESSEL = TFCFContainerTypes.<LargeKaoliniteVesselBlockEntity, LargeKaoliniteVesselContainer>registerBlock("large_kaolinite_vessel", TFCFBlockEntities.LARGE_KAOLINITE_VESSEL, LargeKaoliniteVesselContainer::create);
@@ -50,22 +53,22 @@ public class TFCFContainerTypes
 
     public static KnappingContainer createEarthenwareClay(ItemStack stack, InteractionHand hand, int slot, Inventory playerInventory, int windowId)
     {
-        return new KnappingContainer(EARTHENWARE_CLAY_KNAPPING.get(), TFCFRecipeTypes.EARTHENWARE_CLAY_KNAPPING.get(), windowId, playerInventory, stack, hand, slot, 5, true, true, TFCSounds.KNAP_CLAY.get()).init(playerInventory, 20);
+        return null;// new KnappingContainer(EARTHENWARE_CLAY_KNAPPING.get(), TFCFRecipeTypes.EARTHENWARE_CLAY_KNAPPING.get(), windowId, playerInventory, stack, hand, slot);//, 5, true, true, TFCSounds.KNAP_CLAY.get()).init(playerInventory, 20);
     }
 
     public static KnappingContainer createKaoliniteClay(ItemStack stack, InteractionHand hand, int slot, Inventory playerInventory, int windowId)
     {
-        return new KnappingContainer(KAOLINITE_CLAY_KNAPPING.get(), TFCFRecipeTypes.KAOLINITE_CLAY_KNAPPING.get(), windowId, playerInventory, stack, hand, slot, 5, true, true, TFCSounds.KNAP_CLAY.get()).init(playerInventory, 20);
+        return null;// new KnappingContainer(KAOLINITE_CLAY_KNAPPING.get(), TFCFRecipeTypes.KAOLINITE_CLAY_KNAPPING.get(), windowId, playerInventory, stack, hand, slot);//, 5, true, true, TFCSounds.KNAP_CLAY.get()).init(playerInventory, 20);
     }
 
     public static KnappingContainer createStonewareClay(ItemStack stack, InteractionHand hand, int slot, Inventory playerInventory, int windowId)
     {
-        return new KnappingContainer(STONEWARE_CLAY_KNAPPING.get(), TFCFRecipeTypes.STONEWARE_CLAY_KNAPPING.get(), windowId, playerInventory, stack, hand, slot, 5, true, true, TFCSounds.KNAP_CLAY.get()).init(playerInventory, 20);
+        return null;// new KnappingContainer(STONEWARE_CLAY_KNAPPING.get(), TFCFRecipeTypes.STONEWARE_CLAY_KNAPPING.get(), windowId, playerInventory, stack, hand, slot);//, 5, true, true, TFCSounds.KNAP_CLAY.get()).init(playerInventory, 20);
     }
 
     public static KnappingContainer createFlint(ItemStack stack, InteractionHand hand, int slot, Inventory playerInventory, int windowId)
     {
-        return new KnappingContainer(FLINT_KNAPPING.get(), TFCFRecipeTypes.FLINT_KNAPPING.get(), windowId, playerInventory, stack, hand, slot, 1, false, false, TFCSounds.KNAP_STONE.get()).init(playerInventory, 20);
+        return null;// new KnappingContainer(FLINT_KNAPPING.get(), TFCFRecipeTypes.FLINT_KNAPPING.get(), windowId, playerInventory, stack, hand, slot);//, 1, false, false, TFCSounds.KNAP_STONE.get()).init(playerInventory, 20);
     }
 
     private static <T extends InventoryBlockEntity<?>, C extends BlockEntityContainer<T>> RegistryObject<MenuType<C>> registerBlock(String name, Supplier<BlockEntityType<T>> type, BlockEntityContainer.Factory<T, C> factory)

@@ -53,7 +53,7 @@ private static final int[] CONTINENT_HIGH_BIOMES = {HILLS, ROLLING_HILLS, ROLLIN
     @Override
     public int apply(AreaContext context, int value)
     {
-        switch (value)
+       /* switch (value)
         {
             case OCEANIC:
                 // Main oceanic plate body - generate deep oceans
@@ -94,7 +94,7 @@ private static final int[] CONTINENT_HIGH_BIOMES = {HILLS, ROLLING_HILLS, ROLLIN
                 // Continental shelf, for continental plate area that is still underwater
                 // This is generated as a replacement for ocean-continental diverging boundaries, and helps create better mid-ocean ridges
                 return OCEAN;
-        }
+        }*/
         throw new IllegalStateException("What is this: " + value);
     }
 }

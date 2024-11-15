@@ -1,9 +1,10 @@
 package tfcflorae.common.blocks.wood;
 
 import java.util.List;
-import java.util.Random;
+
 import java.util.function.Supplier;
 
+import net.minecraft.util.RandomSource;
 import org.jetbrains.annotations.Nullable;
 
 import com.google.common.base.Preconditions;
@@ -79,10 +80,10 @@ public abstract class TFCFMangroveLeavesBlock extends TFCLeavesBlock implements 
 
     private static IntegerProperty getDistanceProperty(int maxDecayDistance)
     {
-        if (maxDecayDistance >= 7 && maxDecayDistance < 7 + TFCBlockStateProperties.DISTANCES.length)
+        /*if (maxDecayDistance >= 7 && maxDecayDistance < 7 + TFCBlockStateProperties.DISTANCES.length)
         {
             return TFCBlockStateProperties.DISTANCES[maxDecayDistance - 7 + 1]; // we select one higher than max
-        }
+        }*/
         throw new IllegalArgumentException("No property set for distance: " + maxDecayDistance);
     }
 
@@ -163,7 +164,7 @@ public abstract class TFCFMangroveLeavesBlock extends TFCLeavesBlock implements 
 
     @Override
     @SuppressWarnings("deprecation")
-    public void tick(BlockState state, ServerLevel level, BlockPos pos, Random rand)
+    public void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource rand)
     {
         int distance = updateDistanceNew(level, pos);
         if (distance > maxDecayDistance)
@@ -194,7 +195,7 @@ public abstract class TFCFMangroveLeavesBlock extends TFCLeavesBlock implements 
 
     @Override
     @SuppressWarnings("deprecation")
-    public void randomTick(BlockState state, ServerLevel level, BlockPos pos, Random random)
+    public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random)
     {
         super.randomTick(state, level, pos, random);
         if (state.getValue(getDistanceProperty()) > maxDecayDistance && !state.getValue(PERSISTENT))
@@ -363,7 +364,7 @@ public abstract class TFCFMangroveLeavesBlock extends TFCLeavesBlock implements 
         return state.setValue(LIFECYCLE, Lifecycle.HEALTHY);
     }
 
-    public ItemStack getProductItem(Random random)
+    public ItemStack getProductItem(RandomSource random)
     {
         return new ItemStack(productItem.get());
     }

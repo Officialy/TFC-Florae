@@ -5,6 +5,7 @@ import java.util.*;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -39,7 +40,7 @@ public class HotSpringFeature extends Feature<HotSpringConfig>
     {
         final WorldGenLevel level = context.level();
         final BlockPos pos = context.origin();
-        final Random random = context.random();
+        final RandomSource random = context.random();
         final HotSpringConfig config = context.config();
 
         final Metaballs2D noise = Metaballs2D.simple(Helpers.fork(random), config.radius());
@@ -78,7 +79,7 @@ public class HotSpringFeature extends Feature<HotSpringConfig>
                 final BlockState stateAbove = level.getBlockState(mutablePos);
                 if (!isEmptyBlock(config, stateAbove))
                 {
-                    if (stateAbove.getMaterial().isReplaceable())
+                    if (stateAbove.liquid())
                     {
                         setBlock(level, mutablePos, stateAbove.getFluidState().createLegacyBlock());
                         mutablePos.move(0, 1, 0);
@@ -95,7 +96,7 @@ public class HotSpringFeature extends Feature<HotSpringConfig>
                 {
                     mutablePos.set(localX, y, localZ).move(direction);
                     final BlockState stateAt = level.getBlockState(mutablePos);
-                    if (stateAt.getMaterial().isLiquid())
+                    if (stateAt.liquid())
                     {
                         touchedWater = true;
                     }

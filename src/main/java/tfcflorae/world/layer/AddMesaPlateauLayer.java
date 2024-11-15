@@ -27,7 +27,7 @@ public enum AddMesaPlateauLayer implements CenterTransformLayer
     @Override
     public int apply(AreaContext context, int value)
     {
-        if (value == INLAND_MARKER && context.random().nextInt(chance) == 0)
+        if (/*value == INLAND_MARKER && */context.random().nextInt(chance) == 0)
         {
             return MESA_PLATEAU_MARKER;
         }

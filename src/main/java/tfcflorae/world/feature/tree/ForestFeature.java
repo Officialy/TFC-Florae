@@ -4,12 +4,13 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
-import java.util.Random;
+
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
@@ -65,7 +66,7 @@ public class ForestFeature extends Feature<ForestConfig>
     {
         final WorldGenLevel level = context.level();
         final BlockPos pos = context.origin();
-        final Random rand = context.random();
+        final RandomSource rand = context.random();
         final ForestConfig config = context.config();
 
         final ChunkDataProvider provider = ChunkDataProvider.get(context.chunkGenerator());
@@ -110,7 +111,7 @@ public class ForestFeature extends Feature<ForestConfig>
         return placedTrees || placedBushes;
     }
 
-    private boolean placeTree(WorldGenLevel level, ChunkGenerator generator, Random random, BlockPos chunkBlockPos, ForestConfig config, ChunkData data, BlockPos.MutableBlockPos mutablePos, ForestConfig.Type typeConfig)
+    private boolean placeTree(WorldGenLevel level, ChunkGenerator generator, RandomSource random, BlockPos chunkBlockPos, ForestConfig config, ChunkData data, BlockPos.MutableBlockPos mutablePos, ForestConfig.Type typeConfig)
     {
         final int chunkX = chunkBlockPos.getX();
         final int chunkZ = chunkBlockPos.getZ();
@@ -149,7 +150,7 @@ public class ForestFeature extends Feature<ForestConfig>
         return false;
     }
 
-    private boolean placeBush(WorldGenLevel level, Random random, BlockPos chunkBlockPos, ForestConfig config, ChunkData data, BlockPos.MutableBlockPos mutablePos)
+    private boolean placeBush(WorldGenLevel level, RandomSource random, BlockPos chunkBlockPos, ForestConfig config, ChunkData data, BlockPos.MutableBlockPos mutablePos)
     {
         final int chunkX = chunkBlockPos.getX();
         final int chunkZ = chunkBlockPos.getZ();
@@ -182,7 +183,7 @@ public class ForestFeature extends Feature<ForestConfig>
         return false;
     }
 
-    private void placeBushPart(WorldGenLevel level, BlockPos.MutableBlockPos mutablePos, BlockState log, BlockState leaves, float decay, Random rand, boolean needsEmptyCenter)
+    private void placeBushPart(WorldGenLevel level, BlockPos.MutableBlockPos mutablePos, BlockState log, BlockState leaves, float decay, RandomSource rand, boolean needsEmptyCenter)
     {
         if (EnvironmentHelpers.isWorldgenReplaceable(level, mutablePos))
         {
@@ -205,7 +206,7 @@ public class ForestFeature extends Feature<ForestConfig>
         }
     }
 
-    private void placeGroundcover(WorldGenLevel level, Random random, BlockPos chunkBlockPos, ForestConfig config, ChunkData data, BlockPos.MutableBlockPos mutablePos, int tries)
+    private void placeGroundcover(WorldGenLevel level, RandomSource random, BlockPos chunkBlockPos, ForestConfig config, ChunkData data, BlockPos.MutableBlockPos mutablePos, int tries)
     {
         final int chunkX = chunkBlockPos.getX();
         final int chunkZ = chunkBlockPos.getZ();
@@ -234,7 +235,7 @@ public class ForestFeature extends Feature<ForestConfig>
         }
     }
 
-    private void placeFallenTree(WorldGenLevel level, Random random, BlockPos chunkBlockPos, ForestConfig config, ChunkData data, BlockPos.MutableBlockPos mutablePos)
+    private void placeFallenTree(WorldGenLevel level, RandomSource random, BlockPos chunkBlockPos, ForestConfig config, ChunkData data, BlockPos.MutableBlockPos mutablePos)
     {
         final int chunkX = chunkBlockPos.getX();
         final int chunkZ = chunkBlockPos.getZ();
@@ -316,7 +317,7 @@ public class ForestFeature extends Feature<ForestConfig>
                                 final ForestType forestType = data.getForestType();
                                 final BlockState fungiState = Helpers.getRandomElement(ForgeRegistries.BLOCKS, TFCFTags.Blocks.FUNGI_ON_FALLEN_LOGS, random).map(Block::defaultBlockState).orElse(TFCFBlocks.PLANTS.get(TFCFPlant.PORCINI).get().defaultBlockState());
 
-                                if (random.nextFloat(1F - actualForestDensity) <= forestType.ordinal())
+                                if (Mth.clamp(random.nextFloat(), 0, 1F - actualForestDensity) <= forestType.ordinal())
                                 {
                                     if (fungiState != null && fungiState.canSurvive(level, mutablePosMycelium.above()))
                                     {
@@ -375,7 +376,7 @@ public class ForestFeature extends Feature<ForestConfig>
                                                             level.setBlock(mutablePosMycelium, TFCFBlocks.TFCFSOIL.get(TFCFSoil.MYCELIUM_DIRT).get(TFCFSoil.TFCFVariant.HUMUS).get().defaultBlockState(), Block.UPDATE_ALL);
                                                         }
 
-                                                        if (random.nextFloat(1F - actualForestDensity) <= forestType.ordinal())
+                                                        if (Mth.clamp(random.nextFloat(), 0, 1F - actualForestDensity) <= forestType.ordinal())
                                                         {
                                                             if (fungiState != null && fungiState.canSurvive(level, mutablePosMycelium.above()))
                                                             {
@@ -398,7 +399,7 @@ public class ForestFeature extends Feature<ForestConfig>
     }
 
     @Nullable
-    private ForestConfig.Entry getTree(ChunkData chunkData, Random random, ForestConfig config, BlockPos pos)
+    private ForestConfig.Entry getTree(ChunkData chunkData, RandomSource random, ForestConfig config, BlockPos pos)
     {
         List<ForestConfig.Entry> entries = new ArrayList<>(4);
         float rainfall = chunkData.getRainfall(pos);

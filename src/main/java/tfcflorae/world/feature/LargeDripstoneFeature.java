@@ -1,7 +1,7 @@
 package tfcflorae.world.feature;
 
 import java.util.Optional;
-import java.util.Random;
+
 import javax.annotation.Nullable;
 
 import com.mojang.serialization.Codec;
@@ -9,6 +9,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
 import net.minecraft.util.valueproviders.FloatProvider;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.WorldGenLevel;
@@ -32,7 +33,7 @@ public class LargeDripstoneFeature extends Feature<LargeDripstoneConfig>
    {
       final WorldGenLevel level = context.level();
       final BlockPos pos = context.origin();
-      final Random random = context.random();
+      final RandomSource random = context.random();
       final LargeDripstoneConfig config = context.config();
 
       final Boolean hasSurface = config.hasSurface;
@@ -92,7 +93,7 @@ public class LargeDripstoneFeature extends Feature<LargeDripstoneConfig>
       }
    }
 
-   private static LargeDripstoneFeature.LargeDripstone makeDripstone(BlockPos root, boolean pointingUp, Random random, int radius, FloatProvider bluntnessBase, FloatProvider scaleBase)
+   private static LargeDripstoneFeature.LargeDripstone makeDripstone(BlockPos root, boolean pointingUp, RandomSource random, int radius, FloatProvider bluntnessBase, FloatProvider scaleBase)
    {
       return new LargeDripstoneFeature.LargeDripstone(root, pointingUp, radius, (double)bluntnessBase.sample(random), (double)scaleBase.sample(random));
    }
@@ -174,7 +175,7 @@ public class LargeDripstoneFeature extends Feature<LargeDripstoneConfig>
          return (int)DripstoneUtils.getDripstoneHeight((double)radius, (double)this.radius, this.scale, this.bluntness);
       }
 
-      void placeBlocks(WorldGenLevel level, Random random, LargeDripstoneFeature.WindOffsetter pWindOffsetter, LargeDripstoneConfig config)
+      void placeBlocks(WorldGenLevel level, RandomSource random, LargeDripstoneFeature.WindOffsetter pWindOffsetter, LargeDripstoneConfig config)
       {
          for(int i = -this.radius; i <= this.radius; ++i)
          {
@@ -226,7 +227,7 @@ public class LargeDripstoneFeature extends Feature<LargeDripstoneConfig>
       @Nullable
       private final Vec3 windSpeed;
 
-      WindOffsetter(int pOriginY, Random random, FloatProvider pMagnitude)
+      WindOffsetter(int pOriginY, RandomSource random, FloatProvider pMagnitude)
       {
          this.originY = pOriginY;
          float f = pMagnitude.sample(random);
@@ -255,7 +256,7 @@ public class LargeDripstoneFeature extends Feature<LargeDripstoneConfig>
          {
             int i = this.originY - pPos.getY();
             Vec3 vec3 = this.windSpeed.scale((double)i);
-            return pPos.offset(vec3.x, 0.0D, vec3.z);
+            return pPos.offset((int) vec3.x, 0, (int) vec3.z);
          }
       }
    }

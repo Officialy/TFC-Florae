@@ -2,16 +2,18 @@ package tfcflorae.common.blocks.plant;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Random;
+
 import java.util.function.Supplier;
 
 import net.minecraft.tags.BlockTags;
 import net.minecraft.core.Direction;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -129,7 +131,7 @@ public abstract class TFCFTopPlantBlock extends GrowingPlantHeadBlock implements
     }
 
     @Override
-    public void randomTick(BlockState state, ServerLevel level, BlockPos pos, Random random)
+    public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random)
     {
         level.setBlockAndUpdate(pos, updateStateWithCurrentMonth(state));
         double tempThreshold = Config.COMMON.foliageDecayThreshold.get();
@@ -172,8 +174,7 @@ public abstract class TFCFTopPlantBlock extends GrowingPlantHeadBlock implements
     }
 
     @Override
-    public boolean isValidBonemealTarget(BlockGetter level, BlockPos pos, BlockState state, boolean isClient)
-    {
+    public boolean isValidBonemealTarget(LevelReader pLevel, BlockPos pPos, BlockState pState, boolean pIsClient) {
         return false;
     }
 
@@ -184,7 +185,7 @@ public abstract class TFCFTopPlantBlock extends GrowingPlantHeadBlock implements
     }
 
     @Override
-    protected int getBlocksToGrowWhenBonemealed(Random rand)
+    protected int getBlocksToGrowWhenBonemealed(RandomSource rand)
     {
         return 0;
     }
@@ -236,9 +237,8 @@ public abstract class TFCFTopPlantBlock extends GrowingPlantHeadBlock implements
     }
 
     @Override
-    public List<ItemStack> getDrops(BlockState state, LootContext.Builder builder)
-    {
-        return isDead ? Collections.emptyList() : super.getDrops(state, builder);
+    public List<ItemStack> getDrops(BlockState pState, LootParams.Builder pParams) {
+        return isDead ? Collections.emptyList() : super.getDrops(pState, pParams);
     }
 
     @Override

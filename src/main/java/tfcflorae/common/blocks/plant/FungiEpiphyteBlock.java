@@ -1,7 +1,8 @@
 package tfcflorae.common.blocks.plant;
 
-import java.util.Random;
 
+
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.core.BlockPos;
@@ -54,7 +55,7 @@ public abstract class FungiEpiphyteBlock extends EpiphytePlantBlock
     }
 
     @Override
-    public void animateTick(BlockState state, Level level, BlockPos pos, Random random)
+    public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random)
     {
         if (plantTFCF.getSporeColor() != -1 && level.getRawBrightness(pos, 0) > 9 && (Calendars.get(level).getCalendarMonthOfYear().getSeason() == Season.SUMMER || Calendars.get(level).getCalendarMonthOfYear().getSeason() == Season.FALL))
         {
@@ -80,7 +81,7 @@ public abstract class FungiEpiphyteBlock extends EpiphytePlantBlock
 
     @Override
     @SuppressWarnings("deprecation")
-    public void randomTick(BlockState state, ServerLevel level, BlockPos pos, Random random)
+    public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random)
     {
         if (random.nextDouble() < TFCConfig.SERVER.plantGrowthChance.get())
         {

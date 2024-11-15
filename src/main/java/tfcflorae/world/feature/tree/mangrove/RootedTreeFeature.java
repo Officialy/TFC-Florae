@@ -10,6 +10,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Vec3i;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelSimulatedReader;
 import net.minecraft.world.level.WorldGenLevel;
@@ -31,7 +32,7 @@ import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.OptionalInt;
-import java.util.Random;
+
 import java.util.Set;
 import java.util.function.BiConsumer;
 
@@ -39,7 +40,6 @@ import net.dries007.tfc.common.blocks.TFCBlocks;
 import net.dries007.tfc.common.fluids.FluidHelpers;
 import net.dries007.tfc.util.EnvironmentHelpers;
 
-import tfcflorae.mixin.accessor.TreeFeatureAccessor;
 import tfcflorae.world.feature.tree.RootedTreeConfig;
 
 public class RootedTreeFeature extends Feature<RootedTreeConfig>
@@ -49,7 +49,7 @@ public class RootedTreeFeature extends Feature<RootedTreeConfig>
         super(codec);
     }
 
-    public boolean generate(WorldGenLevel level, Random random, BlockPos pos, BiConsumer<BlockPos, BlockState> rootPlacerReplacer, BiConsumer<BlockPos, BlockState> trunkPlacerReplacer, BiConsumer<BlockPos, BlockState> foliagePlacerReplacer, RootedTreeConfig config)
+    public boolean generate(WorldGenLevel level, RandomSource random, BlockPos pos, BiConsumer<BlockPos, BlockState> rootPlacerReplacer, BiConsumer<BlockPos, BlockState> trunkPlacerReplacer, BiConsumer<BlockPos, BlockState> foliagePlacerReplacer, RootedTreeConfig config)
     {
         int treeHeight = config.trunkPlacer.getTreeHeight(random);
         int foliageHeight = config.foliagePlacer.foliageHeight(random, treeHeight, config);
@@ -72,7 +72,7 @@ public class RootedTreeFeature extends Feature<RootedTreeConfig>
                 else
                 {
                     List<FoliagePlacer.FoliageAttachment> foliage = config.trunkPlacer.placeTrunk(level, trunkPlacerReplacer, random, topPosition, origin, config);
-                    foliage.forEach(node -> config.foliagePlacer.createFoliage(level, foliagePlacerReplacer, random, config, topPosition, node, foliageHeight, foliageRadius));
+//                    foliage.forEach(node -> config.foliagePlacer.createFoliage(level, foliagePlacerReplacer, random, config, topPosition, node, foliageHeight, foliageRadius));
                     return true;
                 }
             }
@@ -101,7 +101,7 @@ public class RootedTreeFeature extends Feature<RootedTreeConfig>
                 {
                     mutable.setWithOffset(pos, x, y, z);
                     boolean isValid = TreeFeature.validTreePos(level, pos) || level.isStateAtPosition(pos, state -> isEmptyOrWater(state)) || level.isStateAtPosition(pos, state -> state.is(BlockTags.LOGS)) || (config.trunkPlacer instanceof UpwardBranchingTrunk trunk && (level.isStateAtPosition(pos, state -> state.is(trunk.canGrowThrough)) || level.isStateAtPosition(pos, state -> isEmptyOrWater(state))));
-                    if (!isValid || (!config.ignoreVines && TreeFeatureAccessor.isVine(level, mutable))) return y - 2;
+                    if (!isValid || (!config.ignoreVines /*todo && TreeFeatureAccessor.isVine(level, mutable)*/)) return y - 2;
                 }
             }
         }
@@ -117,7 +117,7 @@ public class RootedTreeFeature extends Feature<RootedTreeConfig>
     public final boolean place(FeaturePlaceContext<RootedTreeConfig> context)
     {
         WorldGenLevel level = context.level();
-        Random random = context.random();
+        RandomSource random = context.random();
         BlockPos pos = context.origin();
         RootedTreeConfig config = context.config();
         HashSet<BlockPos> rootPos = Sets.newHashSet();
@@ -151,7 +151,7 @@ public class RootedTreeFeature extends Feature<RootedTreeConfig>
             trunkPositions.sort(Comparator.comparingInt(Vec3i::getY));
             foliagePositions.sort(Comparator.comparingInt(Vec3i::getY));
             rootPositions.sort(Comparator.comparingInt(Vec3i::getY));
-            config.decorators.forEach(treeDecorator -> treeDecorator.place(level, decoratorReplacer, random, trunkPositions, foliagePositions));
+//            config.decorators.forEach(treeDecorator -> treeDecorator.place(level, decoratorReplacer, random, trunkPositions, foliagePositions));
         }
 
         return BoundingBox.encapsulatingPositions(Iterables.concat(trunkPos, foliagePos, decoratorPos)).map(box -> {
@@ -182,7 +182,7 @@ public class RootedTreeFeature extends Feature<RootedTreeConfig>
                 mutable.setWithOffset(pos, direction);
                 if (trunkPositions.contains(mutable) || !(blockState = level.getBlockState(mutable)).hasProperty(BlockStateProperties.DISTANCE)) continue;
                 positions.get(0).add(mutable.immutable());
-                TreeFeatureAccessor.setBlockKnownShape(level, mutable, blockState.setValue(BlockStateProperties.DISTANCE, 1));
+//                TreeFeatureAccessor.setBlockKnownShape(level, mutable, blockState.setValue(BlockStateProperties.DISTANCE, 1));
                 if (!box.isInside(mutable)) continue;
                 shape.fill(mutable.getX() - box.minX(), mutable.getY() - box.minY(), mutable.getZ() - box.minZ());
             }
@@ -202,7 +202,7 @@ public class RootedTreeFeature extends Feature<RootedTreeConfig>
                     BlockState state = level.getBlockState(mutable);
                     if (trunkPos.contains(mutable) || foliagePos.contains(mutable) || !state.hasProperty(BlockStateProperties.DISTANCE) || (state.getValue(BlockStateProperties.DISTANCE)) <= tries + 1) continue;
                     BlockState foliage = state.setValue(BlockStateProperties.DISTANCE, tries + 1);
-                    TreeFeatureAccessor.setBlockKnownShape(level, mutable, foliage);
+//                    TreeFeature.setBlockKnownShape(level, mutable, foliage);
                     if (box.isInside(mutable)) (shape).fill(mutable.getX() - box.minX(), mutable.getY() - box.minY(), mutable.getZ() - box.minZ());
                     foliagePos.add(mutable.immutable());
                 }

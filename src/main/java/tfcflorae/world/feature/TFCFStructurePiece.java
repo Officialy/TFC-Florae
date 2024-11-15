@@ -1,11 +1,12 @@
 package tfcflorae.world.feature;
 
-import java.util.Random;
+
 import javax.annotation.Nullable;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.Blocks;
@@ -78,7 +79,7 @@ public class TFCFStructurePiece
         }
     }
 
-    public static boolean createChestTFC(ServerLevelAccessor pLevel, BoundingBox pBox, Random pRandom, BlockPos pPos, ResourceLocation pLootTable, @Nullable BlockState pState)
+    public static boolean createChestTFC(ServerLevelAccessor pLevel, BoundingBox pBox, RandomSource pRandom, BlockPos pPos, ResourceLocation pLootTable, @Nullable BlockState pState)
     {
         if (pBox.isInside(pPos) && !pLevel.getBlockState(pPos).is(TFCFBlocks.ROCK_CHEST.get()))
         {

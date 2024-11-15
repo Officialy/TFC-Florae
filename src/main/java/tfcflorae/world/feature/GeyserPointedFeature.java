@@ -2,7 +2,7 @@ package tfcflorae.world.feature;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.Random;
+
 import java.util.function.Supplier;
 
 import com.mojang.serialization.Codec;
@@ -12,6 +12,7 @@ import net.dries007.tfc.world.chunkdata.ChunkDataProvider;
 import net.dries007.tfc.world.settings.RockSettings;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.state.BlockState;
@@ -30,7 +31,7 @@ public class GeyserPointedFeature extends Feature<GeyserPointedConfig>
    {
       final WorldGenLevel level = context.level();
       final BlockPos pos = context.origin();
-      final Random random = context.random();
+      final RandomSource random = context.random();
       final GeyserPointedConfig config = context.config();
       final Boolean hasSurface = config.hasSurface;
 
@@ -77,7 +78,7 @@ public class GeyserPointedFeature extends Feature<GeyserPointedConfig>
       }
    }
 
-   private static Optional<Direction> getTipDirection(BlockState inputState, LevelAccessor level, BlockPos blockPos, Random random)
+   private static Optional<Direction> getTipDirection(BlockState inputState, LevelAccessor level, BlockPos blockPos, RandomSource random)
    {
       boolean flag = DripstoneUtils.isDripstoneBase(level.getBlockState(blockPos.above()), inputState);
       boolean flag1 = DripstoneUtils.isDripstoneBase(level.getBlockState(blockPos.below()), inputState);
@@ -96,7 +97,7 @@ public class GeyserPointedFeature extends Feature<GeyserPointedConfig>
       return Optional.empty();
    }
 
-   private static void createPatchOfDripstoneBlocks(BlockState inputSurfaceState, Boolean hasSurface, LevelAccessor level, Random random, BlockPos blockPos, GeyserPointedConfig config)
+   private static void createPatchOfDripstoneBlocks(BlockState inputSurfaceState, Boolean hasSurface, LevelAccessor level, RandomSource random, BlockPos blockPos, GeyserPointedConfig config)
    {
       DripstoneUtils.placeDripstoneBlockIfPossible(inputSurfaceState, level, blockPos, hasSurface);
 

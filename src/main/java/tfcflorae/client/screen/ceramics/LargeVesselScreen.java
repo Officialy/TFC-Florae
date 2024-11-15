@@ -2,9 +2,9 @@ package tfcflorae.client.screen.ceramics;
 
 import java.util.function.Consumer;
 
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 
@@ -21,8 +21,8 @@ import tfcflorae.common.container.ceramics.LargeVesselContainer;
 
 public class LargeVesselScreen extends BlockEntityScreen<LargeVesselBlockEntity, LargeVesselContainer>
 {
-    private static final Component SEAL = new TranslatableComponent(TerraFirmaCraft.MOD_ID + ".tooltip.seal_barrel");
-    private static final Component UNSEAL = new TranslatableComponent(TerraFirmaCraft.MOD_ID + ".tooltip.unseal_barrel");
+    private static final Component SEAL = Component.translatable(TerraFirmaCraft.MOD_ID + ".tooltip.seal_barrel");
+    private static final Component UNSEAL = Component.translatable(TerraFirmaCraft.MOD_ID + ".tooltip.unseal_barrel");
     public static final ResourceLocation BACKGROUND = Helpers.identifier("textures/gui/large_vessel.png");
 
     public LargeVesselScreen(LargeVesselContainer container, Inventory playerInventory, Component name)
@@ -34,7 +34,7 @@ public class LargeVesselScreen extends BlockEntityScreen<LargeVesselBlockEntity,
     public void init()
     {
         super.init();
-        addRenderableWidget(new VesselSealButton(blockEntity, getGuiLeft() + 9, getGuiTop(), new Button.OnTooltip()
+/*        addRenderableWidget(new VesselSealButton(blockEntity, getGuiLeft() + 9, getGuiTop()));/*new Button.OnTooltip()
         {
             @Override
             public void onTooltip(Button button, PoseStack poseStack, int x, int y)
@@ -47,11 +47,11 @@ public class LargeVesselScreen extends BlockEntityScreen<LargeVesselBlockEntity,
             {
                 consumer.accept(isSealed() ? UNSEAL : SEAL);
             }
-        }));
+        }));*/
     }
 
     @Override
-    protected void renderLabels(PoseStack poseStack, int mouseX, int mouseY)
+    protected void renderLabels(GuiGraphics poseStack, int mouseX, int mouseY)
     {
         super.renderLabels(poseStack, mouseX, mouseY);
         if (isSealed())

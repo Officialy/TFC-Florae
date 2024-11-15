@@ -38,7 +38,7 @@ public class AtollSurfaceBuilder implements SurfaceBuilder
 
     private void buildAtollSurface(SurfaceBuilderContext context, int startY, int endY)
     {
-        float variantNoiseValue = variantNoise.noise(context.pos().getX(), context.pos().getZ());
+        double variantNoiseValue = variantNoise.noise(context.pos().getX(), context.pos().getZ());
         if (variantNoiseValue > 0.6f)
         {
             NormalSurfaceBuilder.INSTANCE.buildSurface(context, startY, endY, SurfaceStates.RARE_SHORE_SAND, SurfaceStates.RARE_SHORE_SAND, SurfaceStates.RARE_SHORE_SANDSTONE);

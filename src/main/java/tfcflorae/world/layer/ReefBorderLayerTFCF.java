@@ -30,7 +30,7 @@ public enum ReefBorderLayerTFCF implements AdjacentTransformLayer
     public int apply(AreaContext context, int north, int east, int south, int west, int center)
     {
         Predicate<IntPredicate> matcher = p -> p.test(north) || p.test(east) || p.test(south) || p.test(west);
-        if (center == OCEAN_REEF_MARKER)
+       /* if (center == OCEAN_REEF_MARKER)
         {
             if (matcher.test(i -> !isOceanOrMarker(i) || i != ATOLL || i != LAGOON || i != BARRIER_REEF))
             {
@@ -41,7 +41,7 @@ public enum ReefBorderLayerTFCF implements AdjacentTransformLayer
         else if (isOceanOrMarker(center) && matcher.test(i -> i == OCEAN_REEF_MARKER))
         {
             return OCEAN_REEF;
-        }
+        }*/
         return center;
     }
 }

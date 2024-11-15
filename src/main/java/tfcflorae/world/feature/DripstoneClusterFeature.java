@@ -2,7 +2,7 @@ package tfcflorae.world.feature;
 
 import java.util.Optional;
 import java.util.OptionalInt;
-import java.util.Random;
+
 
 import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
@@ -10,6 +10,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
 import net.minecraft.util.valueproviders.ClampedNormalFloat;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
@@ -32,7 +33,7 @@ public class DripstoneClusterFeature extends Feature<DripstoneClusterConfig>
    {
       final WorldGenLevel level = context.level();
       final BlockPos pos = context.origin();
-      final Random random = context.random();
+      final RandomSource random = context.random();
       final DripstoneClusterConfig config = context.config();
 
       final Boolean hasSurface = config.hasSurface;
@@ -64,7 +65,7 @@ public class DripstoneClusterFeature extends Feature<DripstoneClusterConfig>
       }
    }
 
-   private void placeColumn(BlockState inputState, Boolean hasSurface, BlockState inputSurfaceState, WorldGenLevel level, Random random, BlockPos pos, int x, int z, float wetness, double chance, int height, float density, DripstoneClusterConfig config)
+   private void placeColumn(BlockState inputState, Boolean hasSurface, BlockState inputSurfaceState, WorldGenLevel level, RandomSource random, BlockPos pos, int x, int z, float wetness, double chance, int height, float density, DripstoneClusterConfig config)
    {
       Optional<Column> optional = Column.scan(level, pos, config.floorToCeilingSearchRange, DripstoneUtils::isEmptyOrWater, DripstoneUtils::isNeitherEmptyNorWater);
       if (optional.isPresent())
@@ -168,7 +169,7 @@ public class DripstoneClusterFeature extends Feature<DripstoneClusterConfig>
       return level.getBlockState(pos).is(Blocks.LAVA);
    }
 
-   private int getDripstoneHeight(Random random, int x, int z, float chance, int height, DripstoneClusterConfig config)
+   private int getDripstoneHeight(RandomSource random, int x, int z, float chance, int height, DripstoneClusterConfig config)
    {
       if (random.nextFloat() > chance)
       {
@@ -236,7 +237,7 @@ public class DripstoneClusterFeature extends Feature<DripstoneClusterConfig>
       return (double)Mth.clampedMap((float)k, 0.0F, (float)config.maxDistanceFromEdgeAffectingChanceOfDripstoneColumn, config.chanceOfDripstoneColumnAtMaxDistanceFromCenter, 1.0F);
    }
 
-   private static float randomBetweenBiased(Random random, float pMin, float pMax, float pMean, float pDeviation)
+   private static float randomBetweenBiased(RandomSource random, float pMin, float pMax, float pMean, float pDeviation)
    {
       return ClampedNormalFloat.sample(random, pMean, pDeviation, pMin, pMax);
    }

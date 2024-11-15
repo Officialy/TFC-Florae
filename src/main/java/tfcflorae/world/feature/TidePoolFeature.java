@@ -1,12 +1,13 @@
 package tfcflorae.world.feature;
 
-import java.util.Random;
+
 import java.util.function.Predicate;
 import com.mojang.serialization.Codec;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.Block;
@@ -38,7 +39,7 @@ public class TidePoolFeature extends Feature<NoneFeatureConfiguration>
     public boolean place(FeaturePlaceContext<NoneFeatureConfiguration> context)
     {
         boolean placedAny = false;
-        final Random random = context.random();
+        final RandomSource random = context.random();
         final WorldGenLevel level = context.level();
         BlockPos origin = context.origin();
 

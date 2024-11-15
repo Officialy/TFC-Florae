@@ -49,7 +49,7 @@ public abstract class TFCFCactusBlock extends TFCCactusBlock
         {
             mutable.setWithOffset(pos, direction);
             BlockState stateAt = level.getBlockState(mutable);
-            if (stateAt.getMaterial().isSolid() || Helpers.isFluid(level.getFluidState(mutable), FluidTags.LAVA))
+            if (stateAt.isSolid() || Helpers.isFluid(level.getFluidState(mutable), FluidTags.LAVA))
             {
                 return false;
             }

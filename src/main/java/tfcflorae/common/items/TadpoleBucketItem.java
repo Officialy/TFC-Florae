@@ -5,7 +5,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
@@ -77,18 +76,18 @@ public class TadpoleBucketItem extends BucketItem
                 String base = "color.minecraft." + TFCTropicalFish.getBaseColor(variant);
                 String pattern = "color.minecraft." + TFCTropicalFish.getPatternColor(variant);
 
-                for(int i = 0; i < TFCTropicalFish.COMMON_VARIANTS.length; ++i)
+                for(int i = 0; i < TFCTropicalFish.COMMON_VARIANTS.size(); ++i)
                 {
-                    if (variant == TFCTropicalFish.COMMON_VARIANTS[i])
+                 /*   if (variant == TFCTropicalFish.COMMON_VARIANTS[i])
                     {
-                        components.add((new TranslatableComponent(TFCTropicalFish.getPredefinedName(i))).withStyle(format));
+                        components.add((Component.translatable(TFCTropicalFish.getPredefinedName(i))).withStyle(format));
                         return;
-                    }
+                    }*/
                 }
 
-                components.add(new TranslatableComponent(TFCTropicalFish.getFishTypeName(variant)).withStyle(format));
-                MutableComponent component = new TranslatableComponent(base);
-                if (!base.equals(pattern)) component.append(", ").append(new TranslatableComponent(pattern));
+                components.add(Component.translatable(TFCTropicalFish.getPredefinedName(variant)).withStyle(format));
+                MutableComponent component = Component.translatable(base);
+                if (!base.equals(pattern)) component.append(", ").append(Component.translatable(pattern));
 
                 component.withStyle(format);
                 components.add(component);

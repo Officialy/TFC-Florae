@@ -1,9 +1,10 @@
 package tfcflorae.common.blocks.soil;
 
+import net.minecraft.util.RandomSource;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Map;
-import java.util.Random;
+
 import java.util.function.Supplier;
 
 import com.google.common.collect.ImmutableMap;
@@ -100,7 +101,7 @@ public class ConnectedDryGrassBlock extends ConnectedGrassBlock
 
     @Override
     @SuppressWarnings("deprecation")
-    public void randomTick(BlockState state, ServerLevel level, BlockPos pos, Random random)
+    public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random)
     {
         if (!canBeGrass(state, level, pos))
         {
@@ -135,7 +136,7 @@ public class ConnectedDryGrassBlock extends ConnectedGrassBlock
 
     @Override
     @SuppressWarnings("deprecation")
-    public void tick(BlockState state, ServerLevel level, BlockPos pos, Random rand)
+    public void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource rand)
     {
         level.setBlock(pos, updateStateFromNeighbors(level, pos, state), 2);
     }

@@ -2,6 +2,7 @@ package tfcflorae.common.procedures;
 
 import java.util.concurrent.atomic.AtomicReference;
 
+import net.dries007.tfc.common.capabilities.Capabilities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
@@ -17,7 +18,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.block.state.properties.Property;
 
-import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.items.ItemHandlerHelper;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -29,8 +29,8 @@ public class ChiseledBookshelfOnBlockRightClickedProcedure
         AtomicReference<ItemStack> _retval = new AtomicReference<>(ItemStack.EMPTY);
         BlockEntity _ent = world.getBlockEntity(pos);
         if (_ent != null)
-            _ent.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null)
-            .ifPresent(capability -> _retval.set(capability.getStackInSlot(slotid).copy())); 
+            _ent.getCapability(Capabilities.ITEM, null)
+            .ifPresent(capability -> _retval.set(capability.getStackInSlot(slotid).copy()));
         return _retval.get();
     }
 
@@ -54,11 +54,11 @@ public class ChiseledBookshelfOnBlockRightClickedProcedure
                         AtomicReference<ItemStack> _retval = new AtomicReference<>(ItemStack.EMPTY);
                         BlockEntity _ent = world.getBlockEntity(pos);
                         if (_ent != null)
-                            _ent.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null)
+                            _ent.getCapability(Capabilities.ITEM, null)
                             .ifPresent(capability -> _retval.set(capability.getStackInSlot(slotid).copy())); 
                         return _retval.get();
                     }
-                }).getItemStack(world, new BlockPos(x, y, z), (int)repeated).getItem() != ItemStack.EMPTY.getItem())
+                }).getItemStack(world, BlockPos.containing(x, y, z), (int)repeated).getItem() != ItemStack.EMPTY.getItem())
                 books++; 
                 repeated++;
             } 
@@ -66,13 +66,13 @@ public class ChiseledBookshelfOnBlockRightClickedProcedure
             {
                 if (books < 6.0D)
                 {
-                    BlockEntity _ent = world.getBlockEntity(new BlockPos(x, y, z));
+                    BlockEntity _ent = world.getBlockEntity(BlockPos.containing(x, y, z));
                     if (_ent != null)
                     {
                         int _slotid = (int)books;
                         ItemStack _setstack = itemgiven;
                         _setstack.setCount(1);
-                        _ent.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null).ifPresent(capability -> {
+                        _ent.getCapability(Capabilities.ITEM, null).ifPresent(capability -> {
                             if (capability instanceof IItemHandlerModifiable)
                                 ((IItemHandlerModifiable)capability).setStackInSlot(_slotid, _setstack); 
                             });
@@ -85,7 +85,7 @@ public class ChiseledBookshelfOnBlockRightClickedProcedure
                         Level _level = (Level)world;
                         if (!_level.isClientSide())
                         {
-                            _level.playSound(null, new BlockPos(x, y, z), (SoundEvent)ForgeRegistries.SOUND_EVENTS
+                            _level.playSound(null, BlockPos.containing(x, y, z), (SoundEvent)ForgeRegistries.SOUND_EVENTS
                             .getValue(new ResourceLocation("item.book.put")), SoundSource.PLAYERS, 1.0F, 1.0F);
                         }
                         else
@@ -110,20 +110,20 @@ public class ChiseledBookshelfOnBlockRightClickedProcedure
                                 AtomicReference<ItemStack> _retval = new AtomicReference<>(ItemStack.EMPTY);
                                 BlockEntity _ent = world.getBlockEntity(pos);
                                 if (_ent != null)
-                                    _ent.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null).ifPresent(capability -> _retval.set(capability.getStackInSlot(slotid).copy())); 
+                                    _ent.getCapability(Capabilities.ITEM, null).ifPresent(capability -> _retval.set(capability.getStackInSlot(slotid).copy()));
                                 return _retval.get();
                             }
-                        }).getItemStack(world, new BlockPos(x, y, z), (int)books);
+                        }).getItemStack(world, BlockPos.containing(x, y, z), (int)books);
                         _setstack.setCount(1);
                         ItemHandlerHelper.giveItemToPlayer(_player, _setstack);
                     } 
-                    BlockEntity _ent = world.getBlockEntity(new BlockPos(x, y, z));
+                    BlockEntity _ent = world.getBlockEntity(BlockPos.containing(x, y, z));
                     if (_ent != null)
                     {
                         int _slotid = (int)books;
                         ItemStack _setstack = ItemStack.EMPTY;
                         _setstack.setCount(1);
-                        _ent.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null).ifPresent(capability -> {
+                        _ent.getCapability(Capabilities.ITEM, null).ifPresent(capability -> {
                             if (capability instanceof IItemHandlerModifiable)
                                 ((IItemHandlerModifiable)capability).setStackInSlot(_slotid, _setstack); 
                             });
@@ -131,7 +131,7 @@ public class ChiseledBookshelfOnBlockRightClickedProcedure
                 } 
             } 
             int _value = (int)books;
-            BlockPos _pos = new BlockPos(x, y, z);
+            BlockPos _pos = BlockPos.containing(x, y, z);
             BlockState _bs = world.getBlockState(_pos);
             Property property = _bs.getBlock().getStateDefinition().getProperty("books");
             if (property instanceof IntegerProperty)

@@ -1,13 +1,14 @@
 package tfcflorae.world.surface;
 
 import java.util.List;
-import java.util.Random;
+
 import java.util.function.Supplier;
 
 import com.google.common.collect.ImmutableList;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
@@ -115,7 +116,7 @@ public class TFCFSoilSurfaceState implements SurfaceState
     {
         return context -> {
             final BlockPos pos = context.pos();
-            float noise = SoilSurfaceState.PATCH_NOISE.noise(pos.getX(), pos.getZ());
+            double noise = SoilSurfaceState.PATCH_NOISE.noise(pos.getX(), pos.getZ());
             return noise > 0 ? first.getState(context) : second.getState(context);
         };
     }
@@ -377,9 +378,9 @@ public class TFCFSoilSurfaceState implements SurfaceState
                 }
             }
         }
-        else if (Colors.fromMaterialColour(context.getBottomRock().sand().defaultBlockState().getBlock().defaultMaterialColor()) != null)
+        else if (Colors.fromMaterialColour(context.getBottomRock().sand().defaultBlockState().getBlock().defaultMapColor()) != null)
         {
-            return Colors.fromMaterialColour(context.getBottomRock().sand().defaultBlockState().getBlock().defaultMaterialColor());
+            return Colors.fromMaterialColour(context.getBottomRock().sand().defaultBlockState().getBlock().defaultMapColor());
         }
         return Colors.YELLOW;
     }
@@ -446,7 +447,7 @@ public class TFCFSoilSurfaceState implements SurfaceState
 
     public static RockSettings surfaceRock(SurfaceBuilderContext context)
     {
-        return context.getRockData().getRock(context.pos());
+        return context.getRock();
     }
 
     public final List<SurfaceState> regions;
@@ -484,7 +485,7 @@ public class TFCFSoilSurfaceState implements SurfaceState
 
     public static RegistrySoilVariant getSoilVariant(WorldGenLevel level, BlockPos pos)
     {
-        final Random random = level.getRandom();
+        final RandomSource random = level.getRandom();
         final ChunkDataProvider provider = ChunkDataProvider.get(level);
         final ChunkData data = provider.get(level, pos);
 
@@ -516,10 +517,10 @@ public class TFCFSoilSurfaceState implements SurfaceState
         }
     }
 
-    public static RegistrySoilVariant transitionSoil(RegistrySoilVariant first, RegistrySoilVariant second, BlockPos pos, Random random)
+    public static RegistrySoilVariant transitionSoil(RegistrySoilVariant first, RegistrySoilVariant second, BlockPos pos, RandomSource random)
     {
-        float noise = SoilSurfaceState.PATCH_NOISE.noise(pos.getX(), pos.getZ());
-        float noiseGauss = noise + (2 * (float) random.nextGaussian());
+        double noise = SoilSurfaceState.PATCH_NOISE.noise(pos.getX(), pos.getZ());
+        double noiseGauss = noise + (2 * (float) random.nextGaussian());
         return noiseGauss > 0 ? first : second;
     }
 }

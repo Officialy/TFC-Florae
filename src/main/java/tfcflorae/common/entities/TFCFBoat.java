@@ -3,6 +3,7 @@ package tfcflorae.common.entities;
 import java.util.function.Supplier;
 
 import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.vehicle.Boat;
 import net.minecraft.world.item.Item;
@@ -32,7 +33,7 @@ public class TFCFBoat extends Boat
     }
 
     @Override
-    public Packet<?> getAddEntityPacket()
+    public Packet<ClientGamePacketListener> getAddEntityPacket()
     {
         return NetworkHooks.getEntitySpawningPacket(this);
     }

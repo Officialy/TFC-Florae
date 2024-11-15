@@ -4,11 +4,11 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.Material;
+
 
 import net.dries007.tfc.common.blocks.RiverWaterBlock;
 import net.dries007.tfc.common.blocks.TFCBlocks;
-import net.dries007.tfc.common.blocks.TFCMaterials;
+
 import net.dries007.tfc.common.blocks.rock.Rock;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.world.chunkdata.ChunkData;
@@ -78,7 +78,7 @@ public class RockyDirtSurfaceBuilder implements SurfaceBuilder
         final double gauss = context.random().nextGaussian();
         double altitudeChance = Math.pow(2f, (topBlock * 0.02f) + 1.75) + 5;
 
-        final float noise = surfaceMaterialNoise.noise(context.pos().getX(), context.pos().getZ()) * 0.9f + context.random().nextFloat() * 0.1f;
+        final double noise = surfaceMaterialNoise.noise(context.pos().getX(), context.pos().getZ()) * 0.9f + context.random().nextFloat() * 0.1f;
         final double heightNoise = this.heightNoise.noise(context.pos().getX(), context.pos().getZ()) * 4f + startY;
 
         if (pos.getY() > context.getSeaLevel() && heightNoise <= 130)

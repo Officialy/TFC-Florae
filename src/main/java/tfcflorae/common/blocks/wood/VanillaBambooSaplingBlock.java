@@ -1,7 +1,9 @@
 package tfcflorae.common.blocks.wood;
 
-import java.util.Random;
 
+
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.LevelReader;
 import org.jetbrains.annotations.Nullable;
 
 import net.minecraft.core.BlockPos;
@@ -33,8 +35,8 @@ import net.dries007.tfc.common.fluids.IFluidLoggable;
 import net.dries007.tfc.config.TFCConfig;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.calendar.ICalendar;
-
 import tfcflorae.world.feature.tree.BambooTreeGrower;
+
 
 public class VanillaBambooSaplingBlock extends SaplingBlock implements IFluidLoggable, IForgeBlockExtension, EntityBlockExtension
 {
@@ -58,7 +60,7 @@ public class VanillaBambooSaplingBlock extends SaplingBlock implements IFluidLog
 
     @Override
     @SuppressWarnings("deprecation")
-    public void randomTick(BlockState state, ServerLevel level, BlockPos pos, Random random)
+    public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random)
     {
         if (level.getMaxLocalRawBrightness(pos.above()) >= 9 && random.nextInt(7) == 0)
         {
@@ -77,8 +79,7 @@ public class VanillaBambooSaplingBlock extends SaplingBlock implements IFluidLog
     }
 
     @Override
-    public boolean isValidBonemealTarget(BlockGetter level, BlockPos pos, BlockState state, boolean isClient)
-    {
+    public boolean isValidBonemealTarget(LevelReader pLevel, BlockPos pPos, BlockState pState, boolean pIsClient) {
         return false;
     }
 
@@ -138,6 +139,6 @@ public class VanillaBambooSaplingBlock extends SaplingBlock implements IFluidLog
     @SuppressWarnings("deprecation")
     public FluidState getFluidState(BlockState state)
     {
-        return IFluidLoggable.super.getFluidState(state);
+        return IFluidLoggable.super.getFluidLoggedState(state);
     }
 }

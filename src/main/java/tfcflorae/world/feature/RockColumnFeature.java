@@ -1,9 +1,10 @@
 package tfcflorae.world.feature;
 
 import java.util.List;
-import java.util.Random;
+
 import java.util.function.Supplier;
 
+import net.minecraft.util.RandomSource;
 import org.jetbrains.annotations.Nullable;
 
 import net.minecraft.core.BlockPos;
@@ -44,7 +45,7 @@ public class RockColumnFeature extends Feature<RockColumnConfig>
     {
         final WorldGenLevel level = context.level();
         final BlockPos pos = context.origin();
-        final Random random = context.random();
+        final RandomSource random = context.random();
         final RockColumnConfig config = context.config();
 
         final ChunkDataProvider provider = ChunkDataProvider.get(context.chunkGenerator());
@@ -79,7 +80,7 @@ public class RockColumnFeature extends Feature<RockColumnConfig>
         return false;
     }
 
-    private boolean placeColumn(LevelAccessor level, BlockPos pos, int distance, int reach, List<BlockState> states, Random random)
+    private boolean placeColumn(LevelAccessor level, BlockPos pos, int distance, int reach, List<BlockState> states, RandomSource random)
     {
         /*BlockState state;
         if (states.size() == 1)

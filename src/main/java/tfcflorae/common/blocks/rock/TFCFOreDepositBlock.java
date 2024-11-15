@@ -2,10 +2,9 @@ package tfcflorae.common.blocks.rock;
 
 import net.minecraft.world.level.block.Block;
 
-import net.dries007.tfc.common.blocks.ItemPropertyProviderBlock;
 import net.dries007.tfc.common.blocks.OreDeposit;
 
-public class TFCFOreDepositBlock extends Block implements ItemPropertyProviderBlock
+public class TFCFOreDepositBlock extends Block //implements PropertyProviderBlock
 {
     private final int rockProperty;
     private final int oreProperty;
@@ -23,7 +22,7 @@ public class TFCFOreDepositBlock extends Block implements ItemPropertyProviderBl
         this.oreProperty = oreProperty;
     }
 
-    @Override
+  /*  @Override
     public int getValue(Type type)
     {
         if (type == OreDeposit.ROCK_PROPERTY)
@@ -35,5 +34,5 @@ public class TFCFOreDepositBlock extends Block implements ItemPropertyProviderBl
             return oreProperty;
         }
         return 0;
-    }
+    }*/
 }

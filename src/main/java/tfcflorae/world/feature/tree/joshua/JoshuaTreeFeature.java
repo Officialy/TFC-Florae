@@ -30,7 +30,7 @@ public class JoshuaTreeFeature extends Feature<BlockConfig<TFCFJoshuaLeavesBlock
         final BlockState state = level.getBlockState(pos);
 
         //if (pos.getY() > seaLevel && (materialAt != Material.WATER || !Helpers.isFluid(fluidState, FluidTags.WATER)) && TFCFJoshuaTrunkBlock.canConnectTo(state))
-        if (EnvironmentHelpers.isWorldgenReplaceable(state) && !state.getMaterial().isLiquid())
+        if (EnvironmentHelpers.isWorldgenReplaceable(state) && !state.liquid())
         {
             final FluidState fluidAt = level.getFluidState(pos);
             return context.config().block().generatePlant(level, pos, context.random(), 8, fluidAt.getType());

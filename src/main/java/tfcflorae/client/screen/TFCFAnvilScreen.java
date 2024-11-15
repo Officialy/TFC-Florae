@@ -1,9 +1,10 @@
 package tfcflorae.client.screen;
 
+import net.dries007.tfc.client.RenderHelpers;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
-import net.minecraft.client.gui.components.Widget;
+import net.minecraft.client.gui.components.Renderable;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.level.Level;
@@ -11,7 +12,7 @@ import net.minecraft.world.level.Level;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 
-import net.dries007.tfc.client.RenderHelpers;
+
 import net.dries007.tfc.client.screen.BlockEntityScreen;
 import net.dries007.tfc.client.screen.button.AnvilPlanButton;
 import net.dries007.tfc.client.screen.button.AnvilStepButton;
@@ -42,16 +43,16 @@ public class TFCFAnvilScreen extends BlockEntityScreen<TFCFAnvilBlockEntity, TFC
     {
         super.init();
 
-        addRenderableWidget(new AnvilPlanButton(blockEntity, getGuiLeft(), getGuiTop(), RenderHelpers.makeButtonTooltip(this, Helpers.translatable("tfc.tooltip.anvil_plan"))));
+//        addRenderableWidget(new AnvilPlanButton(blockEntity, getGuiLeft(), getGuiTop(), RenderHelpers.makeButtonTooltip(this, Component.translatable("tfc.tooltip.anvil_plan"))));
 
         for (ForgeStep step : ForgeStep.VALUES)
         {
-            addRenderableWidget(new AnvilStepButton(step, getGuiLeft(), getGuiTop(), RenderHelpers.makeButtonTooltip(this, Helpers.translateEnum(step))));
+//            addRenderableWidget(new AnvilStepButton(step, getGuiLeft(), getGuiTop(), RenderHelpers.makeButtonTooltip(this, Helpers.translateEnum(step))));
         }
     }
 
     @Override
-    protected void renderBg(PoseStack poseStack, float partialTicks, int mouseX, int mouseY)
+    protected void renderBg(GuiGraphics poseStack, float partialTicks, int mouseX, int mouseY)
     {
         super.renderBg(poseStack, partialTicks, mouseX, mouseY);
 
@@ -66,10 +67,10 @@ public class TFCFAnvilScreen extends BlockEntityScreen<TFCFAnvilBlockEntity, TFC
         {
             // Draw the progress indicators
             final int progress = forging.getWork();
-            blit(poseStack, guiLeft + 13 + progress, guiTop + 100, 176, 0, 5, 5);
+            poseStack.blit(texture, guiLeft + 13 + progress, guiTop + 100, 176, 0, 5, 5);
 
             final int target = forging.getWorkTarget();
-            blit(poseStack, guiLeft + 13 + target, guiTop + 94, 181, 0, 5, 5);
+            poseStack.blit(texture, guiLeft + 13 + target, guiTop + 94, 181, 0, 5, 5);
 
             final ForgeSteps steps = forging.getSteps();
             final AnvilRecipe recipe = forging.getRecipe(level);
@@ -84,7 +85,7 @@ public class TFCFAnvilScreen extends BlockEntityScreen<TFCFAnvilBlockEntity, TFC
                         final int xOffset = i * 19;
 
                         // The rule icon
-                        blit(poseStack, guiLeft + 64 + xOffset, guiTop + 10, 10, 10, rule.iconX(), rule.iconY(), 32, 32, 256, 256);
+                        poseStack.blit(texture,guiLeft + 64 + xOffset, guiTop + 10, 10, 10, rule.iconX(), rule.iconY(), 32, 32, 256, 256);
 
                         // The overlay
                         if (rule.matches(steps))
@@ -96,7 +97,7 @@ public class TFCFAnvilScreen extends BlockEntityScreen<TFCFAnvilBlockEntity, TFC
                             RenderSystem.setShaderColor(1f, 0.4f, 0, 1f); // Red
                         }
 
-                        blit(poseStack, guiLeft + 59 + xOffset, guiTop + 7, 198, rule.overlayY(), 20, 22);
+                        poseStack.blit(texture, guiLeft + 59 + xOffset, guiTop + 7, 198, rule.overlayY(), 20, 22);
                         RenderSystem.setShaderColor(1f, 1f, 1f, 1f);
                     }
                 }
@@ -110,22 +111,22 @@ public class TFCFAnvilScreen extends BlockEntityScreen<TFCFAnvilBlockEntity, TFC
                 if (step != null)
                 {
                     final int xOffset = i * 19;
-                    blit(poseStack, guiLeft + 64 + xOffset, guiTop + 31, 10, 10, step.iconX(), step.iconY(), 32, 32, 256, 256);
+                    poseStack.blit(texture, guiLeft + 64 + xOffset, guiTop + 31, 10, 10, step.iconX(), step.iconY(), 32, 32, 256, 256);
                 }
             }
         }
     }
 
     @Override
-    protected void renderTooltip(PoseStack poseStack, int mouseX, int mouseY)
+    protected void renderTooltip(GuiGraphics poseStack, int mouseX, int mouseY)
     {
         super.renderTooltip(poseStack, mouseX, mouseY);
 
-        for (Widget widget : renderables)
+        for (Renderable widget : renderables)
         {
             if (widget instanceof Button button && button.isHoveredOrFocused())
             {
-                button.renderToolTip(poseStack, mouseX, mouseY);
+//                button.renderToolTip(poseStack, mouseX, mouseY);
                 return;
             }
         }
@@ -148,7 +149,7 @@ public class TFCFAnvilScreen extends BlockEntityScreen<TFCFAnvilBlockEntity, TFC
                         final int y = getGuiTop() + 10;
                         if (mouseX > x && mouseX < x + 10 && mouseY > y && mouseY < y + 10)
                         {
-                            renderTooltip(poseStack, rule.getDescriptionId(), mouseX, mouseY);
+//                            renderTooltip(poseStack, rule.getDescriptionId(), mouseX, mouseY);
                         }
                     }
                 }

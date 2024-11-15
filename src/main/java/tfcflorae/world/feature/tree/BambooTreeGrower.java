@@ -1,12 +1,12 @@
+
 package tfcflorae.world.feature.tree;
 
-import org.jetbrains.annotations.Nullable;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.util.RandomSource;
 
 import com.google.common.collect.ImmutableList;
 
-import java.util.Random;
 
-import net.minecraft.core.Holder;
 import net.minecraft.world.level.block.grower.AbstractTreeGrower;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
@@ -36,16 +36,17 @@ public class BambooTreeGrower extends AbstractTreeGrower
         this.bamboo = bamboo;
     }
 
-    @Nullable
     @Override
-    protected Holder<? extends ConfiguredFeature<?, ?>> getConfiguredFeature(Random random, boolean bees)
+    protected ResourceKey<ConfiguredFeature<?, ?>> getConfiguredFeature(RandomSource random, boolean bees)
     {
-        return TFCFFeatures.config("tree/grower/bamboo", TFCFFeatures.VANILLA_BAMBOO_TREE.get(),
+      /*  return TFCFFeatures.config("tree/grower/bamboo", TFCFFeatures.VANILLA_BAMBOO_TREE.get(),
             new TreeConfiguration.TreeConfigurationBuilder(
-                BlockStateProvider.simple(TFCFBlocks.VANILLA_BAMBOO_LOGS.get().defaultBlockState().setValue(BambooLogBlock.NATURAL, true)),
+                BlockStateProvider.simple(TFCFBlocks.VANILLA_BAMBOO_LOGS.get().defaultBlockState().setValue(NATRUAL, true)),
                 new StraightTrunkPlacer(12, 9, 0), 
                 BlockStateProvider.simple(TFCFBlocks.WOODS.get(bamboo).get(Wood.BlockType.LEAVES).get().defaultBlockState().setValue(TFCLeavesBlock.PERSISTENT, false)),
                 new RandomSpreadFoliagePlacer(ConstantInt.of(2), ConstantInt.of(0), ConstantInt.of(5), 150), 
                 new TwoLayersFeatureSize(1, 0, 1)).decorators(ImmutableList.of(BambooLeavesDecorator.INSTANCE)).ignoreVines().dirt(BlockStateProvider.simple(TFCBlocks.SOIL.get(SoilBlockType.ROOTED_DIRT).get(SoilBlockType.Variant.LOAM).get().defaultBlockState())).build());
+    */
+    return null;
     }
 }

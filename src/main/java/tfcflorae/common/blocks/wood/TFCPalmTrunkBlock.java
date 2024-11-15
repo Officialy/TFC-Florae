@@ -1,8 +1,9 @@
 package tfcflorae.common.blocks.wood;
 
-import java.util.Random;
+
 import java.util.function.Supplier;
 
+import net.minecraft.util.RandomSource;
 import org.jetbrains.annotations.Nullable;
 
 import net.minecraft.core.BlockPos;
@@ -103,7 +104,7 @@ public class TFCPalmTrunkBlock extends TFCFJoshuaTrunkBlock
 
     public boolean canConnectToSoil(BlockState state)
     {
-        return Helpers.isBlock(state, TFCTags.Blocks.BUSH_PLANTABLE_ON) || Helpers.isBlock(state, TFCTags.Blocks.TREE_GROWS_ON) || Helpers.isBlock(state, BlockTags.SAND) || Helpers.isBlock(state, Tags.Blocks.GRAVEL) || state.getMaterial().isSolid();
+        return Helpers.isBlock(state, TFCTags.Blocks.BUSH_PLANTABLE_ON) || Helpers.isBlock(state, TFCTags.Blocks.TREE_GROWS_ON) || Helpers.isBlock(state, BlockTags.SAND) || Helpers.isBlock(state, Tags.Blocks.GRAVEL) || state.isSolid();
     }
 
     // Only return true if *one* block or less are connected
@@ -217,7 +218,7 @@ public class TFCPalmTrunkBlock extends TFCFJoshuaTrunkBlock
 
     @Override
     @SuppressWarnings("deprecation")
-    public void tick(BlockState state, ServerLevel level, BlockPos pos, Random rand)
+    public void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource rand)
     {
         if (!state.canSurvive(level, pos))
         {
@@ -269,7 +270,7 @@ public class TFCPalmTrunkBlock extends TFCFJoshuaTrunkBlock
     /**
      * @return {@code true} if any plant blocks were placed.
      */
-    public boolean generatePlant(LevelAccessor level, BlockPos pos, Random random, int maxHorizontalDistance)
+    public boolean generatePlant(LevelAccessor level, BlockPos pos, RandomSource random, int maxHorizontalDistance)
     {
         if (pos.getY() >= TFCChunkGenerator.SEA_LEVEL_Y && level.getBlockState(pos.below()).isFaceSturdy(level, pos.below(), Direction.UP))
         {
@@ -291,7 +292,7 @@ public class TFCPalmTrunkBlock extends TFCFJoshuaTrunkBlock
     /**
      * @return {@code true} if any plant blocks were placed.
      */
-    public boolean growTreeRecursive(LevelAccessor level, BlockPos branchPos, Random random, BlockPos originalBranchPos, int maxHorizontalDistance, int iterations, Direction originalDirection)
+    public boolean growTreeRecursive(LevelAccessor level, BlockPos branchPos, RandomSource random, BlockPos originalBranchPos, int maxHorizontalDistance, int iterations, Direction originalDirection)
     {
         final int maxHeight = level.getHeight(Heightmap.Types.OCEAN_FLOOR, originalBranchPos.getX(), originalBranchPos.getZ()) + 10 + random.nextInt(6);
 
@@ -450,7 +451,7 @@ public class TFCPalmTrunkBlock extends TFCFJoshuaTrunkBlock
             BlockState relativeState = level.getBlockState(relativePos);
             BlockState leavesBlock = FluidHelpers.fillWithFluid(getLeaves().defaultBlockState(), level.getBlockState(pos).getFluidState().getType());
 
-            if ((EnvironmentHelpers.isWorldgenReplaceable(relativeState) || relativeState.getMaterial().isReplaceable()) && !isTrunk(relativeState))
+            if ((EnvironmentHelpers.isWorldgenReplaceable(relativeState) || relativeState.canBeReplaced()) && !isTrunk(relativeState))
             {
                 level.setBlock(relativePos, leavesBlock.setValue(PalmLeavesBlock.DIRECTION, direction).setValue(PalmLeavesBlock.CENTER_BLOCK, true).setValue(TFCPalmLeavesBlock.PERSISTENT, false), Block.UPDATE_ALL);
             }
@@ -459,7 +460,7 @@ public class TFCPalmTrunkBlock extends TFCFJoshuaTrunkBlock
             {
                 BlockPos relativePosCorner = relativePos.relative(direction.getClockWise());
                 BlockState relativeStateCorner = level.getBlockState(relativePosCorner);
-                if ((EnvironmentHelpers.isWorldgenReplaceable(relativeStateCorner) || relativeStateCorner.getMaterial().isReplaceable()) && !isTrunk(relativeStateCorner))
+                if ((EnvironmentHelpers.isWorldgenReplaceable(relativeStateCorner) || relativeStateCorner.canBeReplaced()) && !isTrunk(relativeStateCorner))
                 {
                     level.setBlock(relativePosCorner, leavesBlock.setValue(PalmLeavesBlock.DIRECTION, direction.getClockWise()).setValue(PalmLeavesBlock.CORNER_BLOCK, true).setValue(TFCPalmLeavesBlock.PERSISTENT, false), Block.UPDATE_ALL);
                 }

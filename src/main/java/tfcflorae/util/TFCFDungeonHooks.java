@@ -2,8 +2,9 @@ package tfcflorae.util;
 
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.Random;
 
+
+import net.minecraft.util.RandomSource;
 import net.minecraft.util.random.WeightedEntry;
 import net.minecraft.util.random.WeightedRandom;
 import net.minecraft.world.entity.EntityType;
@@ -73,7 +74,7 @@ public class TFCFDungeonHooks
      * @param rand World generation random number generator
      * @return The mob name
      */
-    public static EntityType<?> getRandomDungeonMob(Random rand)
+    public static EntityType<?> getRandomDungeonMob(RandomSource rand)
     {
         DungeonMob mob = WeightedRandom.getRandomItem(rand, dungeonMobs).orElseThrow();
         return mob.type;

@@ -25,7 +25,7 @@ public enum ArchipelagoLayerTFCF implements CenterTransformLayer
     @Override
     public int apply(AreaContext context, int value)
     {
-        if (value == OCEAN_OCEAN_CONVERGING_MARKER)
+        /*if (value == OCEAN_OCEAN_CONVERGING_MARKER)
         {
             // Ocean - Ocean Converging creates volcanic island chains on this marker
             final int r = context.random().nextInt(20);
@@ -42,7 +42,7 @@ public enum ArchipelagoLayerTFCF implements CenterTransformLayer
         else if (value == OCEAN_OCEAN_DIVERGING_MARKER)
         {
             // Ocean - Ocean Diverging creates mid-ocean ridges, which become ocean biomes (shallow areas)
-            // Random chance for small non-volcanic islands (plains)
+            // RandomSource chance for small non-volcanic islands (plains)
             final int r = context.random().nextInt(30);
             if (r == 0)
             {
@@ -50,7 +50,7 @@ public enum ArchipelagoLayerTFCF implements CenterTransformLayer
             }
             return OCEAN;
         }
-        else if (value == DEEP_OCEAN || value == PELAGIC_ZONE || value == GUYOTS || value == SEAMOUNTS)
+        else*/ if (value == DEEP_OCEAN || value == PELAGIC_ZONE || value == GUYOTS || value == SEAMOUNTS)
         {
             // Deep Oceans have a chance for a volcanic hotspot
             final int r = context.random().nextInt(250);
@@ -59,12 +59,12 @@ public enum ArchipelagoLayerTFCF implements CenterTransformLayer
                 return VOLCANIC_OCEANIC_MOUNTAINS;
             }
         }
-        else if (value == OCEAN)
+        /*else if (value == OCEAN)
         {
             // All oceans are initially marked as reefs, as many other oceans will be added in this phase
             // We then go back and prune this via the marker, to not appear too close to shores
             return OCEAN_REEF_MARKER;
-        }
+        }*/
         return value;
     }
 }

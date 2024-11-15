@@ -1,7 +1,7 @@
 package tfcflorae.common.blocks.wood;
 
-import java.util.Random;
-
+import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Final;
 
@@ -54,7 +54,6 @@ import net.dries007.tfc.util.calendar.Season;
 import net.dries007.tfc.util.climate.ClimateModel;
 import net.dries007.tfc.world.biome.BiomeExtension;
 import net.dries007.tfc.world.biome.TFCBiomes;
-import net.dries007.tfc.world.biome.BiomeExtension.Group;
 import net.dries007.tfc.world.chunkdata.ChunkData;
 import net.dries007.tfc.world.chunkdata.ChunkDataProvider;
 import tfcflorae.Config;
@@ -139,12 +138,14 @@ public class TFCFMangrovePropaguleBlock extends SaplingBlock implements IForgeBl
         FluidHelpers.tickFluid(level, pos, state);
         return direction == Direction.UP && !state.canSurvive(level, pos) ? Blocks.AIR.defaultBlockState() : super.updateShape(state, direction, newState, level, pos, newPos);
     }
+/*
 
     @Override
     public OffsetType getOffsetType()
     {
         return OffsetType.XZ;
     }
+*/
 
     @Override
     public FluidProperty getFluidProperty()
@@ -156,12 +157,12 @@ public class TFCFMangrovePropaguleBlock extends SaplingBlock implements IForgeBl
     @SuppressWarnings("deprecation")
     public FluidState getFluidState(BlockState state)
     {
-        return IFluidLoggable.super.getFluidState(state);
+        return IFluidLoggable.super.getFluidLoggedState(state);
     }
 
     @Override
     @SuppressWarnings("deprecation")
-    public void randomTick(BlockState state, ServerLevel level, BlockPos pos, Random random)
+    public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random)
     {
         if (!isHanging(state) && random.nextInt(7) == 0)
         {
@@ -174,10 +175,10 @@ public class TFCFMangrovePropaguleBlock extends SaplingBlock implements IForgeBl
                 if (counter.getTicksSinceUpdate() > ICalendar.TICKS_IN_DAY * getDaysToGrow() * TFCConfig.SERVER.globalSaplingGrowthModifier.get())
                 {
                     this.advanceTree(level, pos, state.setValue(STAGE, 1), random);
-                    if (ForgeEventFactory.saplingGrowTree(level, random, pos))
+                    /*if (ForgeEventFactory.saplingGrowTree(level, random, pos))
                     {
                         level.destroyBlock(pos, false);
-                    }
+                    }*/
                 }
             }
         }
@@ -194,7 +195,7 @@ public class TFCFMangrovePropaguleBlock extends SaplingBlock implements IForgeBl
                 final BiomeExtension MARSHES = ((TFCBiomesMixinInterface) (Object) staticBiomes).getStaticMarshes();
 
                 BiomeExtension biome = TFCBiomes.getExtension(level, level.getBiome(pos).value());
-                final boolean biomeStuff = biome.getGroup() == Group.RIVER || biome.getGroup() == Group.LAKE || biome == TFCBiomes.LOWLANDS || biome == SWAMPS || biome == WETLANDS || biome == MANGROVES || biome == MARSHES;
+                final boolean biomeStuff = /*biome.getGroup() == Group.RIVER || biome.getGroup() == Group.LAKE || */biome == TFCBiomes.LOWLANDS || biome == SWAMPS || biome == WETLANDS || biome == MANGROVES || biome == MARSHES;
 
                 Season currentSeason = Calendars.get(level).getCalendarMonthOfYear().getSeason();
 
@@ -209,7 +210,7 @@ public class TFCFMangrovePropaguleBlock extends SaplingBlock implements IForgeBl
                     final float actualForestDensity = data.getForestDensity();
                     final float forestDensity = actualForestDensity == 0 ? 0.001F : actualForestDensity; // Cannot divide by 0.
 
-                    if (random.nextFloat((Config.COMMON.leavesSaplingPlacementChance.get() / forestDensity) * rainfallInverted) == 0)
+                    if (Mth.clamp(random.nextFloat(), 0, (Config.COMMON.leavesSaplingPlacementChance.get() / forestDensity) * rainfallInverted) == 0)
                     {
                         int x = pos.getX() + (int) Math.round(random.nextGaussian() * Config.COMMON.leavesSaplingSpreadDistance.get());
                         int z = pos.getZ() + (int) Math.round(random.nextGaussian() * Config.COMMON.leavesSaplingSpreadDistance.get());

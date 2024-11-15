@@ -1,3 +1,4 @@
+/*
 package tfcflorae.world.layer;
 
 import net.dries007.tfc.world.layer.TFCLayers;
@@ -50,4 +51,4 @@ public class MergeChasmsLayer implements TransformLayer
     {
         return TFCLayers.isOcean(value) || TFCLayers.isLake(value) || TFCLayers.isRiver(value) || TFCLayers.isLow(value) || value == ATOLL || value == NEAR_SHORE || value == SHORE || value == SHORE_DUNES || value == NULL_MARKER || value == LAKE_MARKER;
     }
-}
+}*/

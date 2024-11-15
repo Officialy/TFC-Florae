@@ -1,3 +1,4 @@
+/*
 package tfcflorae.world.layer.river;
 
 import net.dries007.tfc.world.layer.TFCLayers;
@@ -6,7 +7,6 @@ import net.dries007.tfc.world.layer.framework.AreaContext;
 import net.dries007.tfc.world.layer.framework.TransformLayer;
 import net.dries007.tfc.world.noise.Noise2D;
 import net.dries007.tfc.world.river.MidpointFractal;
-import net.dries007.tfc.world.settings.ClimateSettings;
 import net.dries007.tfc.world.settings.RockLayerSettings;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
@@ -14,20 +14,7 @@ import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.chunk.LevelChunk;
 import tfcflorae.interfaces.ChunkDataInterface;
 import tfcflorae.interfaces.TFCLayersMixinInterface;
-import tfcflorae.util.TFCFHelpers;
 
-import static net.dries007.tfc.world.layer.TFCLayers.*;
-
-import net.dries007.tfc.util.climate.Climate;
-import net.dries007.tfc.world.biome.BiomeSourceExtension;
-import net.dries007.tfc.world.biome.BiomeSourceExtension.Settings;
-import net.dries007.tfc.world.biome.LegacyBiomeSource;
-import net.dries007.tfc.world.biome.RegionBiomeSource;
-import net.dries007.tfc.world.biome.TFCBiomeSource;
-import net.dries007.tfc.world.chunkdata.ChunkData;
-import net.dries007.tfc.world.chunkdata.ChunkDataProvider;
-import net.dries007.tfc.world.chunkdata.ChunkGeneratorExtension;
-import net.dries007.tfc.world.chunkdata.TFCChunkDataGenerator;
 
 public class MergeRiverBanksLayer implements TransformLayer
 {
@@ -62,7 +49,8 @@ public class MergeRiverBanksLayer implements TransformLayer
     @Override
     public int apply(AreaContext context, Area area, int x, int z)
     {
-        /*float rainfall = 1F;
+        */
+/*float rainfall = 1F;
         float temperature = 1F;
         float forestDensity = 0F;
 
@@ -93,7 +81,8 @@ public class MergeRiverBanksLayer implements TransformLayer
 
         float extraWidth = Mth.clamp(((rainfall / temperature) * 0.1F) - forestDensity, 1, 10);
         final float riverWidth = Watershed.RIVER_WIDTH_OLD * extraWidth;
-        final float riverbankWidth = WatershedBank.RIVERBANK_WIDTH_OLD * (extraWidth * 2);*/
+        final float riverbankWidth = WatershedBank.RIVERBANK_WIDTH_OLD * (extraWidth * 2);*//*
+
 
         final int value = area.get(x, z);
 
@@ -111,7 +100,11 @@ public class MergeRiverBanksLayer implements TransformLayer
                 }
             }
         }
-        else if (!isRiver(value) && hasRiver(value) && !hasRiverCave(value) && !isLowlands(value) && !isOcean(value) && !isLake(value) && value != LAKE_SHORE && !isOceanOrMarker(value))
+        else if (*/
+/*!isRiver(value) && hasRiver(value) &&*//*
+ !hasRiverCave(value) && !isLowlands(value) && !TFCLayers.isOcean(value) */
+/*&& !isLake(value) && value != LAKE_SHORE && !isOceanOrMarker(value))*//*
+)
         {
             final float scale = 1f / (1 << 7);
             final float x0 = x * scale, z0 = z * scale;
@@ -125,7 +118,7 @@ public class MergeRiverBanksLayer implements TransformLayer
                 }
             }
         }
-        else if (value == RIVER)
+        else if (value == TFCLayers.RIVER)
         {
             final float scale = 1f / (1 << 7);
             final float x0 = x * scale, z0 = z * scale;
@@ -135,7 +128,7 @@ public class MergeRiverBanksLayer implements TransformLayer
                 //if (fractal.maybeIntersect(x0, z0, watersheds.getRiverWidth(seed, x, z)) && fractal.intersect(x0, z0, watersheds.getRiverWidth(seed, x, z)))
                 if (fractal.maybeIntersect(x0, z0, Watershed.RIVER_WIDTH_OLD) && fractal.intersect(x0, z0, Watershed.RIVER_WIDTH_OLD))
                 {
-                    return RIVER;
+                    return TFCLayers.RIVER;
                 }
             }
         }
@@ -144,16 +137,18 @@ public class MergeRiverBanksLayer implements TransformLayer
 
     public static boolean hasRiverCave(int value)
     {
-        return value == CALDERAS || value == ALPINE_MOUNTAINS || value == ALPINE_HIGHLANDS || value == MOUNTAINS || value == VOLCANIC_MOUNTAINS || value == OLD_MOUNTAINS || value == OCEANIC_MOUNTAINS || value == VOLCANIC_OCEANIC_MOUNTAINS /*|| value == OCEANIC_MOUNTAIN_RIVER || value == OLD_MOUNTAIN_RIVER || value == MOUNTAIN_RIVER || value == VOLCANIC_OCEANIC_MOUNTAIN_RIVER || value == VOLCANIC_MOUNTAIN_RIVER || value == CANYON_RIVER || value == ALPINE_MOUNTAIN_RIVER*/;
+        return value == CALDERAS || value == ALPINE_MOUNTAINS || value == ALPINE_HIGHLANDS || value == TFCLayers.MOUNTAINS || value == TFCLayers.VOLCANIC_MOUNTAINS || value == TFCLayers.OLD_MOUNTAINS || value == TFCLayers.OCEANIC_MOUNTAINS || value == TFCLayers.VOLCANIC_OCEANIC_MOUNTAINS */
+/*|| value == OCEANIC_MOUNTAIN_RIVER || value == OLD_MOUNTAIN_RIVER || value == MOUNTAIN_RIVER || value == VOLCANIC_OCEANIC_MOUNTAIN_RIVER || value == VOLCANIC_MOUNTAIN_RIVER || value == CANYON_RIVER || value == ALPINE_MOUNTAIN_RIVER*//*
+;
     }
 
     public static boolean isLowlands(int value)
     {
-        return value == LOWLANDS || value == THERMAL_CANYONS || value == LOW_CANYONS || value == WETLANDS || value == MARSHES || value == SWAMPS || value == MANGROVES;
+        return value == TFCLayers.LOWLANDS || value == THERMAL_CANYONS || value == TFCLayers.LOW_CANYONS || value == WETLANDS || value == MARSHES || value == SWAMPS || value == MANGROVES;
     }
 
     public static boolean specialRiver(int value)
     {
-        return value == CANYON_RIVER || value == ALPINE_MOUNTAIN_RIVER || value == MOUNTAIN_RIVER || value == VOLCANIC_MOUNTAIN_RIVER || value == OLD_MOUNTAIN_RIVER || value == OCEANIC_MOUNTAIN_RIVER || value == VOLCANIC_OCEANIC_MOUNTAIN_RIVER;
+        return value == CANYON_RIVER || value == ALPINE_MOUNTAIN_RIVER;// || value == MOUNTAIN_RIVER || value == VOLCANIC_MOUNTAIN_RIVER || value == OLD_MOUNTAIN_RIVER || value == OCEANIC_MOUNTAIN_RIVER || value == VOLCANIC_OCEANIC_MOUNTAIN_RIVER;
     }
-}
+}*/

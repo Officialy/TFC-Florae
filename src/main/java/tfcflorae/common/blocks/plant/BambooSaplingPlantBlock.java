@@ -1,8 +1,9 @@
 package tfcflorae.common.blocks.plant;
 
-import java.util.Random;
+
 import java.util.function.Supplier;
 
+import net.minecraft.util.RandomSource;
 import org.jetbrains.annotations.Nullable;
 
 import net.minecraft.core.BlockPos;
@@ -73,11 +74,13 @@ public abstract class BambooSaplingPlantBlock extends PlantBlock implements IFlu
         super.createBlockStateDefinition(builder.add(getFluidProperty()));
     }
 
+/*
     @Override
     public BlockBehaviour.OffsetType getOffsetType()
     {
         return BlockBehaviour.OffsetType.XZ;
     }
+*/
 
     @Override
     public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context)
@@ -87,7 +90,7 @@ public abstract class BambooSaplingPlantBlock extends PlantBlock implements IFlu
     }
 
     @Override
-    public void randomTick(BlockState state, ServerLevel level, BlockPos pos, Random random)
+    public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random)
     {
         if (random.nextDouble() < TFCConfig.SERVER.plantGrowthChance.get() && level.isEmptyBlock(pos.above()) && level.getRawBrightness(pos.above(), 0) >= 9)
         {
@@ -153,6 +156,6 @@ public abstract class BambooSaplingPlantBlock extends PlantBlock implements IFlu
     @SuppressWarnings("deprecation")
     public FluidState getFluidState(BlockState state)
     {
-        return IFluidLoggable.super.getFluidState(state);
+        return IFluidLoggable.super.getFluidLoggedState(state);
     }
 }

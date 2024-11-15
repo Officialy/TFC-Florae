@@ -1,11 +1,12 @@
 package tfcflorae.common.blocks.wood;
 
-import java.util.Random;
+
 import java.util.function.Supplier;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.item.context.UseOnContext;
@@ -32,6 +33,8 @@ import net.dries007.tfc.common.fluids.IFluidLoggable;
 import net.dries007.tfc.util.Helpers;
 
 import org.jetbrains.annotations.Nullable;
+
+import static tfcflorae.common.blocks.wood.TFCPalmTrunkBlock.NATURAL;
 
 public class BambooLogBlock extends LogBlock implements IFluidLoggable
 {
@@ -117,7 +120,7 @@ public class BambooLogBlock extends LogBlock implements IFluidLoggable
     @Override
     public FluidState getFluidState(BlockState state)
     {
-        return IFluidLoggable.super.getFluidState(state);
+        return IFluidLoggable.super.getFluidLoggedState(state);
     }
 
     @Override
@@ -152,7 +155,7 @@ public class BambooLogBlock extends LogBlock implements IFluidLoggable
     {
         final BlockPos posBelow = pos.below();
         final BlockState stateBelow = level.getBlockState(posBelow);
-        return !FluidHelpers.isAirOrEmptyFluid(stateBelow) && (stateBelow.getMaterial().isSolid() || stateBelow.isFaceSturdy(level, posBelow, Direction.UP));
+        return !FluidHelpers.isAirOrEmptyFluid(stateBelow) && (stateBelow.isSolid() || stateBelow.isFaceSturdy(level, posBelow, Direction.UP));
     }
 
     @Override
@@ -168,7 +171,7 @@ public class BambooLogBlock extends LogBlock implements IFluidLoggable
     }
 
     @Override
-    public void tick(BlockState state, ServerLevel level, BlockPos pos, Random random)
+    public void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random)
     {
         if (!state.canSurvive(level, pos))
         {

@@ -1,10 +1,11 @@
 package tfcflorae.common.blocks.rock;
 
 import java.util.Map;
-import java.util.Random;
+
 import java.util.function.Supplier;
 import java.util.stream.Stream;
 
+import net.minecraft.util.RandomSource;
 import org.jetbrains.annotations.Nullable;
 
 import com.google.common.collect.ImmutableMap;
@@ -99,7 +100,7 @@ public class MossGrowingBoulderBlock extends Block implements IFluidLoggable, IM
     }
 
     @Override
-    public void randomTick(BlockState blockState, ServerLevel serverLevel, BlockPos blockPos, Random random)
+    public void randomTick(BlockState blockState, ServerLevel serverLevel, BlockPos blockPos, RandomSource random)
     {
         for (Direction direction : Direction.values())
         {
@@ -115,7 +116,7 @@ public class MossGrowingBoulderBlock extends Block implements IFluidLoggable, IM
     @SuppressWarnings("deprecation")
     public FluidState getFluidState(BlockState state)
     {
-        return IFluidLoggable.super.getFluidState(state);
+        return IFluidLoggable.super.getFluidLoggedState(state);
     }
 
     /*
@@ -153,14 +154,14 @@ public class MossGrowingBoulderBlock extends Block implements IFluidLoggable, IM
         }
     }
 
-    @Override
+/*    @Override
     public OffsetType getOffsetType()
     {
         if (IS_UP_DOWN)
             return OffsetType.XZ;
         else
             return OffsetType.NONE;
-    }
+    }*/
 
     @Override
     public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context)

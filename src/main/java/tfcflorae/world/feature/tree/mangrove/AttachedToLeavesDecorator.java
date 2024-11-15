@@ -3,6 +3,7 @@ package tfcflorae.world.feature.tree.mangrove;
 import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.LevelSimulatedReader;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.Feature;
@@ -12,7 +13,7 @@ import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecoratorTy
 
 import java.util.HashSet;
 import java.util.List;
-import java.util.Random;
+
 import java.util.function.BiConsumer;
 
 import com.mojang.serialization.Codec;
@@ -58,8 +59,13 @@ public class AttachedToLeavesDecorator extends TreeDecorator
     }
 
     @Override
-    public void place(LevelSimulatedReader level, BiConsumer<BlockPos, BlockState> replacer, Random random, List<BlockPos> trunkPositions, List<BlockPos> foliagePositions)
-    {
+    public void place(Context pContext) {
+
+        LevelSimulatedReader level = pContext.level();
+        RandomSource random = pContext.random();
+        List<BlockPos> trunkPositions = pContext.roots();
+        List<BlockPos> foliagePositions = pContext.leaves();
+
         HashSet<BlockPos> positions = new HashSet<>();
         for (BlockPos pos : copyShuffled(new ObjectArrayList<>(foliagePositions), random))
         {
@@ -73,7 +79,7 @@ public class AttachedToLeavesDecorator extends TreeDecorator
                 {
                     positions.add(position.immutable());
                 }
-                replacer.accept(offset, this.blockProvider.getState(random, offset));
+                pContext.setBlock(offset, this.blockProvider.getState(random, offset));
             }
         }
     }
@@ -82,7 +88,7 @@ public class AttachedToLeavesDecorator extends TreeDecorator
     {
         for (int i = 1; i <= this.requiredEmptyBlocks; i++)
         {
-            if (!Feature.isAir(level, pos.relative(direction, i))) return false;
+//            if (!Feature.isAir(level, pos.relative(direction, i))) return false;
         }
 
         return true;
@@ -94,7 +100,7 @@ public class AttachedToLeavesDecorator extends TreeDecorator
         return TFCFFeatures.ATTACHED_TO_LEAVES.get();
     }
 
-    public static <T> void shuffle(List<T> entries, Random random)
+    public static <T> void shuffle(List<T> entries, RandomSource random)
     {
         int size = entries.size();
         for (int i = size; i > 1; --i) {
@@ -102,14 +108,14 @@ public class AttachedToLeavesDecorator extends TreeDecorator
         }
     }
 
-    public static <T> List<T> copyShuffled(T[] entries, Random random)
+    public static <T> List<T> copyShuffled(T[] entries, RandomSource random)
     {
         ObjectArrayList<T> objects = new ObjectArrayList<>(entries);
         shuffle(objects, random);
         return objects;
     }
 
-    public static <T> List<T> copyShuffled(ObjectArrayList<T> entries, Random random)
+    public static <T> List<T> copyShuffled(ObjectArrayList<T> entries, RandomSource random)
     {
         ObjectArrayList<T> objects = new ObjectArrayList<>(entries);
         shuffle(objects, random);

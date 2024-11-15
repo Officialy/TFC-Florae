@@ -1,8 +1,11 @@
 package tfcflorae.world.feature.tree;
 
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.util.RandomSource;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Random;
+
 import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
@@ -50,12 +53,12 @@ public class TFCFMangroveTreeGrower extends AbstractTreeGrower
 
     /**
      * TODO: make soil variant, where used, get the local variant in the world, instead of always loam
-     */ 
+     */
     @Nullable
     @Override
-    protected Holder<? extends ConfiguredFeature<?, ?>> getConfiguredFeature(Random random, boolean bees)
+    protected ResourceKey<ConfiguredFeature<?, ?>> getConfiguredFeature(RandomSource random, boolean bees)
     {
-        if (random.nextFloat() < this.tallChance)
+        /*if (random.nextFloat() < this.tallChance)
         {
             return TFCFFeatures.config("tree/" + wood.getSerializedName().toLowerCase(Locale.ROOT) + "_tall", TFCFFeatures.VANILLA_MANGROVE_TREE.get(),
                 new RootedTreeConfig.TreeConfigurationBuilder(
@@ -63,20 +66,20 @@ public class TFCFMangroveTreeGrower extends AbstractTreeGrower
                 new UpwardBranchingTrunk(4, 1, 9,
                     UniformInt.of(1, 6), 0.5F,
                     UniformInt.of(0, 1),
-                    Registry.BLOCK.getOrCreateTag(TFCFTags.Blocks.MANGROVE_LOGS_CAN_GROW_THROUGH)),
+                        BuiltInRegistries.BLOCK.getOrCreateTag(TFCFTags.Blocks.MANGROVE_LOGS_CAN_GROW_THROUGH)),
                     BlockStateProvider.simple(TFCFBlocks.WOODS_SEASONAL_LEAVES.get(wood).get().defaultBlockState().setValue(TFCFMangroveLeavesBlock.PERSISTENT, false).setValue(TFCFMangroveLeavesBlock.LIFECYCLE, Lifecycle.HEALTHY)),
-                new RandomSpreadFoliagePlacer(ConstantInt.of(3), 
-                    ConstantInt.of(0), 
+                new RandomSpreadFoliagePlacer(ConstantInt.of(3),
+                    ConstantInt.of(0),
                     ConstantInt.of(2), 70),
-                new MangroveRootPlacer(UniformInt.of(3, 7), 
-                    BlockStateProvider.simple(TFCFBlocks.MANGROVE_ROOTS.get(wood).get().defaultBlockState()), 
-                    Optional.of(new AboveRootPlacement(BlockStateProvider.simple(Blocks.MOSS_CARPET), 0.5F)), 
-                new MangroveRootPlacement(Registry.BLOCK.getOrCreateTag(TFCFTags.Blocks.MANGROVE_ROOTS_CAN_GROW_THROUGH), 
-                    HolderSet.direct(Block::builtInRegistryHolder, TFCBlocks.SOIL.get(SoilBlockType.MUD).get(SoilBlockType.Variant.LOAM).get(), TFCFBlocks.TFC_MUDDY_MANGROVE_ROOTS.get(wood).get(SoilBlockType.Variant.LOAM).get()), 
+                new MangroveRootPlacer(UniformInt.of(3, 7),
+                    BlockStateProvider.simple(TFCFBlocks.MANGROVE_ROOTS.get(wood).get().defaultBlockState()),
+                    Optional.of(new AboveRootPlacement(BlockStateProvider.simple(Blocks.MOSS_CARPET), 0.5F)),
+                new MangroveRootPlacement(BuiltInRegistries.BLOCK.getOrCreateTag(TFCFTags.Blocks.MANGROVE_ROOTS_CAN_GROW_THROUGH),
+                    HolderSet.direct(Block::builtInRegistryHolder, TFCBlocks.SOIL.get(SoilBlockType.MUD).get(SoilBlockType.Variant.LOAM).get(), TFCFBlocks.TFC_MUDDY_MANGROVE_ROOTS.get(wood).get(SoilBlockType.Variant.LOAM).get()),
                     BlockStateProvider.simple(TFCFBlocks.MANGROVE_ROOTS.get(wood).get()), 8, 15, 0.2F)),
                 new TwoLayersFeatureSize(3, 0, 2),
-                2, 
-                new TreePlacementConfig(1, 14, true, true)
+                2,
+                new TreePlacementConfig(1, 14, TreePlacementConfig.GroundType.NORMAL)
             ).decorators(List.of(
                 new WeightedLeaveVineDecorator(0.125F),
                 new AttachedToLeavesDecorator(0.14F, 1, 0, new RandomizedIntStateProvider(BlockStateProvider.simple(TFCFBlocks.WOODS.get(wood).get(Wood.BlockType.SAPLING).get().defaultBlockState().setValue(TFCFMangrovePropaguleBlock.HANGING, true)), TFCFMangrovePropaguleBlock.AGE, UniformInt.of(0, 4)), 2, List.of(Direction.DOWN)),
@@ -89,27 +92,29 @@ public class TFCFMangroveTreeGrower extends AbstractTreeGrower
                 new RootedTreeConfig.TreeConfigurationBuilder(
                     BlockStateProvider.simple(TFCFBlocks.WOODS.get(wood).get(Wood.BlockType.LOG).get().defaultBlockState()),
                 new UpwardBranchingTrunk(2, 1, 4,
-                    UniformInt.of(1, 4), 0.5F, 
-                    UniformInt.of(0, 1), 
-                    Registry.BLOCK.getOrCreateTag(TFCFTags.Blocks.MANGROVE_LOGS_CAN_GROW_THROUGH)),
+                    UniformInt.of(1, 4), 0.5F,
+                    UniformInt.of(0, 1),
+                    BuiltInRegistries.BLOCK.getOrCreateTag(TFCFTags.Blocks.MANGROVE_LOGS_CAN_GROW_THROUGH)),
                     BlockStateProvider.simple(TFCFBlocks.WOODS_SEASONAL_LEAVES.get(wood).get().defaultBlockState().setValue(TFCFMangroveLeavesBlock.PERSISTENT, false).setValue(TFCFMangroveLeavesBlock.LIFECYCLE, Lifecycle.HEALTHY)),
-                new RandomSpreadFoliagePlacer(ConstantInt.of(3), 
-                    ConstantInt.of(0), 
+                new RandomSpreadFoliagePlacer(ConstantInt.of(3),
+                    ConstantInt.of(0),
                     ConstantInt.of(2), 70),
-                new MangroveRootPlacer(UniformInt.of(1, 3), 
-                    BlockStateProvider.simple(TFCFBlocks.MANGROVE_ROOTS.get(wood).get().defaultBlockState()), 
-                    Optional.of(new AboveRootPlacement(BlockStateProvider.simple(Blocks.MOSS_CARPET), 0.5F)), 
-                new MangroveRootPlacement(Registry.BLOCK.getOrCreateTag(TFCFTags.Blocks.MANGROVE_ROOTS_CAN_GROW_THROUGH), 
-                    HolderSet.direct(Block::builtInRegistryHolder, TFCBlocks.SOIL.get(SoilBlockType.MUD).get(SoilBlockType.Variant.LOAM).get(), TFCFBlocks.TFC_MUDDY_MANGROVE_ROOTS.get(wood).get(SoilBlockType.Variant.LOAM).get()), 
+                new MangroveRootPlacer(UniformInt.of(1, 3),
+                    BlockStateProvider.simple(TFCFBlocks.MANGROVE_ROOTS.get(wood).get().defaultBlockState()),
+                    Optional.of(new AboveRootPlacement(BlockStateProvider.simple(Blocks.MOSS_CARPET), 0.5F)),
+                new MangroveRootPlacement(BuiltInRegistries.BLOCK.getOrCreateTag(TFCFTags.Blocks.MANGROVE_ROOTS_CAN_GROW_THROUGH),
+                    HolderSet.direct(Block::builtInRegistryHolder, TFCBlocks.SOIL.get(SoilBlockType.MUD).get(SoilBlockType.Variant.LOAM).get(), TFCFBlocks.TFC_MUDDY_MANGROVE_ROOTS.get(wood).get(SoilBlockType.Variant.LOAM).get()),
                     BlockStateProvider.simple(TFCFBlocks.TFC_MUDDY_MANGROVE_ROOTS.get(wood).get(SoilBlockType.Variant.LOAM).get().defaultBlockState()), 8, 15, 0.2F)),
                 new TwoLayersFeatureSize(2, 0, 2),
-                2, 
-                new TreePlacementConfig(1, 14, true, true)
+                2,
+                new TreePlacementConfig(1, 14, TreePlacementConfig.GroundType.NORMAL) //todo true, true)
             ).decorators(List.of(
                 new WeightedLeaveVineDecorator(0.125F),
                 new AttachedToLeavesDecorator(0.14F, 1, 0, new RandomizedIntStateProvider(BlockStateProvider.simple(TFCFBlocks.WOODS.get(wood).get(Wood.BlockType.SAPLING).get().defaultBlockState().setValue(TFCFMangrovePropaguleBlock.HANGING, true)), TFCFMangrovePropaguleBlock.AGE, UniformInt.of(0, 4)), 2, List.of(Direction.DOWN)),
                 new BeehiveDecorator(0F)
             )).ignoreVines().build());
-        }
+        }*/
+        return null;
     }
+
 }

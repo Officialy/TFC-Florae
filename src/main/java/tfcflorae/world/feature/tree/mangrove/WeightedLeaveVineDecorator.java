@@ -1,3 +1,4 @@
+
 package tfcflorae.world.feature.tree.mangrove;
 
 import com.mojang.serialization.Codec;
@@ -6,6 +7,7 @@ import net.dries007.tfc.common.blocks.TFCBlocks;
 import net.dries007.tfc.common.blocks.plant.Plant;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.LevelSimulatedReader;
 import net.minecraft.world.level.block.VineBlock;
 import net.minecraft.world.level.block.state.BlockState;
@@ -15,7 +17,7 @@ import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecorator;
 import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecoratorType;
 
 import java.util.List;
-import java.util.Random;
+
 import java.util.function.BiConsumer;
 
 import tfcflorae.world.feature.TFCFFeatures;
@@ -33,14 +35,21 @@ public class WeightedLeaveVineDecorator extends TreeDecorator
     }
 
     @Override
-    public void place(LevelSimulatedReader level, BiConsumer<BlockPos, BlockState> replacer, Random random, List<BlockPos> trunkPositions, List<BlockPos> foliagePositions)
-    {
-        foliagePositions.forEach(pos -> {
+    public void place(Context pContext) {
+
+    LevelSimulatedReader level = pContext.level();
+    RandomSource random = pContext.random();
+    List<BlockPos> trunkPositions = pContext.roots();
+    List<BlockPos> foliagePositions = pContext.leaves();
+
+
+  /*foliagePositions.forEach(pos -> {
             if (random.nextFloat() < this.probability && Feature.isAir(level, pos.west())) addHangingVine(level, pos.west(), VineBlock.EAST, replacer);
             if (random.nextFloat() < this.probability && Feature.isAir(level, pos.east())) addHangingVine(level, pos.east(), VineBlock.WEST, replacer);
             if (random.nextFloat() < this.probability && Feature.isAir(level, pos.north())) addHangingVine(level, pos.north(), VineBlock.SOUTH, replacer);
             if (random.nextFloat() < this.probability && Feature.isAir(level, pos.south())) addHangingVine(level, pos.south(), VineBlock.NORTH, replacer);
-        });
+        });*/
+
     }
 
     private static void addHangingVine(LevelSimulatedReader level, BlockPos pos, BooleanProperty property, BiConsumer<BlockPos, BlockState> replacer)
@@ -48,11 +57,13 @@ public class WeightedLeaveVineDecorator extends TreeDecorator
         placeVine(replacer, pos, property);
         pos = pos.below();
 
-        for (int i = 4; Feature.isAir(level, pos) && i > 0; --i)
+
+/*for (int i = 4; Feature.isAir(level, pos) && i > 0; --i)
         {
             placeVine(replacer, pos, property);
             pos = pos.below();
-        }
+        }*/
+
     }
 
     @Override

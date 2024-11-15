@@ -2,11 +2,12 @@ package tfcflorae.world.feature;
 
 import java.util.HashSet;
 import java.util.LinkedList;
-import java.util.Random;
+
 import java.util.Set;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.Blocks;
@@ -34,7 +35,7 @@ public class RivuletFeature extends Feature<BlockStateConfiguration>
     {
         final WorldGenLevel world = context.level();
         final BlockPos pos = context.origin();
-        final Random rand = context.random();
+        final RandomSource rand = context.random();
         final BlockStateConfiguration config = context.config();
 
         final ChunkPos chunkPos = new ChunkPos(pos);
@@ -84,7 +85,7 @@ public class RivuletFeature extends Feature<BlockStateConfiguration>
                     {
                         // Check that the block below is solid
                         mutablePos.setY(height - 1);
-                        if (world.getBlockState(mutablePos).getMaterial().isSolid())
+                        if (world.getBlockState(mutablePos).isSolid())
                         {
                             // Valid next position
                             possibleDirections++;

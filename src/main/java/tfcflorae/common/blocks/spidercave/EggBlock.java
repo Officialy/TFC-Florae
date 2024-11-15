@@ -1,7 +1,8 @@
 package tfcflorae.common.blocks.spidercave;
 
-import java.util.Random;
 
+
+import net.minecraft.util.RandomSource;
 import org.jetbrains.annotations.Nullable;
 
 import net.minecraft.core.BlockPos;
@@ -75,7 +76,7 @@ public class EggBlock extends Block implements IForgeBlockExtension, IFluidLogga
 
     @Override
     @SuppressWarnings("deprecation")
-    public void randomTick(BlockState state, ServerLevel level, BlockPos pos, Random random)
+    public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random)
     {
         if (random.nextDouble() < TFCConfig.SERVER.plantGrowthChance.get())
         {
@@ -107,7 +108,7 @@ public class EggBlock extends Block implements IForgeBlockExtension, IFluidLogga
 
         if (level instanceof ServerLevel)
         {
-            final Random random = new Random();
+            final RandomSource random = new RandomSource();
             final int chance = random.nextInt(5);
             if (chance > 1)
             {
@@ -147,7 +148,7 @@ public class EggBlock extends Block implements IForgeBlockExtension, IFluidLogga
 
         if (level instanceof ServerLevel)
         {
-            final Random random = new Random();
+            final RandomSource random = new RandomSource();
             final int chance = random.nextInt(5);
             if (chance > 1)
             {
@@ -192,13 +193,13 @@ public class EggBlock extends Block implements IForgeBlockExtension, IFluidLogga
         }
     }
 
+
     @Override
-    public void spawnAfterBreak(BlockState state, ServerLevel level, BlockPos pos, ItemStack itemStack)
-    {
-        super.spawnAfterBreak(state, level, pos, itemStack);
-        if (level.getGameRules().getBoolean(GameRules.RULE_DOBLOCKDROPS) && EnchantmentHelper.getItemEnchantmentLevel(Enchantments.SILK_TOUCH, itemStack) == 0)
+    public void spawnAfterBreak(BlockState pState, ServerLevel pLevel, BlockPos pPos, ItemStack pStack, boolean pDropExperience) {
+        super.spawnAfterBreak(pState, pLevel, pPos, pStack, pDropExperience);
+        if (pLevel.getGameRules().getBoolean(GameRules.RULE_DOBLOCKDROPS) && EnchantmentHelper.getItemEnchantmentLevel(Enchantments.SILK_TOUCH, pStack) == 0)
         {
-            this.spawnSpider(level, pos);
+            this.spawnSpider(pLevel, pPos);
         }
     }
 
@@ -213,7 +214,7 @@ public class EggBlock extends Block implements IForgeBlockExtension, IFluidLogga
 
     public void spawnSpider(Level level, BlockPos pos)
     {
-        final Random random = level.getRandom();
+        final RandomSource random = level.getRandom();
         final int chance = random.nextInt(4);
         final Block block = level.getBlockState(pos).getBlock();
 
@@ -246,9 +247,8 @@ public class EggBlock extends Block implements IForgeBlockExtension, IFluidLogga
 	}
 
     @Override
-    public int getExpDrop(BlockState state, LevelReader world, BlockPos pos, int fortune, int silkTouch)
-    {
-        final Random random = new Random();
+    public int getExpDrop(BlockState state, LevelReader level, RandomSource randomSource, BlockPos pos, int fortuneLevel, int silkTouchLevel) {
+        final RandomSource random = RandomSource.create();
         return 20 + random.nextInt(20) + random.nextInt(20);
     }
 
@@ -269,7 +269,7 @@ public class EggBlock extends Block implements IForgeBlockExtension, IFluidLogga
     @SuppressWarnings("deprecation")
     public FluidState getFluidState(BlockState state)
     {
-        return IFluidLoggable.super.getFluidState(state);
+        return IFluidLoggable.super.getFluidLoggedState(state);
     }
 
     @Nullable

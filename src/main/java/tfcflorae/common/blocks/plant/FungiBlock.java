@@ -1,7 +1,8 @@
 package tfcflorae.common.blocks.plant;
 
-import java.util.Random;
 
+
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.entity.Entity;
@@ -72,7 +73,7 @@ public abstract class FungiBlock extends TFCBushBlock
     }
 
     @Override
-    public void animateTick(BlockState state, Level level, BlockPos pos, Random random)
+    public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random)
     {
         if (plantTFCF.getSporeColor() != -1 && level.getRawBrightness(pos, 0) > 9 && (Calendars.get(level).getCalendarMonthOfYear().getSeason() == Season.SUMMER || Calendars.get(level).getCalendarMonthOfYear().getSeason() == Season.FALL))
         {
@@ -101,12 +102,12 @@ public abstract class FungiBlock extends TFCBushBlock
         return Helpers.isBlock(state, Tags.Blocks.STONE) || state.is(BlockTags.MUSHROOM_GROW_BLOCK) || Helpers.isBlock(state.getBlock(), BlockTags.LOGS) || Helpers.isBlock(state.getBlock(), TFCTags.Blocks.SEA_BUSH_PLANTABLE_ON) || Helpers.isBlock(state.getBlock(), TFCTags.Blocks.GRASS_PLANTABLE_ON) || Helpers.isBlock(state.getBlock(), TFCTags.Blocks.BUSH_PLANTABLE_ON) || super.mayPlaceOn(state, level, pos);
     }
 
-    @Override
+ /*   @Override
     public OffsetType getOffsetType()
     {
         return OffsetType.XZ;
     }
-
+*/
     @Override
     @SuppressWarnings("deprecation")
     public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context)
@@ -116,7 +117,7 @@ public abstract class FungiBlock extends TFCBushBlock
 
     @Override
     @SuppressWarnings("deprecation")
-    public void randomTick(BlockState state, ServerLevel level, BlockPos pos, Random random)
+    public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random)
     {
         if (random.nextDouble() < TFCConfig.SERVER.plantGrowthChance.get())
         {
@@ -197,7 +198,7 @@ public abstract class FungiBlock extends TFCBushBlock
      *
      * The stage property is isolated and referenced via this as it is needed in the {@link Block} constructor - which builds the state container, and requires all property references to be computed in {@link Block#createBlockStateDefinition(StateDefinition.Builder)}.
      *
-     * See the various {@link FungiBlock#create(RegistryPlant, ExtendedProperties)} methods and subclass versions for how to use.
+     * See the various {@link FungiBlock#create(RegistryPlant, TFCFPlant, ExtendedProperties)} methods and subclass versions for how to use.
      */
     public abstract RegistryPlant getPlant();
 

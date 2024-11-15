@@ -1,9 +1,14 @@
 package tfcflorae.client;
 
-import java.util.Arrays;
-import java.util.Locale;
-import java.util.stream.Stream;
-
+import net.dries007.tfc.client.TFCColors;
+import net.dries007.tfc.client.render.blockentity.AnvilBlockEntityRenderer;
+import net.dries007.tfc.client.render.blockentity.BarrelBlockEntityRenderer;
+import net.dries007.tfc.client.render.blockentity.SluiceBlockEntityRenderer;
+import net.dries007.tfc.client.screen.KnappingScreen;
+import net.dries007.tfc.common.blocks.rock.Rock;
+import net.dries007.tfc.common.blocks.rock.RockCategory;
+import net.dries007.tfc.common.blocks.wood.Wood;
+import net.dries007.tfc.util.Helpers;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.color.block.BlockColor;
 import net.minecraft.client.color.block.BlockColors;
@@ -25,23 +30,10 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.client.event.*;
-import net.minecraftforge.client.model.ForgeModelBakery;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.event.config.ModConfigEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-
-import net.dries007.tfc.client.*;
-import net.dries007.tfc.client.render.blockentity.AnvilBlockEntityRenderer;
-import net.dries007.tfc.client.render.blockentity.BarrelBlockEntityRenderer;
-import net.dries007.tfc.client.render.blockentity.SluiceBlockEntityRenderer;
-import net.dries007.tfc.client.screen.KnappingScreen;
-import net.dries007.tfc.common.blocks.TFCBlocks;
-import net.dries007.tfc.common.blocks.rock.Rock;
-import net.dries007.tfc.common.blocks.rock.RockCategory;
-import net.dries007.tfc.common.blocks.wood.Wood;
-import net.dries007.tfc.util.Helpers;
-
 import tfcflorae.client.model.entity.*;
 import tfcflorae.client.particle.FallingLeafParticle;
 import tfcflorae.client.particle.SporeParticle;
@@ -55,7 +47,7 @@ import tfcflorae.client.render.entity.*;
 import tfcflorae.client.screen.TFCFAnvilPlanScreen;
 import tfcflorae.client.screen.TFCFAnvilScreen;
 import tfcflorae.client.screen.TFCFBarrelScreen;
-import tfcflorae.client.screen.ceramics.*;
+import tfcflorae.client.screen.ceramics.LargeVesselScreen;
 import tfcflorae.common.blockentities.TFCFBlockEntities;
 import tfcflorae.common.blocks.TFCFBlocks;
 import tfcflorae.common.blocks.rock.Mineral;
@@ -68,6 +60,10 @@ import tfcflorae.common.entities.Silkmoth;
 import tfcflorae.common.entities.TFCFEntities;
 import tfcflorae.common.items.TFCFItems;
 import tfcflorae.util.TFCFHelpers;
+
+import java.util.Arrays;
+import java.util.Locale;
+import java.util.stream.Stream;
 
 import static net.dries007.tfc.common.blocks.wood.Wood.BlockType.*;
 
@@ -135,7 +131,7 @@ public class ClientEventHandler
         TFCFBlocks.WOODS_SEASONAL_LEAVES.values().forEach(map -> {
             Stream.of(LEAVES).forEach(type -> ItemBlockRenderTypes.setRenderLayer(map.get(), layer -> Minecraft.useFancyGraphics() ? layer == cutoutMipped : layer == cutoutMipped));
         });
-        ItemBlockRenderTypes.setRenderLayer(TFCFBlocks.CHARRED_TREE_TWIG.get(), cutout);
+//        ItemBlockRenderTypes.setRenderLayer(TFCFBlocks.CHARRED_TREE_TWIG.get(), cutout);
         TFCFBlocks.MANGROVE_ROOTS.values().forEach(reg -> ItemBlockRenderTypes.setRenderLayer(reg.get(), cutoutMipped));
 
         TFCFBlocks.CLAY_LARGE_VESSELS.values().forEach(reg -> ItemBlockRenderTypes.setRenderLayer(reg.get(), cutoutMipped));
@@ -285,7 +281,7 @@ public class ClientEventHandler
         ItemBlockRenderTypes.setRenderLayer(TFCFBlocks.OCHRE_FROGLIGHT.get(), cutout);
         ItemBlockRenderTypes.setRenderLayer(TFCFBlocks.VERDANT_FROGLIGHT.get(), cutout);
         ItemBlockRenderTypes.setRenderLayer(TFCFBlocks.PEARLESCENT_FROGLIGHT.get(), cutout);
-        ItemBlockRenderTypes.setRenderLayer(TFCFBlocks.FROGSPAWN.get(), cutout);
+//        ItemBlockRenderTypes.setRenderLayer(TFCFBlocks.FROGSPAWN.get(), cutout);
 
         TFCFBlocks.GROUNDCOVER.values().forEach(reg -> ItemBlockRenderTypes.setRenderLayer(reg.get(), cutout));
     }
@@ -346,39 +342,39 @@ public class ClientEventHandler
     {
     }
 
-    public static void registerModelLoaders(ModelRegistryEvent event)
+    public static void registerModelLoaders(ModelEvent.RegisterAdditional event)
     {
         for (TFCFWood wood : TFCFWood.VALUES)
         {
             if (wood.isPalmTree())
             {
-                ForgeModelBakery.addSpecialModel(TFCFHelpers.identifier("block/wood/leaves/" + wood.getSerializedName() + "_leaves_1"));
-                ForgeModelBakery.addSpecialModel(TFCFHelpers.identifier("block/wood/leaves/" + wood.getSerializedName() + "_leaves_2"));
-                ForgeModelBakery.addSpecialModel(TFCFHelpers.identifier("block/wood/leaves/" + wood.getSerializedName() + "_leaves_corner_1"));
-                ForgeModelBakery.addSpecialModel(TFCFHelpers.identifier("block/wood/leaves/" + wood.getSerializedName() + "_leaves_corner_2"));
-                ForgeModelBakery.addSpecialModel(TFCFHelpers.identifier("block/wood/leaves/" + wood.getSerializedName() + "_leaves_top_1"));
+                event.register(TFCFHelpers.identifier("block/wood/leaves/" + wood.getSerializedName() + "_leaves_1"));
+                event.register(TFCFHelpers.identifier("block/wood/leaves/" + wood.getSerializedName() + "_leaves_2"));
+                event.register(TFCFHelpers.identifier("block/wood/leaves/" + wood.getSerializedName() + "_leaves_corner_1"));
+                event.register(TFCFHelpers.identifier("block/wood/leaves/" + wood.getSerializedName() + "_leaves_corner_2"));
+                event.register(TFCFHelpers.identifier("block/wood/leaves/" + wood.getSerializedName() + "_leaves_top_1"));
             }
         }
         for (Wood wood : Wood.VALUES)
         {
             if (wood == Wood.PALM)
             {
-                ForgeModelBakery.addSpecialModel(TFCFHelpers.identifier("block/wood/leaves/" + wood.getSerializedName() + "_leaves_1"));
-                ForgeModelBakery.addSpecialModel(TFCFHelpers.identifier("block/wood/leaves/" + wood.getSerializedName() + "_leaves_2"));
-                ForgeModelBakery.addSpecialModel(TFCFHelpers.identifier("block/wood/leaves/" + wood.getSerializedName() + "_leaves_corner_1"));
-                ForgeModelBakery.addSpecialModel(TFCFHelpers.identifier("block/wood/leaves/" + wood.getSerializedName() + "_leaves_corner_2"));
-                ForgeModelBakery.addSpecialModel(TFCFHelpers.identifier("block/wood/leaves/" + wood.getSerializedName() + "_leaves_top_1"));
+                event.register(TFCFHelpers.identifier("block/wood/leaves/" + wood.getSerializedName() + "_leaves_1"));
+                event.register(TFCFHelpers.identifier("block/wood/leaves/" + wood.getSerializedName() + "_leaves_2"));
+                event.register(TFCFHelpers.identifier("block/wood/leaves/" + wood.getSerializedName() + "_leaves_corner_1"));
+                event.register(TFCFHelpers.identifier("block/wood/leaves/" + wood.getSerializedName() + "_leaves_corner_2"));
+                event.register(TFCFHelpers.identifier("block/wood/leaves/" + wood.getSerializedName() + "_leaves_top_1"));
             }
         }
     }
 
-    public static void registerColorHandlerBlocks(ColorHandlerEvent.Block event)
+    public static void registerColorHandlerBlocks(RegisterColorHandlersEvent.Block event)
     {
         final BlockColors registry = event.getBlockColors();
         final BlockColor grassColor = (state, worldIn, pos, tintIndex) -> TFCColors.getGrassColor(pos, tintIndex);
         final BlockColor tallGrassColor = (state, worldIn, pos, tintIndex) -> TFCColors.getTallGrassColor(pos, tintIndex);
         final BlockColor foliageColor = (state, worldIn, pos, tintIndex) -> TFCColors.getFoliageColor(pos, tintIndex);
-        final BlockColor seasonalFoliageColor = (state, worldIn, pos, tintIndex) -> TFCColors.getSeasonalFoliageColor(pos, tintIndex);
+        final BlockColor seasonalFoliageColor = (state, worldIn, pos, tintIndex) -> TFCColors.getSeasonalFoliageColor(pos, tintIndex, 0);
 
         //TFCFBlocks.TFCSOIL.get(TFCFSoil.GRASS).values().forEach(reg -> registry.register(grassColor, reg.get()));
         TFCFBlocks.TFCSOIL.get(TFCFSoil.PODZOL).values().forEach(reg -> registry.register(grassColor, reg.get()));
@@ -452,12 +448,12 @@ public class ClientEventHandler
         TFCFBlocks.BAMBOO_LEAVES.forEach((plant, reg) -> registry.register(seasonalFoliageColor, reg.get()));
     }
 
-    public static void registerColorHandlerItems(ColorHandlerEvent.Item event)
+    public static void registerColorHandlerItems(RegisterColorHandlersEvent.Item event)
     {
         final ItemColors registry = event.getItemColors();
         final ItemColor grassColor = (stack, tintIndex) -> TFCColors.getGrassColor(null, tintIndex);
         final ItemColor foliageColor = (stack, tintIndex) -> TFCColors.getFoliageColor(null, tintIndex);
-        final ItemColor seasonalFoliageColor = (stack, tintIndex) -> TFCColors.getSeasonalFoliageColor(null, tintIndex);
+        final ItemColor seasonalFoliageColor = (stack, tintIndex) -> TFCColors.getSeasonalFoliageColor(null, tintIndex, 0);
 
         TFCFBlocks.WOODS.forEach((wood, value) -> {
             if (value.get(FALLEN_LEAVES).get() != null)
@@ -492,7 +488,7 @@ public class ClientEventHandler
         // Colormaps
     }
 
-    public static void registerParticleFactories(ParticleFactoryRegisterEvent event)
+    public static void registerParticleFactories(RegisterParticleProvidersEvent event)
     {
         ParticleEngine particleEngine = Minecraft.getInstance().particleEngine;
         particleEngine.register(TFCFParticles.WATER_FLOW.get(), WaterFlowParticle.Provider::new);
@@ -500,10 +496,10 @@ public class ClientEventHandler
         particleEngine.register(TFCFParticles.FALLING_SPORE.get(), set -> new SporeParticle.Provider(set, true));
     }
 
-    public static void onTextureStitch(TextureStitchEvent.Pre event)
+    public static void onTextureStitch(TextureStitchEvent.Post event)
     {
         final ResourceLocation texture = event.getAtlas().location();
-        if (texture.equals(TFCFRenderHelpers.BLOCKS_ATLAS))
+      /*  if (texture.equals(TFCFRenderHelpers.BLOCKS_ATLAS))
         {
             for (Mineral mineral : Mineral.values())
             {
@@ -513,7 +509,7 @@ public class ClientEventHandler
                 event.addSprite(TFCFHelpers.identifier("block/mineral/" + mineral.name().toLowerCase(Locale.ROOT) + "_3"));
             }
         }
-        else if (texture.equals(Sheets.CHEST_SHEET)/* && hasLeavesOnly()*/)
+        else if (texture.equals(Sheets.CHEST_SHEET)*//* && hasLeavesOnly()*//*)
         {
             Arrays.stream(TFCFWood.VALUES).map(TFCFWood::getSerializedName).forEach(name -> {
                 event.addSprite(TFCFHelpers.identifier("entity/chest/normal/" + name));
@@ -546,9 +542,9 @@ public class ClientEventHandler
             event.addSprite(TFCFHelpers.identifier("entity/chest/trapped_left/rock"));
             event.addSprite(TFCFHelpers.identifier("entity/chest/trapped_right/rock"));
         }
-        else if (texture.equals(Sheets.SIGN_SHEET)/* && hasLeavesOnly()*/)
+        else if (texture.equals(Sheets.SIGN_SHEET)/* && hasLeavesOnly()*//*)
         {
             Arrays.stream(TFCFWood.VALUES).map(TFCFWood::getSerializedName).forEach(name -> event.addSprite(TFCFHelpers.identifier("entity/signs/" + name)));
-        }
+        }*/
     }
 }

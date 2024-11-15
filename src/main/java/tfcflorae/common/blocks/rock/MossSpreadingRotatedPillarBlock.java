@@ -1,11 +1,12 @@
 package tfcflorae.common.blocks.rock;
 
-import java.util.Random;
+
 import java.util.function.Supplier;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -41,20 +42,14 @@ public class MossSpreadingRotatedPillarBlock extends MossSpreadingBlock
 
     public static BlockState rotatePillar(BlockState state, Rotation rotation)
     {
-        switch(rotation) {
-        case COUNTERCLOCKWISE_90:
-        case CLOCKWISE_90:
-            switch((Direction.Axis)state.getValue(AXIS)) {
-            case X:
-                return state.setValue(AXIS, Direction.Axis.Z);
-            case Z:
-                return state.setValue(AXIS, Direction.Axis.X);
-            default:
-                return state;
-            }
-        default:
-            return state;
-        }
+        return switch (rotation) {
+            case COUNTERCLOCKWISE_90, CLOCKWISE_90 -> switch ((Direction.Axis) state.getValue(AXIS)) {
+                case X -> state.setValue(AXIS, Direction.Axis.Z);
+                case Z -> state.setValue(AXIS, Direction.Axis.X);
+                default -> state;
+            };
+            default -> state;
+        };
     }
 
     @Override
@@ -70,7 +65,7 @@ public class MossSpreadingRotatedPillarBlock extends MossSpreadingBlock
     }
 
     @SuppressWarnings("deprecation")
-    public static void spreadMoss(Level world, BlockPos pos, Random random)
+    public static void spreadMoss(Level world, BlockPos pos, RandomSource random)
     {
         if (world.isAreaLoaded(pos, 5) && TFCConfig.SERVER.enableMossyRockSpreading.get() && random.nextInt(TFCConfig.SERVER.mossyRockSpreadRate.get()) == 0)
         {
@@ -85,7 +80,7 @@ public class MossSpreadingRotatedPillarBlock extends MossSpreadingBlock
 
     @Override
     @SuppressWarnings("deprecation")
-    public void randomTick(BlockState state, ServerLevel worldIn, BlockPos pos, Random random)
+    public void randomTick(BlockState state, ServerLevel worldIn, BlockPos pos, RandomSource random)
     {
         MossSpreadingRotatedPillarBlock.spreadMoss(worldIn, pos, random);
     }

@@ -4,10 +4,11 @@ import com.mojang.logging.LogUtils;
 import com.mojang.serialization.Codec;
 
 import java.util.List;
-import java.util.Random;
+
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
+import net.minecraft.util.RandomSource;
 import org.slf4j.Logger;
 
 import net.minecraft.core.BlockPos;
@@ -23,7 +24,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.structure.StructurePiece;
-import net.minecraft.world.level.material.Material;
+
 import net.minecraft.world.level.storage.loot.BuiltInLootTables;
 
 import net.dries007.tfc.world.chunkdata.ChunkData;
@@ -55,7 +56,7 @@ public class MonsterRoomFeature extends Feature<RockConfig>
     {
         Predicate<BlockState> predicate = Feature.isReplaceable(BlockTags.FEATURES_CANNOT_REPLACE);
         BlockPos pos = context.origin();
-        Random random = context.random();
+        RandomSource random = context.random();
         WorldGenLevel level = context.level();
         final RockConfig config = context.config();
 
@@ -93,8 +94,7 @@ public class MonsterRoomFeature extends Feature<RockConfig>
                 for (int i3 = l1; i3 <= i2; ++i3)
                 {
                     BlockPos pos1 = pos.offset(k2, l2, i3);
-                    Material material = level.getBlockState(pos1).getMaterial();
-                    boolean flag = material.isSolid();
+                    boolean flag = level.getBlockState(pos1).isSolid();
                     if (l2 == -1 && !flag)
                     {
                         return false;
@@ -130,11 +130,11 @@ public class MonsterRoomFeature extends Feature<RockConfig>
                                 safeSetBlock(level, pos2, AIR, predicate);
                             }
                         }
-                        else if (pos2.getY() >= level.getMinBuildHeight() && !level.getBlockState(pos2.below()).getMaterial().isSolid())
+                        else if (pos2.getY() >= level.getMinBuildHeight() && !level.getBlockState(pos2.below()).isSolid())
                         {
                             level.setBlock(pos2, AIR, 2);
                         }
-                        else if (blockstate.getMaterial().isSolid() && !blockstate.is(TFCFBlocks.ROCK_CHEST.get()) && !blockstate.is(TFCFBlocks.ROCK_TRAPPED_CHEST.get())) 
+                        else if (blockstate.isSolid() && !blockstate.is(TFCFBlocks.ROCK_CHEST.get()) && !blockstate.is(TFCFBlocks.ROCK_TRAPPED_CHEST.get()))
                         {
                             if (i4 == -1 && random.nextInt(4) != 0)
                             {
@@ -164,7 +164,7 @@ public class MonsterRoomFeature extends Feature<RockConfig>
 
                         for(Direction direction : Direction.Plane.HORIZONTAL)
                         {
-                            if (level.getBlockState(pos3.relative(direction)).getMaterial().isSolid())
+                            if (level.getBlockState(pos3.relative(direction)).isSolid())
                             {
                                 ++j3;
                             }
@@ -192,7 +192,7 @@ public class MonsterRoomFeature extends Feature<RockConfig>
             BlockEntity blockentity = level.getBlockEntity(pos);
             if (blockentity instanceof SpawnerBlockEntity)
             {
-                ((SpawnerBlockEntity)blockentity).getSpawner().setEntityId(this.randomEntityId(random));
+                ((SpawnerBlockEntity)blockentity).getSpawner().setEntityId(this.randomEntityId(random), level.getLevel(), random, pos);
             }
             else
             {
@@ -207,7 +207,7 @@ public class MonsterRoomFeature extends Feature<RockConfig>
         }
     }
 
-    private EntityType<?> randomEntityId(Random random)
+    private EntityType<?> randomEntityId(RandomSource random)
     {
         return TFCFDungeonHooks.getRandomDungeonMob(random);
     }

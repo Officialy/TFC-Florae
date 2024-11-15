@@ -26,7 +26,7 @@ import tfcflorae.common.blocks.soil.TFCFSoil;
 @SuppressWarnings("RedundantTypeArguments")
 public class TFCFBlockEntities
 {
-    public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITIES, TFCFlorae.MOD_ID);
+    public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, TFCFlorae.MOD_ID);
 
     public static final RegistryObject<BlockEntityType<SandPileBlockEntity>> SAND_PILE = register("sand_pile", SandPileBlockEntity::new, Stream.of(
             //TFCFBlocks.SAND_LAYERS.values().stream(),

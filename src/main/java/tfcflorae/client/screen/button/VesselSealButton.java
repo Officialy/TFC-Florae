@@ -1,9 +1,10 @@
 package tfcflorae.client.screen.button;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.renderer.GameRenderer;
-import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.chat.Component;
 import net.minecraftforge.network.PacketDistributor;
 
 import com.mojang.blaze3d.systems.RenderSystem;
@@ -20,9 +21,9 @@ public class VesselSealButton extends Button
 {
     private final LargeVesselBlockEntity vessel;
 
-    public VesselSealButton(LargeVesselBlockEntity barrel, int guiLeft, int guiTop, OnTooltip onTooltip)
+    public VesselSealButton(LargeVesselBlockEntity barrel, int guiLeft, int guiTop, CreateNarration onTooltip)
     {
-        super(guiLeft + 123, guiTop + 35, 20, 20, TextComponent.EMPTY, b -> {}, onTooltip);
+        super(guiLeft + 123, guiTop + 35, 20, 20, Component.empty(), b -> {}, onTooltip);
         this.vessel = barrel;
     }
 
@@ -33,19 +34,19 @@ public class VesselSealButton extends Button
         playDownSound(Minecraft.getInstance().getSoundManager());
     }
 
-    @Override
-    public void renderButton(PoseStack poseStack, int mouseX, int mouseY, float partialTicks)
+//    @Override
+    public void renderButton(GuiGraphics poseStack, int mouseX, int mouseY, float partialTicks)
     {
         RenderSystem.setShader(GameRenderer::getPositionTexShader);
         RenderSystem.setShaderTexture(0, LargeVesselScreen.BACKGROUND);
         RenderSystem.setShaderColor(1f, 1f, 1f, 1f);
 
         final int v = vessel.getBlockState().getValue(LargeVesselBlock.SEALED) ? 0 : 20;
-        blit(poseStack, x, y, 236, v, 20, 20, 256, 256);
+//todo        blit(poseStack, x, y, 236, v, 20, 20, 256, 256);
 
         if (isHoveredOrFocused())
         {
-            renderToolTip(poseStack, mouseX, mouseY);
+// todo           renderToolTip(poseStack, mouseX, mouseY);
         }
     }
 }

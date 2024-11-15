@@ -1,9 +1,0 @@
-@ParametersAreNonnullByDefault
-@MethodsReturnNonnullByDefault
-@FieldsAreNonnullByDefault
-package tfcflorae.mixin.accessor;
-
-import javax.annotation.ParametersAreNonnullByDefault;
-
-import net.minecraft.FieldsAreNonnullByDefault;
-import net.minecraft.MethodsReturnNonnullByDefault;

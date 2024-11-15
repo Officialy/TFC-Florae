@@ -1,13 +1,16 @@
 package tfcflorae.world.feature;
 
-import java.util.Random;
+
 
 import com.mojang.serialization.Codec;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.BeehiveBlock;
@@ -29,7 +32,7 @@ public class BeeNestFeature extends Feature<NoneFeatureConfiguration>
     {
         final WorldGenLevel level = context.level();
         final BlockPos pos = context.origin();
-        final Random random = context.random();
+        final RandomSource random = context.random();
 
         Direction facingDirection = randomDirection(random);
 
@@ -39,22 +42,21 @@ public class BeeNestFeature extends Feature<NoneFeatureConfiguration>
             for(int k = 0; k < j; ++k)
             {
                 CompoundTag compoundTag = new CompoundTag();
-                compoundTag.putString("id", Registry.ENTITY_TYPE.getKey(EntityType.BEE).toString());
+                compoundTag.putString("id", BuiltInRegistries.ENTITY_TYPE.getKey(EntityType.BEE).toString());
                 p_202310_.storeBee(compoundTag, random.nextInt(599), false);
             }
         });
         return true;
     }
 
-    public Direction randomDirection(Random random)
+    public Direction randomDirection(RandomSource random)
     {
         int randomDirection = random.nextInt(4);
-        switch(randomDirection)
-        {
-            case 0: return Direction.NORTH;
-            case 1: return Direction.SOUTH;
-            case 2: return Direction.EAST;
-            default: return Direction.WEST;
-        }
+        return switch (randomDirection) {
+            case 0 -> Direction.NORTH;
+            case 1 -> Direction.SOUTH;
+            case 2 -> Direction.EAST;
+            default -> Direction.WEST;
+        };
     }
 }

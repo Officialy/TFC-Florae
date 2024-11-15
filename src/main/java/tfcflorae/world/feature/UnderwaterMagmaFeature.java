@@ -3,13 +3,14 @@ package tfcflorae.world.feature;
 import java.util.List;
 import java.util.Optional;
 import java.util.OptionalInt;
-import java.util.Random;
+
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Vec3i;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.Blocks;
@@ -36,7 +37,7 @@ public class UnderwaterMagmaFeature extends Feature<UnderwaterMagmaConfig>
     {
         final WorldGenLevel level = context.level();
         final BlockPos pos = context.origin();
-        final Random random = context.random();
+        final RandomSource random = context.random();
         final UnderwaterMagmaConfig config = context.config();
 
         final ChunkDataProvider provider = ChunkDataProvider.get(context.chunkGenerator());

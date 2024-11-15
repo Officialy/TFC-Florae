@@ -6,6 +6,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.function.Supplier;
 
+import net.minecraft.core.Direction;
 import org.apache.commons.lang3.StringUtils;
 
 import net.minecraft.sounds.SoundEvents;
@@ -48,9 +49,9 @@ import tfcflorae.common.blocks.soil.TFCFSoil;
 import tfcflorae.common.blocks.wood.TFCFWood;
 import tfcflorae.common.entities.Fish;
 import tfcflorae.common.entities.TFCFEntities;
-import tfcflorae.util.TFCFHelpers;
 
-import static net.dries007.tfc.common.TFCItemGroup.*;
+import static net.dries007.tfc.common.TFCCreativeTabs.*;
+import static tfcflorae.common.blocks.TFCFBlocks.ROCK_STUFFS;
 
 @SuppressWarnings("unused")
 public final class TFCFItems
@@ -60,38 +61,38 @@ public final class TFCFItems
     // Sand
 
     public static final Map<Colors, RegistryObject<Item>> WEATHERED_TERRACOTTA = Helpers.mapOfKeys(Colors.class, type ->
-        register("sand/weathered_terracotta_shard/" + type.name(), TFCItemGroup.EARTH)
+        register("sand/weathered_terracotta_shard/" + type.name(), EARTH)
     );
 
     // Ores
 
-    public static final RegistryObject<Item> COKE = register("ore/coke", TFCItemGroup.ORES);
+    public static final RegistryObject<Item> COKE = register("ore/coke", TFCCreativeTabs.ORES);
     public static final Map<TFCFOre, RegistryObject<Item>> ORES = Helpers.mapOfKeys(TFCFOre.class, ore -> !ore.isGraded(), type ->
-        register("ore/" + type.name(), TFCItemGroup.ORES)
+        register("ore/" + type.name(), TFCCreativeTabs.ORES)
     );
     public static final Map<TFCFOre, Map<TFCFOre.Grade, RegistryObject<Item>>> GRADED_ORES = Helpers.mapOfKeys(TFCFOre.class, TFCFOre::isGraded, ore ->
         Helpers.mapOfKeys(TFCFOre.Grade.class, grade ->
-            register("ore/" + grade.name() + '_' + ore.name(), TFCItemGroup.ORES)
+            register("ore/" + grade.name() + '_' + ore.name(), TFCCreativeTabs.ORES)
         )
     );
 
     public static final Map<TFCFPowder, RegistryObject<Item>> POWDERS = Helpers.mapOfKeys(TFCFPowder.class, powder ->
-        register("powder/" + powder.name(), TFCItemGroup.MISC)
+        register("powder/" + powder.name(), MISC)
     );
 
-    public static final RegistryObject<Item> BOG_IRON = register("ore/small_bog_iron", TFCItemGroup.ORES);
+    public static final RegistryObject<Item> BOG_IRON = register("ore/small_bog_iron", TFCCreativeTabs.ORES);
 
-    public static final RegistryObject<Item> GLOWSTONE_SHARDS = register("crystal/shard/glowstone", TFCItemGroup.ORES);
+    public static final RegistryObject<Item> GLOWSTONE_SHARDS = register("crystal/shard/glowstone", TFCCreativeTabs.ORES);
     public static final Map<Gem, RegistryObject<Item>> GEM_SHARDS = Helpers.mapOfKeys(Gem.class, gem ->
-        register("crystal/shard/" + gem.name(), TFCItemGroup.ORES)
+        register("crystal/shard/" + gem.name(), TFCCreativeTabs.ORES)
     );
 
     public static final Map<Mineral, RegistryObject<Item>> MINERALS = Helpers.mapOfKeys(Mineral.class, mineral ->
-        register("mineral/" + mineral.name(), TFCItemGroup.ORES)
+        register("mineral/" + mineral.name(), TFCCreativeTabs.ORES)
     );
 
     public static final Map<Clay, RegistryObject<Item>> CLAY_MINERALS = Helpers.mapOfKeys(Clay.class, Clay::hasRock, mineral ->
-        register("mineral/" + mineral.name(), TFCItemGroup.ORES)
+        register("mineral/" + mineral.name(), TFCCreativeTabs.ORES)
     );
 
     // Rock Stuff
@@ -102,7 +103,7 @@ public final class TFCFItems
 
     // Food
 
-    public static final RegistryObject<Item> COCONUT = register("food/coconut", TFCItemGroup.FOOD);
+    public static final RegistryObject<Item> COCONUT = register("food/coconut", TFCCreativeTabs.FOOD);
     public static final Map<TFCFFood, RegistryObject<Item>> FOOD = foodMapper();
 
     // Wood
@@ -115,7 +116,7 @@ public final class TFCFItems
 
     // Decorations
 
-    public static final RegistryObject<Item> HUMUS_MUD_BRICK = register("mud_brick/humus", TFCItemGroup.DECORATIONS);
+    public static final RegistryObject<Item> HUMUS_MUD_BRICK = register("mud_brick/humus", TFCCreativeTabs.DECORATIONS);
 
     // Pottery
 
@@ -138,17 +139,17 @@ public final class TFCFItems
 
     public static final Map<RockCategory, Map<RockCategory.ItemType, RegistryObject<Item>>> FLINT_TOOLS = flintToolMapper();
 
-    public static final RegistryObject<Item> BRUSHES = register("tools/brush", () -> new BrushItem(new Item.Properties().tab(MISC).stacksTo(1).durability(250)));
-    public static final RegistryObject<Item> WALKING_CANES = register("tools/walking_cane", () -> new WalkingCaneItem(new Item.Properties().tab(MISC).stacksTo(1).durability(200)));
+    public static final RegistryObject<Item> BRUSHES = register("tools/brush", () -> new BrushItem(new Item.Properties()/*.tab(MISC)*/.stacksTo(1).durability(250)));
+    public static final RegistryObject<Item> WALKING_CANES = register("tools/walking_cane", () -> new WalkingCaneItem(new Item.Properties()/*.tab(MISC)*/.stacksTo(1).durability(200)));
 
-    public static final RegistryObject<Item> MULBERRY_LEAVES = register("wood/leaf/mulberry", TFCItemGroup.MISC);
-    public static final RegistryObject<Item> SILK_MOTH_EGG = register("animal/product/silk_moth_egg", TFCItemGroup.MISC);
-    public static final RegistryObject<Item> SILK_WORM_HATCHERY = register("animal/product/silk_moth_hatchery", TFCItemGroup.MISC);
-    public static final RegistryObject<Item> SILK_WORM = register("animal/product/silk_worm", TFCItemGroup.MISC);
-    public static final RegistryObject<Item> SILK_WORM_COCOON = register("animal/product/silk_worm_cocoon", TFCItemGroup.MISC);
-    public static final RegistryObject<Item> SILK_WORM_COCOON_BOILED = register("animal/product/silk_worm_cocoon_boiled", TFCItemGroup.MISC);
+    public static final RegistryObject<Item> MULBERRY_LEAVES = register("wood/leaf/mulberry", MISC);
+    public static final RegistryObject<Item> SILK_MOTH_EGG = register("animal/product/silk_moth_egg", MISC);
+    public static final RegistryObject<Item> SILK_WORM_HATCHERY = register("animal/product/silk_moth_hatchery", MISC);
+    public static final RegistryObject<Item> SILK_WORM = register("animal/product/silk_worm", MISC);
+    public static final RegistryObject<Item> SILK_WORM_COCOON = register("animal/product/silk_worm_cocoon", MISC);
+    public static final RegistryObject<Item> SILK_WORM_COCOON_BOILED = register("animal/product/silk_worm_cocoon_boiled", MISC);
 
-    public static final RegistryObject<Item> TADPOLE_BUCKET = register("bucket/tadpole", () -> new MobBucketItem(TFCFEntities.TADPOLE, () -> Fluids.WATER, () -> SoundEvents.BUCKET_EMPTY_FISH, new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1).tab(MISC)));
+    public static final RegistryObject<Item> TADPOLE_BUCKET = register("bucket/tadpole", () -> new MobBucketItem(TFCFEntities.TADPOLE, () -> Fluids.WATER, () -> SoundEvents.BUCKET_EMPTY_FISH, new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)/*.tab(MISC)*/));
     public static final Map<Fish, RegistryObject<MobBucketItem>> FRESHWATER_FISH_BUCKETS = Helpers.mapOfKeys(Fish.class, fish -> register("bucket/" + fish.getSerializedName(), () -> new MobBucketItem(TFCFEntities.FRESHWATER_FISH.get(fish), () -> Fluids.WATER, () -> SoundEvents.BUCKET_EMPTY_FISH, new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1))));
 
     public static final RegistryObject<Item> SILKMOTH_EGG = registerSpawnEgg(TFCFEntities.SILKMOTH, 0xd78ed7, 0xd9fff9);
@@ -189,13 +190,13 @@ public final class TFCFItems
             Map.put(clay, register("ceramic/" + clayName + "/unfired/bowl", MISC));
             Map.put(clay, register("ceramic/" + clayName + "/fired/bowl", MISC));
             Map.put(clay, register("ceramic/" + clayName + "/unfired/jug", MISC));
-            Map.put(clay, register("ceramic/" + clayName + "/fired/jug", () -> new JugItem(new Item.Properties().tab(MISC).stacksTo(1), TFCConfig.SERVER.jugCapacity::get, TFCTags.Fluids.USABLE_IN_JUG)));
+            Map.put(clay, register("ceramic/" + clayName + "/fired/jug", () -> new JugItem(new Item.Properties()/*.tab(MISC)*/.stacksTo(1), TFCConfig.SERVER.jugCapacity::get, TFCTags.Fluids.USABLE_IN_JUG)));
             Map.put(clay, register("ceramic/" + clayName + "/unfired/pot", MISC));
             Map.put(clay, register("ceramic/" + clayName + "/fired/pot", MISC));
             Map.put(clay, register("ceramic/" + clayName + "/unfired/spindle_head", MISC));
             Map.put(clay, register("ceramic/" + clayName + "/fired/spindle_head", MISC));
             Map.put(clay, register("ceramic/" + clayName + "/unfired/vessel", MISC));
-            Map.put(clay, register("ceramic/" + clayName + "/fired/vessel", () -> new VesselItem(new Item.Properties().tab(MISC).stacksTo(1))));
+            Map.put(clay, register("ceramic/" + clayName + "/fired/vessel", () -> new VesselItem(new Item.Properties()/*.tab(MISC)*/.stacksTo(1))));
             Map.put(clay, register("ceramic/" + clayName + "/unfired/large_vessel", MISC));
         }
         return Map;
@@ -214,7 +215,7 @@ public final class TFCFItems
                 String colorName = color.name().toLowerCase(Locale.ROOT);
 
                 subMap.put(color, register("ceramic/" + clayName + "/unfired/glazed_vessel/" + colorName, MISC));
-                subMap.put(color, register("ceramic/" + clayName + "/fired/glazed_vessel/" + colorName, () -> new VesselItem(new Item.Properties().tab(MISC).stacksTo(1))));
+                subMap.put(color, register("ceramic/" + clayName + "/fired/glazed_vessel/" + colorName, () -> new VesselItem(new Item.Properties()/*.tab(MISC)*/.stacksTo(1))));
             }
             Map.put(clay, subMap);
         }
@@ -237,7 +238,7 @@ public final class TFCFItems
                 String typeName = type.name().toLowerCase(Locale.ROOT);
 
                 subMap.put(type, register("ceramic/" + clayName + "/unfired/mold/" + typeName, MISC));
-                subMap.put(type, register("ceramic/" + clayName + "/fired/mold/" + typeName, () -> new MoldItem(type, new Item.Properties().tab(MISC).stacksTo(1))));
+                subMap.put(type, register("ceramic/" + clayName + "/fired/mold/" + typeName, () -> new MoldItem(type, new Item.Properties())));//.tab(MISC).stacksTo(1))));
             }
             Map.put(clay, subMap);
         }
@@ -283,7 +284,7 @@ public final class TFCFItems
             if (TFCFBlocks.WOODS.get(wood) == null)
                 continue;
 
-            Map.put(wood, register("wood/support/" + wood.name(), () -> new StandingAndWallBlockItem(TFCFBlocks.WOODS.get(wood).get(Wood.BlockType.VERTICAL_SUPPORT).get(), TFCFBlocks.WOODS.get(wood).get(Wood.BlockType.HORIZONTAL_SUPPORT).get(), new Item.Properties().tab(WOOD))));
+            Map.put(wood, register("wood/support/" + wood.name(), () -> new StandingAndWallBlockItem(TFCFBlocks.WOODS.get(wood).get(Wood.BlockType.VERTICAL_SUPPORT).get(), TFCFBlocks.WOODS.get(wood).get(Wood.BlockType.HORIZONTAL_SUPPORT).get(), new Item.Properties()/*.tab(WOOD)*/, null)));
         }
         return Map;
     }
@@ -295,11 +296,11 @@ public final class TFCFItems
         {
             if (TFCFBlocks.WOODS.get(wood) == null)
                 continue;
-            
+
             if (wood == TFCFWood.BAMBOO)
-                Map.put(wood, register("wood/boat/" + wood.name(), () -> new TFCFBoatItem(TFCFEntities.BOATS.get(wood), new Item.Properties().tab(WOOD))));
+                Map.put(wood, register("wood/boat/" + wood.name(), () -> new TFCFBoatItem(TFCFEntities.BOATS.get(wood), new Item.Properties()/*.tab(WOOD)*/)));
             else
-                Map.put(wood, register("wood/boat/" + wood.name(), () -> new TFCFBoatItem(TFCFEntities.BOATS.get(wood), new Item.Properties().tab(WOOD))));
+                Map.put(wood, register("wood/boat/" + wood.name(), () -> new TFCFBoatItem(TFCFEntities.BOATS.get(wood), new Item.Properties()/*.tab(WOOD)*/)));
         }
         return Map;
     }
@@ -312,7 +313,7 @@ public final class TFCFItems
             if (TFCFBlocks.WOODS.get(wood) == null)
                 continue;
 
-            Map.put(wood, register("wood/chest_minecart/" + wood.name(), () -> new TFCMinecartItem(new Item.Properties().tab(WOOD), TFCEntities.CHEST_MINECART, () -> TFCFBlocks.WOODS.get(wood).get(Wood.BlockType.CHEST).get().asItem())));
+            Map.put(wood, register("wood/chest_minecart/" + wood.name(), () -> new TFCMinecartItem(new Item.Properties()/*.tab(WOOD)*/, TFCEntities.CHEST_MINECART, () -> TFCFBlocks.WOODS.get(wood).get(Wood.BlockType.CHEST).get().asItem())));
         }
         return Map;
     }
@@ -325,7 +326,7 @@ public final class TFCFItems
             if (TFCFBlocks.WOODS.get(wood) == null)
                 continue;
 
-            Map.put(wood, register("wood/sign/" + wood.name(), () -> new SignItem(new Item.Properties().tab(WOOD), TFCFBlocks.WOODS.get(wood).get(Wood.BlockType.SIGN).get(), TFCFBlocks.WOODS.get(wood).get(Wood.BlockType.WALL_SIGN).get())));
+            Map.put(wood, register("wood/sign/" + wood.name(), () -> new SignItem(new Item.Properties()/*.tab(WOOD)*/, TFCFBlocks.WOODS.get(wood).get(Wood.BlockType.SIGN).get(), TFCFBlocks.WOODS.get(wood).get(Wood.BlockType.WALL_SIGN).get())));
         }
         return Map;
     }
@@ -333,79 +334,80 @@ public final class TFCFItems
     @SuppressWarnings("deprecation")
     private static Map<TFCFFood, RegistryObject<Item>> foodMapper()
     {
-        Map<TFCFFood,  RegistryObject<Item>> Map = new HashMap<>();
+        TFCFlorae.LOGGER.info("about to add stuff to map");
+        Map<TFCFFood,  RegistryObject<Item>> map = new HashMap<>();
         for (TFCFFood food : TFCFFood.class.getEnumConstants())
         {
             if (food.hasEffect())
             {
                 if (food == TFCFFood.DRAGONBERRY)
-                    Map.put(food, register("food/" + food.name(), () -> new DecayingItem(new Item.Properties().food(new FoodProperties.Builder().nutrition(4).saturationMod(0.3f)
-                        .effect(new MobEffectInstance(MobEffects.POISON, 50, 0), 0.3F).alwaysEat().build()).tab(TFCItemGroup.FOOD))));
+                    map.put(food, register("food/" + food.name(), () -> new Item(new Item.Properties().food(new FoodProperties.Builder().nutrition(4).saturationMod(0.3f)
+                        .effect(new MobEffectInstance(MobEffects.POISON, 50, 0), 0.3F).alwaysEat().build()))));//.tab(TFCCreativeTabs.FOOD))));
                 else if (food == TFCFFood.ROASTED_ARTISTS_CONK)
-                    Map.put(food, register("food/" + food.name(), () -> new DecayingItem(new Item.Properties().food(new FoodProperties.Builder().nutrition(4).saturationMod(0.3f)
-                        .effect(new MobEffectInstance(MobEffects.CONFUSION, 200, 0), 0.5F).effect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 300, 0), 0.25F).alwaysEat().build()).tab(TFCItemGroup.FOOD))));
+                    map.put(food, register("food/" + food.name(), () -> new Item(new Item.Properties().food(new FoodProperties.Builder().nutrition(4).saturationMod(0.3f)
+                        .effect(new MobEffectInstance(MobEffects.CONFUSION, 200, 0), 0.5F).effect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 300, 0), 0.25F).alwaysEat().build()))));//.tab(TFCCreativeTabs.FOOD))));
                 else if (food == TFCFFood.ROASTED_SULPHUR_SHELF)
-                    Map.put(food, register("food/" + food.name(), () -> new DecayingItem(new Item.Properties().food(new FoodProperties.Builder().nutrition(4).saturationMod(0.3f)
-                        .effect(new MobEffectInstance(MobEffects.CONFUSION, 200, 0), 0.5F).effect(new MobEffectInstance(MobEffects.DIG_SLOWDOWN, 300, 0), 0.25F).alwaysEat().build()).tab(TFCItemGroup.FOOD))));
+                    map.put(food, register("food/" + food.name(), () -> new Item(new Item.Properties().food(new FoodProperties.Builder().nutrition(4).saturationMod(0.3f)
+                        .effect(new MobEffectInstance(MobEffects.CONFUSION, 200, 0), 0.5F).effect(new MobEffectInstance(MobEffects.DIG_SLOWDOWN, 300, 0), 0.25F).alwaysEat().build()))));//.tab(TFCCreativeTabs.FOOD))));
                 else if (food == TFCFFood.ROASTED_TURKEY_TAIL)
-                    Map.put(food, register("food/" + food.name(), () -> new DecayingItem(new Item.Properties().food(new FoodProperties.Builder().nutrition(4).saturationMod(0.3f)
-                        .effect(new MobEffectInstance(MobEffects.CONFUSION, 200, 0), 0.5F).effect(new MobEffectInstance(MobEffects.BLINDNESS, 300, 0), 0.25F).alwaysEat().build()).tab(TFCItemGroup.FOOD))));
+                    map.put(food, register("food/" + food.name(), () -> new Item(new Item.Properties().food(new FoodProperties.Builder().nutrition(4).saturationMod(0.3f)
+                        .effect(new MobEffectInstance(MobEffects.CONFUSION, 200, 0), 0.5F).effect(new MobEffectInstance(MobEffects.BLINDNESS, 300, 0), 0.25F).alwaysEat().build()))));//.tab(TFCCreativeTabs.FOOD))));
                 else if (food == TFCFFood.ROASTED_AMANITA)
-                    Map.put(food, register("food/" + food.name(), () -> new DecayingItem(new Item.Properties().food(new FoodProperties.Builder().nutrition(4).saturationMod(0.3f)
-                        .effect(new MobEffectInstance(MobEffects.CONFUSION, 200, 0), 0.5F).effect(new MobEffectInstance(MobEffects.WEAKNESS, 300, 0), 0.5F).effect(new MobEffectInstance(MobEffects.WITHER, 150, 1), 1F).alwaysEat().build()).tab(TFCItemGroup.FOOD))));
+                    map.put(food, register("food/" + food.name(), () -> new Item(new Item.Properties().food(new FoodProperties.Builder().nutrition(4).saturationMod(0.3f)
+                        .effect(new MobEffectInstance(MobEffects.CONFUSION, 200, 0), 0.5F).effect(new MobEffectInstance(MobEffects.WEAKNESS, 300, 0), 0.5F).effect(new MobEffectInstance(MobEffects.WITHER, 150, 1), 1F).alwaysEat().build()))));//.tab(TFCCreativeTabs.FOOD))));
                 else if (food == TFCFFood.ROASTED_DEATH_CAP)
-                    Map.put(food, register("food/" + food.name(), () -> new DecayingItem(new Item.Properties().food(new FoodProperties.Builder().nutrition(4).saturationMod(0.3f)
-                        .effect(new MobEffectInstance(MobEffects.CONFUSION, 200, 0), 0.5F).effect(new MobEffectInstance(MobEffects.WEAKNESS, 300, 0), 0.5F).effect(new MobEffectInstance(MobEffects.WITHER, 150, 1), 1F).alwaysEat().build()).tab(TFCItemGroup.FOOD))));
+                    map.put(food, register("food/" + food.name(), () -> new Item(new Item.Properties().food(new FoodProperties.Builder().nutrition(4).saturationMod(0.3f)
+                        .effect(new MobEffectInstance(MobEffects.CONFUSION, 200, 0), 0.5F).effect(new MobEffectInstance(MobEffects.WEAKNESS, 300, 0), 0.5F).effect(new MobEffectInstance(MobEffects.WITHER, 150, 1), 1F).alwaysEat().build()))));//.tab(TFCCreativeTabs.FOOD))));
                 else if (food == TFCFFood.ROASTED_WOOLLY_GOMPHUS)
-                    Map.put(food, register("food/" + food.name(), () -> new DecayingItem(new Item.Properties().food(new FoodProperties.Builder().nutrition(4).saturationMod(0.3f)
-                        .effect(new MobEffectInstance(MobEffects.CONFUSION, 200, 0), 0.5F).effect(new MobEffectInstance(MobEffects.POISON, 300, 0), 0.25F).alwaysEat().build()).tab(TFCItemGroup.FOOD))));
+                    map.put(food, register("food/" + food.name(), () -> new Item(new Item.Properties().food(new FoodProperties.Builder().nutrition(4).saturationMod(0.3f)
+                        .effect(new MobEffectInstance(MobEffects.CONFUSION, 200, 0), 0.5F).effect(new MobEffectInstance(MobEffects.POISON, 300, 0), 0.25F).alwaysEat().build()))));//.tab(TFCCreativeTabs.FOOD))));
                 else if (food == TFCFFood.ROASTED_CHANTERELLE)
-                    Map.put(food, register("food/" + food.name(), () -> new DecayingItem(new Item.Properties().food(new FoodProperties.Builder().nutrition(4).saturationMod(0.3f)
-                        .effect(new MobEffectInstance(MobEffects.REGENERATION, 80, 0), 0.5F).alwaysEat().build()).tab(TFCItemGroup.FOOD))));
+                    map.put(food, register("food/" + food.name(), () -> new Item(new Item.Properties().food(new FoodProperties.Builder().nutrition(4).saturationMod(0.3f)
+                        .effect(new MobEffectInstance(MobEffects.REGENERATION, 80, 0), 0.5F).alwaysEat().build()))));//.tab(TFCCreativeTabs.FOOD))));
                 else if (food == TFCFFood.ROASTED_STINKHORN)
-                    Map.put(food, register("food/" + food.name(), () -> new DecayingItem(new Item.Properties().food(new FoodProperties.Builder().nutrition(4).saturationMod(0.3f)
-                        .effect(new MobEffectInstance(MobEffects.UNLUCK, 200, 0), 0.5F).alwaysEat().build()).tab(TFCItemGroup.FOOD))));
+                    map.put(food, register("food/" + food.name(), () -> new Item(new Item.Properties().food(new FoodProperties.Builder().nutrition(4).saturationMod(0.3f)
+                        .effect(new MobEffectInstance(MobEffects.UNLUCK, 200, 0), 0.5F).alwaysEat().build()))));//.tab(TFCCreativeTabs.FOOD))));
                 else if (food == TFCFFood.ROASTED_INDIGO_MILK_CAP)
-                    Map.put(food, register("food/" + food.name(), () -> new DecayingItem(new Item.Properties().food(new FoodProperties.Builder().nutrition(4).saturationMod(0.3f)
-                        .effect(new MobEffectInstance(MobEffects.WATER_BREATHING, 50, 0), 0.3F).alwaysEat().build()).tab(TFCItemGroup.FOOD))));
+                    map.put(food, register("food/" + food.name(), () -> new Item(new Item.Properties().food(new FoodProperties.Builder().nutrition(4).saturationMod(0.3f)
+                        .effect(new MobEffectInstance(MobEffects.WATER_BREATHING, 50, 0), 0.3F).alwaysEat().build()))));//.tab(TFCCreativeTabs.FOOD))));
                 else if (food == TFCFFood.ROASTED_LIONS_MANE)
-                    Map.put(food, register("food/" + food.name(), () -> new DecayingItem(new Item.Properties().food(new FoodProperties.Builder().nutrition(4).saturationMod(0.3f)
-                        .effect(new MobEffectInstance(MobEffects.REGENERATION, 75, 0), 0.3F).effect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 100, 0), 0.4F).alwaysEat().build()).tab(TFCItemGroup.FOOD))));
+                    map.put(food, register("food/" + food.name(), () -> new Item(new Item.Properties().food(new FoodProperties.Builder().nutrition(4).saturationMod(0.3f)
+                        .effect(new MobEffectInstance(MobEffects.REGENERATION, 75, 0), 0.3F).effect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 100, 0), 0.4F).alwaysEat().build()))));//.tab(TFCCreativeTabs.FOOD))));
                 else if (food == TFCFFood.ROASTED_BLACK_POWDERPUFF)
-                    Map.put(food, register("food/" + food.name(), () -> new DecayingItem(new Item.Properties().food(new FoodProperties.Builder().nutrition(4).saturationMod(0.3f)
-                        .effect(new MobEffectInstance(MobEffects.INVISIBILITY, 25, 0), 0.5F).alwaysEat().build()).tab(TFCItemGroup.FOOD))));
+                    map.put(food, register("food/" + food.name(), () -> new Item(new Item.Properties().food(new FoodProperties.Builder().nutrition(4).saturationMod(0.3f)
+                        .effect(new MobEffectInstance(MobEffects.INVISIBILITY, 25, 0), 0.5F).alwaysEat().build()))));//.tab(TFCCreativeTabs.FOOD))));
                 else if (food == TFCFFood.EUCALYPTUS_LEAVES)
-                    Map.put(food, register("food/" + food.name(), () -> new DecayingItem(new Item.Properties().food(new FoodProperties.Builder().nutrition(0).saturationMod(0)
-                        .effect(new MobEffectInstance(MobEffects.POISON, 35, 0), 0.2F).alwaysEat().build()).tab(TFCItemGroup.FOOD))));
+                    map.put(food, register("food/" + food.name(), () -> new Item(new Item.Properties().food(new FoodProperties.Builder().nutrition(0).saturationMod(0)
+                        .effect(new MobEffectInstance(MobEffects.POISON, 35, 0), 0.2F).alwaysEat().build()))));//.tab(TFCCreativeTabs.FOOD))));
                 else
-                    Map.put(food, register("food/" + food.name(), () -> new DecayingItem(food.createProperties())));
+                    map.put(food, register("food/" + food.name(), () -> new Item(food.createProperties())));
             }
             else
-                Map.put(food, register("food/" + food.name(), () -> new DecayingItem(food.createProperties())));
+                map.put(food, register("food/" + food.name(), () -> new Item(food.createProperties())));
         }
-        return Map;
+        return map;
     }
 
     private static Item.Properties prop()
     {
-        return new Item.Properties().tab(MISC);
+        return new Item.Properties();//.tab(MISC);
     }
 
     private static <T extends EntityType<? extends Mob>> RegistryObject<Item> registerSpawnEgg(RegistryObject<T> entity, int color1, int color2)
     {
-        return register("spawn_egg/" + entity.getId().getPath(), () -> new ForgeSpawnEggItem(entity, color1, color2, new Item.Properties().tab(MISC)));
+        return register("spawn_egg/" + entity.getId().getPath(), () -> new ForgeSpawnEggItem(entity, color1, color2, new Item.Properties()));//.tab(MISC)));
     }
 
-    private static RegistryObject<Item> register(String name, CreativeModeTab group)
+    private static RegistryObject<Item> register(String name, TFCCreativeTabs.CreativeTabHolder group)
     {
-        return register(name, () -> new Item(new Item.Properties().tab(group)));
+        return register(name, () -> new Item(new Item.Properties()));//.tab(group)));
     }
 
     private static <T extends Item> RegistryObject<T> register(String name, Supplier<T> item)
     {
-        /*String replace = name.replace("/", " ");
+        String replace = name.replace("/", " ");
         String replace2 = replace.replace("_", " ");
-        TFCFlorae.LOGGER.debug("\"item." + TFCFlorae.MOD_ID + "." + name.toLowerCase() + "\": " + "\"" + StringUtils.capitalize(replace2) + "\"" + ",");*/
+        TFCFlorae.LOGGER.debug("\"item." + TFCFlorae.MOD_ID + "." + name.toLowerCase() + "\": " + "\"" + StringUtils.capitalize(replace2) + "\"" + ",");
         return ITEMS.register(name.toLowerCase(Locale.ROOT), item);
     }
 }

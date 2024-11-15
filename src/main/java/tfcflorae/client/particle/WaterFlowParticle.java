@@ -20,7 +20,7 @@ public class WaterFlowParticle extends TextureSheetParticle
         super(level, x, y, z);
         this.setSize(0.02F, 0.02F);
         this.quadSize *= random.nextFloat() * 0.6F + 0.2F;
-        final BlockPos pos = new BlockPos(x, y, z);
+        final BlockPos pos = BlockPos.containing(x, y, z);
         final FluidState state = level.getFluidState(pos);
         setDirectionFromFlow(state);
         lifetime = 100;
@@ -48,7 +48,7 @@ public class WaterFlowParticle extends TextureSheetParticle
         xo = x;
         yo = y;
         zo = z;
-        final BlockPos pos = new BlockPos(x, y, z);
+        final BlockPos pos = BlockPos.containing(x, y, z);
         final FluidState state = level.getFluidState(pos);
         y = state.getHeight(level, pos);
         setDirectionFromFlow(state);

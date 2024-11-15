@@ -1,10 +1,11 @@
 package tfcflorae.world.feature;
 
-import java.util.Random;
 
+
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.material.Material;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.Mth;
 import net.minecraft.world.level.BlockGetter;
@@ -33,7 +34,7 @@ public class GlacierFeature extends TFCIcebergFeature
         BlockPos blockpos = context.origin();
         WorldGenLevel worldgenlevel = context.level();
         blockpos = new BlockPos(blockpos.getX(), worldgenlevel.getHeight(Heightmap.Types.WORLD_SURFACE_WG, blockpos.getX(), blockpos.getZ()), blockpos.getZ());
-        Random random = context.random();
+        RandomSource random = context.random();
         boolean flag = random.nextDouble() > 0.7D;
         BlockState blockstate = (context.config()).state;
         double d0 = random.nextDouble() * 2.0D * Math.PI;
@@ -94,7 +95,7 @@ public class GlacierFeature extends TFCIcebergFeature
         return true;
     }
 
-    public void generateCutOut(Random p_66100_, LevelAccessor p_66101_, int p_66102_, int p_66103_, BlockPos p_66104_, boolean p_66105_, int p_66106_, double p_66107_, int p_66108_)
+    public void generateCutOut(RandomSource p_66100_, LevelAccessor p_66101_, int p_66102_, int p_66103_, BlockPos p_66104_, boolean p_66105_, int p_66106_, double p_66107_, int p_66108_)
     {
         int i = p_66100_.nextBoolean() ? -1 : 1;
         int j = p_66100_.nextBoolean() ? -1 : 1;
@@ -126,7 +127,7 @@ public class GlacierFeature extends TFCIcebergFeature
         }
     }
 
-    public void generateIcebergBlock(LevelAccessor p_66059_, Random p_66060_, BlockPos p_66061_, int p_66062_, int p_66063_, int p_66064_, int p_66065_, int p_66066_, int p_66067_, boolean p_66068_, int p_66069_, double p_66070_, boolean p_66071_, BlockState p_66072_)
+    public void generateIcebergBlock(LevelAccessor p_66059_, RandomSource p_66060_, BlockPos p_66061_, int p_66062_, int p_66063_, int p_66064_, int p_66065_, int p_66066_, int p_66067_, boolean p_66068_, int p_66069_, double p_66070_, boolean p_66071_, BlockState p_66072_)
     {
         double d0 = p_66068_ ? this.signedDistanceEllipse(p_66063_, p_66065_, BlockPos.ZERO, p_66067_, this.getEllipseC(p_66064_, p_66062_, p_66069_), p_66070_) : this.signedDistanceCircle(p_66063_, p_66065_, BlockPos.ZERO, p_66066_, p_66060_);
         if (d0 < 0.0D) {
@@ -148,7 +149,7 @@ public class GlacierFeature extends TFCIcebergFeature
         return i;
     }
 
-    public double signedDistanceCircle(int p_66030_, int p_66031_, BlockPos p_66032_, int p_66033_, Random p_66034_)
+    public double signedDistanceCircle(int p_66030_, int p_66031_, BlockPos p_66032_, int p_66033_, RandomSource p_66034_)
     {
         float f = 10.0F * Mth.clamp(p_66034_.nextFloat(), 0.2F, 0.8F) / (float)p_66033_;
         return (double)f + Math.pow((double)(p_66030_ - p_66032_.getX()), 2.0D) + Math.pow((double)(p_66031_ - p_66032_.getZ()), 2.0D) - Math.pow((double)p_66033_, 2.0D);
@@ -159,7 +160,7 @@ public class GlacierFeature extends TFCIcebergFeature
         return Math.pow(((double)(p_66023_ - p_66025_.getX()) * Math.cos(p_66028_) - (double)(p_66024_ - p_66025_.getZ()) * Math.sin(p_66028_)) / (double)p_66026_, 2.0D) + Math.pow(((double)(p_66023_ - p_66025_.getX()) * Math.sin(p_66028_) + (double)(p_66024_ - p_66025_.getZ()) * Math.cos(p_66028_)) / (double)p_66027_, 2.0D) - 1.0D;
     }
 
-    public int heightDependentRadiusRound(Random p_66095_, int p_66096_, int p_66097_, int p_66098_)
+    public int heightDependentRadiusRound(RandomSource p_66095_, int p_66096_, int p_66097_, int p_66098_)
     {
         float f = 3.5F - p_66095_.nextFloat();
         float f1 = (1.0F - (float)Math.pow((double)p_66096_, 2.0D) / ((float)p_66097_ * f)) * (float)p_66098_;
@@ -178,7 +179,7 @@ public class GlacierFeature extends TFCIcebergFeature
         return Mth.ceil(f1 / 2.0F);
     }
 
-    public int heightDependentRadiusSteep(Random p_66114_, int p_66115_, int p_66116_, int p_66117_)
+    public int heightDependentRadiusSteep(RandomSource p_66114_, int p_66115_, int p_66116_, int p_66117_)
     {
         float f = 1.0F + p_66114_.nextFloat() / 2.0F;
         float f1 = (1.0F - (float)p_66115_ / ((float)p_66116_ * f)) * (float)p_66117_;
@@ -192,7 +193,7 @@ public class GlacierFeature extends TFCIcebergFeature
 
     public boolean belowIsAir(BlockGetter p_66046_, BlockPos p_66047_)
     {
-        return p_66046_.getBlockState(p_66047_.below()).getMaterial() == Material.AIR;
+        return p_66046_.getBlockState(p_66047_.below()).getBlock() == Blocks.AIR;
     }
 
     public void smooth(LevelAccessor p_66052_, BlockPos p_66053_, int p_66054_, int p_66055_, boolean p_66056_, int p_66057_)

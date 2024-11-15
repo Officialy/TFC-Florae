@@ -1,12 +1,13 @@
 package tfcflorae.world.feature;
 
-import java.util.Random;
+
 
 import com.google.common.collect.ImmutableList;
 import com.mojang.serialization.Codec;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -34,7 +35,7 @@ public class DeltaFeature extends Feature<DeltaConfig>
     public boolean place(FeaturePlaceContext<DeltaConfig> context)
     {
         boolean flag = false;
-        Random random = context.random();
+        RandomSource random = context.random();
         WorldGenLevel level = context.level();
         DeltaConfig config = context.config();
         BlockPos blockpos = context.origin();
@@ -78,7 +79,7 @@ public class DeltaFeature extends Feature<DeltaConfig>
     public static boolean isClear(WorldGenLevel level, BlockPos pos, DeltaConfig config)
     {
         BlockState blockstate = level.getBlockState(pos);
-        boolean replaceable = EnvironmentHelpers.isWorldgenReplaceable(level, pos) || level.getBlockState(pos).getMaterial().isReplaceable() || level.getBlockState(pos).getBlock() instanceof BushBlock || Helpers.isBlock(level.getBlockState(pos).getBlock(), TFCFTags.Blocks.REPLACEABLE);
+        boolean replaceable = EnvironmentHelpers.isWorldgenReplaceable(level, pos) || level.getBlockState(pos).canBeReplaced() || level.getBlockState(pos).getBlock() instanceof BushBlock || Helpers.isBlock(level.getBlockState(pos).getBlock(), TFCFTags.Blocks.REPLACEABLE);
         if (blockstate.is(config.contents().getBlock()))
         {
             return false;

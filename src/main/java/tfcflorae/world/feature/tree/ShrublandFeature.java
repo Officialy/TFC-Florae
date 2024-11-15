@@ -3,10 +3,11 @@ package tfcflorae.world.feature.tree;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Random;
+
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -42,7 +43,7 @@ public class ShrublandFeature extends Feature<ShrublandConfig>
     {
         final WorldGenLevel level = context.level();
         final BlockPos pos = context.origin();
-        final Random rand = context.random();
+        final RandomSource rand = context.random();
         final ShrublandConfig config = context.config();
 
         final ChunkDataProvider provider = ChunkDataProvider.get(context.chunkGenerator());
@@ -72,7 +73,7 @@ public class ShrublandFeature extends Feature<ShrublandConfig>
         return placedBushes;
     }
 
-    private boolean placeTree(WorldGenLevel level, ChunkGenerator generator, Random random, BlockPos chunkBlockPos, ShrublandConfig config, ChunkData data, BlockPos.MutableBlockPos mutablePos, ShrublandConfig.Type typeConfig)
+    private boolean placeTree(WorldGenLevel level, ChunkGenerator generator, RandomSource random, BlockPos chunkBlockPos, ShrublandConfig config, ChunkData data, BlockPos.MutableBlockPos mutablePos, ShrublandConfig.Type typeConfig)
     {
         final int chunkX = chunkBlockPos.getX();
         final int chunkZ = chunkBlockPos.getZ();
@@ -111,7 +112,7 @@ public class ShrublandFeature extends Feature<ShrublandConfig>
         return false;
     }
 
-    private boolean placeBush(WorldGenLevel level, Random random, BlockPos chunkBlockPos, ShrublandConfig config, ChunkData data, BlockPos.MutableBlockPos mutablePos)
+    private boolean placeBush(WorldGenLevel level, RandomSource random, BlockPos chunkBlockPos, ShrublandConfig config, ChunkData data, BlockPos.MutableBlockPos mutablePos)
     {
         final int chunkX = chunkBlockPos.getX();
         final int chunkZ = chunkBlockPos.getZ();
@@ -144,7 +145,7 @@ public class ShrublandFeature extends Feature<ShrublandConfig>
         return false;
     }
 
-    private void placeBushPart(WorldGenLevel level, BlockPos.MutableBlockPos mutablePos, BlockState log, BlockState leaves, float decay, Random rand, boolean needsEmptyCenter)
+    private void placeBushPart(WorldGenLevel level, BlockPos.MutableBlockPos mutablePos, BlockState log, BlockState leaves, float decay, RandomSource rand, boolean needsEmptyCenter)
     {
         if (EnvironmentHelpers.isWorldgenReplaceable(level, mutablePos))
         {
@@ -167,7 +168,7 @@ public class ShrublandFeature extends Feature<ShrublandConfig>
         }
     }
 
-    private void placeGroundcover(WorldGenLevel level, Random random, BlockPos chunkBlockPos, ShrublandConfig config, ChunkData data, BlockPos.MutableBlockPos mutablePos, int tries)
+    private void placeGroundcover(WorldGenLevel level, RandomSource random, BlockPos chunkBlockPos, ShrublandConfig config, ChunkData data, BlockPos.MutableBlockPos mutablePos, int tries)
     {
         final int chunkX = chunkBlockPos.getX();
         final int chunkZ = chunkBlockPos.getZ();
@@ -196,7 +197,7 @@ public class ShrublandFeature extends Feature<ShrublandConfig>
         }
     }
 
-    private void placeFallenTree(WorldGenLevel level, Random random, BlockPos chunkBlockPos, ShrublandConfig config, ChunkData data, BlockPos.MutableBlockPos mutablePos)
+    private void placeFallenTree(WorldGenLevel level, RandomSource random, BlockPos chunkBlockPos, ShrublandConfig config, ChunkData data, BlockPos.MutableBlockPos mutablePos)
     {
         final int chunkX = chunkBlockPos.getX();
         final int chunkZ = chunkBlockPos.getZ();
@@ -274,7 +275,7 @@ public class ShrublandFeature extends Feature<ShrublandConfig>
     }
 
     @Nullable
-    private ForestConfig.Entry getTree(ChunkData chunkData, Random random, ShrublandConfig config, BlockPos pos)
+    private ForestConfig.Entry getTree(ChunkData chunkData, RandomSource random, ShrublandConfig config, BlockPos pos)
     {
         List<ForestConfig.Entry> entries = new ArrayList<>(4);
         float rainfall = chunkData.getRainfall(pos);

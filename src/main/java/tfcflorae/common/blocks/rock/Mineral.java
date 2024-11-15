@@ -4,7 +4,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.material.Material;
+
+import net.minecraft.world.level.material.MapColor;
 import tfcflorae.common.items.TFCFItems;
 
 import org.jetbrains.annotations.Nullable;
@@ -44,7 +45,7 @@ public enum Mineral
     public Block create(RegistryRock rock)
     {
         // Same hardness as raw rock
-        final BlockBehaviour.Properties properties = Block.Properties.of(Material.STONE).sound(SoundType.STONE).strength(rock.category().hardness(6.5f), 10).noCollission().requiresCorrectToolForDrops();
+        final BlockBehaviour.Properties properties = Block.Properties.of().mapColor(MapColor.STONE).sound(SoundType.STONE).strength(rock.category().hardness(6.5f), 10).noCollission().requiresCorrectToolForDrops();
         if (this == BRIMSTONE)
         {
             return new ExtendedBlock(ExtendedProperties.of(properties).flammable(5, 120));

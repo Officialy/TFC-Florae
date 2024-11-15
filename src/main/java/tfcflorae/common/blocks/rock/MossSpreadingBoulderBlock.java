@@ -1,9 +1,10 @@
 package tfcflorae.common.blocks.rock;
 
 import java.util.Map;
-import java.util.Random;
+
 import java.util.stream.Stream;
 
+import net.minecraft.util.RandomSource;
 import org.jetbrains.annotations.Nullable;
 
 import com.google.common.collect.ImmutableMap;
@@ -95,7 +96,7 @@ public class MossSpreadingBoulderBlock extends Block implements IFluidLoggable
     @SuppressWarnings("deprecation")
     public FluidState getFluidState(BlockState state)
     {
-        return IFluidLoggable.super.getFluidState(state);
+        return IFluidLoggable.super.getFluidLoggedState(state);
     }
 
     @Override
@@ -122,7 +123,7 @@ public class MossSpreadingBoulderBlock extends Block implements IFluidLoggable
     }
 
     @SuppressWarnings("deprecation")
-    public static void spreadMoss(Level world, BlockPos pos, Random random)
+    public static void spreadMoss(Level world, BlockPos pos, RandomSource random)
     {
         if (world.isAreaLoaded(pos, 5) && TFCConfig.SERVER.enableMossyRockSpreading.get() && random.nextInt(TFCConfig.SERVER.mossyRockSpreadRate.get()) == 0)
         {
@@ -137,11 +138,11 @@ public class MossSpreadingBoulderBlock extends Block implements IFluidLoggable
 
     @Override
     @SuppressWarnings("deprecation")
-    public void randomTick(BlockState state, ServerLevel worldIn, BlockPos pos, Random random)
+    public void randomTick(BlockState state, ServerLevel worldIn, BlockPos pos, RandomSource random)
     {
         MossSpreadingBoulderBlock.spreadMoss(worldIn, pos, random);
     }
-
+/*
     @Override
     public OffsetType getOffsetType()
     {
@@ -149,7 +150,7 @@ public class MossSpreadingBoulderBlock extends Block implements IFluidLoggable
             return OffsetType.XZ;
         else
             return OffsetType.NONE;
-    }
+    }*/
 
     @Override
     public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context)

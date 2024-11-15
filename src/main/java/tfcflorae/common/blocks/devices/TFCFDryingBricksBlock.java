@@ -1,10 +1,11 @@
 package tfcflorae.common.blocks.devices;
 
-import java.util.Random;
+
 import java.util.function.Supplier;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
@@ -95,7 +96,7 @@ public class TFCFDryingBricksBlock extends DryingBricksBlock
 
     @Override
     @SuppressWarnings("deprecation")
-    public void randomTick(BlockState state, ServerLevel level, BlockPos pos, Random rand)
+    public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource rand)
     {
         level.getBlockEntity(pos, TFCFBlockEntities.TICK_COUNTER.get()).ifPresent(counter -> {
             if (level.isRainingAt(pos.above()))

@@ -1,3 +1,4 @@
+/*
 package tfcflorae.world.layer;
 
 import net.dries007.tfc.world.layer.TFCLayers;
@@ -40,4 +41,4 @@ public class MergeCoastalCliffsLayer implements TransformLayer
         }
         return value;
     }
-}
+}*/

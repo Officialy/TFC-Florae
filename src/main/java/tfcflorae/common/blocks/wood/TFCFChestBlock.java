@@ -62,7 +62,7 @@ public class TFCFChestBlock extends ChestBlock implements IForgeBlockExtension, 
                     {
                         return chest1.getDisplayName();
                     }
-                    return chest2.hasCustomName() ? chest2.getDisplayName() : Helpers.translatable("container.chestDouble");
+                    return chest2.hasCustomName() ? chest2.getDisplayName() : Component.translatable("container.chestDouble");
                 }
             });
         }

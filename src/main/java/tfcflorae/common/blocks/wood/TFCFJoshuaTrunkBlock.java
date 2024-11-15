@@ -1,11 +1,12 @@
 package tfcflorae.common.blocks.wood;
 
-import java.util.Random;
+
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
@@ -145,7 +146,7 @@ public class TFCFJoshuaTrunkBlock extends PipeBlock implements IFluidLoggable
 
     public boolean canConnectTo(BlockState state)
     {
-        return (Helpers.isBlock(state, TFCTags.Blocks.BUSH_PLANTABLE_ON) || Helpers.isBlock(state, TFCTags.Blocks.TREE_GROWS_ON) || Helpers.isBlock(state, BlockTags.SAND) || Helpers.isBlock(state, Tags.Blocks.GRAVEL) || state.getMaterial().isSolid());
+        return (Helpers.isBlock(state, TFCTags.Blocks.BUSH_PLANTABLE_ON) || Helpers.isBlock(state, TFCTags.Blocks.TREE_GROWS_ON) || Helpers.isBlock(state, BlockTags.SAND) || Helpers.isBlock(state, Tags.Blocks.GRAVEL) || state.isSolid());
     }
 
     @Override
@@ -177,7 +178,7 @@ public class TFCFJoshuaTrunkBlock extends PipeBlock implements IFluidLoggable
     @SuppressWarnings("deprecation")
     public FluidState getFluidState(BlockState state)
     {
-        return IFluidLoggable.super.getFluidState(state);
+        return IFluidLoggable.super.getFluidLoggedState(state);
     }
 
     /**
@@ -207,7 +208,7 @@ public class TFCFJoshuaTrunkBlock extends PipeBlock implements IFluidLoggable
 
     @Override
     @SuppressWarnings("deprecation")
-    public void tick(BlockState state, ServerLevel level, BlockPos pos, Random rand)
+    public void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource rand)
     {
         if (!state.canSurvive(level, pos))
         {

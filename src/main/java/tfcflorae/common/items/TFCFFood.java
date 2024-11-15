@@ -1,12 +1,10 @@
 package tfcflorae.common.items;
 
+import net.dries007.tfc.common.TFCCreativeTabs;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.Item;
 
-import net.dries007.tfc.common.TFCItemGroup;
-
-public enum TFCFFood
-{
+public enum TFCFFood {
     // Fruit
     BAOBAB_FRUIT(false, false),
     BARREL_CACTUS_FRUIT(false, false),
@@ -102,34 +100,28 @@ public enum TFCFFood
 
     public final boolean meat, fast, hasEffect;
 
-    TFCFFood(boolean meat, boolean fast)
-    {
+    TFCFFood(boolean meat, boolean fast) {
         this(false, false, false);
     }
 
-    TFCFFood(boolean meat, boolean fast, boolean hasEffect)
-    {
+    TFCFFood(boolean meat, boolean fast, boolean hasEffect) {
         this.meat = meat;
         this.fast = fast;
         this.hasEffect = hasEffect;
     }
 
-    public FoodProperties getFoodProperties()
-    {
+    public FoodProperties getFoodProperties() {
         FoodProperties.Builder builder = new FoodProperties.Builder();
         if (meat) builder.meat();
         if (fast) builder.fast();
         return builder.nutrition(4).saturationMod(0.3f).build();
     }
 
-    public Item.Properties createProperties()
-    {
-        Item.Properties props = new Item.Properties().food(getFoodProperties());
-        return props.tab(TFCItemGroup.FOOD);
+    public Item.Properties createProperties() {
+        return new Item.Properties().food(getFoodProperties());//.tab(TFCCreativeTabs.FOOD);
     }
 
-    public boolean hasEffect()
-    {
+    public boolean hasEffect() {
         return hasEffect;
     }
 }

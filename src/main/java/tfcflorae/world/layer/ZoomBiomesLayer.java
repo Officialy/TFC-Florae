@@ -17,7 +17,7 @@ public enum ZoomBiomesLayer implements TransformLayer
         public int choose(AreaContext context, int first, int second, int third, int fourth, int center)
         {
             Predicate<IntPredicate> matcher = p -> p.test(first) || p.test(second) || p.test(third) || p.test(fourth);
-            if (matcher.test(i -> !isOceanOrMarker(i)))
+           /* if (matcher.test(i -> !isOceanOrMarker(i)))
             {
                 if (first == second)
                 {
@@ -40,7 +40,7 @@ public enum ZoomBiomesLayer implements TransformLayer
                     return third;
                 }
                 return context.choose(first, second, third, fourth);
-            }
+            }*/
             return center;
         }
     },
@@ -50,11 +50,11 @@ public enum ZoomBiomesLayer implements TransformLayer
         public int choose(AreaContext context, int first, int second, int third, int fourth, int center)
         {
             Predicate<IntPredicate> matcher = p -> p.test(first) || p.test(second) || p.test(third) || p.test(fourth);
-            if (matcher.test(i -> !isOceanOrMarker(i)))
+            /*if (matcher.test(i -> !isOceanOrMarker(i)))
             {
-                // Random
+                // RandomSource
                 return context.choose(first, second, third, fourth);
-            }
+            }*/
             return center;
         }
     },
@@ -64,7 +64,7 @@ public enum ZoomBiomesLayer implements TransformLayer
         public int choose(AreaContext context, int first, int second, int third, int fourth, int center)
         {
             Predicate<IntPredicate> matcher = p -> p.test(first) || p.test(second) || p.test(third) || p.test(fourth);
-            if (matcher.test(i -> isOceanOrMarker(i)))
+         /*   if (matcher.test(i -> isOceanOrMarker(i)))
             {
                 if (first == second)
                 {
@@ -87,7 +87,7 @@ public enum ZoomBiomesLayer implements TransformLayer
                     return third;
                 }
                 return context.choose(first, second, third, fourth);
-            }
+            }*/
             return center;
         }
     },
@@ -97,11 +97,11 @@ public enum ZoomBiomesLayer implements TransformLayer
         public int choose(AreaContext context, int first, int second, int third, int fourth, int center)
         {
             Predicate<IntPredicate> matcher = p -> p.test(first) || p.test(second) || p.test(third) || p.test(fourth);
-            if (matcher.test(i -> isOceanOrMarker(i)))
+            /*if (matcher.test(i -> isOceanOrMarker(i)))
             {
-                // Random
+                // RandomSource
                 return context.choose(first, second, third, fourth);
-            }
+            }*/
             return center;
         }
     };

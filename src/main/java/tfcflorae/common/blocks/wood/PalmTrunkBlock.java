@@ -1,9 +1,10 @@
 package tfcflorae.common.blocks.wood;
 
 import java.util.List;
-import java.util.Random;
+
 import java.util.function.Supplier;
 
+import net.minecraft.util.RandomSource;
 import org.jetbrains.annotations.Nullable;
 
 import net.minecraft.core.BlockPos;
@@ -88,7 +89,7 @@ public class PalmTrunkBlock extends TFCPalmTrunkBlock implements IBushBlock, Hoe
 
     @Override
     @SuppressWarnings("deprecation")
-    public void randomTick(BlockState state, ServerLevel level, BlockPos pos, Random random)
+    public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random)
     {
         super.randomTick(state, level, pos, random);
 
@@ -253,7 +254,7 @@ public class PalmTrunkBlock extends TFCPalmTrunkBlock implements IBushBlock, Hoe
         return state.setValue(LIFECYCLE, Lifecycle.HEALTHY);
     }
 
-    public ItemStack getProductItem(Random random)
+    public ItemStack getProductItem(RandomSource random)
     {
         return new ItemStack(productItem.get());
     }

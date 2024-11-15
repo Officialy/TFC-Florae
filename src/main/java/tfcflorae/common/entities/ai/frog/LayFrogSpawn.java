@@ -30,7 +30,7 @@ public class LayFrogSpawn extends Behavior<Frog>
     @Override
     protected boolean checkExtraStartConditions(ServerLevel level, Frog frog)
     {
-        return !frog.isInWaterOrBubble() && frog.isOnGround();
+        return !frog.isInWaterOrBubble() && frog.onGround();
     }
 
     @Override

@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.Map;
 import java.util.function.ToIntFunction;
 
+import net.dries007.tfc.common.blocks.HorizontalPipeBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -87,7 +88,7 @@ public abstract class CreepingWaterPlantBlock extends CreepingPlantBlock impleme
     @SuppressWarnings("deprecation")
     public FluidState getFluidState(BlockState state)
     {
-        return IFluidLoggable.super.getFluidState(state);
+        return IFluidLoggable.super.getFluidLoggedState(state);
     }
 
     @Override
@@ -119,6 +120,6 @@ public abstract class CreepingWaterPlantBlock extends CreepingPlantBlock impleme
 
     public static BooleanProperty getFaceProperty(Direction direction)
     {
-        return PROPERTY_BY_DIRECTION.get(direction);
+        return HorizontalPipeBlock.PROPERTY_BY_DIRECTION.get(direction);
     }
 }

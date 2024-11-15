@@ -34,10 +34,10 @@ public enum OceanBorderLayerTFCF implements AdjacentTransformLayer
         if (center == DEEP_OCEAN)
         {
             // Add ocean to land - deep ocean borders
-            if (matcher.test(i -> !TFCLayers.isOceanOrMarker(i)) || isShallowWaters(matcher))
+            /*if (matcher.test(i -> !TFCLayers.isOceanOrMarker(i)) || isShallowWaters(matcher))
             {
                 return OCEAN;
-            }
+            }*/
         }
         /*else if (center == OCEAN)
         {
@@ -49,14 +49,14 @@ public enum OceanBorderLayerTFCF implements AdjacentTransformLayer
         }*/
         else if (center == PELAGIC_ZONE || center == SEAMOUNTS || center == GUYOTS)
         {
-            if (!isShallowWaters(matcher) && matcher.test(TFCLayers::isOceanOrMarker))
+            /*if (!isShallowWaters(matcher) && matcher.test(TFCLayers::isOceanOrMarker))
             {
                 return DEEP_OCEAN_TRENCH;
             }
             else if (!matcher.test(TFCLayers::isOceanOrMarker) || isShallowWaters(matcher))
             {
                 return OCEAN;
-            }
+            }*/
         }
         return center;
     }

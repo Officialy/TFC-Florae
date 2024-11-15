@@ -1,7 +1,7 @@
 package tfcflorae.common.blocks.soil;
 
 import java.util.Optional;
-import java.util.Random;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleOptions;
@@ -10,6 +10,7 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
@@ -66,7 +67,7 @@ public class LooseMudBlock extends Block
             entity.makeStuckInBlock(state, new Vec3((double)0.9F, 1.5D, (double)0.9F));
             if (level.isClientSide)
             {
-                Random random = level.getRandom();
+                RandomSource random = level.getRandom();
                 boolean flag = entity.xOld != entity.getX() || entity.zOld != entity.getZ();
                 if (flag && random.nextBoolean())
                 {

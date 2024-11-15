@@ -1,8 +1,9 @@
 package tfcflorae.world.feature;
 
-import java.util.Random;
+
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.Feature;
@@ -28,7 +29,7 @@ public class LooseFlintFeature extends Feature<NoneFeatureConfiguration>
     {
         final WorldGenLevel level = context.level();
         final BlockPos pos = context.origin();
-        final Random random = context.random();
+        final RandomSource random = context.random();
 
         final BlockState stateAt = level.getBlockState(pos);
         final BlockState rockState = FluidHelpers.fillWithFluid(TFCFBlocks.LOOSE_FLINT.get().defaultBlockState(), stateAt.getFluidState().getType());

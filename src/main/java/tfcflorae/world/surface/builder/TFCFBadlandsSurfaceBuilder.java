@@ -2,9 +2,11 @@ package tfcflorae.world.surface.builder;
 
 import java.util.Arrays;
 import java.util.Collections;
+
 import java.util.Random;
 import java.util.function.Function;
 
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.block.state.BlockState;
 
 import net.dries007.tfc.common.blocks.TFCBlocks;
@@ -109,7 +111,7 @@ public class TFCFBadlandsSurfaceBuilder implements SurfaceBuilder
     public void buildSurface(SurfaceBuilderContext context, int startY, int endY)
     {
         final Random random = new Random(context.getSeed());
-        final float noiseGrass = surfaceMaterialNoise.noise(context.pos().getX(), context.pos().getZ()) * 0.9f + context.random().nextFloat() * 0.1f;
+        final double noiseGrass = surfaceMaterialNoise.noise(context.pos().getX(), context.pos().getZ()) * 0.9f + context.random().nextFloat() * 0.1f;
         final SurfaceState SPARSE_GRASS = TFCFSoilSurfaceState.buildType(TFCFSoil.SPARSE_GRASS);
         final SurfaceState DENSE_GRASS = TFCFSoilSurfaceState.buildType(TFCFSoil.DENSE_GRASS);
         final SurfaceState COMPACT_DIRT = TFCFSoilSurfaceState.buildType(TFCFSoil.COMPACT_DIRT);
@@ -130,7 +132,7 @@ public class TFCFBadlandsSurfaceBuilder implements SurfaceBuilder
             grass = DENSE_GRASS;
         }
 
-        float variantNoiseValue = variantNoise.noise(context.pos().getX(), context.pos().getZ());
+        double variantNoiseValue = variantNoise.noise(context.pos().getX(), context.pos().getZ());
         if (variantNoiseValue > 0f)
         {
             if (context.rainfall() > 300f && context.averageTemperature() > 15f)
@@ -160,7 +162,7 @@ public class TFCFBadlandsSurfaceBuilder implements SurfaceBuilder
             fill(random, sandLayers1, sandstoneLayers1, Colors.BROWN, Colors.YELLOW, Colors.WHITE);
         }
 
-        final float heightVariation = grassHeightVariationNoise.noise(context.pos().getX(), context.pos().getZ());
+        final double heightVariation = grassHeightVariationNoise.noise(context.pos().getX(), context.pos().getZ());
         final float weightVariation = (float) (1f - context.weight()) * 23f;
         if (inverted ? startY + 5 < heightVariation + weightVariation : startY - 5 > heightVariation - weightVariation)
         {
@@ -181,7 +183,7 @@ public class TFCFBadlandsSurfaceBuilder implements SurfaceBuilder
 
     private void buildSandySurface(SurfaceBuilderContext context, int startHeight, int minSurfaceHeight)
     {
-        final float style = sandStyleNoise.noise(context.pos().getX(), context.pos().getZ());
+        final float style = (float) sandStyleNoise.noise(context.pos().getX(), context.pos().getZ());
         final int height = (int) sandHeightOffsetNoise.noise(context.pos().getX(), context.pos().getZ());
 
         int surfaceDepth = -1;

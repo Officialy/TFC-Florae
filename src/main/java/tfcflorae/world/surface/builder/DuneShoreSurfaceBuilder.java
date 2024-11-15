@@ -46,7 +46,7 @@ public class DuneShoreSurfaceBuilder implements SurfaceBuilder
     {
         int surface = startY - 1;
         BlockPos pos = new BlockPos(context.pos().getX(), surface, context.pos().getZ());
-        float variantNoiseValue = variantNoise.noise(context.pos().getX(), context.pos().getZ());
+        double variantNoiseValue = variantNoise.noise(context.pos().getX(), context.pos().getZ());
 
         SurfaceState PEBBLE = TFCFSoilSurfaceState.rockSand(TFCFRockSand.PEBBLE);
         SurfaceState ROCKY = TFCFSoilSurfaceState.rockSand(TFCFRockSand.ROCKY);
@@ -65,7 +65,7 @@ public class DuneShoreSurfaceBuilder implements SurfaceBuilder
 
         final double randomGauss = Math.abs(context.random().nextGaussian()) * 0.1f;
         final double gauss = context.random().nextGaussian();
-        final float noise = surfaceMaterialNoise.noise(context.pos().getX(), context.pos().getZ()) * 0.9f + context.random().nextFloat() * 0.1f;
+        final double noise = surfaceMaterialNoise.noise(context.pos().getX(), context.pos().getZ()) * 0.9f + context.random().nextFloat() * 0.1f;
 
         if (pos.getY() > context.getSeaLevel() + 3 + gauss)
         {

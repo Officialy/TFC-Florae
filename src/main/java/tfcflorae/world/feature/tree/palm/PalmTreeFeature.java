@@ -30,7 +30,7 @@ public class PalmTreeFeature extends Feature<NoneFeatureConfiguration>
         final BlockState state = level.getBlockState(pos);
         final BlockState stateBelow = level.getBlockState(pos.below());
 
-        if (EnvironmentHelpers.isWorldgenReplaceable(state) && !state.getMaterial().isLiquid() && !stateBelow.getMaterial().isLiquid())
+        if (EnvironmentHelpers.isWorldgenReplaceable(state) && !state.liquid() && !stateBelow.liquid())
         {
             if (TFCFBlocks.TFC_PALM_TRUNKS.get(Wood.PALM).isPresent())
             {

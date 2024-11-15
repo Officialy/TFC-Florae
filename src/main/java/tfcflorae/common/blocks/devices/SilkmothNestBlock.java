@@ -1,7 +1,8 @@
 package tfcflorae.common.blocks.devices;
 
-import java.util.Random;
 
+
+import net.minecraft.util.RandomSource;
 import org.jetbrains.annotations.Nullable;
 
 import net.minecraft.core.BlockPos;
@@ -107,11 +108,13 @@ public class SilkmothNestBlock extends Block implements IForgeBlockExtension, IT
         return EntityBlockExtension.super.getTicker(level, state, type);
     }
 
+/*
     @Override
     public OffsetType getOffsetType()
     {
         return OffsetType.XZ;
     }
+*/
 
     @Override
     public boolean hasAnalogOutputSignal(BlockState state)
@@ -150,7 +153,7 @@ public class SilkmothNestBlock extends Block implements IForgeBlockExtension, IT
         return SHAPE;
     }
 
-    public void placeTwoHalves(LevelAccessor world, BlockPos pos, int flags, Random random)
+    public void placeTwoHalves(LevelAccessor world, BlockPos pos, int flags, RandomSource random)
     {
         Direction direction = TFCFHelpers.getRandom(random);
         world.setBlock(pos, defaultBlockState().setValue(FACING, direction).setValue(SILK_LEVEL, random.nextInt(MAX_SILK_LEVELS) + 1).setValue(TFCBlockStateProperties.TALL_PLANT_PART, Part.UPPER), flags);
@@ -225,7 +228,7 @@ public class SilkmothNestBlock extends Block implements IForgeBlockExtension, IT
     }
 
     @Override
-    public void randomTick(BlockState state, ServerLevel level, BlockPos pos, Random random)
+    public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random)
     {
         if (level.getBlockEntity(pos) instanceof SilkmothNestBlockEntity blockEntity)
         {

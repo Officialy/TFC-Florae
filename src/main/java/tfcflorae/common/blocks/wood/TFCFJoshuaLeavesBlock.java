@@ -1,7 +1,7 @@
 package tfcflorae.common.blocks.wood;
 
 import java.util.List;
-import java.util.Random;
+
 import java.util.function.Supplier;
 
 import net.minecraft.core.BlockPos;
@@ -12,6 +12,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
@@ -34,7 +35,8 @@ import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
-import net.minecraft.world.level.material.Material;
+
+import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -136,7 +138,7 @@ public abstract class TFCFJoshuaLeavesBlock extends SeasonalPlantBlock implement
     @SuppressWarnings("deprecation")
     public FluidState getFluidState(BlockState state)
     {
-        return IFluidLoggable.super.getFluidState(state);
+        return IFluidLoggable.super.getFluidLoggedState(state);
     }
 
     @Override
@@ -229,7 +231,7 @@ public abstract class TFCFJoshuaLeavesBlock extends SeasonalPlantBlock implement
 
     @Override
     @SuppressWarnings("deprecation")
-    public void randomTick(BlockState state, ServerLevel level, BlockPos pos, Random random)
+    public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random)
     {
         if (state.getValue(PERSISTENT)) return; // persistent leaves don't grow
         Fluid fluid = level.getFluidState(pos).getType();
@@ -345,7 +347,7 @@ public abstract class TFCFJoshuaLeavesBlock extends SeasonalPlantBlock implement
 
     @Override
     @SuppressWarnings("deprecation")
-    public void tick(BlockState state, ServerLevel level, BlockPos pos, Random rand)
+    public void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource rand)
     {
         if (!state.canSurvive(level, pos))
         {
@@ -356,7 +358,7 @@ public abstract class TFCFJoshuaLeavesBlock extends SeasonalPlantBlock implement
     /**
      * @return {@code true} if any plant blocks were placed.
      */
-    public boolean generatePlant(LevelAccessor level, BlockPos pos, Random rand, int maxHorizontalDistance, Fluid fluid)
+    public boolean generatePlant(LevelAccessor level, BlockPos pos, RandomSource rand, int maxHorizontalDistance, Fluid fluid)
     {
         if (getFluidProperty().canContain(fluid))
         {
@@ -378,7 +380,7 @@ public abstract class TFCFJoshuaLeavesBlock extends SeasonalPlantBlock implement
     /**
      * @return {@code true} if any plant blocks were placed.
      */
-    private boolean growTreeRecursive(LevelAccessor level, BlockPos branchPos, Random rand, BlockPos originalBranchPos, int maxHorizontalDistance, int iterations, Fluid fluid)
+    private boolean growTreeRecursive(LevelAccessor level, BlockPos branchPos, RandomSource rand, BlockPos originalBranchPos, int maxHorizontalDistance, int iterations, Fluid fluid)
     {
         int status = 0;
         status = growStep(level, branchPos, originalBranchPos, rand, maxHorizontalDistance, iterations, fluid);
@@ -390,7 +392,7 @@ public abstract class TFCFJoshuaLeavesBlock extends SeasonalPlantBlock implement
         return true;
     }
 
-    public int growStep(LevelAccessor level, BlockPos currentBlock, BlockPos originalBranchPos, Random random, int maxHorizontalDistance, int iterations, Fluid fluid)
+    public int growStep(LevelAccessor level, BlockPos currentBlock, BlockPos originalBranchPos, RandomSource random, int maxHorizontalDistance, int iterations, Fluid fluid)
     {
         BlockPos blockpos = currentBlock.above();
 
@@ -447,7 +449,7 @@ public abstract class TFCFJoshuaLeavesBlock extends SeasonalPlantBlock implement
                         }
                     }
                 }
-                else if (state.getMaterial() == Material.AIR)
+                else if (state.isAir())
                 {
                     flag = true;
                 }
@@ -661,7 +663,7 @@ public abstract class TFCFJoshuaLeavesBlock extends SeasonalPlantBlock implement
         final float modifier = TFCConfig.SERVER.leavesMovementModifier.get().floatValue();
         if (modifier < 1 && state.getValue(getFluidProperty()).getFluid() == Fluids.EMPTY)
         {
-            Helpers.slowEntityInBlock(entity, modifier, 5);
+            Helpers.slowEntityInsideBlocks(entity);//, modifier, 5);
         }
         if (Helpers.isEntity(entity, TFCTags.Entities.DESTROYED_BY_LEAVES))
         {

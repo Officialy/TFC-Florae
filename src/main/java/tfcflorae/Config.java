@@ -101,6 +101,6 @@ public class Config
             "Setting to 0 equates to smaller than regular TFC biome sizes. Game needs to restart in order to take effect."
         ).defineInRange("lateBiomeSizes", 4, 0, 64);
 
-        foliageDecayThreshold = builder.apply("foliageDecayThreshold").comment("Mean temperature over the last 24 days, at which foliage will \"decay\" for it to later return to normal, when the temperature rises past the set threshold value.").defineInRange("foliageDecayThreshold", -4, OverworldClimateModel.MINIMUM_TEMPERATURE_SCALE, OverworldClimateModel.MAXIMUM_TEMPERATURE_SCALE);
+        foliageDecayThreshold = builder.apply("foliageDecayThreshold").comment("Mean temperature over the last 24 days, at which foliage will \"decay\" for it to later return to normal, when the temperature rises past the set threshold value.").defineInRange("foliageDecayThreshold", -4, 0.5/* OverworldClimateModel.MINIMUM_TEMPERATURE_SCALE*/, 10/*OverworldClimateModel.MAXIMUM_TEMPERATURE_SCALE*/);
     }
 }

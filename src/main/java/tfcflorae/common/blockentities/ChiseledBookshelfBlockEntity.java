@@ -3,12 +3,12 @@ package tfcflorae.common.blockentities;
 import java.util.stream.IntStream;
 import javax.annotation.Nullable;
 
+import net.dries007.tfc.common.capabilities.Capabilities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.WorldlyContainer;
@@ -23,7 +23,6 @@ import net.minecraft.world.level.block.state.BlockState;
 
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.wrapper.SidedInvWrapper;
 
@@ -87,7 +86,7 @@ public class ChiseledBookshelfBlockEntity extends RandomizableContainerBlockEnti
     @Override
     public Component getDefaultName()
     {
-        return new TextComponent("tfcflorae.chiseled_bookshelf");
+        return Component.literal("tfcflorae.chiseled_bookshelf");
     }
 
     @Override
@@ -105,7 +104,7 @@ public class ChiseledBookshelfBlockEntity extends RandomizableContainerBlockEnti
     @Override
     public Component getDisplayName()
     {
-        return new TextComponent("Chiseled Bookshelf");
+        return Component.literal("Chiseled Bookshelf");
     }
 
     @Override
@@ -147,7 +146,7 @@ public class ChiseledBookshelfBlockEntity extends RandomizableContainerBlockEnti
     @Override
     public <T> LazyOptional<T> getCapability(Capability<T> capability, @Nullable Direction facing)
     {
-        if (!this.remove && facing != null && capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
+        if (!this.remove && facing != null && capability == Capabilities.ITEM)
             return this.handlers[facing.ordinal()].cast(); 
         return super.getCapability(capability, facing);
     }

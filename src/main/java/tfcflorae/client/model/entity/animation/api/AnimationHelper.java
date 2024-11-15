@@ -1,6 +1,5 @@
 package tfcflorae.client.model.entity.animation.api;
 
-import com.mojang.math.Vector3f;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.util.Mth;
 
@@ -10,6 +9,7 @@ import java.util.Optional;
 
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import org.joml.Vector3f;
 
 @OnlyIn(Dist.CLIENT)
 public class AnimationHelper

@@ -1,8 +1,9 @@
 package tfcflorae.common.blocks.plant;
 
-import java.util.Random;
+
 
 import net.minecraft.tags.BlockTags;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
@@ -68,14 +69,16 @@ public abstract class TFCFPlantBlock extends TFCBushBlock
         return Helpers.isBlock(state.getBlock(), TFCTags.Blocks.GRASS_PLANTABLE_ON) || Helpers.isBlock(state.getBlock(), TFCTags.Blocks.BUSH_PLANTABLE_ON);
     }
 
+/*
     @Override
     public OffsetType getOffsetType()
     {
         return OffsetType.XZ;
     }
+*/
 
     @Override
-    public void animateTick(BlockState state, Level level, BlockPos pos, Random random)
+    public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random)
     {
         if (random.nextInt(400) == 0 && Helpers.isBlock(state, BlockTags.FLOWERS) && Calendars.get(level).getCalendarMonthOfYear().getSeason() == Season.SPRING)
         {
@@ -92,7 +95,7 @@ public abstract class TFCFPlantBlock extends TFCBushBlock
 
     @Override
     @SuppressWarnings("deprecation")
-    public void randomTick(BlockState state, ServerLevel level, BlockPos pos, Random random)
+    public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random)
     {
         if (random.nextDouble() < TFCConfig.SERVER.plantGrowthChance.get())
         {

@@ -1,10 +1,11 @@
 package tfcflorae.common.blocks.rock;
 
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.material.Material;
-import net.minecraft.world.level.material.MaterialColor;
+
+import net.minecraft.world.level.material.MapColor;
 
 import net.dries007.tfc.common.blocks.ExtendedBlock;
 import net.dries007.tfc.common.blocks.ExtendedProperties;
@@ -29,7 +30,7 @@ public enum TFCFOre
     public Block create(RegistryRock rock)
     {
         // Same hardness as raw rock
-        final BlockBehaviour.Properties properties = Block.Properties.of(Material.STONE, MaterialColor.STONE).sound(SoundType.STONE).strength(rock.category().hardness(6.5f), 10).requiresCorrectToolForDrops();
+        final BlockBehaviour.Properties properties = Block.Properties.copy(Blocks.STONE).mapColor(MapColor.STONE).sound(SoundType.STONE).strength(rock.category().hardness(6.5f), 10).requiresCorrectToolForDrops();
         if (this == ANTHRACITE)
         {
             return new ExtendedBlock(ExtendedProperties.of(properties).flammable(10, 100));

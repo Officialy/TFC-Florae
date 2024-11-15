@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.stream.Stream;
 
 import com.google.common.collect.ImmutableMap;
+import com.mojang.math.Axis;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.model.geom.ModelLayerLocation;
@@ -28,11 +29,11 @@ import net.minecraft.world.phys.Vec3;
 import com.mojang.blaze3d.platform.NativeImage;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.mojang.math.Vector3f;
 
 import net.dries007.tfc.common.blocks.wood.TFCStandingSignBlock;
 import net.dries007.tfc.common.blocks.wood.Wood;
 
+import org.joml.Vector3f;
 import tfcflorae.TFCFlorae;
 import tfcflorae.common.blocks.TFCFBlocks;
 
@@ -50,11 +51,11 @@ public class TFCFSignBlockEntityRenderer extends SignRenderer
 
     private static int getDarkColor(SignBlockEntity sign)
     {
-        int i = sign.getColor().getTextColor();
-        int j = (int) ((double) NativeImage.getR(i) * 0.4D);
-        int k = (int) ((double) NativeImage.getG(i) * 0.4D);
-        int l = (int) ((double) NativeImage.getB(i) * 0.4D);
-        return i == DyeColor.BLACK.getTextColor() && sign.hasGlowingText() ? -988212 : NativeImage.combine(0, l, k, j);
+        int i = sign.getFrontText().getColor().getTextColor();
+        int j = 100;//todo (int) ((double) NativeImage.getR(i) * 0.4D);
+        int k = 100;//(int) ((double) NativeImage.getG(i) * 0.4D);
+        int l = 100;//(int) ((double) NativeImage.getB(i) * 0.4D);
+        return i == DyeColor.BLACK.getTextColor() && sign.getFrontText().hasGlowingText() ? -988212 : 33456;//todo NativeImage.combine(0, l, k, j);
     }
 
     private static boolean isOutlineVisible(SignBlockEntity sing, int dyeIndex)
@@ -128,14 +129,14 @@ public class TFCFSignBlockEntityRenderer extends SignRenderer
         {
             poseStack.translate(0.5D, 0.5D, 0.5D);
             float yRot = -((float) (state.getValue(StandingSignBlock.ROTATION) * 360) / 16.0F);
-            poseStack.mulPose(Vector3f.YP.rotationDegrees(yRot));
+            poseStack.mulPose(Axis.YP.rotationDegrees(yRot));
             model.stick.visible = true;
         }
         else
         {
             poseStack.translate(0.5D, 0.5D, 0.5D);
             float yRot = -state.getValue(WallSignBlock.FACING).toYRot();
-            poseStack.mulPose(Vector3f.YP.rotationDegrees(yRot));
+            poseStack.mulPose(Axis.YP.rotationDegrees(yRot));
             poseStack.translate(0.0D, -0.3125D, -0.4375D);
             model.stick.visible = false;
         }
@@ -153,16 +154,16 @@ public class TFCFSignBlockEntityRenderer extends SignRenderer
         poseStack.scale(rescale, -rescale, rescale);
 
         int darkColor = getDarkColor(sign);
-        FormattedCharSequence[] lines = sign.getRenderMessages(Minecraft.getInstance().isTextFilteringEnabled(), component -> {
+        FormattedCharSequence[] lines = sign.getFrontText().getRenderMessages(Minecraft.getInstance().isTextFilteringEnabled(), component -> {  //todo theres now getBackText??
             List<FormattedCharSequence> list = this.font.split(component, 90);
             return list.isEmpty() ? FormattedCharSequence.EMPTY : list.get(0);
         });
         int textColor;
         boolean outline;
         int totalLight;
-        if (sign.hasGlowingText())
+        if (sign.getFrontText().hasGlowingText())
         {
-            textColor = sign.getColor().getTextColor();
+            textColor = sign.getFrontText().getColor().getTextColor();
             outline = isOutlineVisible(sign, textColor);
             totalLight = 15728880;
         }
@@ -183,7 +184,7 @@ public class TFCFSignBlockEntityRenderer extends SignRenderer
             }
             else
             {
-                this.font.drawInBatch(formattedcharsequence, f3, (float) (i1 * 10 - 20), textColor, false, poseStack.last().pose(), source, false, 0, totalLight);
+                this.font.drawInBatch(formattedcharsequence, f3, (float) (i1 * 10 - 20), textColor, false, poseStack.last().pose(), source, Font.DisplayMode.NORMAL, 0, totalLight);
             }
         }
 

@@ -6,7 +6,10 @@ import java.util.function.Supplier;
 import com.mojang.serialization.Codec;
 import net.minecraft.core.Registry;
 import net.minecraft.core.Holder;
-import net.minecraft.data.BuiltinRegistries;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.TreeFeature;
 import net.minecraft.world.level.levelgen.feature.configurations.*;
@@ -23,8 +26,6 @@ import net.dries007.tfc.world.feature.HotSpringConfig;
 import net.dries007.tfc.world.feature.tree.ForestConfig;
 import net.dries007.tfc.world.feature.tree.RandomTreeConfig;
 
-import tfcflorae.mixin.accessor.TreeDecoratorTypeAccessor;
-import tfcflorae.mixin.accessor.TrunkPlacerTypeAccessor;
 import tfcflorae.world.feature.plant.*;
 import tfcflorae.world.feature.tree.*;
 import tfcflorae.world.feature.tree.baobab.*;
@@ -40,17 +41,17 @@ import static tfcflorae.TFCFlorae.MOD_ID;
 public class TFCFFeatures
 {
     public static final DeferredRegister<Feature<?>> FEATURES = DeferredRegister.create(ForgeRegistries.FEATURES, MOD_ID);
-    public static final TFCFAbstractDeferredRegistry<TrunkPlacerType<?>> TRUNK_DECOR = TFCFDeferredRegistry.create(Registry.TRUNK_PLACER_TYPES, MOD_ID);
-    public static final TFCFAbstractDeferredRegistry<TreeDecoratorType<?>> LEAF_DECOR = TFCFDeferredRegistry.create(Registry.TREE_DECORATOR_TYPES, MOD_ID);
+    public static final TFCFAbstractDeferredRegistry<TrunkPlacerType<?>> TRUNK_DECOR = TFCFDeferredRegistry.create(BuiltInRegistries.TRUNK_PLACER_TYPE, MOD_ID);
+    public static final TFCFAbstractDeferredRegistry<TreeDecoratorType<?>> LEAF_DECOR = TFCFDeferredRegistry.create(BuiltInRegistries.TREE_DECORATOR_TYPE, MOD_ID);
 
-    public static final Supplier<TrunkPlacerType<UpwardBranchingTrunk>> UPWARDS_BRANCHING_TRUNK = TRUNK_DECOR.register("upward_branching_trunk", () -> TrunkPlacerTypeAccessor.createTrunkPlacerType(UpwardBranchingTrunk.CODEC));
-    public static final Supplier<TreeDecoratorType<WeightedLeaveVineDecorator>> WEIGHTED_LEAVE_VINE = LEAF_DECOR.register("leave_vine", () -> TreeDecoratorTypeAccessor.createTreeDecoratorType(WeightedLeaveVineDecorator.CODEC));
-    public static final Supplier<TreeDecoratorType<AttachedToLeavesDecorator>> ATTACHED_TO_LEAVES = LEAF_DECOR.register("attached_to_leaves", () -> TreeDecoratorTypeAccessor.createTreeDecoratorType(AttachedToLeavesDecorator.CODEC));
+    public static final Supplier<TrunkPlacerType<UpwardBranchingTrunk>> UPWARDS_BRANCHING_TRUNK = TRUNK_DECOR.register("upward_branching_trunk", () -> new TrunkPlacerType<>(UpwardBranchingTrunk.CODEC));
+    public static final Supplier<TreeDecoratorType<WeightedLeaveVineDecorator>> WEIGHTED_LEAVE_VINE = LEAF_DECOR.register("leave_vine", () -> new TreeDecoratorType<>(WeightedLeaveVineDecorator.CODEC));
+    public static final Supplier<TreeDecoratorType<AttachedToLeavesDecorator>> ATTACHED_TO_LEAVES = LEAF_DECOR.register("attached_to_leaves", () -> new TreeDecoratorType<>(AttachedToLeavesDecorator.CODEC));
     public static final RegistryObject<Feature<RootedTreeConfig>> VANILLA_MANGROVE_TREE = register("vanilla_mangrove_tree", RootedTreeFeature::new, RootedTreeConfig.CODEC);
 
     public static final RegistryObject<Feature<TreeConfiguration>> BAMBOO_TREE = register("bamboo_tree", TreeFeature::new, TreeConfiguration.CODEC);
     public static final RegistryObject<Feature<TreeConfiguration>> VANILLA_BAMBOO_TREE = register("vanilla_bamboo_tree", TreeFeature::new, TreeConfiguration.CODEC);
-    public static final Supplier<TreeDecoratorType<BambooLeavesDecorator>> BAMBOO_LEAVES = LEAF_DECOR.register("bamboo_leaves", () -> TreeDecoratorTypeAccessor.createTreeDecoratorType(BambooLeavesDecorator.CODEC));
+    public static final Supplier<TreeDecoratorType<BambooLeavesDecorator>> BAMBOO_LEAVES = LEAF_DECOR.register("bamboo_leaves", () -> new TreeDecoratorType<>(BambooLeavesDecorator.CODEC));
     public static final RegistryObject<JoshuaTreeFeature> JOSHUA_TREE = register("joshua_tree", JoshuaTreeFeature::new, JoshuaTreeFeature.CODEC);
     public static final RegistryObject<BaobabTreeFeature> BAOBAB_TREE = register("baobab_tree", BaobabTreeFeature::new, DynamicTreeConfig.CODEC);
     public static final RegistryObject<TFCFRandomTreeFeature> RANDOM_TREE = register("random_tree", TFCFRandomTreeFeature::new, RandomTreeConfig.CODEC);
@@ -108,8 +109,8 @@ public class TFCFFeatures
         return FEATURES.register(name, () -> factory.apply(codec));
     }
 
-    public static <FC extends FeatureConfiguration, F extends Feature<FC>> Holder<ConfiguredFeature<FC, ?>> config(String key, F feature, FC configuration)
+    public static <FC extends FeatureConfiguration, F extends Feature<FC>> ResourceKey<ConfiguredFeature<FC, ?>> config(String key, F feature, FC configuration)
     {
-        return BuiltinRegistries.registerExact(BuiltinRegistries.CONFIGURED_FEATURE, MOD_ID + ":" + key, new ConfiguredFeature<>(feature, configuration));
+        return null;// Registry.register(Registries.CONFIGURED_FEATURE, new ResourceLocation(MOD_ID + ":" + key), new ConfiguredFeature<>(feature, configuration));
     }
 }

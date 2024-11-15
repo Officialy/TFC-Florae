@@ -37,7 +37,7 @@ public class GravelSurfaceBuilder implements SurfaceBuilder
         final double heightNoise = this.heightNoise.noise(context.pos().getX(), context.pos().getZ()) * 4f + startY;
         if (heightNoise <= 64 + context.random().nextGaussian() && heightNoise > 60 - context.random().nextGaussian())
         {
-            float surfaceMaterialValue = surfaceMaterialNoise.noise(context.pos().getX(), context.pos().getZ()) + 0.1f * context.random().nextFloat() - 0.05f;
+            double surfaceMaterialValue = surfaceMaterialNoise.noise(context.pos().getX(), context.pos().getZ()) + 0.1f * context.random().nextFloat() - 0.05f;
             if (surfaceMaterialValue > 0.3f)
             {
                 surfaceBuilder.buildSurface(context, startY, endY, SurfaceStates.GRAVEL, SurfaceStates.GRAVEL, SurfaceStates.RAW);

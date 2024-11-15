@@ -1,6 +1,7 @@
 package tfcflorae.world.feature.tree;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.google.common.collect.ImmutableList;
 import com.mojang.serialization.Codec;
@@ -57,7 +58,7 @@ public class RootedTreeConfig extends TreeConfiguration
 
     protected RootedTreeConfig(BlockStateProvider trunkProvider, TrunkPlacer trunkPlacer, BlockStateProvider foliageProvider, FoliagePlacer foliagePlacer, MangroveRootPlacer rootPlacer, BlockStateProvider dirtProvider, FeatureSize minimumSize, List<TreeDecorator> decorators, boolean ignoreVines, boolean forceDirt, int radius, TreePlacementConfig placement)
     {
-        super(trunkProvider, trunkPlacer, foliageProvider, foliagePlacer, dirtProvider, minimumSize, decorators, ignoreVines, forceDirt);
+        super(trunkProvider, trunkPlacer, foliageProvider, foliagePlacer, Optional.of(null) /*Optional.of(rootPlacer)*/, dirtProvider, minimumSize, decorators, ignoreVines, forceDirt);
         this.rootPlacer = rootPlacer;
         this.radius = radius;
         this.placement = placement;

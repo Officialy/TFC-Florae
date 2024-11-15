@@ -2,9 +2,10 @@ package tfcflorae.common.blocks.plant;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
+
 import java.util.function.Supplier;
 
+import net.minecraft.util.RandomSource;
 import org.jetbrains.annotations.Nullable;
 
 import com.google.common.base.Preconditions;
@@ -123,11 +124,11 @@ public abstract class PitahayaBlock extends PlantBlock implements ILeavesBlock, 
         {
             level.destroyBlock(pos, false);
         }
-        if (level.getBlockState(pos.above()).getMaterial().isSolid() && !(level.getBlockState(pos.above()).getBlock() instanceof PitahayaBlock))
+        if (level.getBlockState(pos.above()).isSolid() && !(level.getBlockState(pos.above()).getBlock() instanceof PitahayaBlock))
         {
             state.setValue(TOP, true);
         }
-        if (!level.getBlockState(pos.above()).getMaterial().isSolid())
+        if (!level.getBlockState(pos.above()).isSolid())
         {
             state.setValue(TOP, false);
         }
@@ -136,11 +137,11 @@ public abstract class PitahayaBlock extends PlantBlock implements ILeavesBlock, 
     @Override
     public BlockState updateShape(BlockState state, Direction direction, BlockState facingState, LevelAccessor level, BlockPos currentPos, BlockPos facingPos)
     {
-        if (level.getBlockState(currentPos.above()).getMaterial().isSolid() && !(level.getBlockState(currentPos.above()).getBlock() instanceof PitahayaBlock))
+        if (level.getBlockState(currentPos.above()).isSolid() && !(level.getBlockState(currentPos.above()).getBlock() instanceof PitahayaBlock))
         {
             state.setValue(TOP, true);
         }
-        if (!level.getBlockState(currentPos.above()).getMaterial().isSolid())
+        if (!level.getBlockState(currentPos.above()).isSolid())
         {
             state.setValue(TOP, false);
         }
@@ -188,7 +189,7 @@ public abstract class PitahayaBlock extends PlantBlock implements ILeavesBlock, 
     }
 
     @Override
-    public void randomTick(BlockState state, ServerLevel level, BlockPos pos, Random random)
+    public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random)
     {
         BlockState attachedState = level.getBlockState(pos.above().relative(state.getValue(FACING).getOpposite()));
         if (getLifecycleForCurrentMonth() != getLifecycleForMonth(Calendars.SERVER.getCalendarMonthOfYear()))
@@ -207,7 +208,7 @@ public abstract class PitahayaBlock extends PlantBlock implements ILeavesBlock, 
     @Override
     public void entityInside(BlockState blockState, Level level, BlockPos blockPos, Entity entity)
     {
-        entity.hurt(DamageSource.CACTUS, 1.0f);
+        entity.hurt(entity.damageSources().cactus(), 1.0f);
     }
 
     /**
@@ -350,7 +351,7 @@ public abstract class PitahayaBlock extends PlantBlock implements ILeavesBlock, 
         return true; // Not for the purposes of leaf decay, but for the purposes of seasonal updates
     }
 
-    public ItemStack getProductItem(Random random)
+    public ItemStack getProductItem(RandomSource random)
     {
         return new ItemStack(productItem.get());
     }

@@ -2,16 +2,18 @@ package tfcflorae.common.blocks.plant;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Random;
+
 import java.util.function.Supplier;
 
 import net.minecraft.tags.BlockTags;
 import net.minecraft.core.Direction;
 import net.minecraft.core.BlockPos;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraft.world.level.BlockGetter;
@@ -142,7 +144,7 @@ public abstract class TFCFBodyPlantBlock extends GrowingPlantBodyBlock implement
 
     @Override
     @SuppressWarnings("deprecation")
-    public void randomTick(BlockState state, ServerLevel level, BlockPos pos, Random random)
+    public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random)
     {
         level.setBlockAndUpdate(pos, updateStateWithCurrentMonth(state));
         double tempThreshold = Config.COMMON.foliageDecayThreshold.get();
@@ -179,19 +181,18 @@ public abstract class TFCFBodyPlantBlock extends GrowingPlantBodyBlock implement
     }
 
     @Override
-    public boolean isValidBonemealTarget(BlockGetter level, BlockPos pos, BlockState state, boolean isClient)
+    public boolean isValidBonemealTarget(LevelReader pLevel, BlockPos pPos, BlockState pState, boolean pIsClient) {
+        return false;
+    }
+
+    @Override
+    public boolean isBonemealSuccess(Level level, RandomSource rand, BlockPos pos, BlockState state)
     {
         return false;
     }
 
     @Override
-    public boolean isBonemealSuccess(Level level, Random rand, BlockPos pos, BlockState state)
-    {
-        return false;
-    }
-
-    @Override
-    public void performBonemeal(ServerLevel level, Random rand, BlockPos pos, BlockState state)
+    public void performBonemeal(ServerLevel level, RandomSource rand, BlockPos pos, BlockState state)
     {
     }
 
@@ -242,9 +243,8 @@ public abstract class TFCFBodyPlantBlock extends GrowingPlantBodyBlock implement
     }
 
     @Override
-    public List<ItemStack> getDrops(BlockState state, LootContext.Builder builder)
-    {
-        return isDead ? Collections.emptyList() : super.getDrops(state, builder);
+    public List<ItemStack> getDrops(BlockState pState, LootParams.Builder pParams) {
+        return isDead ? Collections.emptyList() : super.getDrops(pState, pParams);
     }
 
     @Override

@@ -1,14 +1,29 @@
 package tfcflorae.util;
 
+import net.dries007.tfc.common.items.TFCMinecartItem;
+import net.dries007.tfc.util.Helpers;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.BlockSource;
+import net.minecraft.core.Direction;
 import net.minecraft.core.dispenser.DefaultDispenseItemBehavior;
 import net.minecraft.core.dispenser.DispenseItemBehavior;
+import net.minecraft.core.dispenser.OptionalDispenseItemBehavior;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.world.entity.animal.horse.AbstractChestedHorse;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.BaseRailBlock;
 import net.minecraft.world.level.block.DispenserBlock;
 
 import net.dries007.tfc.common.blocks.wood.Wood;
 import net.dries007.tfc.common.items.TFCItems;
 import net.dries007.tfc.util.DispenserBehaviors;
 
+import net.minecraft.world.level.block.LevelEvent;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.RailShape;
+import net.minecraft.world.phys.AABB;
 import tfcflorae.common.blocks.TFCFBlocks;
 import tfcflorae.common.items.TFCFItems;
 
@@ -16,7 +31,7 @@ public final class TFCFDispenserBehaviors
 {
     public static final DispenseItemBehavior DEFAULT = new DefaultDispenseItemBehavior();
 
-    /*public static final DispenseItemBehavior CHEST_BEHAVIOR = new OptionalDispenseItemBehavior()
+    public static final DispenseItemBehavior CHEST_BEHAVIOR = new OptionalDispenseItemBehavior()
     {
         public ItemStack execute(BlockSource level, ItemStack stack)
         {
@@ -82,7 +97,7 @@ public final class TFCFDispenserBehaviors
         {
             source.getLevel().levelEvent(LevelEvent.SOUND_DISPENSER_DISPENSE, source.getPos(), 0);
         }
-    };*/
+    };
 
     /**
      * {@link DispenserBlock#registerBehavior(ItemLike, DispenseItemBehavior)} is not thread safe

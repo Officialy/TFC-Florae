@@ -52,7 +52,7 @@ public enum TFCFNormalSurfaceBuilder implements SurfaceBuilderFactory.Invariant
                     firstLayer = true;
                     if (y < context.getSeaLevel() - 1)
                     {
-                        surfaceDepth = context.calculateAltitudeSlopeSurfaceDepth(surfaceY, 2, 0.1, -1);
+                        surfaceDepth = context.calculateAltitudeSlopeSurfaceDepth(surfaceY, 2, -1);
                         if (surfaceDepth < -1)
                         {
                             // No surface layers
@@ -73,7 +73,7 @@ public enum TFCFNormalSurfaceBuilder implements SurfaceBuilderFactory.Invariant
                     }
                     else
                     {
-                        surfaceDepth = context.calculateAltitudeSlopeSurfaceDepth(surfaceY, 3, 0, subsurfaceMinDepth);
+                        surfaceDepth = context.calculateAltitudeSlopeSurfaceDepth(surfaceY, 3, subsurfaceMinDepth);
                         if (surfaceDepth < -1)
                         {
                             // No surface layers
@@ -105,12 +105,12 @@ public enum TFCFNormalSurfaceBuilder implements SurfaceBuilderFactory.Invariant
                             firstLayer = false;
                             if (underwaterLayer)
                             {
-                                surfaceDepth = context.calculateAltitudeSlopeSurfaceDepth(surfaceY, 4, 0.4, 0);
+                                surfaceDepth = context.calculateAltitudeSlopeSurfaceDepth(surfaceY, 4, 0);
                                 surfaceState = thinUnderWaterState;
                             }
                             else
                             {
-                                surfaceDepth = context.calculateAltitudeSlopeSurfaceDepth(surfaceY, 7, 0.3, 0);
+                                surfaceDepth = context.calculateAltitudeSlopeSurfaceDepth(surfaceY, 7, 0);
                                 surfaceState = underState;
                             }
                         }

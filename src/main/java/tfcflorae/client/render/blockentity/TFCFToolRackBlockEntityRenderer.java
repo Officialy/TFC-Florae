@@ -1,9 +1,11 @@
 package tfcflorae.client.render.blockentity;
 
+import com.mojang.math.Axis;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.block.model.ItemTransforms;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
+import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -91,9 +93,9 @@ public class TFCFToolRackBlockEntityRenderer implements BlockEntityRenderer<TFCF
                 {
                     poseStack.pushPose();
                     poseStack.translate(ITEM_LOCATION[meta][i][0], ITEM_LOCATION[meta][i][1], ITEM_LOCATION[meta][i][2]);
-                    poseStack.mulPose(RenderHelpers.rotateDegreesY(META_TO_ANGLE[meta]));
+                    poseStack.mulPose(Axis.YP.rotationDegrees(META_TO_ANGLE[meta]));
                     poseStack.scale(ITEM_SCALE, ITEM_SCALE, ITEM_SCALE);
-                    Minecraft.getInstance().getItemRenderer().renderStatic(stack, ItemTransforms.TransformType.FIXED, combinedLight, combinedOverlay, poseStack, buffer, 0);
+//                    Minecraft.getInstance().getItemRenderer().renderStatic(stack, ItemDisplayContext.FIXED, combinedLight, combinedOverlay, poseStack, buffer, 0);
                     poseStack.popPose();
                 }
             }

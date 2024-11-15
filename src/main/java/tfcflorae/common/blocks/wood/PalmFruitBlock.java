@@ -1,8 +1,9 @@
 package tfcflorae.common.blocks.wood;
 
-import java.util.Random;
+
 import java.util.function.Supplier;
 
+import net.minecraft.util.RandomSource;
 import org.jetbrains.annotations.Nullable;
 
 import net.minecraft.core.BlockPos;
@@ -98,11 +99,13 @@ public class PalmFruitBlock extends Block implements IForgeBlockExtension, IFlui
         return !state.canSurvive(level, pos) || !level.getBlockState(pos.relative(state.getValue(DIRECTION).getOpposite()).above()).getBlock().equals(trunk.get()) ? Blocks.AIR.defaultBlockState() : state;
     }
 
+/*
     @Override
     public OffsetType getOffsetType()
     {
         return OffsetType.XYZ;
     }
+*/
 
     @Override
     public FluidProperty getFluidProperty()
@@ -114,7 +117,7 @@ public class PalmFruitBlock extends Block implements IForgeBlockExtension, IFlui
     @SuppressWarnings("deprecation")
     public FluidState getFluidState(BlockState state)
     {
-        return IFluidLoggable.super.getFluidState(state);
+        return IFluidLoggable.super.getFluidLoggedState(state);
     }
 
     @Override
@@ -135,7 +138,7 @@ public class PalmFruitBlock extends Block implements IForgeBlockExtension, IFlui
     }
 
     @Nullable
-    public ItemStack getProductItem(Random random)
+    public ItemStack getProductItem(RandomSource random)
     {
         return new ItemStack(productItem.get());
     }

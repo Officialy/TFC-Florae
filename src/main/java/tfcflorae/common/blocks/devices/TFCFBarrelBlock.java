@@ -65,7 +65,7 @@ public class TFCFBarrelBlock extends BarrelBlock
             {
                 if (state.getValue(RACK) && level.getBlockState(pos.above()).isAir() && hit.getLocation().y - pos.getY() > 0.875f)
                 {
-                    ItemHandlerHelper.giveItemToPlayer(player, new ItemStack(TFCItems.BARREL_RACK.get()));
+//             todo       ItemHandlerHelper.giveItemToPlayer(player, new ItemStack(TFCItems.BARREL_RACK.get()));
                     level.setBlockAndUpdate(pos, state.setValue(RACK, false));
                 }
                 else
@@ -75,12 +75,12 @@ public class TFCFBarrelBlock extends BarrelBlock
                 level.playSound(null, pos, SoundEvents.WOOD_PLACE, SoundSource.BLOCKS, 1.0f, 0.85f);
                 return InteractionResult.SUCCESS;
             }
-            else if (Helpers.isItem(stack, TFCItems.BARREL_RACK.get()) && state.getValue(FACING) != Direction.UP)
+            /*else if (Helpers.isItem(stack, TFCItems.BARREL_RACK.get()) && state.getValue(FACING) != Direction.UP)
             {
                 if (!player.isCreative()) stack.shrink(1);
                 level.setBlockAndUpdate(pos, state.setValue(RACK, true));
                 return InteractionResult.sidedSuccess(level.isClientSide);
-            }
+            }*/
             else if (FluidHelpers.transferBetweenBlockEntityAndItem(stack, barrel, player, hand))
             {
                 return InteractionResult.SUCCESS;

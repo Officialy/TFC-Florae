@@ -87,12 +87,12 @@ public class Tadpole extends AbstractFish
     @Override
     protected void customServerAiStep()
     {
-        this.level.getProfiler().push("tadpoleBrain");
-        this.getBrain().tick((ServerLevel)this.level, this);
-        this.level.getProfiler().pop();
-        this.level.getProfiler().push("tadpoleActivityUpdate");
+        this.level().getProfiler().push("tadpoleBrain");
+        this.getBrain().tick((ServerLevel)this.level(), this);
+        this.level().getProfiler().pop();
+        this.level().getProfiler().push("tadpoleActivityUpdate");
         TadpoleAi.updateActivities(this);
-        this.level.getProfiler().pop();
+        this.level().getProfiler().pop();
         super.customServerAiStep();
     }
 
@@ -105,7 +105,7 @@ public class Tadpole extends AbstractFish
     public void aiStep()
     {
         super.aiStep();
-        if (!this.level.isClientSide) this.setAge(this.age + 1);
+        if (!this.level().isClientSide) this.setAge(this.age + 1);
     }
 
     @Override
@@ -147,7 +147,7 @@ public class Tadpole extends AbstractFish
         if (this.isSlimeBall(stack))
         {
             this.eatSlimeBall(player, stack);
-            return InteractionResult.sidedSuccess(this.level.isClientSide());
+            return InteractionResult.sidedSuccess(this.level().isClientSide());
         }
         else
         {
@@ -211,7 +211,7 @@ public class Tadpole extends AbstractFish
     {
         this.decrementItem(player, stack);
         this.increaseAge((int)((float)(this.getTicksUntilGrowth() / 20) * 0.1F));
-        this.level.addParticle(ParticleTypes.HAPPY_VILLAGER, this.getRandomX(1.0D), this.getRandomY() + 0.5D, this.getRandomZ(1.0D), 0.0D, 0.0D, 0.0D);
+        this.level().addParticle(ParticleTypes.HAPPY_VILLAGER, this.getRandomX(1.0D), this.getRandomY() + 0.5D, this.getRandomZ(1.0D), 0.0D, 0.0D, 0.0D);
     }
 
     private void decrementItem(Player player, ItemStack stack)
@@ -240,14 +240,14 @@ public class Tadpole extends AbstractFish
 
     private void growUp()
     {
-        if (this.level instanceof ServerLevel server)
+        if (this.level() instanceof ServerLevel server)
         {
-            Frog frog = TFCFEntities.FROG.get().create(this.level);
+            Frog frog = TFCFEntities.FROG.get().create(this.level());
             if (frog == null) return;
 
             frog.setIsMale(random.nextBoolean());
             frog.moveTo(this.getX(), this.getY(), this.getZ(), this.getYRot(), this.getXRot());
-            frog.finalizeSpawn(server, this.level.getCurrentDifficultyAt(frog.blockPosition()), MobSpawnType.CONVERSION, null, null);
+            frog.finalizeSpawn(server, this.level().getCurrentDifficultyAt(frog.blockPosition()), MobSpawnType.CONVERSION, null, null);
             frog.setNoAi(this.isNoAi());
 
             if (this.hasCustomName())
@@ -269,7 +269,7 @@ public class Tadpole extends AbstractFish
     }
 
     @Override
-    protected boolean shouldDropExperience()
+    public boolean shouldDropExperience()
     {
         return false;
     }
@@ -277,7 +277,7 @@ public class Tadpole extends AbstractFish
     @Override
     protected float getBlockSpeedFactor()
     {
-        return Helpers.isBlock(level.getBlockState(blockPosition()), TFCTags.Blocks.PLANTS) ? 1.0F : super.getBlockSpeedFactor();
+        return Helpers.isBlock(level().getBlockState(blockPosition()), TFCTags.Blocks.PLANTS) ? 1.0F : super.getBlockSpeedFactor();
     }
 
     @Override

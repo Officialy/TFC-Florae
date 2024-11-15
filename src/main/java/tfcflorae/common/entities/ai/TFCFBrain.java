@@ -2,6 +2,7 @@ package tfcflorae.common.entities.ai;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.UUID;
 import java.util.function.Supplier;
 
@@ -52,7 +53,7 @@ public class TFCFBrain
     public static final RegistryObject<SensorType<FrogAttackablesSensor>> FROG_ATTACKABLES = registerSensorType("frog_attackables", FrogAttackablesSensor::new);
     public static final RegistryObject<SensorType<IsInWaterSensor>> IS_IN_WATER_SENSOR = registerSensorType("is_in_water", IsInWaterSensor::new);
 
-    public static final RegistryObject<PoiType> MOTH_NEST = registerPoi("moth_nest", () -> new PoiType("moth_nest", PoiType.getBlockStates(TFCFBlocks.SILKMOTH_NEST.get()), 0, 1));
+    public static final RegistryObject<PoiType> MOTH_NEST = registerPoi("moth_nest", () -> new PoiType(Set.of(TFCFBlocks.SILKMOTH_NEST.get().defaultBlockState()), 0, 1)); //"moth_nest"
 
     public static RegistryObject<PoiType> registerPoi(String name, Supplier<PoiType> supplier)
     {

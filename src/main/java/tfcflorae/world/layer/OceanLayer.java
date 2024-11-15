@@ -17,6 +17,6 @@ public enum OceanLayer implements AdjacentTransformLayer
     public int apply(AreaContext context, int north, int east, int south, int west, int center)
     {
         Predicate<IntPredicate> matcher = p -> p.test(north) || p.test(east) || p.test(south) || p.test(west);
-        return matcher.test(TFCLayers::isOceanOrMarker) ? center : NULL_MARKER;
+        return center;//matcher.test(TFCLayers::isOceanOrMarker) ? center : NULL_MARKER;
     }
 }

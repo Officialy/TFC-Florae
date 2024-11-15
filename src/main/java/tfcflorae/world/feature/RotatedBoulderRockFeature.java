@@ -1,11 +1,12 @@
 package tfcflorae.world.feature;
 
-import java.util.Random;
+
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -38,7 +39,7 @@ public class RotatedBoulderRockFeature extends Feature<NoneFeatureConfiguration>
     {
         final WorldGenLevel level = context.level();
         final BlockPos pos = context.origin();
-        final Random random = context.random();
+        final RandomSource random = context.random();
 
         final ChunkDataProvider provider = ChunkDataProvider.get(context.chunkGenerator());
         final ChunkData data = provider.get(level, pos);
@@ -46,7 +47,11 @@ public class RotatedBoulderRockFeature extends Feature<NoneFeatureConfiguration>
         final float forestDensity = data.getForestDensity();
         final float forestWeirdness = data.getForestWeirdness();
 
-        final Boolean generateMossy = random.nextFloat(Mth.clamp(Mth.abs((rainfall + 1) * forestDensity), 1, Float.MAX_VALUE)) > random.nextFloat(Mth.clamp(Mth.abs((rainfall + 1) * forestWeirdness), 1, Float.MAX_VALUE));
+        float mossyThreshold = Mth.clamp(Mth.abs((rainfall + 1) * forestDensity), 1, Float.MAX_VALUE);
+        float weirdnessThreshold = Mth.clamp(Mth.abs((rainfall + 1) * forestWeirdness), 1, Float.MAX_VALUE);
+
+        final boolean generateMossy = random.nextFloat() * mossyThreshold > random.nextFloat() * weirdnessThreshold;
+
 
         TFCFRock.TFCFBlockType rockType = TFCFRock.TFCFBlockType.ROCK_PILE;
         if (generateMossy)

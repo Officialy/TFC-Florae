@@ -1,8 +1,9 @@
 package tfcflorae.common.blocks.rock;
 
-import java.util.Random;
+
 import java.util.function.Supplier;
 
+import net.minecraft.util.RandomSource;
 import org.jetbrains.annotations.Nullable;
 
 import net.minecraft.core.BlockPos;
@@ -36,7 +37,7 @@ public abstract class Geyser extends TFCFPointedDripstoneBlock
     }
 
     @Override
-    public void animateTick(BlockState state, Level level, BlockPos pos, Random random)
+    public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random)
     {
         super.animateTick(state, level, pos, random);
         if (this.spawnParticles && state.getValue(THICKNESS) == DripstoneThickness.TIP && state.getValue(TIP_DIRECTION) == Direction.UP)

@@ -1,9 +1,10 @@
 package tfcflorae.common.blocks.wood;
 
 import java.util.List;
-import java.util.Random;
+
 import java.util.function.Supplier;
 
+import net.minecraft.util.RandomSource;
 import org.jetbrains.annotations.Nullable;
 
 import com.google.common.base.Preconditions;
@@ -43,6 +44,8 @@ import net.dries007.tfc.util.climate.Climate;
 import net.dries007.tfc.util.climate.ClimateRange;
 
 import tfcflorae.Config;
+
+import static tfcflorae.common.blocks.wood.TFCPalmTrunkBlock.NATURAL;
 
 public class TFCFFruitingLogBlock extends LogBlock implements IBushBlock, HoeOverlayBlock
 {
@@ -103,7 +106,7 @@ public class TFCFFruitingLogBlock extends LogBlock implements IBushBlock, HoeOve
 
     @Override
     @SuppressWarnings("deprecation")
-    public void randomTick(BlockState state, ServerLevel level, BlockPos pos, Random random)
+    public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random)
     {
         super.randomTick(state, level, pos, random);
 
@@ -275,7 +278,7 @@ public class TFCFFruitingLogBlock extends LogBlock implements IBushBlock, HoeOve
         return state.setValue(LIFECYCLE, Lifecycle.HEALTHY);
     }
 
-    public ItemStack getProductItem(Random random)
+    public ItemStack getProductItem(RandomSource random)
     {
         return new ItemStack(productItem.get());
     }

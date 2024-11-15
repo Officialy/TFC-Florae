@@ -1,9 +1,10 @@
 package tfcflorae.common.blocks.plant;
 
-import java.util.Random;
+
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
@@ -121,7 +122,7 @@ public abstract class TallLandWaterPlantBlock extends TFCTallGrassBlock implemen
     }
 
     @Override
-    public void placeTwoHalves(LevelAccessor level, BlockPos pos, int flags, Random random)
+    public void placeTwoHalves(LevelAccessor level, BlockPos pos, int flags, RandomSource random)
     {
         IntegerProperty stageProperty = getPlant().getStageProperty();
         final BlockPos posAbove = pos.above();
@@ -155,6 +156,6 @@ public abstract class TallLandWaterPlantBlock extends TFCTallGrassBlock implemen
     @SuppressWarnings("deprecation")
     public FluidState getFluidState(BlockState state)
     {
-        return IFluidLoggable.super.getFluidState(state);
+        return IFluidLoggable.super.getFluidLoggedState(state);
     }
 }

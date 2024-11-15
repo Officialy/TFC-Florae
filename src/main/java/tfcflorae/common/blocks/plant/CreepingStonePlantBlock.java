@@ -77,7 +77,7 @@ public abstract class CreepingStonePlantBlock extends CreepingPlantBlock
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context)
     {
-        return updateStateFromSides(context.getLevel(), context.getClickedPos(), updateStateWithCurrentMonth(defaultBlockState()));
+        return updateOtherStateFromSides(context.getLevel(), context.getClickedPos(), updateStateWithCurrentMonth(defaultBlockState()));
     }
 
     @Override
@@ -94,7 +94,7 @@ public abstract class CreepingStonePlantBlock extends CreepingPlantBlock
         return false;
     }
 
-    private BlockState updateStateFromSides(LevelAccessor level, BlockPos pos, BlockState state)
+    private BlockState updateOtherStateFromSides(LevelAccessor level, BlockPos pos, BlockState state)
     {
         final BlockPos.MutableBlockPos mutablePos = new BlockPos.MutableBlockPos();
         boolean hasEarth = false;

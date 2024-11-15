@@ -28,7 +28,7 @@ public class FallingLeafParticle extends CherryParticle
     {
         super(level, x, y, z, set);
 
-        final BlockPos pos = new BlockPos(x, y, z);
+        final BlockPos pos = BlockPos.containing(x, y, z);
 
         int color = -1;
         if (state.getBlock() instanceof FruitTreeLeavesBlock fruit)
@@ -55,7 +55,7 @@ public class FallingLeafParticle extends CherryParticle
             }
             else if (tinted)
             {
-                color = Helpers.isBlock(state, TFCTags.Blocks.SEASONAL_LEAVES) ? TFCColors.getSeasonalFoliageColor(pos, 0) : TFCColors.getFoliageColor(pos, 0);
+                color = Helpers.isBlock(state, TFCTags.Blocks.SEASONAL_LEAVES) ? TFCColors.getSeasonalFoliageColor(pos, 0, 0) : TFCColors.getFoliageColor(pos, 0); //todo added autumn index - set to 0 for now?
             }
             else
             {

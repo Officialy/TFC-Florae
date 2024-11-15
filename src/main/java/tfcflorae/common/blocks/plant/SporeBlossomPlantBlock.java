@@ -1,8 +1,9 @@
 package tfcflorae.common.blocks.plant;
 
 import java.util.Map;
-import java.util.Random;
 
+
+import net.minecraft.util.RandomSource;
 import org.jetbrains.annotations.Nullable;
 
 import com.google.common.collect.ImmutableMap;
@@ -86,7 +87,7 @@ public abstract class SporeBlossomPlantBlock extends PlantBlock implements IFlui
      * Called periodically clientside on blocks near the player to show effects (like furnace fire particles).
      */
     @Override
-    public void animateTick(BlockState state, Level level, BlockPos pos, Random random)
+    public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random)
     {
         //if (getPlant().stageFor(Calendars.SERVER.getCalendarMonthOfYear()) >= 1 || Calendars.CLIENT.getCalendarMonthOfYear().getSeason() == Season.SPRING)
         //{
@@ -172,7 +173,7 @@ public abstract class SporeBlossomPlantBlock extends PlantBlock implements IFlui
     @Override
     public FluidState getFluidState(BlockState state)
     {
-        return IFluidLoggable.super.getFluidState(state);
+        return IFluidLoggable.super.getFluidLoggedState(state);
     }
 
     @Override

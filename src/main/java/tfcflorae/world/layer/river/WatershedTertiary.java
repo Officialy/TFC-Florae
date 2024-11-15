@@ -1,3 +1,4 @@
+/*
 package tfcflorae.world.layer.river;
 
 import java.util.ArrayList;
@@ -6,7 +7,7 @@ import java.util.List;
 import java.util.Set;
 
 import net.minecraft.util.Mth;
-import net.minecraft.world.level.levelgen.RandomSource;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.levelgen.XoroshiroRandomSource;
 
 import it.unimi.dsi.fastutil.longs.LongArrayList;
@@ -16,12 +17,11 @@ import it.unimi.dsi.fastutil.longs.LongSet;
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
 
 import net.dries007.tfc.world.FastConcurrentCache;
-import net.dries007.tfc.world.layer.Plate;
 import net.dries007.tfc.world.layer.framework.AreaFactory;
 import net.dries007.tfc.world.layer.framework.TypedArea;
 import net.dries007.tfc.world.layer.framework.TypedAreaFactory;
 import net.dries007.tfc.world.river.MidpointFractal;
-import net.dries007.tfc.world.river.RiverFractal;
+import net.dries007.tfc.world.river.River;
 import net.dries007.tfc.world.river.RiverHelpers;
 
 import org.jetbrains.annotations.VisibleForTesting;
@@ -90,7 +90,8 @@ public abstract class WatershedTertiary
         return new Rivers(root, interior, sources, random, sourceChance, length, depth, feather);
     }
 
-    /*public static void intToRiverDebug(int value)
+    */
+/*public static void intToRiverDebug(int value)
     {
         if (value == RIVER)
             TFCFlorae.LOGGER.debug("TFCFlorae: Is int correct? River");
@@ -121,7 +122,8 @@ public abstract class WatershedTertiary
         if(value == VOLCANIC_MOUNTAIN_RIVER)
             return "VOLCANIC_MOUNTAIN_RIVER";
         return "It is probably CANYON_RIVER, ALPINE_MOUNTAIN_RIVER, or unknown";
-    }*/
+    }*//*
+
 
     private final Plate plate;
 
@@ -130,7 +132,7 @@ public abstract class WatershedTertiary
         this.plate = plate;
     }
 
-    public abstract List<RiverFractal> getRivers();
+    public abstract List<River> getRivers();
 
     public Plate getPlate()
     {
@@ -160,7 +162,7 @@ public abstract class WatershedTertiary
         }
 
         @Override
-        public List<RiverFractal> getRivers()
+        public List<River> getRivers()
         {
             return Collections.emptyList();
         }
@@ -169,7 +171,7 @@ public abstract class WatershedTertiary
     public static class Rivers extends WatershedTertiary
     {
         public final LongSet interior, sources;
-        private final List<RiverFractal> rivers;
+        private final List<River> rivers;
 
         public Rivers(Plate plate, LongSet interior, LongSet sources, RandomSource random, float sourceChance, float length, int depth, float feather)
         {
@@ -180,7 +182,7 @@ public abstract class WatershedTertiary
 
             // We need to have a consistent iteration order across sources, in order to deterministically generate a watershed from any given sample position
             // The easiest way to guarantee this, is to sort the sources.
-            final RiverFractal.MultiParallelBuilder context = new Builder();
+            final River.MultiParallelBuilder context = new Builder();
             sources.longStream().sorted().forEach(key -> {
                 final float x0 = RiverHelpers.unpackX(key) + 0.5f, z0 = RiverHelpers.unpackZ(key) + 0.5f;
                 if (random.nextFloat() < sourceChance)
@@ -194,7 +196,7 @@ public abstract class WatershedTertiary
                         long adj = RiverHelpers.pack(x0 + dx, z0 + dz);
                         if (this.interior.contains(adj))
                         {
-                            context.add(new RiverFractal.Builder(random, x0, z0, angle, length, depth, feather));
+                            context.add(new River.Builder(random, x0, z0, angle, length, depth, feather));
                             break;
                         }
                         angle += 0.25f * Mth.PI;
@@ -206,7 +208,7 @@ public abstract class WatershedTertiary
         }
 
         @Override
-        public List<RiverFractal> getRivers()
+        public List<River> getRivers()
         {
             return rivers;
         }
@@ -217,10 +219,10 @@ public abstract class WatershedTertiary
             return sources;
         }
 
-        class Builder extends RiverFractal.MultiParallelBuilder
+        class Builder extends River.MultiParallelBuilder
         {
             @Override
-            protected boolean isLegal(RiverFractal.Vertex prev, RiverFractal.Vertex vertex)
+            protected boolean isLegal(River.Vertex prev, River.Vertex vertex)
             {
                 final int x = RiverHelpers.floor(vertex.x()), z = RiverHelpers.floor(vertex.y());
                 final long key = RiverHelpers.pack(x, z);
@@ -231,19 +233,23 @@ public abstract class WatershedTertiary
 
     public static class Context
     {
-        /**
+        */
+/**
          * Parameters that are tweaked for best performance.
-         */
+         *//*
+
         private static final int PARTITION_BITS = 5;
         private static final int ZOOM_BITS = 7;
 
         private static final int WATERSHED_CACHE_BITS = 8;
         private static final int PARTITION_CACHE_BITS = 10;
 
-        /**
+        */
+/**
          * The diagonal from the center of a unit cell, to the corner.
          * Scale is partition coordinates.
-         */
+         *//*
+
         private static final float PARTITION_RADIUS = (float) Math.sqrt(2) / 2f;
         private static final int PARTITION_TO_ZOOM_BITS = ZOOM_BITS - PARTITION_BITS;
 
@@ -271,12 +277,14 @@ public abstract class WatershedTertiary
             this.feather = feather;
         }
 
-        /**
+        */
+/**
          * Input coordinates are biome quart positions.
          * Partition coordinates are quart positions shifted by {@link #PARTITION_BITS}.
          * WatershedTertiary coordinates are quart positions shifted by {@link #ZOOM_BITS}. (Based on the total amount of zoom layers used between plate layers and the final biome area.)
          * In order to compute the partition, we query the four adjacent watersheds, which may overlap the partition area.
-         */
+         *//*
+
         public List<MidpointFractal> getFractalsByPartition(int x, int z)
         {
             final int px = x >> PARTITION_BITS, pz = z >> PARTITION_BITS;
@@ -304,7 +312,7 @@ public abstract class WatershedTertiary
                 partition = new ArrayList<>(32);
                 for (WatershedTertiary shed : nearbySheds)
                 {
-                    for (RiverFractal river : shed.getRivers())
+                    for (River river : shed.getRivers())
                     {
                         for (MidpointFractal fractal : river.getFractals())
                         {
@@ -339,3 +347,4 @@ public abstract class WatershedTertiary
         }
     }
 }
+*/

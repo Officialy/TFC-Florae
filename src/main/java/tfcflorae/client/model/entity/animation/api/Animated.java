@@ -1,8 +1,7 @@
 package tfcflorae.client.model.entity.animation.api;
-
-import com.mojang.math.Vector3f;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
+import org.joml.Vector3f;
 
 public interface Animated
 {

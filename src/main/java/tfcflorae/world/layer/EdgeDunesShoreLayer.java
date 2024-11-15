@@ -27,10 +27,10 @@ public enum EdgeDunesShoreLayer implements AdjacentTransformLayer
         Predicate<IntPredicate> matcher = p -> p.test(north) || p.test(east) || p.test(south) || p.test(west);
         if (center == SHORE_DUNES)
         {
-            if (matcher.test(i -> !TFCLayers.isRiver(i) && (TFCLayers.hasRiver(i) || TFCLayers.isLow(i))))
+            /*if (matcher.test(i -> !TFCLayers.isRiver(i) && (TFCLayers.hasRiver(i) || TFCLayers.isLow(i))))
             {
                 return SHORE_DUNES;
-            }
+            }*/
             return SHORE;
         }
         else if (TFCLayers.isMountains(center))// || center == COASTAL_CLIFFS)

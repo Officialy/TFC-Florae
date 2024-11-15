@@ -1,23 +1,20 @@
 package tfcflorae.world.feature.tree;
 
-import java.util.Random;
-
+import com.mojang.serialization.Codec;
+import net.dries007.tfc.mixin.accessor.StructureTemplateAccessor;
+import net.dries007.tfc.world.feature.tree.RandomTreeConfig;
+import net.dries007.tfc.world.feature.tree.RandomTreeFeature;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
-import net.minecraft.world.level.levelgen.structure.templatesystem.StructureManager;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlaceSettings;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
+import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplateManager;
 
-import com.mojang.serialization.Codec;
-
-import net.dries007.tfc.mixin.accessor.StructureTemplateAccessor;
-import net.dries007.tfc.world.feature.tree.RandomTreeConfig;
-import net.dries007.tfc.world.feature.tree.TreeFeature;
-
-public class TFCFRandomTreeFeature extends TreeFeature<RandomTreeConfig>
+public class TFCFRandomTreeFeature extends RandomTreeFeature
 {
     public TFCFRandomTreeFeature(Codec<RandomTreeConfig> codec)
     {
@@ -29,12 +26,12 @@ public class TFCFRandomTreeFeature extends TreeFeature<RandomTreeConfig>
     {
         final WorldGenLevel level = context.level();
         final BlockPos pos = context.origin();
-        final Random random = context.random();
+        final RandomSource random = context.random();
         final RandomTreeConfig config = context.config();
 
         final ChunkPos chunkPos = new ChunkPos(pos);
         final BlockPos.MutableBlockPos mutablePos = new BlockPos.MutableBlockPos().set(pos);
-        final StructureManager manager = TFCFTreeHelpers.getStructureManager(level);
+        final StructureTemplateManager manager = TFCFTreeHelpers.getStructureManager(level);
         final StructurePlaceSettings settings = TFCFTreeHelpers.getPlacementSettings(level, chunkPos, random);
         final ResourceLocation structureId = config.structureNames().get(random.nextInt(config.structureNames().size()));
         final StructureTemplate structure = manager.getOrCreate(structureId);

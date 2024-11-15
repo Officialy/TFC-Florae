@@ -40,20 +40,14 @@ public class MossGrowingRotatedPillarBlock extends MossGrowingBlock implements I
 
     public static BlockState rotatePillar(BlockState state, Rotation rotation)
     {
-        switch(rotation) {
-        case COUNTERCLOCKWISE_90:
-        case CLOCKWISE_90:
-            switch((Direction.Axis)state.getValue(AXIS)) {
-            case X:
-                return state.setValue(AXIS, Direction.Axis.Z);
-            case Z:
-                return state.setValue(AXIS, Direction.Axis.X);
-            default:
-                return state;
-            }
-        default:
-            return state;
-        }
+        return switch (rotation) {
+            case COUNTERCLOCKWISE_90, CLOCKWISE_90 -> switch ((Direction.Axis) state.getValue(AXIS)) {
+                case X -> state.setValue(AXIS, Direction.Axis.Z);
+                case Z -> state.setValue(AXIS, Direction.Axis.X);
+                default -> state;
+            };
+            default -> state;
+        };
     }
 
     @Override

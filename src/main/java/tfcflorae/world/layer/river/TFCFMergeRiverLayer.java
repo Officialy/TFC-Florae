@@ -1,3 +1,4 @@
+/*
 package tfcflorae.world.layer.river;
 
 import net.minecraft.server.level.ServerLevel;
@@ -9,17 +10,8 @@ import net.dries007.tfc.world.layer.framework.AreaContext;
 import net.dries007.tfc.world.layer.framework.TransformLayer;
 import net.dries007.tfc.world.river.MidpointFractal;
 
-import tfcflorae.interfaces.ChunkDataInterface;
 import tfcflorae.interfaces.TFCLayersMixinInterface;
-import tfcflorae.util.TFCFHelpers;
 
-import net.dries007.tfc.world.biome.BiomeSourceExtension.Settings;
-import net.dries007.tfc.world.chunkdata.ChunkData;
-import net.dries007.tfc.world.chunkdata.ChunkDataProvider;
-import net.dries007.tfc.world.chunkdata.ChunkGeneratorExtension;
-import net.dries007.tfc.world.chunkdata.TFCChunkDataGenerator;
-
-import static net.dries007.tfc.world.layer.TFCLayers.*;
 
 public class TFCFMergeRiverLayer implements TransformLayer
 {
@@ -38,7 +30,8 @@ public class TFCFMergeRiverLayer implements TransformLayer
     @Override
     public int apply(AreaContext context, Area area, int x, int z)
     {
-        /*float rainfall = 1F;
+        */
+/*float rainfall = 1F;
         float temperature = 1F;
         float forestDensity = 0F;
 
@@ -68,11 +61,13 @@ public class TFCFMergeRiverLayer implements TransformLayer
         if (temperature == 0F) temperature = 1F;
 
         float extraWidth = Mth.clamp(((rainfall / temperature) * 0.1F) - forestDensity, 1, 10);
-        final float riverWidth = Watershed.RIVER_WIDTH * extraWidth;*/
+        final float riverWidth = Watershed.RIVER_WIDTH * extraWidth;*//*
+
 
         final int value = area.get(x, z);
 
-        if ((hasRiver(value) || value == RIVER_EDGE) && !isOceanOrMarker(value))
+       */
+/* if ((hasRiver(value) || value == RIVER_EDGE) && !isOceanOrMarker(value))
         {
             final float scale = 1f / (1 << 7);
             final float x0 = x * scale, z0 = z * scale;
@@ -85,7 +80,9 @@ public class TFCFMergeRiverLayer implements TransformLayer
                     return riverFor(value);
                 }
             }
-        }
+        }*//*
+
         return value;
     }
 }
+*/

@@ -2,6 +2,8 @@ package tfcflorae.common.blocks;
 
 import java.util.function.Supplier;
 
+import net.dries007.tfc.common.blocks.*;
+import net.minecraft.world.level.material.*;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -24,22 +26,12 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.material.FlowingFluid;
-import net.minecraft.world.level.material.Fluid;
-import net.minecraft.world.level.material.FluidState;
-import net.minecraft.world.level.material.Fluids;
-import net.minecraft.world.level.material.MaterialColor;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.items.ItemHandlerHelper;
 
-import net.dries007.tfc.common.blocks.ExtendedBlock;
-import net.dries007.tfc.common.blocks.ExtendedProperties;
-import net.dries007.tfc.common.blocks.GroundcoverBlock;
-import net.dries007.tfc.common.blocks.TFCBlockStateProperties;
-import net.dries007.tfc.common.blocks.TFCMaterials;
 import net.dries007.tfc.common.fluids.FluidHelpers;
 import net.dries007.tfc.common.fluids.FluidProperty;
 import net.dries007.tfc.common.fluids.IFluidLoggable;
@@ -70,7 +62,7 @@ public class TFCFGroundcoverBlock extends ExtendedBlock implements IFluidLoggabl
 
     public TFCFGroundcoverBlock(TFCFGroundcoverBlockType cover)
     {
-        this(ExtendedProperties.of(TFCMaterials.GROUNDCOVER, MaterialColor.PLANT).strength(0.05F, 0.0F).sound(SoundType.NETHER_WART).noCollission(), cover.getShape(), cover.getVanillaItem());
+        this(ExtendedProperties.of().mapColor(MapColor.PLANT).strength(0.05F, 0.0F).sound(SoundType.NETHER_WART).noCollission(), cover.getShape(), cover.getVanillaItem());
     }
 
     public TFCFGroundcoverBlock(ExtendedProperties properties, VoxelShape shape, @Nullable Supplier<? extends Item> pickBlock)
@@ -149,7 +141,7 @@ public class TFCFGroundcoverBlock extends ExtendedBlock implements IFluidLoggabl
     @SuppressWarnings("deprecation")
     public FluidState getFluidState(BlockState state)
     {
-        return IFluidLoggable.super.getFluidState(state);
+        return IFluidLoggable.super.getFluidLoggedState(state);
     }
 
     @Override

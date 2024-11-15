@@ -1,7 +1,8 @@
 package tfcflorae.common.blocks.wood;
 
-import java.util.Random;
 
+
+import net.minecraft.util.RandomSource;
 import org.jetbrains.annotations.Nullable;
 
 import net.minecraft.core.BlockPos;
@@ -39,19 +40,21 @@ import tfcflorae.common.blockentities.TFCFTickCounterBlockEntity;
 import tfcflorae.common.blocks.TFCFBlocks;
 import tfcflorae.world.feature.tree.TFCFTreeGrower;
 
+import java.util.function.Supplier;
+
 public class TFCFSaplingBlock extends TFCSaplingBlock implements IFluidLoggable
 {
     public static final FluidProperty FLUID = TFCBlockStateProperties.ALL_WATER;
 
     public final RegistryWood wood;
     private final ExtendedProperties properties;
-    private final int daysToGrow;
+    private final Supplier<Integer> daysToGrow;
 
     public TFCFSaplingBlock(RegistryWood wood, TFCFTreeGrower tree, ExtendedProperties properties, int days)
     {
-        super(tree, properties, days);
+        super(tree, properties, () -> days, false);
         this.properties = properties;
-        this.daysToGrow = days;
+        this.daysToGrow = () -> days;
         this.wood = wood;
     }
 
@@ -84,7 +87,7 @@ public class TFCFSaplingBlock extends TFCSaplingBlock implements IFluidLoggable
 
     @Override
     @SuppressWarnings("deprecation")
-    public void randomTick(BlockState state, ServerLevel level, BlockPos pos, Random random)
+    public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random)
     {
         if (level.getMaxLocalRawBrightness(pos.above()) >= 9 && random.nextInt(7) == 0 && Climate.getTemperature(level, pos) >= 0)
         {
@@ -97,10 +100,10 @@ public class TFCFSaplingBlock extends TFCSaplingBlock implements IFluidLoggable
                 if (counter.getTicksSinceUpdate() > ICalendar.TICKS_IN_DAY * getDaysToGrow() * TFCConfig.SERVER.globalSaplingGrowthModifier.get())
                 {
                     this.advanceTree(level, pos, state.setValue(STAGE, 1), random);
-                    if (ForgeEventFactory.saplingGrowTree(level, random, pos) && (wood instanceof TFCFWood woodTFCF && !woodTFCF.isPalmTree() || wood != Wood.PALM))
+                   /* if (ForgeEventFactory.saplingGrowTree(level, random, pos) && (wood instanceof TFCFWood woodTFCF && !woodTFCF.isPalmTree() || wood != Wood.PALM))
                     {
                         level.setBlock(pos, TFCFBlocks.WOODS.get(wood).get(Wood.BlockType.WOOD).get().defaultBlockState(), Block.UPDATE_ALL);
-                    }
+                    }*/
                 }
             }
         }
@@ -122,7 +125,7 @@ public class TFCFSaplingBlock extends TFCSaplingBlock implements IFluidLoggable
     @Override
     public int getDaysToGrow()
     {
-        return daysToGrow;
+        return daysToGrow.get();
     }
 
     @Override
@@ -135,6 +138,6 @@ public class TFCFSaplingBlock extends TFCSaplingBlock implements IFluidLoggable
     @SuppressWarnings("deprecation")
     public FluidState getFluidState(BlockState state)
     {
-        return IFluidLoggable.super.getFluidState(state);
+        return IFluidLoggable.super.getFluidLoggedState(state);
     }
 }

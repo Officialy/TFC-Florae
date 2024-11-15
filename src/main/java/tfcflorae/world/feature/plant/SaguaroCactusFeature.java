@@ -1,9 +1,10 @@
 package tfcflorae.world.feature.plant;
 
-import java.util.Random;
+
 
 import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.Feature;
@@ -30,10 +31,10 @@ public class SaguaroCactusFeature extends Feature<BlockConfig<SaguaroCactusBlock
     {
         final WorldGenLevel level = context.level();
         final BlockPos pos = context.origin();
-        final Random random = context.random();
+        final RandomSource random = context.random();
         final BlockState state = level.getBlockState(pos);
 
-        if (EnvironmentHelpers.isWorldgenReplaceable(state) && !state.getMaterial().isLiquid())
+        if (EnvironmentHelpers.isWorldgenReplaceable(state) && !state.liquid())
         {
             return context.config().block().generateCactus(TFCFBlocks.FRUITING_PLANTS.get(TFCFPlant.SAGUARO_CACTUS).get(), level, random.nextBoolean(), pos, random, false);
         }

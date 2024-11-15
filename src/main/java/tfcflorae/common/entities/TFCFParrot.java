@@ -7,7 +7,7 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
+
 import java.util.function.Predicate;
 import javax.annotation.Nullable;
 
@@ -28,6 +28,7 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.InteractionHand;
@@ -192,14 +193,14 @@ public class TFCFParrot extends Parrot
     @Override
     public void aiStep()
     {
-        if (this.jukebox == null || !this.jukebox.closerToCenterThan(this.position(), 3.46D) || !this.level.getBlockState(this.jukebox).is(Blocks.JUKEBOX))
+        if (this.jukebox == null || !this.jukebox.closerToCenterThan(this.position(), 3.46D) || !this.level().getBlockState(this.jukebox).is(Blocks.JUKEBOX))
         {
             this.partyParrot = false;
             this.jukebox = null;
         }
-        if (this.level.random.nextInt(400) == 0)
+        if (this.level().random.nextInt(400) == 0)
         {
-            imitateNearbyMobs(this.level, this);
+            imitateNearbyMobs(this.level(), this);
         }
 
         super.aiStep();
@@ -210,10 +211,10 @@ public class TFCFParrot extends Parrot
     @Override
     public SoundEvent getAmbientSound()
     {
-        return getAmbient(this.level, this.level.random);
+        return getAmbient(this.level(), this.level().random);
     }
 
-    public static SoundEvent getAmbient(Level level, Random random)
+    public static SoundEvent getAmbient(Level level, RandomSource random)
     {
         if (level.getDifficulty() != Difficulty.PEACEFUL && random.nextInt(1000) == 0)
         {
@@ -258,15 +259,15 @@ public class TFCFParrot extends Parrot
     {
         this.oFlap = this.flap;
         this.oFlapSpeed = this.flapSpeed;
-        this.flapSpeed += (float)(!this.onGround && !this.isPassenger() ? 4 : -1) * 0.3F;
+        this.flapSpeed += (float)(!this.onGround() && !this.isPassenger() ? 4 : -1) * 0.3F;
         this.flapSpeed = Mth.clamp(this.flapSpeed, 0.0F, 1.0F);
-        if (!this.onGround && this.flapping < 1.0F)
+        if (!this.onGround() && this.flapping < 1.0F)
         {
             this.flapping = 1.0F;
         }
         this.flapping *= 0.9F;
         Vec3 vec3 = this.getDeltaMovement();
-        if (!this.onGround && vec3.y < 0.0D)
+        if (!this.onGround() && vec3.y < 0.0D)
         {
             this.setDeltaMovement(vec3.multiply(1.0D, 0.6D, 1.0D));
         }
@@ -352,22 +353,22 @@ public class TFCFParrot extends Parrot
 
             if (!this.isSilent())
             {
-                this.level.playSound((Player)null, this.getX(), this.getY(), this.getZ(), SoundEvents.PARROT_EAT, this.getSoundSource(), 1.0F, 1.0F + (this.random.nextFloat() - this.random.nextFloat()) * 0.2F);
+                this.level().playSound((Player)null, this.getX(), this.getY(), this.getZ(), SoundEvents.PARROT_EAT, this.getSoundSource(), 1.0F, 1.0F + (this.random.nextFloat() - this.random.nextFloat()) * 0.2F);
             }
 
-            if (!this.level.isClientSide)
+            if (!this.level().isClientSide)
             {
                 if (this.random.nextInt(10) == 0 && !net.minecraftforge.event.ForgeEventFactory.onAnimalTame(this, player))
                 {
                     this.tame(player);
-                    this.level.broadcastEntityEvent(this, (byte)7);
+                    this.level().broadcastEntityEvent(this, (byte)7);
                 }
                 else
                 {
-                    this.level.broadcastEntityEvent(this, (byte)6);
+                    this.level().broadcastEntityEvent(this, (byte)6);
                 }
             }
-            return InteractionResult.sidedSuccess(this.level.isClientSide);
+            return InteractionResult.sidedSuccess(this.level().isClientSide);
         }
         else if (POISONOUS_FOOD.test(itemstack))
         {
@@ -379,21 +380,21 @@ public class TFCFParrot extends Parrot
             this.addEffect(new MobEffectInstance(MobEffects.POISON, 900));
             if (player.isCreative() || !this.isInvulnerable())
             {
-                this.hurt(DamageSource.playerAttack(player), Float.MAX_VALUE);
+                this.hurt(player.damageSources().playerAttack(player), Float.MAX_VALUE);
             }
-            return InteractionResult.sidedSuccess(this.level.isClientSide);
+            return InteractionResult.sidedSuccess(this.level().isClientSide);
         }
         else if (!this.isFlying() && this.isTame() && this.isOwnedBy(player))
         {
-            if (!this.level.isClientSide)
+            if (!this.level().isClientSide)
             {
                 this.setOrderedToSit(!this.isOrderedToSit());
             }
-            return InteractionResult.sidedSuccess(this.level.isClientSide);
+            return InteractionResult.sidedSuccess(this.level().isClientSide);
         }
         else
         {
-            return EntityHelpers.pluck(player, hand, this) ? InteractionResult.sidedSuccess(level.isClientSide) : super.mobInteract(player, hand);
+            return null;//EntityHelpers.pluck(player, hand, this) ? InteractionResult.sidedSuccess(level().isClientSide) : super.mobInteract(player, hand);
         }
     }
 
@@ -433,9 +434,9 @@ public class TFCFParrot extends Parrot
             {
                 if (!blockpos.equals(blockpos1))
                 {
-                    BlockState blockstate = this.mob.level.getBlockState(blockpos$mutableblockpos1.setWithOffset(blockpos1, Direction.DOWN));
+                    BlockState blockstate = this.mob.level().getBlockState(blockpos$mutableblockpos1.setWithOffset(blockpos1, Direction.DOWN));
                     boolean flag = blockstate.getBlock() instanceof LeavesBlock || blockstate.is(BlockTags.LOGS) || blockstate.is(BlockTags.LEAVES);
-                    if (flag && this.mob.level.isEmptyBlock(blockpos1) && this.mob.level.isEmptyBlock(blockpos$mutableblockpos.setWithOffset(blockpos1, Direction.UP)))
+                    if (flag && this.mob.level().isEmptyBlock(blockpos1) && this.mob.level().isEmptyBlock(blockpos$mutableblockpos.setWithOffset(blockpos1, Direction.UP)))
                     {
                         return Vec3.atBottomCenterOf(blockpos1);
                     }

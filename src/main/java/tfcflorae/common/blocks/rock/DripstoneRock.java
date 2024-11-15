@@ -4,11 +4,12 @@ import java.util.Locale;
 import java.util.function.BiFunction;
 import java.util.function.Supplier;
 
+import net.minecraft.world.level.material.MapColor;
 import org.jetbrains.annotations.Nullable;
 
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.level.block.*;
-import net.minecraft.world.level.material.Material;
+
 
 import net.dries007.tfc.common.blocks.rock.*;
 import net.dries007.tfc.common.blocks.rock.Rock.BlockType;
@@ -38,6 +39,11 @@ public enum DripstoneRock implements RegistryRock
     public SandBlockType getSandType()
     {
         return sandType;
+    }
+
+    @Override
+    public RockDisplayCategory displayCategory() {
+        return RockDisplayCategory.SEDIMENTARY;
     }
 
     @Override
@@ -89,12 +95,12 @@ public enum DripstoneRock implements RegistryRock
 
     public enum TFCFBlockType implements StringRepresentable
     {
-        STONE_TILES((rock, self) -> new Block(Block.Properties.of(Material.STONE).sound(SoundType.DEEPSLATE).strength(rock.category().hardness(6.5f), 10).requiresCorrectToolForDrops()), true),
-        COBBLED_BRICKS((rock, self) -> new MossGrowingRotatedPillarBlock(Block.Properties.of(Material.STONE).sound(SoundType.DEEPSLATE_BRICKS).strength(rock.category().hardness(9f), 10).requiresCorrectToolForDrops(), TFCFBlocks.ROCK_BLOCKS.get(rock).get(self.mossy())), true),
-        FLAGSTONE_BRICKS((rock, self) -> new MossGrowingBlock(Block.Properties.of(Material.STONE).sound(SoundType.DEEPSLATE_TILES).strength(rock.category().hardness(9f), 10).requiresCorrectToolForDrops(), TFCFBlocks.ROCK_BLOCKS.get(rock).get(self.mossy())), true),
-        MOSSY_COBBLED_BRICKS((rock, self) -> new MossSpreadingRotatedPillarBlock(Block.Properties.of(Material.STONE).sound(SoundType.DEEPSLATE_BRICKS).strength(rock.category().hardness(9f), 10).requiresCorrectToolForDrops()), true),
-        MOSSY_FLAGSTONE_BRICKS((rock, self) -> new MossSpreadingBlock(Block.Properties.of(Material.STONE).sound(SoundType.DEEPSLATE_TILES).strength(rock.category().hardness(9f), 10).requiresCorrectToolForDrops()), true),
-        CRACKED_FLAGSTONE_BRICKS((rock, self) -> new Block(Block.Properties.of(Material.STONE).sound(SoundType.DEEPSLATE_TILES).strength(rock.category().hardness(9f), 10).requiresCorrectToolForDrops()), true);
+        STONE_TILES((rock, self) -> new Block(Block.Properties.of().mapColor(MapColor.STONE).sound(SoundType.DEEPSLATE).strength(rock.category().hardness(6.5f), 10).requiresCorrectToolForDrops()), true),
+        COBBLED_BRICKS((rock, self) -> new MossGrowingRotatedPillarBlock(Block.Properties.of().mapColor(MapColor.STONE).sound(SoundType.DEEPSLATE_BRICKS).strength(rock.category().hardness(9f), 10).requiresCorrectToolForDrops(), TFCFBlocks.ROCK_BLOCKS.get(rock).get(self.mossy())), true),
+        FLAGSTONE_BRICKS((rock, self) -> new MossGrowingBlock(Block.Properties.of().mapColor(MapColor.STONE).sound(SoundType.DEEPSLATE_TILES).strength(rock.category().hardness(9f), 10).requiresCorrectToolForDrops(), TFCFBlocks.ROCK_BLOCKS.get(rock).get(self.mossy())), true),
+        MOSSY_COBBLED_BRICKS((rock, self) -> new MossSpreadingRotatedPillarBlock(Block.Properties.of().mapColor(MapColor.STONE).sound(SoundType.DEEPSLATE_BRICKS).strength(rock.category().hardness(9f), 10).requiresCorrectToolForDrops()), true),
+        MOSSY_FLAGSTONE_BRICKS((rock, self) -> new MossSpreadingBlock(Block.Properties.of().mapColor(MapColor.STONE).sound(SoundType.DEEPSLATE_TILES).strength(rock.category().hardness(9f), 10).requiresCorrectToolForDrops()), true),
+        CRACKED_FLAGSTONE_BRICKS((rock, self) -> new Block(Block.Properties.of().mapColor(MapColor.STONE).sound(SoundType.DEEPSLATE_TILES).strength(rock.category().hardness(9f), 10).requiresCorrectToolForDrops()), true);
         //COLUMN((rock, self) -> new RotatedPillarBlock(Block.Properties.of(Material.STONE).sound(SoundType.BASALT).strength(rock.category().hardness(9f), 15).requiresCorrectToolForDrops()), false),
         //POLISHED_COLUMN((rock, self) -> new RotatedPillarBlock(Block.Properties.of(Material.STONE).sound(SoundType.BASALT).strength(rock.category().hardness(9f), 15).requiresCorrectToolForDrops()), false);
 

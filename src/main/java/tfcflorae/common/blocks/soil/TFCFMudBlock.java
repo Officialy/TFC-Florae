@@ -10,11 +10,10 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.ToolAction;
 import net.minecraftforge.common.ToolActions;
 
-import net.dries007.tfc.common.blocks.soil.MudBlock;
 import net.dries007.tfc.common.blocks.soil.SoilBlockType;
 import net.dries007.tfc.util.registry.RegistrySoilVariant;
 
-public class TFCFMudBlock extends MudBlock
+public class TFCFMudBlock extends LooseMudBlock
 {
     @Nullable private final Supplier<? extends Block> packedMud;
 

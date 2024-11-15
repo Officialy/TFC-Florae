@@ -3,15 +3,13 @@ package tfcflorae.client.screen;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
-import net.minecraft.client.gui.components.Widget;
+import net.minecraft.client.gui.components.Renderable;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.ItemStack;
-
-import com.mojang.blaze3d.vertex.PoseStack;
-import net.dries007.tfc.client.RenderHelpers;
 import net.dries007.tfc.client.screen.BlockEntityScreen;
 import net.dries007.tfc.client.screen.button.AnvilPlanSelectButton;
 import net.dries007.tfc.client.screen.button.NextPageButton;
@@ -52,7 +50,7 @@ public class TFCFAnvilPlanScreen extends BlockEntityScreen<TFCFAnvilBlockEntity,
             .getCapability(Capabilities.ITEM, null)
             .map(t -> t.getStackInSlot(TFCFAnvilBlockEntity.SLOT_INPUT_MAIN))
             .orElse(ItemStack.EMPTY);
-        final List<AnvilRecipe> recipes = AnvilRecipe.getAll(playerInventory.player.level, inputStack, blockEntity.getTier());
+        final List<AnvilRecipe> recipes = AnvilRecipe.getAll(playerInventory.player.level(), inputStack, blockEntity.getTier());
 
         recipeButtons = new ArrayList<>();
         for (int i = 0; i < recipes.size(); i++)
@@ -63,7 +61,7 @@ public class TFCFAnvilPlanScreen extends BlockEntityScreen<TFCFAnvilBlockEntity,
             final int posY = 17 + ((index % 18) / 9) * 18;
 
             final AnvilRecipe recipe = recipes.get(i);
-            final AnvilPlanSelectButton button = new AnvilPlanSelectButton(guiLeft + posX, guiTop + posY, page, recipe, RenderHelpers.makeButtonTooltip(this, recipe.getResultItem().getHoverName()));
+            final AnvilPlanSelectButton button = new AnvilPlanSelectButton(guiLeft + posX, guiTop + posY, page, recipe, Component.literal("TESTING"));// RenderHelpers.makeButtonTooltip(this, recipe.getResultItem().getHoverName()));
 
             button.setCurrentPage(0);
             recipeButtons.add(button);
@@ -91,21 +89,21 @@ public class TFCFAnvilPlanScreen extends BlockEntityScreen<TFCFAnvilBlockEntity,
     }
 
     @Override
-    protected void renderBg(PoseStack poseStack, float partialTicks, int mouseX, int mouseY)
+    protected void renderBg(GuiGraphics poseStack, float partialTicks, int mouseX, int mouseY)
     {
         drawDefaultBackground(poseStack);
     }
 
     @Override
-    protected void renderTooltip(PoseStack poseStack, int mouseX, int mouseY)
+    protected void renderTooltip(GuiGraphics poseStack, int mouseX, int mouseY)
     {
         super.renderTooltip(poseStack, mouseX, mouseY);
 
-        for (Widget widget : renderables)
+        for (Renderable widget : renderables)
         {
             if (widget instanceof AnvilPlanSelectButton button && button.isHoveredOrFocused())
             {
-                button.renderToolTip(poseStack, mouseX, mouseY);
+                button.render(poseStack, mouseX, mouseY, 0);
                 return;
             }
         }

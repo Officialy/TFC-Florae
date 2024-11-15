@@ -1,6 +1,7 @@
 package tfcflorae.common;
 
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
@@ -39,7 +40,7 @@ public class TFCFTags
 
         private static TagKey<Block> create(String id)
         {
-            return TagKey.create(Registry.BLOCK_REGISTRY, TFCFHelpers.identifier(id));
+            return TagKey.create(Registries.BLOCK, TFCFHelpers.identifier(id));
         }
     }
 
@@ -62,7 +63,7 @@ public class TFCFTags
 
         private static TagKey<Item> create(String id)
         {
-            return TagKey.create(Registry.ITEM_REGISTRY, TFCFHelpers.identifier(id));
+            return TagKey.create(Registries.ITEM, TFCFHelpers.identifier(id));
         }
     }
 
@@ -72,7 +73,7 @@ public class TFCFTags
 
         private static TagKey<EntityType<?>> create(String id)
         {
-            return TagKey.create(Registry.ENTITY_TYPE_REGISTRY, TFCFHelpers.identifier(id));
+            return TagKey.create(Registries.ENTITY_TYPE, TFCFHelpers.identifier(id));
         }
     }
 
@@ -85,7 +86,7 @@ public class TFCFTags
 
         private static TagKey<Biome> create(String id)
         {
-            return TagKey.create(Registry.BIOME_REGISTRY, TFCFHelpers.identifier(id));
+            return TagKey.create(Registries.BIOME, TFCFHelpers.identifier(id));
         }
     }
 }

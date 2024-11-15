@@ -2,9 +2,11 @@ package tfcflorae.world.surface.builder;
 
 import java.util.Arrays;
 import java.util.Collections;
+
 import java.util.Random;
 import java.util.function.Function;
 
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.block.state.BlockState;
 
 import net.dries007.tfc.common.blocks.SandstoneBlockType;
@@ -104,7 +106,7 @@ public class TopBadlandsSurfaceBuilder implements SurfaceBuilder
     public void buildSurface(SurfaceBuilderContext context, int startY, int endY)
     {
         parent.buildSurface(context, startY, endY);
-        final float heightVariation = grassHeightVariationNoise.noise(context.pos().getX(), context.pos().getZ());
+        final double heightVariation = grassHeightVariationNoise.noise(context.pos().getX(), context.pos().getZ());
         final float weightVariation = (float) (1f - context.weight()) * 23f;
         if (inverted ? startY + 5 < heightVariation + weightVariation : startY - 5 > heightVariation - weightVariation)
         {
@@ -118,7 +120,7 @@ public class TopBadlandsSurfaceBuilder implements SurfaceBuilder
 
     private void buildSandySurface(SurfaceBuilderContext context, int startHeight, int minSurfaceHeight)
     {
-        final float style = sandStyleNoise.noise(context.pos().getX(), context.pos().getZ());
+        final float style = (float) sandStyleNoise.noise(context.pos().getX(), context.pos().getZ());
         final int height = (int) sandHeightOffsetNoise.noise(context.pos().getX(), context.pos().getZ());
 
         int surfaceDepth = -1;

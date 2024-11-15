@@ -1,17 +1,19 @@
 package tfcflorae.world.feature;
 
-import java.util.Random;
+
 
 import com.mojang.serialization.Codec;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
-import net.minecraft.world.level.material.Material;
+
 
 import net.dries007.tfc.common.blocks.TFCBlocks;
 import net.dries007.tfc.common.blocks.rock.Rock;
@@ -21,6 +23,7 @@ import net.dries007.tfc.world.biome.TFCBiomes;
 import net.dries007.tfc.world.noise.Noise3D;
 import net.dries007.tfc.world.noise.OpenSimplex3D;
 
+import net.minecraft.world.level.material.MapColor;
 import tfcflorae.Config;
 import tfcflorae.common.TFCFTags;
 import tfcflorae.interfaces.TFCBiomesMixinInterface;
@@ -49,7 +52,7 @@ public class SubTerraneanRiver extends Feature<NoneFeatureConfiguration>
 
         final WorldGenLevel level = context.level();
         final BlockPos pos = context.origin();
-        final Random random = context.random();
+        final RandomSource random = context.random();
 
         BlockPos.MutableBlockPos mutablePos = new BlockPos.MutableBlockPos();
 
@@ -62,7 +65,7 @@ public class SubTerraneanRiver extends Feature<NoneFeatureConfiguration>
                 mutablePos.set(x, 0, z);
 
                 BiomeExtension biome = TFCBiomes.getExtension(level, level.getBiome(mutablePos).value());
-                if (biome.isRiver() || biome.equals(CHASMS) || biome.equals(ALPINE_MOUNTAINS) || biome.toString().equals(TFCFTags.Biomes.IS_RIVER.toString()) || biome.toString().equals(TFCFTags.Biomes.IS_LAKE.toString()))
+                if (biome.hasRivers() || biome.equals(CHASMS) || biome.equals(ALPINE_MOUNTAINS) || biome.toString().equals(TFCFTags.Biomes.IS_RIVER.toString()) || biome.toString().equals(TFCFTags.Biomes.IS_LAKE.toString()))
                 {
                     for (int y = REFERENCE_DEPTH - 10; y < REFERENCE_DEPTH + 23; ++y)
                     {
@@ -72,7 +75,7 @@ public class SubTerraneanRiver extends Feature<NoneFeatureConfiguration>
                         //TFCFlorae.LOGGER.debug("Carving noise is " + carving + " at coords: " + x + ", " + y + ", " + z);
                         if (y > level.getMinBuildHeight() && y < level.getMaxBuildHeight() && level.getBlockState(mutablePos).getBlock() != Blocks.BEDROCK)
                         {
-                            if (carving >= HOLLOWING_THRESHOLD && (EnvironmentHelpers.isWorldgenReplaceable(level, mutablePos) || level.getBlockState(mutablePos).getMaterial() == Material.STONE || level.getBlockState(mutablePos).getMaterial() == Material.DIRT))
+                            if (carving >= HOLLOWING_THRESHOLD && (EnvironmentHelpers.isWorldgenReplaceable(level, mutablePos) || level.getBlockState(mutablePos).getMapColor(level, pos) == MapColor.STONE || level.getBlockState(mutablePos).getMapColor(level, pos) == MapColor.DIRT))
                             {
                                 if (y <= REFERENCE_DEPTH)
                                 {
@@ -83,7 +86,7 @@ public class SubTerraneanRiver extends Feature<NoneFeatureConfiguration>
                                     level.setBlock(mutablePos, Blocks.AIR.defaultBlockState(), Block.UPDATE_ALL);
                                 }
                             }
-                            else if (carving < HOLLOWING_THRESHOLD && carving >= random.nextFloat(3) * 0.1f && y < REFERENCE_DEPTH - 2 && EnvironmentHelpers.isWorldgenReplaceable(level, mutablePos))
+                            else if (carving < HOLLOWING_THRESHOLD && carving >= Mth.clamp(random.nextFloat(),0, 3) * 0.1f && y < REFERENCE_DEPTH - 2 && EnvironmentHelpers.isWorldgenReplaceable(level, mutablePos))
                             {
                                 level.setBlock(mutablePos, TFCBlocks.ROCK_BLOCKS.get(Rock.BASALT).get(Rock.BlockType.RAW).get().defaultBlockState(), Block.UPDATE_ALL);
                             }

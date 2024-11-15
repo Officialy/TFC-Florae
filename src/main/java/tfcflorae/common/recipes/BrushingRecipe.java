@@ -3,6 +3,7 @@ package tfcflorae.common.recipes;
 import com.google.gson.JsonObject;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.world.InteractionHand;
@@ -24,7 +25,6 @@ import net.dries007.tfc.common.fluids.FluidHelpers;
 import net.dries007.tfc.common.recipes.RecipeSerializerImpl;
 import net.dries007.tfc.common.recipes.SimpleBlockRecipe;
 import net.dries007.tfc.common.recipes.ingredients.BlockIngredient;
-import net.dries007.tfc.common.recipes.ingredients.BlockIngredients;
 import net.dries007.tfc.common.recipes.outputs.ItemStackProvider;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.JsonHelpers;
@@ -63,7 +63,7 @@ public class BrushingRecipe extends SimpleBlockRecipe
                     else
                     {
                         // covers case where a waterlogged block is brushed and the new block can't take the fluid contained
-                        brushed = FluidHelpers.fillWithFluid(brushed, player.level.getFluidState(pos).getType());
+                        brushed = FluidHelpers.fillWithFluid(brushed, player.level().getFluidState(pos).getType());
                         if (brushed == null)
                         {
                             if (informWhy) complain(player, "bad_fluid");
@@ -82,10 +82,10 @@ public class BrushingRecipe extends SimpleBlockRecipe
 
     private static void complain(Player player, String message)
     {
-        player.displayClientMessage(Helpers.translatable("tfcflorae.brushing." + message), true);
+        player.displayClientMessage(Component.translatable("tfcflorae.brushing." + message), true);
     }
 
-    public static final IndirectHashCollection<Block, BrushingRecipe> CACHE = IndirectHashCollection.createForRecipe(recipe -> recipe.getBlockIngredient().getValidBlocks(), TFCFRecipeTypes.BRUSHING);
+    public static final IndirectHashCollection<Block, BrushingRecipe> CACHE = IndirectHashCollection.createForRecipe(recipe -> recipe.getBlockIngredient().blocks(), TFCFRecipeTypes.BRUSHING);
 
     @Nullable
     public static BrushingRecipe getRecipe(BlockState state, ItemStack held)
@@ -148,7 +148,7 @@ public class BrushingRecipe extends SimpleBlockRecipe
         @Override
         public BrushingRecipe fromJson(ResourceLocation recipeId, JsonObject json)
         {
-            BlockIngredient ingredient = BlockIngredients.fromJson(JsonHelpers.get(json, "ingredient"));
+            BlockIngredient ingredient = BlockIngredient.fromJson(JsonHelpers.get(json, "ingredient"));
             BlockState state = JsonHelpers.getBlockState(GsonHelper.getAsString(json, "result"));
             Ingredient itemIngredient = json.has("item_ingredient") ? Ingredient.fromJson(json.get("item_ingredient")) : null;
             ItemStackProvider drop = json.has("extra_drop") ? ItemStackProvider.fromJson(JsonHelpers.getAsJsonObject(json, "extra_drop")) : ItemStackProvider.empty();
@@ -159,7 +159,7 @@ public class BrushingRecipe extends SimpleBlockRecipe
         @Override
         public BrushingRecipe fromNetwork(ResourceLocation recipeId, FriendlyByteBuf buffer)
         {
-            final BlockIngredient ingredient = BlockIngredients.fromNetwork(buffer);
+            final BlockIngredient ingredient = BlockIngredient.fromNetwork(buffer);
             final BlockState state = buffer.readRegistryIdUnsafe(ForgeRegistries.BLOCKS).defaultBlockState();
             final Ingredient itemIngredient = Helpers.decodeNullable(buffer, Ingredient::fromNetwork);
             final ItemStackProvider drop = ItemStackProvider.fromNetwork(buffer);

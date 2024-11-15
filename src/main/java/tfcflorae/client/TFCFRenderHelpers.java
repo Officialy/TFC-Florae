@@ -2,8 +2,9 @@ package tfcflorae.client;
 
 import java.util.function.Consumer;
 
+import com.mojang.math.Axis;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiComponent;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.model.geom.ModelLayerLocation;
@@ -17,24 +18,27 @@ import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.player.PlayerRenderer;
 import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
+import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.HumanoidArm;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.inventory.InventoryMenu;
+import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraftforge.fluids.FluidAttributes;
+import net.minecraftforge.client.extensions.common.IClientFluidTypeExtensions;
 import net.minecraftforge.fluids.FluidStack;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.mojang.math.Matrix4f;
-import com.mojang.math.Vector3f;
+import org.joml.Matrix4f;
+import org.joml.Vector3f;
 
 import net.dries007.tfc.common.entities.livestock.TFCAnimal;
 import net.dries007.tfc.common.entities.livestock.TFCAnimalProperties;
@@ -375,24 +379,24 @@ public final class TFCFRenderHelpers
         final float tilt = calculateTilt(pitch);
         poseStack.translate(0.0D, 0.04F + equipProgress * -1.2F + tilt * -0.5F, -0.72F);
         // tfc: clamp the tilt amount, and reverse the tilt direction based on the player looking around
-        poseStack.mulPose(Vector3f.XP.rotationDegrees(Mth.clamp(tilt, 0.3F, 0.51F) * 85.0F));
+        poseStack.mulPose(Axis.XP.rotationDegrees(Mth.clamp(tilt, 0.3F, 0.51F) * 85.0F));
         if (!mc.player.isInvisible())
         {
             poseStack.pushPose();
-            poseStack.mulPose(Vector3f.YP.rotationDegrees(90.0F));
+            poseStack.mulPose(Axis.YP.rotationDegrees(90.0F));
             renderMapHand(mc, poseStack, source, combinedLight, HumanoidArm.RIGHT);
             renderMapHand(mc, poseStack, source, combinedLight, HumanoidArm.LEFT);
             poseStack.popPose();
         }
 
         addSiftingMovement(mc.player, poseStack); // tfc: rotate the pan due to sifting
-        poseStack.mulPose(Vector3f.XP.rotationDegrees(Mth.sin(swingSqrt * (float) Math.PI) * 20.0F));
+        poseStack.mulPose(Axis.XP.rotationDegrees(Mth.sin(swingSqrt * (float) Math.PI) * 20.0F));
         poseStack.scale(2.0F, 2.0F, 2.0F);
 
         final boolean right = mc.player.getMainArm() == HumanoidArm.RIGHT;
-        mc.getItemInHandRenderer().renderItem(mc.player, stack,
-            right ? ItemTransforms.TransformType.FIRST_PERSON_RIGHT_HAND : ItemTransforms.TransformType.FIRST_PERSON_LEFT_HAND,
-            !right, poseStack, source, combinedLight);
+
+        BakedModel bakedmodel = mc.getItemRenderer().getModel(stack, mc.player.level(), mc.player, mc.player.getId()); //todo test model works
+        mc.getItemRenderer().render(stack, right ? ItemDisplayContext.FIRST_PERSON_RIGHT_HAND : ItemDisplayContext.FIRST_PERSON_LEFT_HAND, !right, poseStack, source, combinedLight, 0, bakedmodel);
 
     }
 
@@ -426,7 +430,8 @@ public final class TFCFRenderHelpers
 
     public static int getFluidColor(Fluid fluid)
     {
-        return fluid.getAttributes().getColor();
+
+        return IClientFluidTypeExtensions.of(fluid).getTintColor();
     }
 
     public static void renderFluidFace(PoseStack poseStack, FluidStack fluidStack, MultiBufferSource buffer, float minX, float minZ, float maxX, float maxZ, float y, int combinedOverlay, int combinedLight)
@@ -437,7 +442,7 @@ public final class TFCFRenderHelpers
     public static void renderFluidFace(PoseStack poseStack, FluidStack fluidStack, MultiBufferSource buffer, int color, float minX, float minZ, float maxX, float maxZ, float y, int combinedOverlay, int combinedLight)
     {
         Fluid fluid = fluidStack.getFluid();
-        FluidAttributes attributes = fluid.getAttributes();
+        IClientFluidTypeExtensions attributes = IClientFluidTypeExtensions.of(fluid);
         ResourceLocation texture = attributes.getStillTexture(fluidStack);
         TextureAtlasSprite sprite = Minecraft.getInstance().getTextureAtlas(TFCFRenderHelpers.BLOCKS_ATLAS).apply(texture);
 
@@ -459,10 +464,10 @@ public final class TFCFRenderHelpers
     {
         setShaderColor(getFluidColor(fluid));
         RenderSystem.setShaderTexture(0, InventoryMenu.BLOCK_ATLAS);
-        return Minecraft.getInstance().getTextureAtlas(InventoryMenu.BLOCK_ATLAS).apply(fluid.getFluid().getAttributes().getStillTexture(fluid));
+        return Minecraft.getInstance().getTextureAtlas(InventoryMenu.BLOCK_ATLAS).apply(IClientFluidTypeExtensions.of(fluid.getFluid()).getStillTexture(fluid));
     }
 
-    public static void fillAreaWithSprite(int left, int top, TextureAtlasSprite sprite, PoseStack poseStack, int startX, int endX, int endY, int fillHeight)
+    public static void fillAreaWithSprite(int left, int top, TextureAtlasSprite sprite, GuiGraphics graphics, int startX, int endX, int endY, int fillHeight)
     {
         int yPos = endY;
         while (fillHeight > 0)
@@ -473,7 +478,7 @@ public final class TFCFRenderHelpers
             while (fillWidth > 0)
             {
                 int xPixels = Math.min(fillWidth, 16);
-                GuiComponent.blit(poseStack, left + xPos - xPixels, top + yPos - yPixels, 0, xPixels, yPixels, sprite);
+                graphics.blit(left + xPos - xPixels, top + yPos - yPixels, 0, xPixels, yPixels, sprite);
                 fillWidth -= 16;
                 xPos -= 16;
             }
@@ -482,7 +487,7 @@ public final class TFCFRenderHelpers
         }
     }
 
-    public static Button.OnTooltip makeButtonTooltip(Screen screen, Component component)
+/*    public static Button.OnTooltip makeButtonTooltip(Screen screen, Component component)
     {
         return new Button.OnTooltip()
         {
@@ -498,7 +503,7 @@ public final class TFCFRenderHelpers
                 consumer.accept(component);
             }
         };
-    }
+    }*/
 
     private static float calculateTilt(float pitch)
     {
@@ -512,9 +517,9 @@ public final class TFCFRenderHelpers
         PlayerRenderer playerrenderer = (PlayerRenderer) mc.getEntityRenderDispatcher().<AbstractClientPlayer>getRenderer(mc.player);
         poseStack.pushPose();
         final float side = arm == HumanoidArm.RIGHT ? 1.0F : -1.0F;
-        poseStack.mulPose(Vector3f.YP.rotationDegrees(92.0F));
-        poseStack.mulPose(Vector3f.XP.rotationDegrees(45.0F));
-        poseStack.mulPose(Vector3f.ZP.rotationDegrees(side * -41.0F + calculateArmMovement(mc.player))); // tfc: jiggle the arms
+        poseStack.mulPose(Axis.YP.rotationDegrees(92.0F));
+        poseStack.mulPose(Axis.XP.rotationDegrees(45.0F));
+        poseStack.mulPose(Axis.ZP.rotationDegrees(side * -41.0F + calculateArmMovement(mc.player))); // tfc: jiggle the arms
         poseStack.translate(side * 0.3D, -1.1D, 0.45D);
         if (arm == HumanoidArm.RIGHT)
         {

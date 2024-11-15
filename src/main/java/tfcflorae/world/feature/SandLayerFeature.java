@@ -1,6 +1,6 @@
 package tfcflorae.world.feature;
 
-import java.util.Random;
+
 
 import com.mojang.serialization.Codec;
 
@@ -8,6 +8,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.SandBlock;
@@ -16,7 +17,7 @@ import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
-import net.minecraft.world.level.material.Material;
+
 
 import net.dries007.tfc.common.blocks.GroundcoverBlock;
 import net.dries007.tfc.common.fluids.FluidHelpers;
@@ -27,6 +28,7 @@ import net.dries007.tfc.world.chunkdata.ChunkData;
 import net.dries007.tfc.world.chunkdata.ChunkDataProvider;
 import net.dries007.tfc.world.surface.SoilSurfaceState;
 
+import net.minecraft.world.level.material.MapColor;
 import tfcflorae.Config;
 import tfcflorae.common.blocks.TFCFBlocks;
 import tfcflorae.common.blocks.rock.MossGrowingBoulderBlock;
@@ -52,7 +54,7 @@ public class SandLayerFeature extends Feature<NoneFeatureConfiguration>
         boolean placedAny = false;
         final WorldGenLevel level = context.level();
         final BlockPos pos = context.origin();
-        final Random random = context.random();
+        final RandomSource random = context.random();
 
         BlockPos.MutableBlockPos mutablePos = new BlockPos.MutableBlockPos();
 
@@ -72,11 +74,11 @@ public class SandLayerFeature extends Feature<NoneFeatureConfiguration>
 
                     for (Direction facing : Direction.Plane.HORIZONTAL)
                     {
-                        if (level.getBlockState(mutablePos.below()).getMaterial().isSolid() && (level.isEmptyBlock(mutablePos.above()) || level.getBlockState(mutablePos.above()).getMaterial().isLiquid() || DripstoneUtils.isEmptyOrWater(level.getBlockState(mutablePos.above()))) && canReplace(level, mutablePos, random, sandLayer))
+                        if (level.getBlockState(mutablePos.below()).isSolid() && (level.isEmptyBlock(mutablePos.above()) || level.getBlockState(mutablePos.above()).liquid() || DripstoneUtils.isEmptyOrWater(level.getBlockState(mutablePos.above()))) && canReplace(level, mutablePos, random, sandLayer))
                         {
                             final boolean isBelowSeaLevel = y < SEA_LEVEL_Y; // Y 63 is right above sea level (in air)
-                            final boolean shouldWaterLog = isBelowSeaLevel || level.getBlockState(mutablePos).getMaterial().isLiquid();
-                            final boolean canPlaceInLiquidIfBelowSeaLevel = isBelowSeaLevel ? true : !level.getBlockState(mutablePos).getMaterial().isLiquid();
+                            final boolean shouldWaterLog = isBelowSeaLevel || level.getBlockState(mutablePos).liquid();
+                            final boolean canPlaceInLiquidIfBelowSeaLevel = isBelowSeaLevel ? true : !level.getBlockState(mutablePos).liquid();
                             final boolean hasSturdyFaceNearby = isBelowSeaLevel ? true : level.getBlockState(mutablePos.relative(facing).below()).isFaceSturdy(level, mutablePos.relative(facing).below(), Direction.UP);
 
                             if (hasNearbySandOrIsDryEnough(level, mutablePos, random, false) && hasSturdyFaceNearby && canPlaceInLiquidIfBelowSeaLevel)
@@ -97,7 +99,7 @@ public class SandLayerFeature extends Feature<NoneFeatureConfiguration>
         return placedAny;
     }
 
-    public static int sandLayerHeight(TFCChunkGenerator chunkGen, BlockPos inputPos, Random random, boolean isShort)
+    public static int sandLayerHeight(TFCChunkGenerator chunkGen, BlockPos inputPos, RandomSource random, boolean isShort)
     {
         BlockPos pos = new BlockPos(inputPos.getX(), inputPos.getY() - 1, inputPos.getZ());
         int y1 = pos.getY();
@@ -121,7 +123,7 @@ public class SandLayerFeature extends Feature<NoneFeatureConfiguration>
         return y1 > 62 ? sandLayerHeight - 1 : sandLayerHeight;
     }
 
-    public boolean hasNearbySandOrIsDryEnough(WorldGenLevel level, BlockPos pos, Random random, boolean isPicky)
+    public boolean hasNearbySandOrIsDryEnough(WorldGenLevel level, BlockPos pos, RandomSource random, boolean isPicky)
     {
         boolean isSandy = false;
         if (isPicky)
@@ -143,11 +145,11 @@ public class SandLayerFeature extends Feature<NoneFeatureConfiguration>
         return false;
     }
 
-    public boolean canReplace(WorldGenLevel level, BlockPos pos, Random random, BlockState sandLayer)
+    public boolean canReplace(WorldGenLevel level, BlockPos pos, RandomSource random, BlockState sandLayer)
     {
         BlockState state = level.getBlockState(pos);
 
-        return SandLayerBlock.canPlaceSandPileStatic(level, pos, state, sandLayer) || (FluidHelpers.isAirOrEmptyFluid(state) || EnvironmentHelpers.isWorldgenReplaceable(level, pos) || state.getBlock() instanceof GroundcoverBlock || state.getBlock() instanceof MossGrowingBoulderBlock || state.getBlock() instanceof MossSpreadingBoulderBlock || state.getMaterial() == Material.PLANT || state.getMaterial() == Material.REPLACEABLE_PLANT);
+        return SandLayerBlock.canPlaceSandPileStatic(level, pos, state, sandLayer) || (FluidHelpers.isAirOrEmptyFluid(state) || EnvironmentHelpers.isWorldgenReplaceable(level, pos) || state.getBlock() instanceof GroundcoverBlock || state.getBlock() instanceof MossGrowingBoulderBlock || state.getBlock() instanceof MossSpreadingBoulderBlock || state.getMapColor(level, pos) == MapColor.PLANT || state.canBeReplaced());
     }
 
     public boolean isSmallerThanNew(WorldGenLevel level, BlockPos pos, int height)
@@ -156,16 +158,16 @@ public class SandLayerFeature extends Feature<NoneFeatureConfiguration>
         return state.getBlock() instanceof SandLayerBlock && state.getValue(SandLayerBlock.LAYERS) >= height;
     }
 
-	public boolean properRainfall(WorldGenLevel level, BlockPos pos, Random random)
+	public boolean properRainfall(WorldGenLevel level, BlockPos pos, RandomSource random)
 	{
         final ChunkDataProvider provider = ChunkDataProvider.get(level);
         final ChunkData data = provider.get(level, pos);
 
         final float rainfall = data.getRainfall(pos);
 
-        final float noise = SoilSurfaceState.PATCH_NOISE.noise(pos.getX(), pos.getZ());
-        final float noiseGauss = noise + (2 * (float) random.nextGaussian());
-        final float noiseRainfall = rainfall + (10 * (float) random.nextGaussian());
+        final double noise = SoilSurfaceState.PATCH_NOISE.noise(pos.getX(), pos.getZ());
+        final double noiseGauss = noise + (2 * (float) random.nextGaussian());
+        final double noiseRainfall = rainfall + (10 * (float) random.nextGaussian());
 
         return noiseRainfall <= 80 ? (noiseRainfall <= 50 || noiseGauss > 0.2F) : false;
 	}
@@ -185,7 +187,7 @@ public class SandLayerFeature extends Feature<NoneFeatureConfiguration>
         return inputHeight;
 	}
 
-	/*public SandBlockType getSandColor(WorldGenLevel level, BlockPos pos, Random random)
+	/*public SandBlockType getSandColor(WorldGenLevel level, BlockPos pos, RandomSource random)
 	{
         final ChunkDataProvider provider = ChunkDataProvider.get(level);
         final ChunkData data = provider.get(level, pos);

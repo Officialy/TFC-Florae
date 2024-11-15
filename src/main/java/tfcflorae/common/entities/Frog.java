@@ -19,6 +19,7 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.stats.Stats;
 import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
 import net.minecraft.util.Unit;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.DifficultyInstance;
@@ -70,7 +71,7 @@ import java.util.Comparator;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.OptionalInt;
-import java.util.Random;
+
 import java.util.function.Predicate;
 
 import net.dries007.tfc.common.capabilities.food.FoodCapability;
@@ -131,7 +132,7 @@ public class Frog extends Animal
         this.setPathfindingMalus(BlockPathTypes.WATER, 4.0F);
         this.setPathfindingMalus(BlockPathTypes.TRAPDOOR, -1.0F);
         this.moveControl = new SmoothSwimmingMoveControl(this, 85, 10, 0.02F, 0.1F, true);
-        this.maxUpStep = 1.0F;
+        this.setMaxUpStep(1.0F);
     }
 
     @Override
@@ -170,7 +171,7 @@ public class Frog extends Animal
 
     public Optional<Entity> getFrogTarget()
     {
-        return this.entityData.get(TARGET).stream().mapToObj(this.level::getEntity).filter(Objects::nonNull).findFirst();
+        return this.entityData.get(TARGET).stream().mapToObj(this.level()::getEntity).filter(Objects::nonNull).findFirst();
     }
 
     public void setFrogTarget(Entity entity)
@@ -262,7 +263,7 @@ public class Frog extends Animal
 
     public boolean beenLongEnoughToMate()
     {
-        return Calendars.get(level).getTicks() > lastMated + (ICalendar.TICKS_IN_DAY * 12);
+        return Calendars.get(level()).getTicks() > lastMated + (ICalendar.TICKS_IN_DAY * 12);
     }
 
     @Override
@@ -273,7 +274,7 @@ public class Frog extends Animal
 
     public boolean shouldWalk()
     {
-        return this.onGround && this.getDeltaMovement().horizontalDistanceSqr() > 1.0E-6D && !this.isInWaterOrBubble();
+        return this.onGround() && this.getDeltaMovement().horizontalDistanceSqr() > 1.0E-6D && !this.isInWaterOrBubble();
     }
 
     public boolean shouldSwim()
@@ -325,19 +326,19 @@ public class Frog extends Animal
     @Override
     protected void customServerAiStep()
     {
-        this.level.getProfiler().push("frogBrain");
-        this.getBrain().tick((ServerLevel)this.level, this);
-        this.level.getProfiler().pop();
-        this.level.getProfiler().push("frogActivityUpdate");
+        this.level().getProfiler().push("frogBrain");
+        this.getBrain().tick((ServerLevel)this.level(), this);
+        this.level().getProfiler().pop();
+        this.level().getProfiler().push("frogActivityUpdate");
         FrogAi.updateActivities(this);
-        this.level.getProfiler().pop();
+        this.level().getProfiler().pop();
         super.customServerAiStep();
     }
 
     @Override
     public void tick()
     {
-        if (this.level.isClientSide())
+        if (this.level().isClientSide())
         {
             if (this.shouldWalk())
             {
@@ -519,7 +520,7 @@ public class Frog extends Animal
                 this.setVariant(Variant.GREEN_TREE);
             }
         }
-        else if (temperature > OverworldClimateModel.LATITUDE_TEMPERATURE_VARIANCE_MEAN)
+        else if (temperature > 15f) //OverworldClimateModel.LATITUDE_TEMPERATURE_VARIANCE_MEAN)
         {
             if (chance == 0)
             {
@@ -630,11 +631,11 @@ public class Frog extends Animal
         }
     }
 
-    @Override
+/*    @Override
     public boolean canCutCorner(BlockPathTypes type)
     {
         return super.canCutCorner(type) && type != BlockPathTypes.WATER_BORDER;
-    }
+    }*/
 
     public static boolean isValidFrogFood(LivingEntity entity)
     {
@@ -664,7 +665,7 @@ public class Frog extends Animal
 
     public boolean fedRecently()
     {
-        return Calendars.get(level).getTicks() < nextFeedTime;
+        return Calendars.get(level()).getTicks() < nextFeedTime;
     }
 
     @Override
@@ -673,7 +674,7 @@ public class Frog extends Animal
         final ItemStack held = player.getItemInHand(hand);
         if (isFood(held))
         {
-            if (!level.isClientSide)
+            if (!level().isClientSide)
             {
                 final long ticks = Calendars.SERVER.getTicks();
                 if (ticks > nextFeedTime)
@@ -695,7 +696,7 @@ public class Frog extends Animal
         super.aiStep();
         if (this.isAlive() && isPoisonousFrog())
         {
-            for(Mob mob : this.level.getEntitiesOfClass(Mob.class, this.getBoundingBox().inflate(0.3D), (target) -> {
+            for(Mob mob : this.level().getEntitiesOfClass(Mob.class, this.getBoundingBox().inflate(0.3D), (target) -> {
                 return targetingConditions.test(this, target);
             }))
             {
@@ -709,7 +710,7 @@ public class Frog extends Animal
 
     public void touch(Mob mob)
     {
-        if (isPoisonousFrog() && mob.hurt(DamageSource.mobAttack(this), (float)(2)) && !(mob instanceof Frog))
+        if (isPoisonousFrog() && mob.hurt(mob.damageSources().mobAttack(this), (float)(2)) && !(mob instanceof Frog))
         {
             mob.addEffect(new MobEffectInstance(MobEffects.POISON, Mth.floor(60 / (getSize() * 0.3F)), 0));
             mob.addEffect(new MobEffectInstance(MobEffects.CONFUSION, Mth.floor(30 / (getSize() * 0.3F)), 0));
@@ -720,7 +721,7 @@ public class Frog extends Animal
     @Override
     public void playerTouch(Player player)
     {
-        if (isPoisonousFrog() && player instanceof ServerPlayer && player.hurt(DamageSource.mobAttack(this), (float)(2)))
+        if (isPoisonousFrog() && player instanceof ServerPlayer && player.hurt(player.damageSources().mobAttack(this), (float)(2)))
         {
             if (!this.isSilent())
             {
@@ -751,7 +752,7 @@ public class Frog extends Animal
         return getVariant() == Variant.RED_HEADED_POISON || getVariant() == Variant.TARAPOTO_POISON || getVariant() == Variant.PAINTED_MANTELLA || getVariant() == Variant.STRAWBERRY_POISON_DART || getVariant() == Variant.ARUM;
     }
 
-    public static boolean checkFrogSpawnRules(EntityType<? extends Animal> type, LevelAccessor accessor, MobSpawnType spawnType, BlockPos pos, Random random)
+    public static boolean checkFrogSpawnRules(EntityType<? extends Animal> type, LevelAccessor accessor, MobSpawnType spawnType, BlockPos pos, RandomSource random)
     {
         return accessor.getBlockState(pos.below()).is(TFCFTags.Blocks.FROGS_SPAWNABLE_ON) && isBrightEnoughToSpawn(accessor, pos);
     }

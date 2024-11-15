@@ -1,42 +1,38 @@
 package tfcflorae.world.feature.tree;
 
-import java.util.List;
-import java.util.Random;
-import java.util.function.BiConsumer;
-
 import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.LevelSimulatedReader;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
 import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecoratorType;
 import net.minecraft.world.level.levelgen.feature.treedecorators.TrunkVineDecorator;
-
 import tfcflorae.world.feature.TFCFFeatures;
 
-public class BambooLeavesDecorator extends TrunkVineDecorator
-{
-    public static final Codec<BambooLeavesDecorator> CODEC = BlockStateProvider.CODEC.fieldOf("block_provider").xmap(BambooLeavesDecorator::new, decorator -> {
-        return decorator.inputState;
-    }).codec();
+import java.util.List;
+
+public class BambooLeavesDecorator extends TrunkVineDecorator {
+    public static final Codec<BambooLeavesDecorator> CODEC = BlockStateProvider.CODEC.fieldOf("block_provider").xmap(BambooLeavesDecorator::new, decorator -> decorator.inputState).codec();
 
     private final BlockStateProvider inputState;
 
-    public BambooLeavesDecorator(BlockStateProvider inputState)
-    {
+    public BambooLeavesDecorator(BlockStateProvider inputState) {
         this.inputState = inputState;
     }
 
     @Override
-    protected TreeDecoratorType<?> type()
-    {
+    protected TreeDecoratorType<?> type() {
         return TFCFFeatures.BAMBOO_LEAVES.get();
     }
 
     @Override
-    public void place(LevelSimulatedReader levelReader, BiConsumer<BlockPos, BlockState> biConsumer, Random random, List<BlockPos> listBlockPos, List<BlockPos> listBlockPos2)
-    {
+    public void place(Context context) {
+
+        LevelSimulatedReader levelReader = context.level();
+        RandomSource random = context.random();
+        List<BlockPos> listBlockPos = context.logs();
+        List<BlockPos> listBlockPos2 = context.leaves();
+
         BlockPos newpos = listBlockPos.get(listBlockPos.size() - 1);
         BlockPos up1 = new BlockPos(newpos.getX(), newpos.getY() + 5, newpos.getZ());
         BlockPos up2 = new BlockPos(newpos.getX(), newpos.getY() + 6, newpos.getZ());
@@ -85,97 +81,97 @@ public class BambooLeavesDecorator extends TrunkVineDecorator
         BlockPos pzp = pzm.below();
         BlockPos nzp = nzm.below();
 
-        if (Feature.isAir(levelReader, px1))
-            biConsumer.accept(px1, inputState.getState(random, px1)); 
-        if (Feature.isAir(levelReader, px2))
-            biConsumer.accept(px2,  inputState.getState(random, px2)); 
-        if (Feature.isAir(levelReader, px3))
-            biConsumer.accept(px3,  inputState.getState(random, px3)); 
-        if (Feature.isAir(levelReader, nx1))
-            biConsumer.accept(nx1,  inputState.getState(random, nx1)); 
-        if (Feature.isAir(levelReader, nx2))
-            biConsumer.accept(nx2,  inputState.getState(random, nx2)); 
-        if (Feature.isAir(levelReader, nx3))
-            biConsumer.accept(nx3,  inputState.getState(random, nx3)); 
-        if (Feature.isAir(levelReader, pz1))
-            biConsumer.accept(pz1,  inputState.getState(random, pz1)); 
-        if (Feature.isAir(levelReader, pz2))
-            biConsumer.accept(pz2,  inputState.getState(random, pz2)); 
-        if (Feature.isAir(levelReader, pz3))
-            biConsumer.accept(pz3,  inputState.getState(random, pz3)); 
-        if (Feature.isAir(levelReader, nz1))
-            biConsumer.accept(nz1,  inputState.getState(random, nz1)); 
-        if (Feature.isAir(levelReader, nz2))
-            biConsumer.accept(nz2,  inputState.getState(random, nz2)); 
-        if (Feature.isAir(levelReader, nz3))
-            biConsumer.accept(nz3,  inputState.getState(random, nz3)); 
-        if (Feature.isAir(levelReader, px))
-            biConsumer.accept(px,  inputState.getState(random, px)); 
-        if (Feature.isAir(levelReader, nx))
-            biConsumer.accept(nx,  inputState.getState(random, nx)); 
-        if (Feature.isAir(levelReader, pz))
-            biConsumer.accept(pz,  inputState.getState(random, pz)); 
-        if (Feature.isAir(levelReader, nz))
-            biConsumer.accept(nz,  inputState.getState(random, nz)); 
-        if (Feature.isAir(levelReader, pxt))
-            biConsumer.accept(pxt,  inputState.getState(random, pxt)); 
-        if (Feature.isAir(levelReader, nxt))
-            biConsumer.accept(nxt,  inputState.getState(random, nxt)); 
-        if (Feature.isAir(levelReader, pzt))
-            biConsumer.accept(pzt,  inputState.getState(random, pzt)); 
-        if (Feature.isAir(levelReader, nzt))
-            biConsumer.accept(nzt,  inputState.getState(random, nzt)); 
-        if (Feature.isAir(levelReader, pxq))
-            biConsumer.accept(pxq,  inputState.getState(random, pxq)); 
-        if (Feature.isAir(levelReader, nxq))
-            biConsumer.accept(nxq,  inputState.getState(random, nxq)); 
-        if (Feature.isAir(levelReader, pzq))
-            biConsumer.accept(pzq,  inputState.getState(random, pzq)); 
-        if (Feature.isAir(levelReader, nzq))
-            biConsumer.accept(nzq,  inputState.getState(random, nzq)); 
-        if (Feature.isAir(levelReader, pxc))
-            biConsumer.accept(pxc,  inputState.getState(random, pxc)); 
-        if (Feature.isAir(levelReader, nxc))
-            biConsumer.accept(nxc,  inputState.getState(random, nxc)); 
-        if (Feature.isAir(levelReader, pzc))
-            biConsumer.accept(pzc,  inputState.getState(random, pzc)); 
-        if (Feature.isAir(levelReader, nzc))
-            biConsumer.accept(nzc,  inputState.getState(random, nzc)); 
-        if (Feature.isAir(levelReader, pxz))
-            biConsumer.accept(pxz,  inputState.getState(random, pxz)); 
-        if (Feature.isAir(levelReader, nxz))
-            biConsumer.accept(nxz,  inputState.getState(random, nxz)); 
-        if (Feature.isAir(levelReader, pzz))
-            biConsumer.accept(pzz,  inputState.getState(random, pzz)); 
-        if (Feature.isAir(levelReader, nzz))
-            biConsumer.accept(nzz,  inputState.getState(random, nzz)); 
-        if (Feature.isAir(levelReader, up1))
-            biConsumer.accept(up1,  inputState.getState(random, up1)); 
-        if (Feature.isAir(levelReader, up2))
-            biConsumer.accept(up2,  inputState.getState(random, up2)); 
-        if (Feature.isAir(levelReader, pxo))
-            biConsumer.accept(pxo,  inputState.getState(random, pxo)); 
-        if (Feature.isAir(levelReader, nxo))
-            biConsumer.accept(nxo,  inputState.getState(random, nxo)); 
-        if (Feature.isAir(levelReader, pzo))
-            biConsumer.accept(pzo,  inputState.getState(random, pzo)); 
-        if (Feature.isAir(levelReader, nzo))
-            biConsumer.accept(nzo,  inputState.getState(random, nzo)); 
-        if (Feature.isAir(levelReader, pxm))
-            biConsumer.accept(pxm,  inputState.getState(random, pxm)); 
-        if (Feature.isAir(levelReader, nxm))
-            biConsumer.accept(nxm,  inputState.getState(random, nxm)); 
-        if (Feature.isAir(levelReader, pzm))
-            biConsumer.accept(pzm,  inputState.getState(random, pzm)); 
-        if (Feature.isAir(levelReader, nzm))
-            biConsumer.accept(nzm,  inputState.getState(random, nzm)); 
-        if (Feature.isAir(levelReader, pxp))
-            biConsumer.accept(pxp,  inputState.getState(random, pxp)); 
-        if (Feature.isAir(levelReader, nxp))
-            biConsumer.accept(nxp,  inputState.getState(random, nxp)); 
-        if (Feature.isAir(levelReader, pzp))
-            biConsumer.accept(pzp,  inputState.getState(random, pzp)); 
-        if (Feature.isAir(levelReader, nzp))
-            biConsumer.accept(nzp,  inputState.getState(random, nzp));
+        if (context.isAir(px1))
+            context.setBlock(px1, inputState.getState(random, px1));
+        if (context.isAir(px2))
+            context.setBlock(px2, inputState.getState(random, px2));
+        if (context.isAir(px3))
+            context.setBlock(px3, inputState.getState(random, px3));
+        if (context.isAir(nx1))
+            context.setBlock(nx1, inputState.getState(random, nx1));
+        if (context.isAir(nx2))
+            context.setBlock(nx2, inputState.getState(random, nx2));
+        if (context.isAir(nx3))
+            context.setBlock(nx3, inputState.getState(random, nx3));
+        if (context.isAir(pz1))
+            context.setBlock(pz1, inputState.getState(random, pz1));
+        if (context.isAir(pz2))
+            context.setBlock(pz2, inputState.getState(random, pz2));
+        if (context.isAir(pz3))
+            context.setBlock(pz3, inputState.getState(random, pz3));
+        if (context.isAir(nz1))
+            context.setBlock(nz1, inputState.getState(random, nz1));
+        if (context.isAir(nz2))
+            context.setBlock(nz2, inputState.getState(random, nz2));
+        if (context.isAir(nz3))
+            context.setBlock(nz3, inputState.getState(random, nz3));
+        if (context.isAir(px))
+            context.setBlock(px, inputState.getState(random, px));
+        if (context.isAir(nx))
+            context.setBlock(nx, inputState.getState(random, nx));
+        if (context.isAir(pz))
+            context.setBlock(pz, inputState.getState(random, pz));
+        if (context.isAir(nz))
+            context.setBlock(nz, inputState.getState(random, nz));
+        if (context.isAir(pxt))
+            context.setBlock(pxt, inputState.getState(random, pxt));
+        if (context.isAir(nxt))
+            context.setBlock(nxt, inputState.getState(random, nxt));
+        if (context.isAir(pzt))
+            context.setBlock(pzt, inputState.getState(random, pzt));
+        if (context.isAir(nzt))
+            context.setBlock(nzt, inputState.getState(random, nzt));
+        if (context.isAir(pxq))
+            context.setBlock(pxq, inputState.getState(random, pxq));
+        if (context.isAir(nxq))
+            context.setBlock(nxq, inputState.getState(random, nxq));
+        if (context.isAir(pzq))
+            context.setBlock(pzq, inputState.getState(random, pzq));
+        if (context.isAir(nzq))
+            context.setBlock(nzq, inputState.getState(random, nzq));
+        if (context.isAir(pxc))
+            context.setBlock(pxc, inputState.getState(random, pxc));
+        if (context.isAir(nxc))
+            context.setBlock(nxc, inputState.getState(random, nxc));
+        if (context.isAir(pzc))
+            context.setBlock(pzc, inputState.getState(random, pzc));
+        if (context.isAir(nzc))
+            context.setBlock(nzc, inputState.getState(random, nzc));
+        if (context.isAir(pxz))
+            context.setBlock(pxz, inputState.getState(random, pxz));
+        if (context.isAir(nxz))
+            context.setBlock(nxz, inputState.getState(random, nxz));
+        if (context.isAir(pzz))
+            context.setBlock(pzz, inputState.getState(random, pzz));
+        if (context.isAir(nzz))
+            context.setBlock(nzz, inputState.getState(random, nzz));
+        if (context.isAir(up1))
+            context.setBlock(up1, inputState.getState(random, up1));
+        if (context.isAir(up2))
+            context.setBlock(up2, inputState.getState(random, up2));
+        if (context.isAir(pxo))
+            context.setBlock(pxo, inputState.getState(random, pxo));
+        if (context.isAir(nxo))
+            context.setBlock(nxo, inputState.getState(random, nxo));
+        if (context.isAir(pzo))
+            context.setBlock(pzo, inputState.getState(random, pzo));
+        if (context.isAir(nzo))
+            context.setBlock(nzo, inputState.getState(random, nzo));
+        if (context.isAir(pxm))
+            context.setBlock(pxm, inputState.getState(random, pxm));
+        if (context.isAir(nxm))
+            context.setBlock(nxm, inputState.getState(random, nxm));
+        if (context.isAir(pzm))
+            context.setBlock(pzm, inputState.getState(random, pzm));
+        if (context.isAir(nzm))
+            context.setBlock(nzm, inputState.getState(random, nzm));
+        if (context.isAir(pxp))
+            context.setBlock(pxp, inputState.getState(random, pxp));
+        if (context.isAir(nxp))
+            context.setBlock(nxp, inputState.getState(random, nxp));
+        if (context.isAir(pzp))
+            context.setBlock(pzp, inputState.getState(random, pzp));
+        if (context.isAir(nzp))
+            context.setBlock(nzp, inputState.getState(random, nzp));
     }
 }

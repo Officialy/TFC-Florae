@@ -1,10 +1,12 @@
 package tfcflorae.common.blocks.rock;
 
 import java.util.Map;
-import java.util.Random;
+
 import java.util.function.Predicate;
 import java.util.stream.Stream;
 
+import net.dries007.tfc.common.blocks.*;
+import net.minecraft.util.RandomSource;
 import org.jetbrains.annotations.Nullable;
 
 import com.google.common.collect.ImmutableMap;
@@ -39,10 +41,6 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-import net.dries007.tfc.common.blocks.DirectionPropertyBlock;
-import net.dries007.tfc.common.blocks.EntityBlockExtension;
-import net.dries007.tfc.common.blocks.ExtendedBlock;
-import net.dries007.tfc.common.blocks.ExtendedProperties;
 import net.dries007.tfc.common.fluids.FluidProperty;
 import net.dries007.tfc.common.fluids.IFluidLoggable;
 import net.dries007.tfc.common.fluids.TFCFluids;
@@ -81,7 +79,7 @@ public class MineralSheetBlock extends ExtendedBlock implements EntityBlockExten
 
     public static void removeSheet(Level level, BlockPos pos, BlockState state, Direction face, @Nullable Player player, boolean doDrops)
     {
-        final BlockState newState = state.setValue(PROPERTY_BY_DIRECTION.get(face), false);
+        final BlockState newState = state.setValue(HorizontalPipeBlock.PROPERTY_BY_DIRECTION.get(face), false);
 
         level.playSound(null, pos, SoundEvents.TUFF_BREAK, SoundSource.BLOCKS, 0.7f, 0.9f + 0.2f * level.getRandom().nextFloat());
         if (doDrops && (player == null || !player.isCreative()))
@@ -106,7 +104,7 @@ public class MineralSheetBlock extends ExtendedBlock implements EntityBlockExten
 
     public static void addSheet(LevelAccessor level, BlockPos pos, BlockState state, Direction face, ItemStack stack)
     {
-        final BlockState newState = state.setValue(PROPERTY_BY_DIRECTION.get(face), true);
+        final BlockState newState = state.setValue(HorizontalPipeBlock.PROPERTY_BY_DIRECTION.get(face), true);
 
         level.setBlock(pos, newState, Block.UPDATE_CLIENTS);
         level.getBlockEntity(pos, TFCFBlockEntities.MINERAL_SHEET.get()).ifPresent(pile -> pile.addSheet(face, stack));
@@ -189,11 +187,11 @@ public class MineralSheetBlock extends ExtendedBlock implements EntityBlockExten
 
     @Override
     @SuppressWarnings("deprecation")
-    public void tick(BlockState state, ServerLevel level, BlockPos pos, Random random)
+    public void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random)
     {
         for (Direction direction : Helpers.DIRECTIONS)
         {
-            if (state.getValue(PROPERTY_BY_DIRECTION.get(direction)))
+            if (state.getValue(HorizontalPipeBlock.PROPERTY_BY_DIRECTION.get(direction)))
             {
                 final BlockPos adjacentPos = pos.relative(direction);
                 final BlockState adjacentState = level.getBlockState(adjacentPos);
@@ -212,7 +210,7 @@ public class MineralSheetBlock extends ExtendedBlock implements EntityBlockExten
     {
         for (Direction direction : Helpers.DIRECTIONS)
         {
-            if (state.getValue(PROPERTY_BY_DIRECTION.get(direction)))
+            if (state.getValue(HorizontalPipeBlock.PROPERTY_BY_DIRECTION.get(direction)))
             {
                 final BlockPos adjacentPos = pos.relative(direction);
                 final BlockState adjacentState = level.getBlockState(adjacentPos);
@@ -312,6 +310,6 @@ public class MineralSheetBlock extends ExtendedBlock implements EntityBlockExten
     @SuppressWarnings("deprecation")
     public FluidState getFluidState(BlockState state)
     {
-        return IFluidLoggable.super.getFluidState(state);
+        return IFluidLoggable.super.getFluidLoggedState(state);
     }
 }

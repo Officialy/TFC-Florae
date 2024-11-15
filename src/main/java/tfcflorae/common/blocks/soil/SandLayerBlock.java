@@ -287,7 +287,7 @@ public class SandLayerBlock extends TFCSandBlock implements IFluidLoggable, IFor
    @SuppressWarnings("deprecation")
    public FluidState getFluidState(BlockState state)
    {
-      return IFluidLoggable.super.getFluidState(state);
+      return IFluidLoggable.super.getFluidLoggedState(state);
    }
 
    @Override

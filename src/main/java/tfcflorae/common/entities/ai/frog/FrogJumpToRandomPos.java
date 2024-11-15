@@ -63,7 +63,7 @@ public class FrogJumpToRandomPos<E extends Mob> extends Behavior<E>
     @Override
     protected boolean checkExtraStartConditions(ServerLevel level, Mob entity)
     {
-        boolean canUse = entity.isOnGround() && !entity.isInWater() && !entity.isInLava() && !level.getBlockState(entity.blockPosition()).is(Blocks.HONEY_BLOCK);
+        boolean canUse = entity.onGround() && !entity.isInWater() && !entity.isInLava() && !level.getBlockState(entity.blockPosition()).is(Blocks.HONEY_BLOCK);
         if (!canUse) entity.getBrain().setMemory(MemoryModuleType.LONG_JUMP_COOLDOWN_TICKS, this.cooldown.sample(level.random) / 2);
         return canUse;
     }
@@ -169,7 +169,7 @@ public class FrogJumpToRandomPos<E extends Mob> extends Behavior<E>
         }
         else
         {
-            return entity.getPathfindingMalus(WalkNodeEvaluator.getBlockPathTypeStatic(entity.level, pos.mutable())) == 0.0F;
+            return entity.getPathfindingMalus(WalkNodeEvaluator.getBlockPathTypeStatic(entity.level(), pos.mutable())) == 0.0F;
         }
     }
 
@@ -256,7 +256,7 @@ public class FrogJumpToRandomPos<E extends Mob> extends Behavior<E>
         {
             vector = i == height - 1 ? target : vector.add(normal.scale(size * (double)0.9F));
             AABB box = dimensions.makeBoundingBox(vector);
-            if (!entity.level.noCollision(entity, box))
+            if (!entity.level().noCollision(entity, box))
             {
                 return false;
             }

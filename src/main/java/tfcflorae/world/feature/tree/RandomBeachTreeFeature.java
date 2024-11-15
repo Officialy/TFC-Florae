@@ -1,19 +1,21 @@
 package tfcflorae.world.feature.tree;
 
 import com.mojang.serialization.Codec;
+import net.dries007.tfc.world.feature.tree.RandomTreeFeature;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.StructureManager;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.SaplingBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
-import net.minecraft.world.level.levelgen.structure.templatesystem.StructureManager;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlaceSettings;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
+import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplateManager;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 
@@ -23,11 +25,10 @@ import net.dries007.tfc.common.fluids.FluidHelpers;
 import net.dries007.tfc.mixin.accessor.StructureTemplateAccessor;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.world.feature.tree.RandomTreeConfig;
-import net.dries007.tfc.world.feature.tree.TreeFeature;
 import net.dries007.tfc.world.feature.tree.TreeHelpers;
 import net.dries007.tfc.world.feature.tree.TreePlacementConfig;
 
-public class RandomBeachTreeFeature extends TreeFeature<RandomTreeConfig>
+public class RandomBeachTreeFeature extends RandomTreeFeature
 {
     public RandomBeachTreeFeature(Codec<RandomTreeConfig> codec)
     {
@@ -44,7 +45,7 @@ public class RandomBeachTreeFeature extends TreeFeature<RandomTreeConfig>
 
         final ChunkPos chunkPos = new ChunkPos(pos);
         final BlockPos.MutableBlockPos mutablePos = new BlockPos.MutableBlockPos().set(pos);
-        final StructureManager manager = TreeHelpers.getStructureManager(level);
+        final StructureTemplateManager manager = TreeHelpers.getStructureManager(level);
         final StructurePlaceSettings settings = TreeHelpers.getPlacementSettings(level, chunkPos, random);
         final ResourceLocation structureId = config.structureNames().get(random.nextInt(config.structureNames().size()));
         final StructureTemplate structure = manager.getOrCreate(structureId);
@@ -77,7 +78,7 @@ public class RandomBeachTreeFeature extends TreeFeature<RandomTreeConfig>
                 TreeHelpers.transformMutable(mutablePos, settings.getMirror(), settings.getRotation());
                 mutablePos.move(pos);
 
-                if (!(config.allowDeeplySubmerged() ? isValidPositionPossiblyUnderwater(level, mutablePos) : isValidPosition(level, mutablePos, config)))
+                if (!(config.mayPlaceUnderwater() ? isValidPositionPossiblyUnderwater(level, mutablePos) : isValidPosition(level, mutablePos, config)))
                 {
                     return false;
                 }
@@ -90,7 +91,7 @@ public class RandomBeachTreeFeature extends TreeFeature<RandomTreeConfig>
     {
         final BlockState stateAt = level.getBlockState(mutablePos);
         final boolean isInWater = stateAt.getFluidState().getType() == Fluids.WATER;
-        if (!(config.allowSubmerged() && FluidHelpers.isAirOrEmptyFluid(stateAt) && isInWater)
+        if (!(config.mayPlaceInWater() && FluidHelpers.isAirOrEmptyFluid(stateAt) && isInWater)
             && !stateAt.isAir()
             && !(stateAt.getBlock() instanceof SaplingBlock))
         {
@@ -101,7 +102,7 @@ public class RandomBeachTreeFeature extends TreeFeature<RandomTreeConfig>
 
         final BlockState stateBelow = level.getBlockState(mutablePos);
         boolean treeGrowsOn = Helpers.isBlock(stateBelow, TFCTags.Blocks.TREE_GROWS_ON) || Helpers.isBlock(stateBelow, BlockTags.SAND);
-        if (config.allowSubmerged() && isInWater)
+        if (config.mayPlaceInWater() && isInWater)
         {
             treeGrowsOn |= Helpers.isBlock(stateBelow, TFCTags.Blocks.SEA_BUSH_PLANTABLE_ON);
         }

@@ -1,7 +1,8 @@
 package tfcflorae.common.blocks.plant;
 
-import java.util.Random;
 
+
+import net.minecraft.util.RandomSource;
 import org.jetbrains.annotations.Nullable;
 
 import net.minecraft.core.BlockPos;
@@ -139,7 +140,7 @@ public abstract class TFCFSeagrassBlock extends WaterPlantBlock
     }
 
     @Override
-    public void tick(BlockState state, ServerLevel level, BlockPos pos, Random random)
+    public void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random)
     {
         if (!state.canSurvive(level, pos))
         {
@@ -183,11 +184,13 @@ public abstract class TFCFSeagrassBlock extends WaterPlantBlock
         return SHORTER_PLANT_SHAPE;
     }
 
+/*
     @Override
     public OffsetType getOffsetType()
     {
         return OffsetType.XZ;
     }
+*/
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder)
@@ -225,7 +228,7 @@ public abstract class TFCFSeagrassBlock extends WaterPlantBlock
     }
 
     @Override
-    public void randomTick(BlockState state, ServerLevel level, BlockPos pos, Random random)
+    public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random)
     {
         super.randomTick(state, level, pos, random);
         int j = state.getValue(AGE);
@@ -267,7 +270,7 @@ public abstract class TFCFSeagrassBlock extends WaterPlantBlock
         return state.getValue(SINGLE) == true && !level.getBlockState(pos.above()).isAir();
     }
 
-    public void grow(ServerLevel level, Random rand, BlockPos pos, BlockState state)
+    public void grow(ServerLevel level, RandomSource rand, BlockPos pos, BlockState state)
     {
         IntegerProperty stageProperty = getPlant().getStageProperty();
         FluidState fluidState = level.getFluidState(pos);
@@ -288,7 +291,7 @@ public abstract class TFCFSeagrassBlock extends WaterPlantBlock
         }
     }
 
-    public void placeTwoHalves(LevelAccessor level, BlockPos pos, int flags, Random random, Fluid fluid)
+    public void placeTwoHalves(LevelAccessor level, BlockPos pos, int flags, RandomSource random, Fluid fluid)
     {
         FluidState fluidState = level.getFluidState(pos);
         if (getFluidProperty().canContain(fluidState.getType()) && fluidState.getType() != Fluids.EMPTY)
@@ -306,7 +309,7 @@ public abstract class TFCFSeagrassBlock extends WaterPlantBlock
         }
     }
 
-    public void placeSingle(LevelAccessor level, BlockPos pos, int flags, Random random, Fluid fluid)
+    public void placeSingle(LevelAccessor level, BlockPos pos, int flags, RandomSource random, Fluid fluid)
     {
         int age = random.nextInt(3);
         level.setBlock(pos, updateStateWithCurrentMonth(defaultBlockState().setValue(TFCBlockStateProperties.TALL_PLANT_PART, Part.LOWER).setValue(TFCBlockStateProperties.AGE_3, age).setValue(SINGLE, true).setValue(getFluidProperty(), getFluidProperty().keyFor(fluid))), flags);

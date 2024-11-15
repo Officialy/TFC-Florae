@@ -1,6 +1,6 @@
 package tfcflorae.common.blocks.plant;
 
-import java.util.Random;
+
 import java.util.function.Supplier;
 
 import javax.annotation.Nullable;
@@ -9,6 +9,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -109,11 +110,11 @@ public abstract class BambooPlantBlock extends TFCBushBlock implements IFluidLog
         builder.add(AGE, LEAVES, GROWTH_STAGE, getFluidProperty());
     }
 
-    @Override
+/*todo    @Override
     public BlockBehaviour.OffsetType getOffsetType()
     {
         return BlockBehaviour.OffsetType.XZ;
-    }
+    }*/
 
     @Override
     public boolean propagatesSkylightDown(BlockState state, BlockGetter pReader, BlockPos pos)
@@ -191,7 +192,7 @@ public abstract class BambooPlantBlock extends TFCBushBlock implements IFluidLog
     }
 
     @Override
-    public void tick(BlockState state, ServerLevel level, BlockPos pos, Random random)
+    public void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random)
     {
         if (!state.canSurvive(level, pos))
         {
@@ -206,7 +207,7 @@ public abstract class BambooPlantBlock extends TFCBushBlock implements IFluidLog
     }
 
     @Override
-    public void randomTick(BlockState state, ServerLevel level, BlockPos pos, Random random)
+    public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random)
     {
         if (random.nextDouble() < TFCConfig.SERVER.plantGrowthChance.get() && state.getValue(GROWTH_STAGE) == 0)
         {
@@ -266,7 +267,7 @@ public abstract class BambooPlantBlock extends TFCBushBlock implements IFluidLog
         }
     }
 
-    public void growBamboo(BlockState state, Level level, BlockPos pos, Random random, int pMaxTotalSize)
+    public void growBamboo(BlockState state, Level level, BlockPos pos, RandomSource random, int pMaxTotalSize)
     {
         BlockState blockstate = level.getBlockState(pos.below());
         BlockPos blockpos = pos.below(2);
@@ -365,6 +366,6 @@ public abstract class BambooPlantBlock extends TFCBushBlock implements IFluidLog
     @SuppressWarnings("deprecation")
     public FluidState getFluidState(BlockState state)
     {
-        return IFluidLoggable.super.getFluidState(state);
+        return IFluidLoggable.super.getFluidLoggedState(state);
     }
 }

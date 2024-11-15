@@ -6,19 +6,20 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
+import net.dries007.tfc.common.fluids.FluidId;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.level.material.FlowingFluid;
 import net.minecraft.world.level.material.Fluid;
-import net.minecraftforge.fluids.FluidAttributes;
+import net.minecraftforge.common.SoundAction;
+import net.minecraftforge.common.SoundActions;
+import net.minecraftforge.fluids.FluidType;
 import net.minecraftforge.fluids.ForgeFlowingFluid;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
-import net.dries007.tfc.common.fluids.FlowingFluidRegistryObject;
-import net.dries007.tfc.common.fluids.FluidType;
 import net.dries007.tfc.common.fluids.MoltenFluid;
 import net.dries007.tfc.common.items.TFCItems;
 import net.dries007.tfc.util.Helpers;
@@ -40,21 +41,22 @@ public class TFCFFluids
 
     public static final int ALPHA_MASK = 0xFF000000;
 
-    public static final Map<SimpleFluids, FlowingFluidRegistryObject<ForgeFlowingFluid>> SIMPLE_FLUIDS = Helpers.mapOfKeys(SimpleFluids.class, fluid -> register(
+/*    public static final Map<SimpleFluids, RegistryObject<ForgeFlowingFluid>> SIMPLE_FLUIDS = Helpers.mapOfKeys(SimpleFluids.class, fluid -> register(
         "ore/" + fluid.getId(),
         "ore/flowing_" + fluid.getId(),
-        properties -> properties.block(TFCFBlocks.SIMPLE_FLUIDS.get(fluid)).bucket(TFCItems.FLUID_BUCKETS.get(FluidType.asType(fluid))).explosionResistance(100),
-        FluidAttributes.builder(MOLTEN_STILL, MOLTEN_FLOW)
-            .translationKey("fluid.tfcflorae.ore." + fluid.getId())
-            .color(ALPHA_MASK | fluid.getColor())
-            .luminosity(15)
+        properties -> properties.block(TFCFBlocks.SIMPLE_FLUIDS.get(fluid)).bucket(TFCItems.FLUID_BUCKETS.get(FluidId.asType(fluid))).explosionResistance(100),
+//                    (MOLTEN_STILL, MOLTEN_FLOW)
+        FluidType.Properties.create()
+//            .translationKey("fluid.tfcflorae.ore." + fluid.getId())
+//            .color(ALPHA_MASK | fluid.getColor())
+//            .luminosity(15)
             .density(3000)
             .viscosity(6000)
             .temperature(1300)
-            .sound(SoundEvents.BUCKET_FILL_LAVA, SoundEvents.BUCKET_EMPTY_LAVA),
+            .sound(SoundActions.BUCKET_FILL, SoundEvents.BUCKET_EMPTY_LAVA),
         MoltenFluid.Source::new,
         MoltenFluid.Flowing::new
-    ));
+    ));*/
 
     public static int dyeColorToInt(DyeColor dye)
     {
@@ -62,15 +64,15 @@ public class TFCFFluids
         return new Color(colors[0], colors[1], colors[2]).getRGB();
     }
 
-    private static FlowingFluidRegistryObject<ForgeFlowingFluid> register(String sourceName, String flowingName, Consumer<ForgeFlowingFluid.Properties> builder, FluidAttributes.Builder attributes)
+/*    private static RegistryObject<ForgeFlowingFluid> register(String sourceName, String flowingName, Consumer<ForgeFlowingFluid.Properties> builder, FluidAttributes.Builder attributes)
     {
         return RegistrationHelpers.registerFluid(FLUIDS, sourceName, flowingName, builder, attributes);
     }
 
-    private static <F extends FlowingFluid> FlowingFluidRegistryObject<F> register(String sourceName, String flowingName, Consumer<ForgeFlowingFluid.Properties> builder, FluidAttributes.Builder attributes, Function<ForgeFlowingFluid.Properties, F> sourceFactory, Function<ForgeFlowingFluid.Properties, F> flowingFactory)
+    private static <F extends FlowingFluid> RegistryObject<F> register(String sourceName, String flowingName, Consumer<ForgeFlowingFluid.Properties> builder, FluidAttributes.Builder attributes, Function<ForgeFlowingFluid.Properties, F> sourceFactory, Function<ForgeFlowingFluid.Properties, F> flowingFactory)
     {
         return RegistrationHelpers.registerFluid(FLUIDS, sourceName, flowingName, builder, attributes, sourceFactory, flowingFactory);
-    }
+    }*/
 
     private static <F extends Fluid> RegistryObject<F> register(String name, Supplier<F> factory)
     {

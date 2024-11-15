@@ -34,7 +34,7 @@ public class WalkingCaneItem extends Item implements Vanishable
         if (event.phase == TickEvent.Phase.END)
         {
             Player player = event.player;
-            if (!player.level.isClientSide)
+            if (!player.level().isClientSide)
             {
                 AttributeInstance movementSpeed = player.getAttribute(Attributes.MOVEMENT_SPEED);
                 if (movementSpeed != null)

@@ -34,7 +34,7 @@ import static tfcflorae.TFCFlorae.MOD_ID;
 @SuppressWarnings("unused")
 public class TFCFEntities
 {
-    public static final DeferredRegister<EntityType<?>> ENTITIES = DeferredRegister.create(ForgeRegistries.ENTITIES, MOD_ID);
+    public static final DeferredRegister<EntityType<?>> ENTITIES = DeferredRegister.create(ForgeRegistries.ENTITY_TYPES, MOD_ID);
 
     public static final Map<TFCFWood, RegistryObject<EntityType<TFCFBoat>>> BOATS = boatEntityMapper();
 

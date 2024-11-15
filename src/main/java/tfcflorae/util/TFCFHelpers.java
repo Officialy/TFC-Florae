@@ -4,9 +4,10 @@ import java.awt.*;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
-import java.util.Random;
+
 import java.util.function.Consumer;
 
+import net.dries007.tfc.world.settings.Settings;
 import net.minecraft.Util;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
@@ -15,7 +16,6 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -32,8 +32,8 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.levelgen.RandomSource;
-import net.minecraft.world.level.material.MaterialColor;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.levelgen.LegacyRandomSource;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
@@ -60,7 +60,6 @@ import net.dries007.tfc.world.chunkdata.ChunkDataProvider;
 import net.dries007.tfc.world.chunkdata.LerpFloatLayer;
 import net.dries007.tfc.world.noise.Noise2D;
 import net.dries007.tfc.world.noise.OpenSimplex2D;
-import net.dries007.tfc.world.settings.ClimateSettings;
 import net.dries007.tfc.world.settings.RockSettings;
 
 import tfcflorae.TFCFlorae;
@@ -72,7 +71,7 @@ import tfcflorae.common.blocks.soil.TFCFSoil;
 
 public class TFCFHelpers
 {
-    public static final Random RANDOM = new Random();
+    public static final RandomSource RANDOM = RandomSource.create();
     public static final Direction[] NOT_DOWN = new Direction[] {Direction.WEST, Direction.EAST, Direction.NORTH, Direction.SOUTH, Direction.UP};
     public static final Direction[] NOT_UP = new Direction[] {Direction.WEST, Direction.EAST, Direction.NORTH, Direction.SOUTH, Direction.DOWN};
     public static final Direction[] DIRECTIONS = Direction.values();
@@ -80,9 +79,9 @@ public class TFCFHelpers
     public static final Direction[] DIRECTIONS_HORIZONTAL = Arrays.stream(DIRECTIONS).filter(d -> d != Direction.DOWN && d != Direction.UP).toArray(Direction[]::new);
     public static final Direction[] DIRECTIONS_VERTICAL = Arrays.stream(DIRECTIONS).filter(d -> d == Direction.DOWN || d == Direction.UP).toArray(Direction[]::new);
 
-    public static Random randomSeed(long seed)
+    public static RandomSource randomSeed(long seed)
     {
-        final Random random = new Random(seed);
+        final RandomSource random = RandomSource.create(seed);
         random.setSeed(seed ^ random.nextLong());
         return random;
     }
@@ -100,7 +99,7 @@ public class TFCFHelpers
             ChunkPos chunkPos = new ChunkPos(chunkX, chunkZ);
             return data.getRainfall(chunkPos.getMiddleBlockX(), chunkPos.getMiddleBlockZ());
         }
-        else
+        /*todo find fix
         {
             final ClimateSettings rainfallSettings = ClimateSettings.DEFAULT;
 
@@ -112,13 +111,14 @@ public class TFCFHelpers
                     .scaled(-OverworldClimateModel.REGIONAL_RAINFALL_SCALE, OverworldClimateModel.REGIONAL_RAINFALL_SCALE))
                 .clamped(ClimateModel.MINIMUM_RAINFALL, ClimateModel.MAXIMUM_RAINFALL);
 
-                float rainNW = rainfallNoise.noise(chunkX, chunkZ);
-                float rainNE = rainfallNoise.noise(chunkX + 16, chunkZ);
-                float rainSW = rainfallNoise.noise(chunkX, chunkZ + 16);
-                float rainSE = rainfallNoise.noise(chunkX + 16, chunkZ + 16);
+                float rainNW = (float) rainfallNoise.noise(chunkX, chunkZ);
+                float rainNE = (float) rainfallNoise.noise(chunkX + 16, chunkZ);
+                float rainSW = (float) rainfallNoise.noise(chunkX, chunkZ + 16);
+                float rainSE = (float) rainfallNoise.noise(chunkX + 16, chunkZ + 16);
 
                 return new LerpFloatLayer(rainNW, rainNE, rainSW, rainSE).getValue((chunkZ & 15) / 16f, 1 - ((chunkX & 15) / 16f));
-        }
+        }*/
+        return 20; //todo FIX OR DIE
     }
 
     public static float getTemperature(long seed, int chunkX, int chunkZ)
@@ -129,27 +129,28 @@ public class TFCFHelpers
             ChunkPos chunkPos = new ChunkPos(chunkX, chunkZ);
             return data.getAverageTemp(chunkPos.getMiddleBlockX(), chunkPos.getMiddleBlockZ());
         }
-        else
+       /* else todo find fix for settings
         {
-            final ClimateSettings temperatureSettings = ClimateSettings.DEFAULT;
+            final Settings temperatureSettings = Settings.DEFAULT;
 
             Noise2D temperatureNoise = ((Noise2D) (x, z) -> Helpers.triangle(1, 0, 1f / (4f * temperatureSettings.scale()), temperatureSettings.endlessPoles() ? Mth.clamp(z, -temperatureSettings.scale(), temperatureSettings.scale()) : z))
-                .scaled(OverworldClimateModel.MINIMUM_TEMPERATURE_SCALE, OverworldClimateModel.MAXIMUM_TEMPERATURE_SCALE)
+                .scaled(Settings.MINIMUM_TEMPERATURE_SCALE, Settings.MAXIMUM_TEMPERATURE_SCALE)
                 .add(new OpenSimplex2D(randomSeed(seed).nextInt())
                     .octaves(2)
                     .spread(12f / temperatureSettings.scale())
-                    .scaled(-OverworldClimateModel.REGIONAL_TEMPERATURE_SCALE, OverworldClimateModel.REGIONAL_TEMPERATURE_SCALE));
+                    .scaled(-Settings.REGIONAL_TEMPERATURE_SCALE, Settings.REGIONAL_TEMPERATURE_SCALE));
 
-            float tempNW = temperatureNoise.noise(chunkX, chunkZ);
-            float tempNE = temperatureNoise.noise(chunkX + 16, chunkZ);
-            float tempSW = temperatureNoise.noise(chunkX, chunkZ + 16);
-            float tempSE = temperatureNoise.noise(chunkX + 16, chunkZ + 16);
+            float tempNW = (float) temperatureNoise.noise(chunkX, chunkZ);
+            float tempNE = (float) temperatureNoise.noise(chunkX + 16, chunkZ);
+            float tempSW = (float) temperatureNoise.noise(chunkX, chunkZ + 16);
+            float tempSE = (float) temperatureNoise.noise(chunkX + 16, chunkZ + 16);
 
             return new LerpFloatLayer(tempNW, tempNE, tempSW, tempSE).getValue((chunkZ & 15) / 16f, 1 - ((chunkX & 15) / 16f));
-        }
+        }*/
+        return 20; //todo FIX OR DIE
     }
 
-    public static float getForestDensity(long seed, int chunkX, int chunkZ)
+    public static double getForestDensity(long seed, int chunkX, int chunkZ)
     {
         if(getLevel() != null)
         {
@@ -167,14 +168,14 @@ public class TFCFHelpers
         return new ResourceLocation(TFCFlorae.MOD_ID, id);
     }
 
-    public static Direction getRandom(Random random)
+    public static Direction getRandom(RandomSource random)
     {
         return Util.getRandom(DIRECTIONS_HORIZONTAL, random);
     }
 
     public static Component blockEntityName(String name)
     {
-        return new TranslatableComponent(TFCFlorae.MOD_ID + ".block_entity." + name);
+        return Component.translatable(TFCFlorae.MOD_ID + ".block_entity." + name);
     }
 
     public static InteractionResult insertOne(Level level, ItemStack item, int slot, IItemHandler inv, Player player)
@@ -231,22 +232,6 @@ public class TFCFHelpers
         return BlockPos.betweenClosed(center.offset(-radius, -height, -radius), center.offset(radius, height, radius));
     }
 
-    // todo: 1.19. inline and remove these
-    public static void openScreen(ServerPlayer player, MenuProvider containerSupplier)
-    {
-        NetworkHooks.openGui(player, containerSupplier);
-    }
-    
-    public static void openScreen(ServerPlayer player, MenuProvider containerSupplier, BlockPos pos)
-    {
-        NetworkHooks.openGui(player, containerSupplier, pos);
-    }
-
-    public static void openScreen(ServerPlayer player, MenuProvider containerSupplier, Consumer<FriendlyByteBuf> extraDataWriter)
-    {
-        NetworkHooks.openGui(player, containerSupplier, extraDataWriter);
-    }
-
     public static int randomRange(int min, int max)
     {
         return RANDOM.nextInt(max - min) + min;
@@ -301,9 +286,9 @@ public class TFCFHelpers
     /**
      * Use over invoking the constructor, as Mojang refactors this in 1.19
      */
-    public static TranslatableComponent translatable(String key)
+    public static Component translatable(String key)
     {
-        return new TranslatableComponent(key);
+        return Component.translatable(key);
     }
 
     public static RegistryRock rockType(ServerLevel level, BlockPos pos)
@@ -409,7 +394,7 @@ public class TFCFHelpers
         {
             for (Direction direction : TFCFHelpers.DIRECTIONS_HORIZONTAL_FIRST)
             {
-                SandBlockType colour = Colors.toSandTFC(Colors.fromMaterialColour(level.getBlockState(pos.relative(direction)).getBlock().defaultMaterialColor()), true);
+                SandBlockType colour = Colors.toSandTFC(Colors.fromMaterialColour(level.getBlockState(pos.relative(direction)).getBlock().defaultMapColor()), true);
                 if (colour != null)
                 {
                     foundColour = true;
@@ -423,7 +408,7 @@ public class TFCFHelpers
         }
         else if (cheap)
         {
-            SandBlockType colour = Colors.toSandTFC(Colors.fromMaterialColour(level.getBlockState(pos.below()).getBlock().defaultMaterialColor()), true);
+            SandBlockType colour = Colors.toSandTFC(Colors.fromMaterialColour(level.getBlockState(pos.below()).getBlock().defaultMapColor()), true);
             if (colour != null)
             {
                 foundColour = true;
@@ -461,7 +446,7 @@ public class TFCFHelpers
         {
             for (Direction direction : TFCFHelpers.DIRECTIONS_HORIZONTAL_FIRST)
             {
-                Colors colour = Colors.fromMaterialColour(level.getBlockState(pos.relative(direction)).getBlock().defaultMaterialColor());
+                Colors colour = Colors.fromMaterialColour(level.getBlockState(pos.relative(direction)).getBlock().defaultMapColor());
                 if (colour != null)
                 {
                     foundColour = true;
@@ -475,7 +460,7 @@ public class TFCFHelpers
         }
         else if (cheap)
         {
-            Colors colour = Colors.fromMaterialColour(level.getBlockState(pos.below()).getBlock().defaultMaterialColor());
+            Colors colour = Colors.fromMaterialColour(level.getBlockState(pos.below()).getBlock().defaultMapColor());
             if (colour != null)
             {
                 foundColour = true;
@@ -506,56 +491,34 @@ public class TFCFHelpers
 		return Colors.ORANGE;
 	}
 
-    public static MaterialColor gemColor(Gem gem)
+    public static MapColor gemColor(Gem gem)
     {
-        switch (gem)
-        {
-            case AMETHYST:
-                return MaterialColor.COLOR_PURPLE;
-            case DIAMOND:
-                return MaterialColor.DIAMOND;
-            case EMERALD:
-                return MaterialColor.EMERALD;
-            case LAPIS_LAZULI:
-                return MaterialColor.LAPIS;
-            case OPAL:
-                return MaterialColor.COLOR_LIGHT_BLUE;
-            case PYRITE:
-                return MaterialColor.GOLD;
-            case RUBY:
-                return MaterialColor.COLOR_RED;
-            case SAPPHIRE:
-                return MaterialColor.COLOR_BLUE;
-            case TOPAZ:
-                return MaterialColor.COLOR_ORANGE;
-            default:
-                return MaterialColor.QUARTZ;
-        }
+        return switch (gem) {
+            case AMETHYST -> MapColor.COLOR_PURPLE;
+            case DIAMOND -> MapColor.DIAMOND;
+            case EMERALD -> MapColor.EMERALD;
+            case LAPIS_LAZULI -> MapColor.LAPIS;
+            case OPAL -> MapColor.COLOR_LIGHT_BLUE;
+            case PYRITE -> MapColor.GOLD;
+            case RUBY -> MapColor.COLOR_RED;
+            case SAPPHIRE -> MapColor.COLOR_BLUE;
+            case TOPAZ -> MapColor.COLOR_ORANGE;
+            default -> MapColor.QUARTZ;
+        };
     }
 
     public static int getFlowerColor(FruitBlocks.Tree tree)
     {
-        switch (tree)
-        {
-            case CHERRY:
-                return new Color(251, 135, 255).getRGB();
-            case GREEN_APPLE:
-                return new Color(252, 171, 255).getRGB();
-            case LEMON:
-                return new Color(215, 137, 217).getRGB();
-            case OLIVE:
-                return new Color(206, 198, 207).getRGB();
-            case ORANGE:
-                return new Color(251, 242, 252).getRGB();
-            case PEACH:
-                return new Color(230, 126, 188).getRGB();
-            case PLUM:
-                return new Color(165, 70, 189).getRGB();
-            case RED_APPLE:
-                return new Color(252, 171, 255).getRGB();
-            default:
-                return -1;
-        }
+        return switch (tree) {
+            case CHERRY -> new Color(251, 135, 255).getRGB();
+            case GREEN_APPLE -> new Color(252, 171, 255).getRGB();
+            case LEMON -> new Color(215, 137, 217).getRGB();
+            case OLIVE -> new Color(206, 198, 207).getRGB();
+            case ORANGE -> new Color(251, 242, 252).getRGB();
+            case PEACH -> new Color(230, 126, 188).getRGB();
+            case PLUM -> new Color(165, 70, 189).getRGB();
+            case RED_APPLE -> new Color(252, 171, 255).getRGB();
+        };
     }
 
     @SuppressWarnings("deprecation")
@@ -564,8 +527,8 @@ public class TFCFHelpers
         TextureAtlasSprite sprite = Minecraft.getInstance().getBlockRenderer().getBlockModel(state).getQuads(state, Direction.NORTH, level.getRandom()).get(0).getSprite();
         int x0 = sprite.getX();
         int y0 = sprite.getY();
-        int x1 = x0 + sprite.getWidth();
-        int y1 = y0 + sprite.getHeight();
+        int x1 = x0 + sprite.getX();
+        int y1 = y0 + sprite.getY();
         long sumr = 0, sumg = 0, sumb = 0;
         for (int xs = x0; xs < x1; xs++)
         {
@@ -577,7 +540,7 @@ public class TFCFHelpers
                 sumb += pixel.getBlue();
             }
         }
-        int num = sprite.getWidth() * sprite.getHeight();
+        int num = sprite.getX() * sprite.getY();
         return new Color(sumr / num, sumg / num, sumb / num);
     }
 
@@ -642,7 +605,7 @@ public class TFCFHelpers
         return 0.5F * (2.0F * start + (end - startPoint) * delta + (2.0F * startPoint - 5.0F * start + 4.0F * end - endPoint) * delta * delta + (3.0F * start - startPoint - 3.0F * end + endPoint) * delta * delta * delta);
     }
 
-    public static void spawnParticleBelow(Level level, BlockPos pos, Random random, ParticleOptions options)
+    public static void spawnParticleBelow(Level level, BlockPos pos, RandomSource random, ParticleOptions options)
     {
         double d0 = (double)pos.getX() + random.nextDouble();
         double d1 = (double)pos.getY() - 0.05D;
@@ -672,70 +635,48 @@ public class TFCFHelpers
         return sum / ICalendar.HOURS_IN_DAY;
     }
 
-    public static Direction chooseOtherDirection(Direction direction, Random random)
+    public static Direction chooseOtherDirection(Direction direction, RandomSource random)
     {
         final int age = random.nextInt(3);
-        switch (age)
-        {
-            case 0:
-                return direction.getClockWise();
-            case 1:
-                return direction.getCounterClockWise();
-            default:
-                return direction.getOpposite();
-        }
+        return switch (age) {
+            case 0 -> direction.getClockWise();
+            case 1 -> direction.getCounterClockWise();
+            default -> direction.getOpposite();
+        };
     }
 
-    public static float getRockNutrient(RegistryRock rockType, NutrientType forType, Random random)
+    public static float getRockNutrient(RegistryRock rockType, NutrientType forType, RandomSource random)
     {
         float gaussModifier = Mth.abs((float) random.nextGaussian()) * 0.09F;
         if (forType == NutrientType.NITROGEN)
         {
-            switch (rockType.category())
-            {
-                case IGNEOUS_EXTRUSIVE:
-                    return 0.005F + gaussModifier;
-                case IGNEOUS_INTRUSIVE:
-                    return 0.01F + gaussModifier;
-                case METAMORPHIC:
-                    return 0.025F + gaussModifier;
-                case SEDIMENTARY:
-                    return 0.04F + gaussModifier;
-                default:
-                    return 0.01F + gaussModifier;
-            }
+            return switch (rockType.category()) {
+                case IGNEOUS_EXTRUSIVE -> 0.005F + gaussModifier;
+                case IGNEOUS_INTRUSIVE -> 0.01F + gaussModifier;
+                case METAMORPHIC -> 0.025F + gaussModifier;
+                case SEDIMENTARY -> 0.04F + gaussModifier;
+                default -> 0.01F + gaussModifier;
+            };
         }
         else if (forType == NutrientType.PHOSPHOROUS)
         {
-            switch (rockType.category())
-            {
-                case IGNEOUS_EXTRUSIVE:
-                    return 0.13F + gaussModifier;
-                case IGNEOUS_INTRUSIVE:
-                    return 0.09F + gaussModifier;
-                case METAMORPHIC:
-                    return 0.05F + gaussModifier;
-                case SEDIMENTARY:
-                    return 0.08F + gaussModifier;
-                default:
-                    return 0.04F + gaussModifier;
-            }
+            return switch (rockType.category()) {
+                case IGNEOUS_EXTRUSIVE -> 0.13F + gaussModifier;
+                case IGNEOUS_INTRUSIVE -> 0.09F + gaussModifier;
+                case METAMORPHIC -> 0.05F + gaussModifier;
+                case SEDIMENTARY -> 0.08F + gaussModifier;
+                default -> 0.04F + gaussModifier;
+            };
         }
         else if (forType == NutrientType.POTASSIUM)
         {
-            switch (rockType.category())
-            {
-                case IGNEOUS_EXTRUSIVE:
-                    return 0.2F + gaussModifier;
-                case IGNEOUS_INTRUSIVE:
-                    return 0.125F + gaussModifier;
-                case METAMORPHIC:
-                    return 0.265F + gaussModifier;
-                case SEDIMENTARY:
-                    return 0.05F + gaussModifier;
-                default:
-                    return 0.04F + gaussModifier;
-            }
+            return switch (rockType.category()) {
+                case IGNEOUS_EXTRUSIVE -> 0.2F + gaussModifier;
+                case IGNEOUS_INTRUSIVE -> 0.125F + gaussModifier;
+                case METAMORPHIC -> 0.265F + gaussModifier;
+                case SEDIMENTARY -> 0.05F + gaussModifier;
+                default -> 0.04F + gaussModifier;
+            };
         }
         return 0F;
     }

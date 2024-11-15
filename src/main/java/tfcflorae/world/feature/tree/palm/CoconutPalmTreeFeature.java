@@ -30,7 +30,7 @@ public class CoconutPalmTreeFeature extends Feature<NoneFeatureConfiguration>
         final BlockState state = level.getBlockState(pos);
         final BlockState stateBelow = level.getBlockState(pos.below());
 
-        if (EnvironmentHelpers.isWorldgenReplaceable(state) && !state.getMaterial().isLiquid() && !stateBelow.getMaterial().isLiquid())
+        if (EnvironmentHelpers.isWorldgenReplaceable(state) && !state.liquid() && !stateBelow.liquid())
         {
             if (TFCFBlocks.PALM_TRUNKS.get(TFCFWood.COCONUT_PALM).isPresent())
             {

@@ -2,11 +2,6 @@ package tfcflorae.world.carver;
 
 import java.util.function.Function;
 
-import net.minecraft.core.Holder;
-import net.minecraft.data.BuiltinRegistries;
-import net.minecraft.util.valueproviders.ConstantFloat;
-import net.minecraft.world.level.levelgen.VerticalAnchor;
-import net.minecraft.world.level.levelgen.carver.CanyonCarverConfiguration;
 import net.minecraft.world.level.levelgen.carver.CarverConfiguration;
 import net.minecraft.world.level.levelgen.carver.CaveCarverConfiguration;
 import net.minecraft.world.level.levelgen.carver.ConfiguredWorldCarver;

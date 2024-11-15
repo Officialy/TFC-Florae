@@ -3,11 +3,11 @@ package tfcflorae.world.feature;
 import java.util.function.Supplier;
 
 import net.minecraft.core.Registry;
+import net.minecraft.core.RegistryAccess;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.IForgeRegistryEntry;
 
-public class TFCFDeferredRegistry<T extends IForgeRegistryEntry<T>> extends TFCFAbstractDeferredRegistry<T>
+public class TFCFDeferredRegistry<T extends RegistryAccess.RegistryEntry<T>> extends TFCFAbstractDeferredRegistry<T>
 {
     private final DeferredRegister<T> deferredRegistry;
     

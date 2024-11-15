@@ -1,53 +1,36 @@
 package tfcflorae.world.feature.tree.baobab;
 
-import java.util.Random;
 
 import com.mojang.serialization.Codec;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
-import net.minecraft.tags.BlockTags;
-import net.minecraft.world.level.ChunkPos;
-import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.LevelSimulatedReader;
-import net.minecraft.world.level.LevelWriter;
-import net.minecraft.world.level.WorldGenLevel;
-import net.minecraft.world.level.biome.Biome;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
-import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
-import net.minecraft.world.level.levelgen.structure.templatesystem.StructureManager;
-import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlaceSettings;
-import net.minecraft.world.level.material.Material;
-
-import net.dries007.tfc.common.TFCTags;
-import net.dries007.tfc.common.blocks.TFCBlocks;
-import net.dries007.tfc.common.blocks.wood.Wood;
 import net.dries007.tfc.util.EnvironmentHelpers;
 import net.dries007.tfc.util.Helpers;
-import net.dries007.tfc.world.biome.BiomeExtension;
-import net.dries007.tfc.world.biome.TFCBiomes;
-import net.dries007.tfc.world.chunkdata.ChunkData;
-import net.dries007.tfc.world.feature.tree.TreeFeature;
+import net.dries007.tfc.world.feature.tree.RandomTreeFeature;
 import net.dries007.tfc.world.feature.tree.TreeHelpers;
+import net.minecraft.core.BlockPos;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.ChunkPos;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.WorldGenLevel;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.levelgen.feature.Feature;
+import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 
+import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlaceSettings;
 import tfcflorae.TFCFlorae;
-import tfcflorae.common.blocks.TFCFBlocks;
-import tfcflorae.common.blocks.wood.TFCFWood;
 import tfcflorae.world.feature.tree.DynamicTreeConfig;
 
-public class BaobabTreeFeature extends TreeFeature<DynamicTreeConfig>
-{
-    public BaobabTreeFeature(Codec<DynamicTreeConfig> codec)
-    {
+public class BaobabTreeFeature extends Feature<DynamicTreeConfig> {
+
+    public BaobabTreeFeature(Codec<DynamicTreeConfig> codec) {
         super(codec);
     }
 
     @Override
-    public boolean place(FeaturePlaceContext<DynamicTreeConfig> context)
-    {
+    public boolean place(FeaturePlaceContext<DynamicTreeConfig> context) {
         final WorldGenLevel level = context.level();
         final BlockPos pos = context.origin();
-        final Random random = context.random();
+        final RandomSource random = context.random();
         final BlockState state = level.getBlockState(pos.below());
         final DynamicTreeConfig config = context.config();
 
@@ -55,8 +38,7 @@ public class BaobabTreeFeature extends TreeFeature<DynamicTreeConfig>
         final BlockPos.MutableBlockPos mutablePos = new BlockPos.MutableBlockPos().set(pos);
         final StructurePlaceSettings settings = TreeHelpers.getPlacementSettings(level, chunkPos, random);
 
-        if (TreeHelpers.isValidLocation(level, pos, settings, config.placement()))
-        {
+        if (TreeHelpers.isValidLocation(level, pos, settings, config.placement())) {
             config.trunk().ifPresent(trunk -> {
                 final int height = TreeHelpers.placeTrunk(level, mutablePos, random, settings, trunk);
                 mutablePos.move(0, height, 0);
@@ -67,20 +49,15 @@ public class BaobabTreeFeature extends TreeFeature<DynamicTreeConfig>
             final BlockState baobabTreeWood = config.woodState();
 
             final int chance = random.nextInt(3);
-            if (chance == 0)
-            {
+            if (chance == 0) {
                 TFCFlorae.LOGGER.info("generating tree 1 at XZ " + pos.getX() + ", " + pos.getZ());
                 buildBaobabVariant1(config, level, random, mutablePos, pos, baobabTreeLog, baobabTreeLeaves, baobabTreeWood);
                 return true;
-            }
-            else if (chance == 1)
-            {
+            } else if (chance == 1) {
                 TFCFlorae.LOGGER.info("generating tree 2 at XZ " + pos.getX() + ", " + pos.getZ());
                 buildBaobabVariant2(config, level, random, mutablePos, pos, baobabTreeLog, baobabTreeLeaves, baobabTreeWood);
                 return true;
-            }
-            else
-            {
+            } else {
                 TFCFlorae.LOGGER.info("generating tree 3 at XZ " + pos.getX() + ", " + pos.getZ());
                 buildBaobabVariant3(config, level, random, mutablePos, pos, baobabTreeLog, baobabTreeLeaves, baobabTreeWood);
                 return true;
@@ -89,12 +66,10 @@ public class BaobabTreeFeature extends TreeFeature<DynamicTreeConfig>
         return false;
     }
 
-    private void buildBaobabVariant1(DynamicTreeConfig config, WorldGenLevel level, Random random, BlockPos.MutableBlockPos mutablePos, BlockPos pos, BlockState baobabTreeLog, BlockState baobabTreeLeaves, BlockState baobabTreeWood)
-    {
+    private void buildBaobabVariant1(DynamicTreeConfig config, WorldGenLevel level, RandomSource random, BlockPos.MutableBlockPos mutablePos, BlockPos pos, BlockState baobabTreeLog, BlockState baobabTreeLeaves, BlockState baobabTreeWood) {
         int baobabHeight = config.minHeight() + random.nextInt(config.placement().height());
 
-        if (pos.getY() + baobabHeight + 1 < level.getMaxBuildHeight())
-        {
+        if (pos.getY() + baobabHeight + 1 < level.getMaxBuildHeight()) {
             mutablePos.set(pos).move(0, 0, 0).immutable();
             mutablePos.set(pos).move(-3, 0, -1).immutable();
             mutablePos.set(pos).move(-3, 0, 0).immutable();
@@ -899,12 +874,10 @@ public class BaobabTreeFeature extends TreeFeature<DynamicTreeConfig>
         }
     }
 
-    private void buildBaobabVariant2(DynamicTreeConfig config, WorldGenLevel level, Random random, BlockPos.MutableBlockPos mutablePos, BlockPos pos, BlockState baobabTreeLog, BlockState baobabTreeLeaves, BlockState baobabTreeWood)
-    {
+    private void buildBaobabVariant2(DynamicTreeConfig config, WorldGenLevel level, RandomSource random, BlockPos.MutableBlockPos mutablePos, BlockPos pos, BlockState baobabTreeLog, BlockState baobabTreeLeaves, BlockState baobabTreeWood) {
         int baobabHeight = config.minHeight() + random.nextInt(config.placement().height());
 
-        if (pos.getY() + baobabHeight + 1 < level.getMaxBuildHeight())
-        {
+        if (pos.getY() + baobabHeight + 1 < level.getMaxBuildHeight()) {
             mutablePos.set(pos).move(0, 0, 0).immutable();
             mutablePos.set(pos).move(-3, 0, -1).immutable();
             mutablePos.set(pos).move(-3, 0, 0).immutable();
@@ -1626,12 +1599,10 @@ public class BaobabTreeFeature extends TreeFeature<DynamicTreeConfig>
         }
     }
 
-    private void buildBaobabVariant3(DynamicTreeConfig config, WorldGenLevel level, Random random, BlockPos.MutableBlockPos mutablePos, BlockPos pos, BlockState baobabTreeLog, BlockState baobabTreeLeaves, BlockState baobabTreeWood)
-    {
+    private void buildBaobabVariant3(DynamicTreeConfig config, WorldGenLevel level, RandomSource random, BlockPos.MutableBlockPos mutablePos, BlockPos pos, BlockState baobabTreeLog, BlockState baobabTreeLeaves, BlockState baobabTreeWood) {
         int baobabHeight = config.minHeight() + random.nextInt(config.placement().height());
 
-        if (pos.getY() + baobabHeight + 1 < level.getMaxBuildHeight())
-        {
+        if (pos.getY() + baobabHeight + 1 < level.getMaxBuildHeight()) {
             mutablePos.set(pos).move(0, 0, 0).immutable();
             mutablePos.set(pos).move(-3, 0, -1).immutable();
             mutablePos.set(pos).move(-3, 0, 0).immutable();
@@ -2320,72 +2291,54 @@ public class BaobabTreeFeature extends TreeFeature<DynamicTreeConfig>
         }
     }
 
-    public boolean canLogPlaceHere(LevelAccessor level, BlockPos pos)
-    {
-        if (level != null && level.getBlockState(pos) != null)
-        {
+    public boolean canLogPlaceHere(LevelAccessor level, BlockPos pos) {
+        if (level != null && level.getBlockState(pos) != null) {
             BlockState state = level.getBlockState(pos);
-            if (state.getMaterial() != null)
-            {
-                return state.getMaterial() == Material.AIR || state.getMaterial() == Material.WATER || EnvironmentHelpers.isWorldgenReplaceable(state) || Helpers.isBlock(state.getBlock(), BlockTags.LEAVES);
-            }
-            else
-            {
+            if (state != null) {
+                return EnvironmentHelpers.isWorldgenReplaceable(state) || Helpers.isBlock(state.getBlock(), BlockTags.LEAVES);
+            } else {
                 TFCFlorae.LOGGER.info("TFCFlorae: statemat is null");
             }
-        }
-        else
-        {
+        } else {
             TFCFlorae.LOGGER.info("TFCFlorae: level or state is null");
-            if (level.getBlockState(pos) != null)
-            {
+            if (level.getBlockState(pos) != null) {
                 TFCFlorae.LOGGER.info("TFCFlorae: state is null");
             }
         }
         return false;
     }
 
-    public void placeTrunk(BlockPos startPos, Random random, WorldGenLevel level, BlockPos pos, BlockState state)
-    {
-        if (canLogPlaceHere(level, pos))
-        {
+    public void placeTrunk(BlockPos startPos, RandomSource random, WorldGenLevel level, BlockPos pos, BlockState state) {
+        if (canLogPlaceHere(level, pos)) {
             this.setFinalBlockState(level, pos, state);
         }
     }
 
-    public void placeBranch(BlockPos startPos, Random random, WorldGenLevel level, BlockPos pos, BlockState state)
-    {
-        if (canLogPlaceHere(level, pos))
-        {
+    public void placeBranch(BlockPos startPos, RandomSource random, WorldGenLevel level, BlockPos pos, BlockState state) {
+        if (canLogPlaceHere(level, pos)) {
             this.setFinalBlockState(level, pos, state);
         }
     }
 
-    private void placeLeaves(BlockPos startPos, Random random, WorldGenLevel level, BlockPos pos, BlockState state)
-    {
-        if (isAir(level, pos))
-        {
+    private void placeLeaves(BlockPos startPos, RandomSource random, WorldGenLevel level, BlockPos pos, BlockState state) {
+        if (level.getBlockState(pos).isAir()) {
             this.setFinalBlockState(level, pos, state);
         }
     }
 
-    public final void setFinalBlockState(WorldGenLevel level, BlockPos pos, BlockState blockState)
-    {
+    public final void setFinalBlockState(WorldGenLevel level, BlockPos pos, BlockState blockState) {
         this.setBlockStateWithoutUpdates(level, pos, blockState);
     }
 
-    public void setBlockStateWithoutUpdates(WorldGenLevel level, BlockPos pos, BlockState blockState)
-    {
+    public void setBlockStateWithoutUpdates(WorldGenLevel level, BlockPos pos, BlockState blockState) {
         level.setBlock(pos, blockState, 18);
     }
 
-    public void setBlockStateWithoutUpdates(WorldGenLevel level, BlockPos pos, BlockState blockState, int flags)
-    {
+    public void setBlockStateWithoutUpdates(WorldGenLevel level, BlockPos pos, BlockState blockState, int flags) {
         level.setBlock(pos, blockState, flags);
     }
 
-    public BlockPos extractOffset(BlockPos startPos, BlockPos pos)
-    {
+    public BlockPos extractOffset(BlockPos startPos, BlockPos pos) {
         return new BlockPos(startPos.getX() - pos.getX(), pos.getY(), startPos.getZ() - pos.getZ());
     }
 }
