@@ -477,26 +477,26 @@ SIMPLE_FLUIDS = ('brine', 'curdled_milk', 'limewater', 'lye', 'milk_vinegar', 'o
 ALCOHOLS = ('beer', 'cider', 'rum', 'sake', 'vodka', 'whiskey', 'corn_whiskey', 'rye_whiskey')
 
 WOODS: Dict[str, Wood] = {
-    'acacia': Wood(650, 1000),
-    'ash': Wood(696, 1250),
-    'aspen': Wood(611, 1000),
-    'birch': Wood(652, 1750),
-    'blackwood': Wood(720, 1750),
-    'chestnut': Wood(651, 1500),
-    'douglas_fir': Wood(707, 1500),
-    'hickory': Wood(762, 2000),
-    'kapok': Wood(645, 1000),
-    'mangrove': Wood(655, 1000),
-    'maple': Wood(745, 2000),
-    'oak': Wood(728, 2250),
-    'palm': Wood(730, 1250),
-    'pine': Wood(627, 1250),
-    'rosewood': Wood(640, 1500),
-    'sequoia': Wood(612, 1750),
-    'spruce': Wood(608, 1500),
-    'sycamore': Wood(653, 1750),
-    'white_cedar': Wood(625, 1500),
-    'willow': Wood(603, 1000)
+    'acacia': Wood(15.0, 1400),
+    'ash': Wood(12.0, 1250),
+    'aspen': Wood(10.0, 1000),
+    'birch': Wood(8.0, 1100),
+    'blackwood': Wood(10.0, 1300),
+    'chestnut': Wood(11.0, 1350),
+    'douglas_fir': Wood(9.0, 1100),
+    'hickory': Wood(12.0, 1400),
+    'kapok': Wood(8.0, 1000),
+    'maple': Wood(10.0, 1200),
+    'oak': Wood(12.0, 1300),
+    'palm': Wood(10.0, 1100),
+    'pine': Wood(8.0, 900),
+    'rosewood': Wood(13.0, 1300),
+    'sequoia': Wood(11.0, 1150),
+    'spruce': Wood(9.0, 1000),
+    'sycamore': Wood(10.0, 1150),
+    'white_cedar': Wood(9.0, 1050),
+    'willow': Wood(8.0, 950),
+    'test_wood': Wood(10.0, 1000),  # Added for testing
 }
 
 # DO NOT EDIT DIRECTLY - Imported directly from spreadsheet
