@@ -2,8 +2,8 @@
   "__comment__": "This file was automatically created by mcresources",
   "type": "tfc:overlay_tree",
   "config": {
-    "base": "tfc:buxus/base",
-    "overlay": "tfc:buxus/overlay",
+    "base": "tfcflorae:buxus/base",
+    "overlay": "tfcflorae:buxus/overlay",
     "trunk": {
       "state": {
         "Name": "tfcflorae:wood/log/buxus",
@@ -12,15 +12,15 @@
           "natural": "true"
         }
       },
-      "min_height": 1,
+      "min_height": 3,
       "max_height": 5,
       "width": 1
     },
     "radius": 1,
     "placement": {
       "width": 1,
-      "height": 6,
-      "allow_submerged": false
+      "height": 5,
+      "allow_submerged": true
     }
   }
 }

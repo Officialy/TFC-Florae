@@ -1,0 +1,34 @@
+{
+  "__comment__": "This file was automatically created by mcresources",
+  "type": "tfc:forest_entry",
+  "config": {
+    "climate": {
+      "min_temperature": -12,
+      "max_temperature": 15,
+      "min_rainfall": 60,
+      "max_rainfall": 400
+    },
+    "groundcover": [
+      {
+        "block": "tfcflorae:wood/twig/larch"
+      },
+      {
+        "block": "tfcflorae:wood/fallen_leaves/larch"
+      }
+    ],
+    "normal_tree": "tfcflorae:tree/larch",
+    "dead_tree": "tfcflorae:tree/larch_dead",
+    "fallen_log": "tfcflorae:wood/log/larch",
+    "bush_log": {
+      "Name": "tfcflorae:wood/wood/larch",
+      "Properties": {
+        "natural": "true",
+        "axis": "y"
+      }
+    },
+    "bush_leaves": "tfcflorae:wood/leaves/larch",
+    "old_growth_tree": "tfcflorae:tree/larch_large",
+    "dead_chance": 1,
+    "fallen_tree_chance": 8
+  }
+}

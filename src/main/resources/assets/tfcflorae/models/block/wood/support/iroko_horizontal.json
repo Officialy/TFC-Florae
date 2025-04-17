@@ -1,5 +1,6 @@
 {
-  "parent": "tfcflorae:block/wood/horizontal",
+  "__comment__": "This file was automatically created by mcresources",
+  "parent": "tfc:block/wood/support/horizontal",
   "textures": {
     "texture": "tfcflorae:block/wood/sheet/iroko",
     "particle": "tfcflorae:block/wood/sheet/iroko"

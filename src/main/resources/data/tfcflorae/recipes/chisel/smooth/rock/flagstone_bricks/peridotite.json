@@ -1,6 +1,0 @@
-{
-  "type": "tfc:chisel",
-  "ingredient": "tfcflorae:rock/flagstone/peridotite",
-  "result": "tfcflorae:rock/flagstone_bricks/peridotite",
-  "mode": "smooth"
-}

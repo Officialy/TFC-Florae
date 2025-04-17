@@ -17,7 +17,7 @@
       "predicate": {
         "type": "would_survive",
         "state": {
-          "Name": "tfcflorae:plant/barrel_cactus",
+          "Name": "tfc:plant/barrel_cactus",
           "Properties": {
             "age": "1",
             "stage": "1",

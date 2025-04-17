@@ -1,178 +1,85 @@
 {
   "__comment__": "This file was automatically created by mcresources",
-  "type": "tfc:cluster_vein",
+  "type": "tfcflorae:tfc:disc_vein_vein",
   "config": {
-    "rarity": 90,
-    "min_y": {
-      "absolute": -48
-    },
-    "max_y": {
-      "absolute": 100
-    },
-    "size": 10,
-    "density": 0.6,
+    "rarity": 110,
+    "density": 0.4,
+    "min_y": 40,
+    "max_y": 100,
+    "size": 35,
+    "height": 5,
+    "random_name": "saltpeter",
     "blocks": [
       {
         "replace": [
-          "tfc:rock/raw/shale"
+          "tfcflorae:rock/raw/shale"
         ],
         "with": [
           {
-            "block": "tfc:ore/saltpeter/shale"
+            "block": "tfcflorae:ore/saltpeter/shale"
           }
         ]
       },
       {
         "replace": [
-          "tfc:rock/raw/claystone"
+          "tfcflorae:rock/raw/claystone"
         ],
         "with": [
           {
-            "block": "tfc:ore/saltpeter/claystone"
+            "block": "tfcflorae:ore/saltpeter/claystone"
           }
         ]
       },
       {
         "replace": [
-          "tfc:rock/raw/limestone"
+          "tfcflorae:rock/raw/limestone"
         ],
         "with": [
           {
-            "block": "tfc:ore/saltpeter/limestone"
+            "block": "tfcflorae:ore/saltpeter/limestone"
           }
         ]
       },
       {
         "replace": [
-          "tfc:rock/raw/conglomerate"
+          "tfcflorae:rock/raw/conglomerate"
         ],
         "with": [
           {
-            "block": "tfc:ore/saltpeter/conglomerate"
+            "block": "tfcflorae:ore/saltpeter/conglomerate"
           }
         ]
       },
       {
         "replace": [
-          "tfc:rock/raw/dolomite"
+          "tfcflorae:rock/raw/dolomite"
         ],
         "with": [
           {
-            "block": "tfc:ore/saltpeter/dolomite"
+            "block": "tfcflorae:ore/saltpeter/dolomite"
           }
         ]
       },
       {
         "replace": [
-          "tfc:rock/raw/chert"
+          "tfcflorae:rock/raw/chert"
         ],
         "with": [
           {
-            "block": "tfc:ore/saltpeter/chert"
+            "block": "tfcflorae:ore/saltpeter/chert"
           }
         ]
       },
       {
         "replace": [
-          "tfc:rock/raw/chalk"
+          "tfcflorae:rock/raw/chalk"
         ],
         "with": [
           {
-            "block": "tfc:ore/saltpeter/chalk"
-          }
-        ]
-      },
-      {
-        "replace": [
-          "tfcflorae:rock/raw/laterite"
-        ],
-        "with": [
-          {
-            "block": "tfcflorae:ore/saltpeter/laterite"
-          }
-        ]
-      },
-      {
-        "replace": [
-          "tfcflorae:rock/raw/mudstone"
-        ],
-        "with": [
-          {
-            "block": "tfcflorae:ore/saltpeter/mudstone"
-          }
-        ]
-      },
-      {
-        "replace": [
-          "tfcflorae:rock/raw/sandstone"
-        ],
-        "with": [
-          {
-            "block": "tfcflorae:ore/saltpeter/sandstone"
-          }
-        ]
-      },
-      {
-        "replace": [
-          "tfcflorae:rock/raw/siltstone"
-        ],
-        "with": [
-          {
-            "block": "tfcflorae:ore/saltpeter/siltstone"
-          }
-        ]
-      },
-      {
-        "replace": [
-          "tfcflorae:rock/raw/arkose"
-        ],
-        "with": [
-          {
-            "block": "tfcflorae:ore/saltpeter/arkose"
-          }
-        ]
-      },
-      {
-        "replace": [
-          "tfcflorae:rock/raw/jaspillite"
-        ],
-        "with": [
-          {
-            "block": "tfcflorae:ore/saltpeter/jaspillite"
-          }
-        ]
-      },
-      {
-        "replace": [
-          "tfcflorae:rock/raw/travertine"
-        ],
-        "with": [
-          {
-            "block": "tfcflorae:ore/saltpeter/travertine"
-          }
-        ]
-      },
-      {
-        "replace": [
-          "tfcflorae:rock/raw/wackestone"
-        ],
-        "with": [
-          {
-            "block": "tfcflorae:ore/saltpeter/wackestone"
-          }
-        ]
-      },
-      {
-        "replace": [
-          "tfcflorae:rock/raw/blackband_ironstone"
-        ],
-        "with": [
-          {
-            "block": "tfcflorae:ore/saltpeter/blackband_ironstone"
+            "block": "tfcflorae:ore/saltpeter/chalk"
           }
         ]
       }
-    ],
-    "random_name": "saltpeter"
+    ]
   }
 }

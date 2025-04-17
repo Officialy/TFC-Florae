@@ -2,10 +2,12 @@
   "__comment__": "This file was automatically created by mcresources",
   "type": "tfc:forest_entry",
   "config": {
-    "min_rain": 180,
-    "max_rain": 350,
-    "min_temp": -15,
-    "max_temp": 11,
+    "climate": {
+      "min_temperature": -15,
+      "max_temperature": 11,
+      "min_rainfall": 180,
+      "max_rainfall": 350
+    },
     "groundcover": [
       {
         "block": "tfcflorae:wood/twig/yew"
@@ -14,8 +16,8 @@
         "block": "tfcflorae:wood/fallen_leaves/yew"
       }
     ],
-    "normal_tree": "tfc:tree/yew",
-    "dead_tree": "tfc:tree/yew_dead",
+    "normal_tree": "tfcflorae:tree/yew",
+    "dead_tree": "tfcflorae:tree/yew_dead",
     "fallen_log": "tfcflorae:wood/log/yew",
     "bush_log": {
       "Name": "tfcflorae:wood/wood/yew",
@@ -25,6 +27,6 @@
       }
     },
     "bush_leaves": "tfcflorae:wood/leaves/yew",
-    "old_growth_tree": "tfc:tree/yew_large"
+    "old_growth_tree": "tfcflorae:tree/yew_large"
   }
 }

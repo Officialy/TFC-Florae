@@ -2,10 +2,12 @@
   "__comment__": "This file was automatically created by mcresources",
   "type": "tfc:forest_entry",
   "config": {
-    "min_rain": 310,
-    "max_rain": 500,
-    "min_temp": 23,
-    "max_temp": 50,
+    "climate": {
+      "min_temperature": 23,
+      "max_temperature": 50,
+      "min_rainfall": 310,
+      "max_rainfall": 500
+    },
     "groundcover": [
       {
         "block": "tfcflorae:wood/twig/greenheart"
@@ -14,8 +16,8 @@
         "block": "tfcflorae:wood/fallen_leaves/greenheart"
       }
     ],
-    "normal_tree": "tfc:tree/greenheart",
-    "dead_tree": "tfc:tree/greenheart_dead",
+    "normal_tree": "tfcflorae:tree/greenheart",
+    "dead_tree": "tfcflorae:tree/greenheart_dead",
     "fallen_log": "tfcflorae:wood/log/greenheart",
     "bush_log": {
       "Name": "tfcflorae:wood/wood/greenheart",
@@ -25,6 +27,6 @@
       }
     },
     "bush_leaves": "tfcflorae:wood/leaves/greenheart",
-    "old_growth_tree": "tfc:tree/greenheart_large"
+    "old_growth_tree": "tfcflorae:tree/greenheart_large"
   }
 }

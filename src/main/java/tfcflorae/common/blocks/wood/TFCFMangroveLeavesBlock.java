@@ -114,7 +114,7 @@ public abstract class TFCFMangroveLeavesBlock extends TFCLeavesBlock implements 
         this.fallenTwig = fallenTwig;
         this.sapling = sapling;
 
-        lastUpdateTick = Calendars.SERVER.getTicks();
+        lastUpdateTick = 0;// Calendars.SERVER.getTicks();
 
         registerDefaultState(getStateDefinition().any().setValue(PERSISTENT, false).setValue(LIFECYCLE, Lifecycle.HEALTHY));
     }
@@ -212,7 +212,7 @@ public abstract class TFCFMangroveLeavesBlock extends TFCLeavesBlock implements 
             if (currentLifecycle != expectedLifecycle && (level.getRawBrightness(pos, 0) >= 11 || level.isDay()))
             {
                 onUpdate(level, pos, state);
-                lastUpdateTick = Calendars.SERVER.getTicks();
+                lastUpdateTick = 0;// todo Calendars.SERVER.getTicks();
             }
         }
     }

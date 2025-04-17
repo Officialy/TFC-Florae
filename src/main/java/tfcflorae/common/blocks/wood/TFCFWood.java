@@ -262,12 +262,10 @@ public enum TFCFWood implements RegistryWood
         return maxDecayDistance;
     }
 
-
-
     @Override
     public int daysToGrow()
     {
-        return Config.COMMON.saplingGrowthDays.get(this).get();
+        return 8;//todo Config.COMMON.saplingGrowthDays.get(this).get();
     }
 
     @Override
@@ -321,11 +319,11 @@ public enum TFCFWood implements RegistryWood
 
     @Override
     public BlockSetType getBlockSet() {
-        return null;
+        return BlockSetType.BAMBOO;
     }
 
     @Override
     public WoodType getVanillaWoodType() {
-        return null;
+        return WoodType.BAMBOO;
     }
 }

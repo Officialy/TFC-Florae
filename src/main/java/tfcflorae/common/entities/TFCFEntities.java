@@ -25,6 +25,7 @@ import net.dries007.tfc.common.TFCTags;
 import net.dries007.tfc.config.TFCConfig;
 import net.dries007.tfc.util.Helpers;
 
+import tfcflorae.TFCFlorae;
 import tfcflorae.client.TFCFSounds;
 import tfcflorae.common.blocks.wood.TFCFWood;
 import tfcflorae.common.items.TFCFItems;

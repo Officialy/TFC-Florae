@@ -7,11 +7,6 @@
       "heightmap": "OCEAN_FLOOR_WG"
     },
     {
-      "type": "tfc:shallow_water",
-      "min_depth": 2,
-      "max_depth": 32
-    },
-    {
       "type": "block_predicate_filter",
       "predicate": {
         "type": "tfc:air_or_empty_fluid"

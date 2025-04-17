@@ -1,6 +1,0 @@
-{
-  "type": "tfc:chisel",
-  "ingredient": "tfcflorae:rock/cobble/catlinite",
-  "result": "tfcflorae:rock/cobbled_bricks/catlinite",
-  "mode": "smooth"
-}

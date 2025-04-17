@@ -1,0 +1,26 @@
+{
+  "__comment__": "This file was automatically created by mcresources",
+  "replace": false,
+  "values": [
+    "tfcflorae:wood/planks/acacia_pressure_plate",
+    "tfcflorae:wood/planks/ash_pressure_plate",
+    "tfcflorae:wood/planks/aspen_pressure_plate",
+    "tfcflorae:wood/planks/birch_pressure_plate",
+    "tfcflorae:wood/planks/blackwood_pressure_plate",
+    "tfcflorae:wood/planks/chestnut_pressure_plate",
+    "tfcflorae:wood/planks/douglas_fir_pressure_plate",
+    "tfcflorae:wood/planks/hickory_pressure_plate",
+    "tfcflorae:wood/planks/kapok_pressure_plate",
+    "tfcflorae:wood/planks/mangrove_pressure_plate",
+    "tfcflorae:wood/planks/maple_pressure_plate",
+    "tfcflorae:wood/planks/oak_pressure_plate",
+    "tfcflorae:wood/planks/palm_pressure_plate",
+    "tfcflorae:wood/planks/pine_pressure_plate",
+    "tfcflorae:wood/planks/rosewood_pressure_plate",
+    "tfcflorae:wood/planks/sequoia_pressure_plate",
+    "tfcflorae:wood/planks/spruce_pressure_plate",
+    "tfcflorae:wood/planks/sycamore_pressure_plate",
+    "tfcflorae:wood/planks/white_cedar_pressure_plate",
+    "tfcflorae:wood/planks/willow_pressure_plate"
+  ]
+}

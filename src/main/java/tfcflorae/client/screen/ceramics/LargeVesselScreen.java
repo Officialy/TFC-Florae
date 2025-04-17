@@ -1,19 +1,14 @@
 package tfcflorae.client.screen.ceramics;
 
-import java.util.function.Consumer;
-
-import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.gui.components.Button;
-import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.player.Inventory;
-
-import com.mojang.blaze3d.vertex.PoseStack;
-
 import net.dries007.tfc.TerraFirmaCraft;
 import net.dries007.tfc.client.screen.BlockEntityScreen;
 import net.dries007.tfc.util.Helpers;
-
+import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.narration.NarratedElementType;
+import net.minecraft.client.gui.narration.NarrationElementOutput;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.player.Inventory;
 import tfcflorae.client.screen.button.VesselSealButton;
 import tfcflorae.common.blockentities.ceramics.LargeVesselBlockEntity;
 import tfcflorae.common.blocks.ceramics.LargeVesselBlock;
@@ -34,20 +29,18 @@ public class LargeVesselScreen extends BlockEntityScreen<LargeVesselBlockEntity,
     public void init()
     {
         super.init();
-/*        addRenderableWidget(new VesselSealButton(blockEntity, getGuiLeft() + 9, getGuiTop()));/*new Button.OnTooltip()
-        {
-            @Override
-            public void onTooltip(Button button, PoseStack poseStack, int x, int y)
-            {
-                renderTooltip(poseStack, isSealed() ? UNSEAL : SEAL, x, y);
-            }
+        addRenderableWidget(new VesselSealButton(blockEntity, getGuiLeft(), getGuiTop(), this.isSealed() ? UNSEAL : SEAL){
+           /* @Override
+            public void setTooltip(@Nullable Tooltip pTooltip) {
+                renderTooltip(poseStack, *//*isSealed() ? UNSEAL : SEAL,*//* x, y);
+            }*/
 
             @Override
-            public void narrateTooltip(Consumer<Component> consumer)
-            {
-                consumer.accept(isSealed() ? UNSEAL : SEAL);
+            public void updateWidgetNarration(NarrationElementOutput pNarrationElementOutput) {
+                pNarrationElementOutput.add(NarratedElementType.USAGE, isSealed() ? UNSEAL : SEAL); //todo test
             }
-        }));*/
+
+        });
     }
 
     @Override

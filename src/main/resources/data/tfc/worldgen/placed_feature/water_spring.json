@@ -1,6 +1,6 @@
 {
   "__comment__": "This file was automatically created by mcresources",
-  "feature": "tfc:water_spring",
+  "feature": "tfcflorae:water_spring",
   "placement": [
     {
       "type": "minecraft:count",
@@ -14,7 +14,7 @@
       "height": {
         "type": "biased_to_bottom",
         "min_inclusive": {
-          "absolute": -128
+          "absolute": -64
         },
         "max_inclusive": {
           "absolute": 180

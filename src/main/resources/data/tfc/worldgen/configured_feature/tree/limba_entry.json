@@ -2,10 +2,12 @@
   "__comment__": "This file was automatically created by mcresources",
   "type": "tfc:forest_entry",
   "config": {
-    "min_rain": 290,
-    "max_rain": 550,
-    "min_temp": 14,
-    "max_temp": 37,
+    "climate": {
+      "min_temperature": 14,
+      "max_temperature": 37,
+      "min_rainfall": 290,
+      "max_rainfall": 550
+    },
     "groundcover": [
       {
         "block": "tfcflorae:wood/twig/limba"
@@ -14,8 +16,8 @@
         "block": "tfcflorae:wood/fallen_leaves/limba"
       }
     ],
-    "normal_tree": "tfc:tree/limba",
-    "dead_tree": "tfc:tree/limba_dead",
+    "normal_tree": "tfcflorae:tree/limba",
+    "dead_tree": "tfcflorae:tree/limba_dead",
     "fallen_log": "tfcflorae:wood/log/limba",
     "bush_log": {
       "Name": "tfcflorae:wood/wood/limba",
@@ -25,6 +27,6 @@
       }
     },
     "bush_leaves": "tfcflorae:wood/leaves/limba",
-    "old_growth_tree": "tfc:tree/limba_large"
+    "old_growth_tree": "tfcflorae:tree/limba_large"
   }
 }

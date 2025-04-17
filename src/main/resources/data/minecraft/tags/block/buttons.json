@@ -1,0 +1,26 @@
+{
+  "__comment__": "This file was automatically created by mcresources",
+  "replace": false,
+  "values": [
+    "tfcflorae:wood/planks/acacia_button",
+    "tfcflorae:wood/planks/ash_button",
+    "tfcflorae:wood/planks/aspen_button",
+    "tfcflorae:wood/planks/birch_button",
+    "tfcflorae:wood/planks/blackwood_button",
+    "tfcflorae:wood/planks/chestnut_button",
+    "tfcflorae:wood/planks/douglas_fir_button",
+    "tfcflorae:wood/planks/hickory_button",
+    "tfcflorae:wood/planks/kapok_button",
+    "tfcflorae:wood/planks/mangrove_button",
+    "tfcflorae:wood/planks/maple_button",
+    "tfcflorae:wood/planks/oak_button",
+    "tfcflorae:wood/planks/palm_button",
+    "tfcflorae:wood/planks/pine_button",
+    "tfcflorae:wood/planks/rosewood_button",
+    "tfcflorae:wood/planks/sequoia_button",
+    "tfcflorae:wood/planks/spruce_button",
+    "tfcflorae:wood/planks/sycamore_button",
+    "tfcflorae:wood/planks/white_cedar_button",
+    "tfcflorae:wood/planks/willow_button"
+  ]
+}

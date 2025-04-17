@@ -1,6 +1,0 @@
-{
-  "type": "tfc:chisel",
-  "ingredient": "tfcflorae:dirtier_stone_tiles/loam/komatiite",
-  "result": "tfcflorae:dirtier_stone_tiles/loam/stairs/komatiite",
-  "mode": "stair"
-}

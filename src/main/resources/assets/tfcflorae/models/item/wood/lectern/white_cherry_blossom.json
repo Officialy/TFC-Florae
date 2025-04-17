@@ -1,3 +1,4 @@
 {
-  "parent": "tfcflorae:block/wood/lectern/white_cherry_blossom"
+  "__comment__": "This file was automatically created by mcresources",
+  "parent": "tfc:block/wood/lectern/white_cherry_blossom"
 }

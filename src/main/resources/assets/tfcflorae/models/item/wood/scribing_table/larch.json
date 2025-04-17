@@ -1,3 +1,4 @@
 {
-  "parent": "tfcflorae:block/wood/scribing_table/larch"
+  "__comment__": "This file was automatically created by mcresources",
+  "parent": "tfc:block/wood/scribing_table/larch"
 }

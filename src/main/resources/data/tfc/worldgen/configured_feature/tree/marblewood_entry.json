@@ -2,10 +2,12 @@
   "__comment__": "This file was automatically created by mcresources",
   "type": "tfc:forest_entry",
   "config": {
-    "min_rain": 180,
-    "max_rain": 500,
-    "min_temp": 16,
-    "max_temp": 35,
+    "climate": {
+      "min_temperature": 16,
+      "max_temperature": 35,
+      "min_rainfall": 180,
+      "max_rainfall": 500
+    },
     "groundcover": [
       {
         "block": "tfcflorae:wood/twig/marblewood"
@@ -14,8 +16,8 @@
         "block": "tfcflorae:wood/fallen_leaves/marblewood"
       }
     ],
-    "normal_tree": "tfc:tree/marblewood",
-    "dead_tree": "tfc:tree/marblewood_dead",
+    "normal_tree": "tfcflorae:tree/marblewood",
+    "dead_tree": "tfcflorae:tree/marblewood_dead",
     "fallen_log": "tfcflorae:wood/log/marblewood",
     "bush_log": {
       "Name": "tfcflorae:wood/wood/marblewood",
@@ -25,6 +27,6 @@
       }
     },
     "bush_leaves": "tfcflorae:wood/leaves/marblewood",
-    "old_growth_tree": "tfc:tree/marblewood_large"
+    "old_growth_tree": "tfcflorae:tree/marblewood_large"
   }
 }

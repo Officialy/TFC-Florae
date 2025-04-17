@@ -65,12 +65,12 @@ minecraft {
         }
     }
 }
-/*
+
 mixin {
     add sourceSets.main, "${mod_id}.refmap.json"
 
     config "${mod_id}.mixins.json"
-}*/
+}
 
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 
@@ -93,7 +93,7 @@ dependencies {
 
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
 
-    implementation fg.deobf("curse.maven:terrafirmacraft-302973:5872631")
+    implementation fg.deobf("curse.maven:terrafirmacraft-302973:5943050")
     compileOnly fg.deobf("mezz.jei:jei-${minecraft_version}-forge-api:${jei_version}")
     runtimeOnly fg.deobf("mezz.jei:jei-${minecraft_version}-forge:${jei_version}")
 

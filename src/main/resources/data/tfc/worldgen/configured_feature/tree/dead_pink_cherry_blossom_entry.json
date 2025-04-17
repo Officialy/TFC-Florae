@@ -1,0 +1,34 @@
+{
+  "__comment__": "This file was automatically created by mcresources",
+  "type": "tfc:forest_entry",
+  "config": {
+    "climate": {
+      "min_temperature": 0,
+      "max_temperature": 20,
+      "min_rainfall": 180,
+      "max_rainfall": 300
+    },
+    "groundcover": [
+      {
+        "block": "tfcflorae:wood/twig/pink_cherry_blossom"
+      },
+      {
+        "block": "tfcflorae:wood/fallen_leaves/pink_cherry_blossom"
+      }
+    ],
+    "normal_tree": "tfcflorae:tree/pink_cherry_blossom",
+    "dead_tree": "tfcflorae:tree/pink_cherry_blossom_dead",
+    "fallen_log": "tfcflorae:wood/log/pink_cherry_blossom",
+    "bush_log": {
+      "Name": "tfcflorae:wood/wood/pink_cherry_blossom",
+      "Properties": {
+        "natural": "true",
+        "axis": "y"
+      }
+    },
+    "bush_leaves": "tfcflorae:wood/leaves/pink_cherry_blossom",
+    "old_growth_tree": "tfcflorae:tree/pink_cherry_blossom_large",
+    "dead_chance": 1,
+    "fallen_tree_chance": 8
+  }
+}

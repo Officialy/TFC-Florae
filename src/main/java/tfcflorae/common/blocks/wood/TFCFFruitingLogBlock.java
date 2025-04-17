@@ -76,7 +76,7 @@ public class TFCFFruitingLogBlock extends LogBlock implements IBushBlock, HoeOve
         this.lifecycle = lifecycle;
         this.productItem = productItem;
 
-        lastUpdateTick = Calendars.SERVER.getTicks();
+        lastUpdateTick = 0;// Calendars.SERVER.getTicks();
 
         registerDefaultState(getStateDefinition().any().setValue(LIFECYCLE, Lifecycle.HEALTHY).setValue(NATURAL, false));
     }
@@ -120,7 +120,7 @@ public class TFCFFruitingLogBlock extends LogBlock implements IBushBlock, HoeOve
                 if (currentLifecycle != expectedLifecycle && (level.getRawBrightness(pos, 0) >= 11 || Calendars.SERVER.getCalendarDayTime() == level.getDayTime()))
                 {
                     onUpdate(level, pos, state);
-                    lastUpdateTick = Calendars.SERVER.getTicks();
+                    lastUpdateTick = 0;// todo Calendars.SERVER.getTicks();
                 }
             }
         }
@@ -243,7 +243,7 @@ public class TFCFFruitingLogBlock extends LogBlock implements IBushBlock, HoeOve
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder)
     {
-        super.createBlockStateDefinition(builder.add(LIFECYCLE));
+        super.createBlockStateDefinition(builder.add(LIFECYCLE).add(NATURAL));
     }
 
     /**

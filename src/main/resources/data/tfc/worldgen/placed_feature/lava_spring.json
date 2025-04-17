@@ -1,16 +1,10 @@
 {
   "__comment__": "This file was automatically created by mcresources",
-  "feature": "tfc:lava_spring",
+  "feature": "tfcflorae:lava_spring",
   "placement": [
     {
-      "type":"minecraft:count",
-      "count":{
-        "type":"minecraft:uniform",
-        "value":{
-          "min_inclusive":50,
-          "max_inclusive":100
-        }
-      }
+      "type": "minecraft:count",
+      "count": 50
     },
     {
       "type": "minecraft:in_square"
@@ -20,7 +14,7 @@
       "height": {
         "type": "biased_to_bottom",
         "min_inclusive": {
-          "absolute": -255
+          "absolute": -64
         },
         "max_inclusive": {
           "absolute": 180

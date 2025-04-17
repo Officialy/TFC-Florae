@@ -8,6 +8,12 @@ from mcresources.type_definitions import ResourceIdentifier
 
 from constants import *
 
+def copy_block_entity(*components: str):
+    return {
+        'function': 'minecraft:copy_components',
+        'source': 'block_entity',
+        'include': ['minecraft:custom_name'] + list(components)
+    }
 
 def generate(rm: ResourceManager):
     # Rock block variants
@@ -319,7 +325,7 @@ def generate(rm: ResourceManager):
     block.with_lang(lang('large vessel'))
     block.with_block_loot(({
         'name': 'tfc:ceramic/large_vessel',
-        'functions': [loot_tables.copy_block_entity_name(), loot_tables.copy_block_entity_nbt()],
+        'functions': [copy_block_entity("tfc:contents")],
         'conditions': [loot_tables.block_state_property('tfc:ceramic/large_vessel[sealed=true]')]
     }, 'tfc:ceramic/large_vessel'))
     block.with_tag('minecraft:mineable/pickaxe')
@@ -340,7 +346,7 @@ def generate(rm: ResourceManager):
         block.with_lang(lang('%s large vessel', color))
         block.with_block_loot(({
             'name': vessel,
-            'functions': [loot_tables.copy_block_entity_name(), loot_tables.copy_block_entity_nbt()],
+            'functions': [copy_block_entity("tfc:contents")],
             'conditions': [loot_tables.block_state_property(vessel + '[sealed=true]')]
         }, vessel))
         block.with_tag('minecraft:mineable/pickaxe')
@@ -363,7 +369,7 @@ def generate(rm: ResourceManager):
     # Uses a custom block model
     rm.blockstate('crucible').with_item_model().with_lang(lang('crucible')).with_block_loot({
         'name': 'tfc:crucible',
-        'functions': [loot_tables.copy_block_entity_name(), loot_tables.copy_block_entity_nbt()]
+        'functions': [copy_block_entity("tfc:crucible")]
     })
 
     block = rm.block('thatch_bed')
@@ -399,7 +405,7 @@ def generate(rm: ResourceManager):
     }).with_lang(lang('Powderkeg')).with_tag('minecraft:mineable/axe')
     block.with_block_loot(({
         'name': 'tfc:powderkeg',
-        'functions': [loot_tables.copy_block_entity_name(), loot_tables.copy_block_entity_nbt()],
+        'functions': [copy_block_entity('tfc:contents')],
         'conditions': [loot_tables.block_state_property('tfc:powderkeg[sealed=true]')]
     }, 'tfc:powderkeg'))
     item_model_property(rm, 'tfc:powderkeg', [{'predicate': {'tfc:sealed': 1.0}, 'model': 'tfc:block/powderkeg_sealed'}], {'parent': 'tfc:block/powderkeg'})
@@ -1020,7 +1026,7 @@ def generate(rm: ResourceManager):
     for meat in MEATS:
         rm.item_model(('food', meat)).with_lang(lang('raw %s', meat))
         rm.item_model(('food', 'cooked_' + meat)).with_lang(lang('cooked %s', meat))
-    for veg in VEGETABLES:
+    for veg in MISC_FOODS:
         rm.item_model(('food', veg)).with_lang(lang(veg))
 
     funny_names = {  # Dict[nutrient, (soup, salad)]
@@ -1228,7 +1234,7 @@ def generate(rm: ResourceManager):
         block.with_tag('minecraft:leaves')
         block.with_block_loot(({
             'name': 'tfcflorae:wood/leaves/%s' % wood,
-            'conditions': [loot_tables.or_condition(match_tag('forge:shears'), loot_tables.silk_touch())]
+            'conditions': [loot_tables.any_of(match_tag('forge:shears'), loot_tables.silk_touch())]
         }, {
             'name': 'tfcflorae:wood/sapling/%s' % wood,
             'conditions': ['minecraft:survives_explosion', condition_chance(TREE_SAPLING_DROP_CHANCES[wood])]
@@ -1358,7 +1364,7 @@ def generate(rm: ResourceManager):
         block.with_tag('tfc:barrels').with_tag('minecraft:mineable/axe')
         block.with_block_loot(({
             'name': 'tfcflorae:wood/barrel/%s' % wood,
-            'functions': [loot_tables.copy_block_entity_name(), loot_tables.copy_block_entity_nbt()],
+            'functions': [copy_block_entity('tfc:barrel')], #todo might be tfcflorae not tfc - test
             'conditions': [loot_tables.block_state_property('tfcflorae:wood/barrel/%s[sealed=true]' % wood)]
         }, 'tfcflorae:wood/barrel/%s' % wood))
 
@@ -1594,7 +1600,7 @@ def make_javelin(rm: ResourceManager, name_parts: str, texture: str) -> 'ItemCon
     rm.item_model(name_parts + '_in_hand', {'particle': texture}, parent='minecraft:item/trident_in_hand')
     rm.item_model(name_parts + '_gui', texture)
     model = rm.domain + ':item/' + name_parts
-    return rm.custom_item_model(name_parts, 'forge:separate-perspective', {
+    return rm.custom_item_model(name_parts, 'forge:separate_transforms', {
         'gui_light': 'front',
         'overrides': [{'predicate': {'tfc:throwing': 1}, 'model': model + '_throwing'}],
         'base': {'parent': model + '_in_hand'},

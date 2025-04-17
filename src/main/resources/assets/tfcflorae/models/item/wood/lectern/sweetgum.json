@@ -1,3 +1,4 @@
 {
-  "parent": "tfcflorae:block/wood/lectern/sweetgum"
+  "__comment__": "This file was automatically created by mcresources",
+  "parent": "tfc:block/wood/lectern/sweetgum"
 }

@@ -2,10 +2,12 @@
   "__comment__": "This file was automatically created by mcresources",
   "type": "tfc:forest_entry",
   "config": {
-    "min_rain": 80,
-    "max_rain": 350,
-    "min_temp": -8,
-    "max_temp": 20,
+    "climate": {
+      "min_temperature": -8,
+      "max_temperature": 20,
+      "min_rainfall": 80,
+      "max_rainfall": 350
+    },
     "groundcover": [
       {
         "block": "tfcflorae:wood/twig/juniper"
@@ -14,8 +16,8 @@
         "block": "tfcflorae:wood/fallen_leaves/juniper"
       }
     ],
-    "normal_tree": "tfc:tree/juniper",
-    "dead_tree": "tfc:tree/juniper_dead",
+    "normal_tree": "tfcflorae:tree/juniper",
+    "dead_tree": "tfcflorae:tree/juniper_dead",
     "fallen_log": "tfcflorae:wood/log/juniper",
     "bush_log": {
       "Name": "tfcflorae:wood/wood/juniper",
@@ -25,6 +27,6 @@
       }
     },
     "bush_leaves": "tfcflorae:wood/leaves/juniper",
-    "old_growth_tree": "tfc:tree/juniper_large"
+    "old_growth_tree": "tfcflorae:tree/juniper_large"
   }
 }

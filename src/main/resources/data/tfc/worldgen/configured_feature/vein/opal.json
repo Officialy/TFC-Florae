@@ -1,269 +1,126 @@
 {
   "__comment__": "This file was automatically created by mcresources",
-  "type": "tfc:disc_vein",
+  "type": "tfcflorae:tfc:disc_vein_vein",
   "config": {
-    "rarity": 14,
-    "min_y": {
-      "absolute": 40
-    },
-    "max_y": {
-      "absolute": 60
-    },
-    "size": 8,
+    "rarity": 25,
     "density": 0.2,
+    "min_y": 40,
+    "max_y": 60,
+    "biomes": "#tfc:is_river",
+    "size": 8,
+    "height": 4,
+    "random_name": "opal",
     "blocks": [
       {
         "replace": [
-          "tfc:rock/raw/shale"
+          "tfcflorae:rock/raw/shale"
         ],
         "with": [
           {
-            "block": "tfc:ore/opal/shale"
+            "block": "tfcflorae:ore/opal/shale"
           }
         ]
       },
       {
         "replace": [
-          "tfc:rock/raw/claystone"
+          "tfcflorae:rock/raw/claystone"
         ],
         "with": [
           {
-            "block": "tfc:ore/opal/claystone"
+            "block": "tfcflorae:ore/opal/claystone"
           }
         ]
       },
       {
         "replace": [
-          "tfc:rock/raw/limestone"
+          "tfcflorae:rock/raw/limestone"
         ],
         "with": [
           {
-            "block": "tfc:ore/opal/limestone"
+            "block": "tfcflorae:ore/opal/limestone"
           }
         ]
       },
       {
         "replace": [
-          "tfc:rock/raw/conglomerate"
+          "tfcflorae:rock/raw/conglomerate"
         ],
         "with": [
           {
-            "block": "tfc:ore/opal/conglomerate"
+            "block": "tfcflorae:ore/opal/conglomerate"
           }
         ]
       },
       {
         "replace": [
-          "tfc:rock/raw/dolomite"
+          "tfcflorae:rock/raw/dolomite"
         ],
         "with": [
           {
-            "block": "tfc:ore/opal/dolomite"
+            "block": "tfcflorae:ore/opal/dolomite"
           }
         ]
       },
       {
         "replace": [
-          "tfc:rock/raw/chert"
+          "tfcflorae:rock/raw/chert"
         ],
         "with": [
           {
-            "block": "tfc:ore/opal/chert"
+            "block": "tfcflorae:ore/opal/chert"
           }
         ]
       },
       {
         "replace": [
-          "tfc:rock/raw/chalk"
+          "tfcflorae:rock/raw/chalk"
         ],
         "with": [
           {
-            "block": "tfc:ore/opal/chalk"
+            "block": "tfcflorae:ore/opal/chalk"
           }
         ]
       },
       {
         "replace": [
-          "tfcflorae:rock/raw/laterite"
+          "tfcflorae:rock/raw/rhyolite"
         ],
         "with": [
           {
-            "block": "tfcflorae:ore/opal/laterite"
+            "block": "tfcflorae:ore/opal/rhyolite"
           }
         ]
       },
       {
         "replace": [
-          "tfcflorae:rock/raw/mudstone"
+          "tfcflorae:rock/raw/basalt"
         ],
         "with": [
           {
-            "block": "tfcflorae:ore/opal/mudstone"
+            "block": "tfcflorae:ore/opal/basalt"
           }
         ]
       },
       {
         "replace": [
-          "tfcflorae:rock/raw/sandstone"
+          "tfcflorae:rock/raw/andesite"
         ],
         "with": [
           {
-            "block": "tfcflorae:ore/opal/sandstone"
+            "block": "tfcflorae:ore/opal/andesite"
           }
         ]
       },
       {
         "replace": [
-          "tfcflorae:rock/raw/siltstone"
+          "tfcflorae:rock/raw/dacite"
         ],
         "with": [
           {
-            "block": "tfcflorae:ore/opal/siltstone"
-          }
-        ]
-      },
-      {
-        "replace": [
-          "tfcflorae:rock/raw/arkose"
-        ],
-        "with": [
-          {
-            "block": "tfcflorae:ore/opal/arkose"
-          }
-        ]
-      },
-      {
-        "replace": [
-          "tfcflorae:rock/raw/jaspillite"
-        ],
-        "with": [
-          {
-            "block": "tfcflorae:ore/opal/jaspillite"
-          }
-        ]
-      },
-      {
-        "replace": [
-          "tfcflorae:rock/raw/travertine"
-        ],
-        "with": [
-          {
-            "block": "tfcflorae:ore/opal/travertine"
-          }
-        ]
-      },
-      {
-        "replace": [
-          "tfcflorae:rock/raw/wackestone"
-        ],
-        "with": [
-          {
-            "block": "tfcflorae:ore/opal/wackestone"
-          }
-        ]
-      },
-      {
-        "replace": [
-          "tfcflorae:rock/raw/blackband_ironstone"
-        ],
-        "with": [
-          {
-            "block": "tfcflorae:ore/opal/blackband_ironstone"
-          }
-        ]
-      },
-      {
-        "replace": [
-          "tfc:rock/raw/rhyolite"
-        ],
-        "with": [
-          {
-            "block": "tfc:ore/opal/rhyolite"
-          }
-        ]
-      },
-      {
-        "replace": [
-          "tfc:rock/raw/basalt"
-        ],
-        "with": [
-          {
-            "block": "tfc:ore/opal/basalt"
-          }
-        ]
-      },
-      {
-        "replace": [
-          "tfc:rock/raw/andesite"
-        ],
-        "with": [
-          {
-            "block": "tfc:ore/opal/andesite"
-          }
-        ]
-      },
-      {
-        "replace": [
-          "tfc:rock/raw/dacite"
-        ],
-        "with": [
-          {
-            "block": "tfc:ore/opal/dacite"
-          }
-        ]
-      },
-      {
-        "replace": [
-          "tfcflorae:rock/raw/porphyry"
-        ],
-        "with": [
-          {
-            "block": "tfcflorae:ore/opal/porphyry"
-          }
-        ]
-      },
-      {
-        "replace": [
-          "tfcflorae:rock/raw/peridotite"
-        ],
-        "with": [
-          {
-            "block": "tfcflorae:ore/opal/peridotite"
-          }
-        ]
-      },
-      {
-        "replace": [
-          "tfcflorae:rock/raw/blaimorite"
-        ],
-        "with": [
-          {
-            "block": "tfcflorae:ore/opal/blaimorite"
-          }
-        ]
-      },
-      {
-        "replace": [
-          "tfcflorae:rock/raw/boninite"
-        ],
-        "with": [
-          {
-            "block": "tfcflorae:ore/opal/boninite"
-          }
-        ]
-      },
-      {
-        "replace": [
-          "tfcflorae:rock/raw/carbonatite"
-        ],
-        "with": [
-          {
-            "block": "tfcflorae:ore/opal/carbonatite"
+            "block": "tfcflorae:ore/opal/dacite"
           }
         ]
       }
-    ],
-    "random_name": "opal",
-    "biomes": "#tfc:is_river"
+    ]
   }
 }

@@ -2,10 +2,12 @@
   "__comment__": "This file was automatically created by mcresources",
   "type": "tfc:forest_entry",
   "config": {
-    "min_rain": 140,
-    "max_rain": 400,
-    "min_temp": -1,
-    "max_temp": 17,
+    "climate": {
+      "min_temperature": -1,
+      "max_temperature": 17,
+      "min_rainfall": 140,
+      "max_rainfall": 400
+    },
     "groundcover": [
       {
         "block": "tfcflorae:wood/twig/maclura"
@@ -14,8 +16,8 @@
         "block": "tfcflorae:wood/fallen_leaves/maclura"
       }
     ],
-    "normal_tree": "tfc:tree/maclura",
-    "dead_tree": "tfc:tree/maclura_dead",
+    "normal_tree": "tfcflorae:tree/maclura",
+    "dead_tree": "tfcflorae:tree/maclura_dead",
     "fallen_log": "tfcflorae:wood/log/maclura",
     "bush_log": {
       "Name": "tfcflorae:wood/wood/maclura",
@@ -25,6 +27,6 @@
       }
     },
     "bush_leaves": "tfcflorae:wood/leaves/maclura",
-    "old_growth_tree": "tfc:tree/maclura_large"
+    "old_growth_tree": "tfcflorae:tree/maclura_large"
   }
 }

@@ -4,6 +4,7 @@
 from enum import Enum, auto
 
 from mcresources import ResourceManager, utils, loot_tables
+from mcresources.type_definitions import ResourceIdentifier
 
 from constants import *
 from recipes import fluid_ingredient

@@ -59,7 +59,6 @@ public class TFCFForgeEventHandler
     public static void init()
     {
         final IEventBus bus = MinecraftForge.EVENT_BUS;
-        IEventBus busMod = FMLJavaModLoadingContext.get().getModEventBus();
 
         bus.addListener(TFCFForgeEventHandler::onItemExpireEvent);
         bus.addListener(TFCFForgeEventHandler::onPlayerRightClickBlock);
@@ -67,7 +66,8 @@ public class TFCFForgeEventHandler
 //        busMod.addListener(TFCFForgeEventHandler::onPackFinder);
     }
 
-/* todo   public static void onPackFinder(AddPackFindersEvent event)
+/*
+  public static void onPackFinder(AddPackFindersEvent event)
     {
         try
         {
@@ -84,7 +84,7 @@ public class TFCFForgeEventHandler
                         return modFile.findResource(paths);
                     }
                 };
-                var metadata = pack.getMetadataSection(PackMetadataSection.SERIALIZER);
+                var metadata = pack.resolve(PackMetadataSection.TYPE.getMetadataSectionName());
                 if (metadata != null)
                 {
                     TFCFlorae.LOGGER.info("Injecting Florae override pack");

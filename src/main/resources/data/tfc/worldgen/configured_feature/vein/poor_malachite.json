@@ -1,122 +1,118 @@
 {
   "__comment__": "This file was automatically created by mcresources",
-  "type": "tfc:cluster_vein",
+  "type": "tfcflorae:cluster_vein",
   "config": {
     "rarity": 80,
-    "min_y": {
-      "absolute": 0
-    },
-    "max_y": {
-      "absolute": 100
-    },
+    "min_y": 0,
+    "max_y": 100,
     "size": 15,
     "density": 0.4,
     "blocks": [
       {
         "replace": [
-          "tfc:rock/raw/marble"
+          "tfcflorae:rock/raw/marble"
         ],
         "with": [
           {
             "weight": 40,
-            "block": "tfc:ore/poor_malachite/marble"
+            "block": "tfcflorae:ore/poor_malachite/marble"
           },
           {
             "weight": 30,
-            "block": "tfc:ore/normal_malachite/marble"
+            "block": "tfcflorae:ore/normal_malachite/marble"
           },
           {
             "weight": 10,
-            "block": "tfc:ore/rich_malachite/marble"
+            "block": "tfcflorae:ore/rich_malachite/marble"
           }
         ]
       },
       {
         "replace": [
-          "tfc:rock/raw/limestone"
+          "tfcflorae:rock/raw/limestone"
         ],
         "with": [
           {
             "weight": 40,
-            "block": "tfc:ore/poor_malachite/limestone"
+            "block": "tfcflorae:ore/poor_malachite/limestone"
           },
           {
             "weight": 30,
-            "block": "tfc:ore/normal_malachite/limestone"
+            "block": "tfcflorae:ore/normal_malachite/limestone"
           },
           {
             "weight": 10,
-            "block": "tfc:ore/rich_malachite/limestone"
+            "block": "tfcflorae:ore/rich_malachite/limestone"
           },
           {
             "weight": 25,
-            "block": "tfc:ore/gypsum/limestone"
+            "block": "tfcflorae:ore/gypsum/limestone"
           }
         ]
       },
       {
         "replace": [
-          "tfc:rock/raw/phyllite"
+          "tfcflorae:rock/raw/phyllite"
         ],
         "with": [
           {
             "weight": 40,
-            "block": "tfc:ore/poor_malachite/phyllite"
+            "block": "tfcflorae:ore/poor_malachite/phyllite"
           },
           {
             "weight": 30,
-            "block": "tfc:ore/normal_malachite/phyllite"
+            "block": "tfcflorae:ore/normal_malachite/phyllite"
           },
           {
             "weight": 10,
-            "block": "tfc:ore/rich_malachite/phyllite"
+            "block": "tfcflorae:ore/rich_malachite/phyllite"
           }
         ]
       },
       {
         "replace": [
-          "tfc:rock/raw/chalk"
+          "tfcflorae:rock/raw/chalk"
         ],
         "with": [
           {
             "weight": 40,
-            "block": "tfc:ore/poor_malachite/chalk"
+            "block": "tfcflorae:ore/poor_malachite/chalk"
           },
           {
             "weight": 30,
-            "block": "tfc:ore/normal_malachite/chalk"
+            "block": "tfcflorae:ore/normal_malachite/chalk"
           },
           {
             "weight": 10,
-            "block": "tfc:ore/rich_malachite/chalk"
+            "block": "tfcflorae:ore/rich_malachite/chalk"
           }
         ]
       },
       {
         "replace": [
-          "tfc:rock/raw/dolomite"
+          "tfcflorae:rock/raw/dolomite"
         ],
         "with": [
           {
             "weight": 40,
-            "block": "tfc:ore/poor_malachite/dolomite"
+            "block": "tfcflorae:ore/poor_malachite/dolomite"
           },
           {
             "weight": 30,
-            "block": "tfc:ore/normal_malachite/dolomite"
+            "block": "tfcflorae:ore/normal_malachite/dolomite"
           },
           {
             "weight": 10,
-            "block": "tfc:ore/rich_malachite/dolomite"
+            "block": "tfcflorae:ore/rich_malachite/dolomite"
           }
         ]
       }
     ],
     "indicator": {
-      "rarity": 10,
+      "rarity": 12,
       "blocks": [
         {
-          "block": "tfc:ore/small_malachite"
+          "block": "tfcflorae:ore/small_malachite"
         }
       ]
     },

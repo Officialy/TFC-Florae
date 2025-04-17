@@ -10,291 +10,131 @@
       "blocks": [
         {
           "replace": [
-            "tfc:rock/raw/rhyolite"
+            "tfcflorae:rock/raw/rhyolite"
           ],
           "with": [
             {
-              "block": "tfc:ore/kimberlite/rhyolite"
+              "block": "tfcflorae:ore/kimberlite/rhyolite"
             }
           ]
         },
         {
           "replace": [
-            "tfc:rock/raw/basalt"
+            "tfcflorae:rock/raw/basalt"
           ],
           "with": [
             {
-              "block": "tfc:ore/kimberlite/basalt"
+              "block": "tfcflorae:ore/kimberlite/basalt"
             }
           ]
         },
         {
           "replace": [
-            "tfc:rock/raw/andesite"
+            "tfcflorae:rock/raw/andesite"
           ],
           "with": [
             {
-              "block": "tfc:ore/kimberlite/andesite"
+              "block": "tfcflorae:ore/kimberlite/andesite"
             }
           ]
         },
         {
           "replace": [
-            "tfc:rock/raw/dacite"
+            "tfcflorae:rock/raw/dacite"
           ],
           "with": [
             {
-              "block": "tfc:ore/kimberlite/dacite"
+              "block": "tfcflorae:ore/kimberlite/dacite"
             }
           ]
         },
         {
           "replace": [
-            "tfcflorae:rock/raw/porphyry"
+            "tfcflorae:rock/raw/granite"
           ],
           "with": [
             {
-              "block": "tfcflorae:ore/kimberlite/porphyry"
+              "block": "tfcflorae:ore/kimberlite/granite"
             }
           ]
         },
         {
           "replace": [
-            "tfcflorae:rock/raw/peridotite"
+            "tfcflorae:rock/raw/diorite"
           ],
           "with": [
             {
-              "block": "tfcflorae:ore/kimberlite/peridotite"
+              "block": "tfcflorae:ore/kimberlite/diorite"
             }
           ]
         },
         {
           "replace": [
-            "tfcflorae:rock/raw/blaimorite"
+            "tfcflorae:rock/raw/gabbro"
           ],
           "with": [
             {
-              "block": "tfcflorae:ore/kimberlite/blaimorite"
+              "block": "tfcflorae:ore/kimberlite/gabbro"
             }
           ]
         },
         {
           "replace": [
-            "tfcflorae:rock/raw/boninite"
+            "tfcflorae:rock/raw/quartzite"
           ],
           "with": [
             {
-              "block": "tfcflorae:ore/kimberlite/boninite"
+              "block": "tfcflorae:ore/kimberlite/quartzite"
             }
           ]
         },
         {
           "replace": [
-            "tfcflorae:rock/raw/carbonatite"
+            "tfcflorae:rock/raw/slate"
           ],
           "with": [
             {
-              "block": "tfcflorae:ore/kimberlite/carbonatite"
+              "block": "tfcflorae:ore/kimberlite/slate"
             }
           ]
         },
         {
           "replace": [
-            "tfc:rock/raw/granite"
+            "tfcflorae:rock/raw/phyllite"
           ],
           "with": [
             {
-              "block": "tfc:ore/kimberlite/granite"
+              "block": "tfcflorae:ore/kimberlite/phyllite"
             }
           ]
         },
         {
           "replace": [
-            "tfc:rock/raw/diorite"
+            "tfcflorae:rock/raw/schist"
           ],
           "with": [
             {
-              "block": "tfc:ore/kimberlite/diorite"
+              "block": "tfcflorae:ore/kimberlite/schist"
             }
           ]
         },
         {
           "replace": [
-            "tfc:rock/raw/gabbro"
+            "tfcflorae:rock/raw/gneiss"
           ],
           "with": [
             {
-              "block": "tfc:ore/kimberlite/gabbro"
+              "block": "tfcflorae:ore/kimberlite/gneiss"
             }
           ]
         },
         {
           "replace": [
-            "tfcflorae:rock/raw/red_granite"
+            "tfcflorae:rock/raw/marble"
           ],
           "with": [
             {
-              "block": "tfcflorae:ore/kimberlite/red_granite"
-            }
-          ]
-        },
-        {
-          "replace": [
-            "tfcflorae:rock/raw/breccia"
-          ],
-          "with": [
-            {
-              "block": "tfcflorae:ore/kimberlite/breccia"
-            }
-          ]
-        },
-        {
-          "replace": [
-            "tfcflorae:rock/raw/foidolite"
-          ],
-          "with": [
-            {
-              "block": "tfcflorae:ore/kimberlite/foidolite"
-            }
-          ]
-        },
-        {
-          "replace": [
-            "tfc:rock/raw/quartzite"
-          ],
-          "with": [
-            {
-              "block": "tfc:ore/kimberlite/quartzite"
-            }
-          ]
-        },
-        {
-          "replace": [
-            "tfc:rock/raw/slate"
-          ],
-          "with": [
-            {
-              "block": "tfc:ore/kimberlite/slate"
-            }
-          ]
-        },
-        {
-          "replace": [
-            "tfc:rock/raw/phyllite"
-          ],
-          "with": [
-            {
-              "block": "tfc:ore/kimberlite/phyllite"
-            }
-          ]
-        },
-        {
-          "replace": [
-            "tfc:rock/raw/schist"
-          ],
-          "with": [
-            {
-              "block": "tfc:ore/kimberlite/schist"
-            }
-          ]
-        },
-        {
-          "replace": [
-            "tfc:rock/raw/gneiss"
-          ],
-          "with": [
-            {
-              "block": "tfc:ore/kimberlite/gneiss"
-            }
-          ]
-        },
-        {
-          "replace": [
-            "tfc:rock/raw/marble"
-          ],
-          "with": [
-            {
-              "block": "tfc:ore/kimberlite/marble"
-            }
-          ]
-        },
-        {
-          "replace": [
-            "tfcflorae:rock/raw/cataclasite"
-          ],
-          "with": [
-            {
-              "block": "tfcflorae:ore/kimberlite/cataclasite"
-            }
-          ]
-        },
-        {
-          "replace": [
-            "tfcflorae:rock/raw/blueschist"
-          ],
-          "with": [
-            {
-              "block": "tfcflorae:ore/kimberlite/blueschist"
-            }
-          ]
-        },
-        {
-          "replace": [
-            "tfcflorae:rock/raw/catlinite"
-          ],
-          "with": [
-            {
-              "block": "tfcflorae:ore/kimberlite/catlinite"
-            }
-          ]
-        },
-        {
-          "replace": [
-            "tfcflorae:rock/raw/greenschist"
-          ],
-          "with": [
-            {
-              "block": "tfcflorae:ore/kimberlite/greenschist"
-            }
-          ]
-        },
-        {
-          "replace": [
-            "tfcflorae:rock/raw/novaculite"
-          ],
-          "with": [
-            {
-              "block": "tfcflorae:ore/kimberlite/novaculite"
-            }
-          ]
-        },
-        {
-          "replace": [
-            "tfcflorae:rock/raw/soapstone"
-          ],
-          "with": [
-            {
-              "block": "tfcflorae:ore/kimberlite/soapstone"
-            }
-          ]
-        },
-        {
-          "replace": [
-            "tfcflorae:rock/raw/komatiite"
-          ],
-          "with": [
-            {
-              "block": "tfcflorae:ore/kimberlite/komatiite"
-            }
-          ]
-        },
-        {
-          "replace": [
-            "tfcflorae:rock/raw/mylonite"
-          ],
-          "with": [
-            {
-              "block": "tfcflorae:ore/kimberlite/mylonite"
+              "block": "tfcflorae:ore/kimberlite/marble"
             }
           ]
         }

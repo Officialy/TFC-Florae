@@ -1,6 +1,6 @@
 {
   "__comment__": "This file was automatically created by mcresources",
-  "parent": "tfc:block/groundcover/rubble",
+  "parent": "tfcflorae:block/groundcover/rubble",
   "textures": {
     "all": "tfcflorae:item/loose_rock/catlinite"
   }

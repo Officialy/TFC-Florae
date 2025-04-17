@@ -2,10 +2,12 @@
   "__comment__": "This file was automatically created by mcresources",
   "type": "tfc:forest_entry",
   "config": {
-    "min_rain": 290,
-    "max_rain": 550,
-    "min_temp": 14,
-    "max_temp": 37,
+    "climate": {
+      "min_temperature": 14,
+      "max_temperature": 37,
+      "min_rainfall": 290,
+      "max_rainfall": 550
+    },
     "groundcover": [
       {
         "block": "tfcflorae:wood/twig/brazilwood"
@@ -14,8 +16,8 @@
         "block": "tfcflorae:wood/fallen_leaves/brazilwood"
       }
     ],
-    "normal_tree": "tfc:tree/brazilwood",
-    "dead_tree": "tfc:tree/brazilwood_dead",
+    "normal_tree": "tfcflorae:tree/brazilwood",
+    "dead_tree": "tfcflorae:tree/brazilwood_dead",
     "fallen_log": "tfcflorae:wood/log/brazilwood",
     "bush_log": {
       "Name": "tfcflorae:wood/wood/brazilwood",
@@ -25,6 +27,6 @@
       }
     },
     "bush_leaves": "tfcflorae:wood/leaves/brazilwood",
-    "old_growth_tree": "tfc:tree/brazilwood_large"
+    "old_growth_tree": "tfcflorae:tree/brazilwood_large"
   }
 }

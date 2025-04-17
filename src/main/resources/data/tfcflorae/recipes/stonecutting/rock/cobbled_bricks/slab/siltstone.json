@@ -1,9 +1,0 @@
-{
-  "__comment__": "This file was automatically created by mcresources",
-  "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "tfcflorae:rock/cobbled_bricks/siltstone"
-  },
-  "result": "tfcflorae:rock/cobbled_bricks/slab/siltstone",
-  "count": 2
-}

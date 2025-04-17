@@ -2,6 +2,6 @@
   "__comment__": "This file was automatically created by mcresources",
   "replace": false,
   "values": [
-    "tfc:loose_mud_disc"
+    "#tfc:feature/soil_discs"
   ]
 }

@@ -1,6 +1,0 @@
-{
-  "type": "tfc:chisel",
-  "ingredient": "tfcflorae:rock/cobble/siltstone",
-  "result": "tfcflorae:rock/cobbled_bricks/siltstone",
-  "mode": "smooth"
-}

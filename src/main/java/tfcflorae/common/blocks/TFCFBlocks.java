@@ -20,7 +20,6 @@ import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.*;
@@ -33,6 +32,7 @@ import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.ForgeRegistry;
 import net.minecraftforge.registries.RegistryObject;
 import tfcflorae.TFCFlorae;
 import tfcflorae.client.TFCFSounds;
@@ -51,13 +51,12 @@ import tfcflorae.common.items.TFCFBarrelBlockItem;
 import tfcflorae.common.items.TFCFItems;
 import tfcflorae.util.TFCFHelpers;
 import tfcflorae.util.climate.TFCFClimateRanges;
+import tfcflorae.world.feature.tree.BambooTreeGrower;
 import tfcflorae.world.feature.tree.TFCFBambooTreeGrower;
 import tfcflorae.world.feature.tree.TFCFTreeGrower;
 
 import javax.annotation.Nullable;
-import java.util.HashMap;
-import java.util.Locale;
-import java.util.Map;
+import java.util.*;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.function.Supplier;
@@ -68,6 +67,7 @@ import static net.dries007.tfc.common.TFCCreativeTabs.*;
 public final class TFCFBlocks {
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, TFCFlorae.MOD_ID);
     public static final CreativeTabHolder ROCK_STUFFS = TFCCreativeTabs.ROCKS;
+    public static HashMap<Supplier<Block>, CreativeTabHolder> tabsMap = new HashMap<>();
     // Earth #wow
 
     public static final Map<TFCFSoil, Map<TFCFSoil.TFCFVariant, RegistryObject<Block>>> TFCFSOIL = Helpers.mapOfKeys(TFCFSoil.class, type ->
@@ -310,12 +310,7 @@ public final class TFCFBlocks {
 //    public static final RegistryObject<Block> CHARRED_TREE_STRIPPED_WOOD = register("wood/stripped_wood/charred_tree", () -> new LogBlock(ExtendedProperties.of(MapColor.WOOD, MapColor.TERRACOTTA_BLACK).strength(7.5f).sound(TFCSounds.CHARCOAL).requiresCorrectToolForDrops().flammableLikeLogs(), null), WOOD);
 //    public static final RegistryObject<Block> CHARRED_TREE_TWIG = register("wood/twig/charred_tree", () -> GroundcoverBlock.twig(ExtendedProperties.of(MapColor.GRASS, MapColor.TERRACOTTA_BLACK).strength(0.05F, 0.0F).sound(TFCSounds.CHARCOAL).noCollission().flammableLikeWool()), WOOD);
 
-    public static final Map<TFCFWood, Map<Wood.BlockType, RegistryObject<Block>>> WOODS;// = woodMapper(TFCFWood.class);
-
-    static {
-        WOODS = woodMapper(TFCFWood.class);
-    }
-
+    public static final Map<TFCFWood, Map<Wood.BlockType, RegistryObject<Block>>> WOODS = woodMapper(TFCFWood.class);
     public static final Map<TFCFWood, RegistryObject<Block>> WOODS_SEASONAL_LEAVES = seasonalLeavesMapper(TFCFWood.class);
     public static final Map<TFCFWood, RegistryObject<Block>> WOODS_SEASONAL_LOGS = seasonalLogMapper(TFCFWood.class);
     public static final Map<TFCFWood, RegistryObject<Block>> WOODS_SEASONAL_WOOD = seasonalWoodMapper(TFCFWood.class);
@@ -538,10 +533,10 @@ public final class TFCFBlocks {
                     } else if (type == BlockType.STRIPPED_LOG) {
                         subMap.put(type, register(("wood/" + type.name() + "_bundle/" + wood.getSerializedName()).toLowerCase(Locale.ROOT), () ->
                                 new LogBlock(ExtendedProperties.of(Blocks.OAK_WOOD).mapColor(wood.woodColor()).sound(SoundType.WOOD).strength(5.5f).requiresCorrectToolForDrops().flammableLikeLogs(), null), WOOD));
-                    }/* else if (type == BlockType.SAPLING) {
+                    } else if (type == BlockType.SAPLING) {
                         subMap.put(type, register(("wood/" + type.name() + "/" + wood.getSerializedName()).toLowerCase(Locale.ROOT), () ->
                                 new VanillaBambooSaplingBlock(new BambooTreeGrower(wood), ExtendedProperties.of(MapColor.PLANT).mapColor(wood.woodColor()).noCollission().randomTicks().strength(0).sound(SoundType.GRASS).flammableLikeLeaves().blockEntity(TFCFBlockEntities.TICK_COUNTER), wood.daysToGrow()), WOOD));
-                    }*/ else if (type == BlockType.LEAVES) {
+                    } else if (type == BlockType.LEAVES) {
                         subMap.put(type, register(("wood/" + type.name() + "/" + wood.getSerializedName()).toLowerCase(Locale.ROOT), () ->
                                 TFCFLeavesBlockExt.create(ExtendedProperties.of(wood.woodColor()).strength(0.5F).sound(SoundType.GRASS).randomTicks().noOcclusion().isViewBlocking(TFCFBlocks::never).flammableLikeLeaves(), 7, null, null, WOODS.get(wood).get(Wood.BlockType.SAPLING)), WOOD));
                     } else if (type == BlockType.TRAPPED_CHEST) {
@@ -791,7 +786,16 @@ public final class TFCFBlocks {
             Function<Block, BlockItem> blockItem = block -> blockItemFactory.apply(block, new Item.Properties());//.tab(WOOD));
 
             Map.put(wood, register(("wood/palm_sapling/" + wood.getSerializedName()).toLowerCase(Locale.ROOT), () ->
-                    new TFCFSaplingBlock(wood, new TFCFTreeGrower(wood, Helpers.identifier("tree/" + wood.getSerializedName()), Helpers.identifier("tree/" + wood.getSerializedName() + "_large")), ExtendedProperties.of(wood.woodColor()).noCollission().randomTicks().strength(0).sound(SoundType.GRASS).flammableLikeLeaves().blockEntity(TFCFBlockEntities.TICK_COUNTER), wood.daysToGrow()), blockItem));
+                    new TFCFSaplingBlock(wood, new TFCFTreeGrower(wood,
+                            Helpers.identifier("tree/" + wood.getSerializedName()),
+                            Helpers.identifier("tree/" + wood.getSerializedName() + "_large")),
+                            ExtendedProperties.of(wood.woodColor())
+                                    .noCollission()
+                                    .randomTicks()
+                                    .strength(0)
+                                    .sound(SoundType.GRASS)
+                                    .flammableLikeLeaves()
+                                    .blockEntity(TFCFBlockEntities.TICK_COUNTER), 5/*wood.daysToGrow()*/), blockItem));
         }
         return Map;
     }
@@ -829,12 +833,12 @@ public final class TFCFBlocks {
             BiFunction<Block, Item.Properties, ? extends BlockItem> blockItemFactory = BlockItem::new;
             Function<Block, BlockItem> blockItem = block -> blockItemFactory.apply(block, new Item.Properties());//.tab(WOOD));
 
-            /*if (wood.isFruitTree() && wood.hasFruitingLog()) {
+            if (wood.isFruitTree() && wood.hasFruitingLog()) {
                 Map.put(wood, register(("wood/log/" + wood.getSerializedName()).toLowerCase(Locale.ROOT), () ->
-                        new TFCFFruitingLogBlock(ExtendedProperties.of(MapColor.WOOD, state -> state.getValue(RotatedPillarBlock.AXIS) == Direction.Axis.Y ? wood.woodColor() : wood.barkColor()).strength(8f)
+                        new TFCFFruitingLogBlock(ExtendedProperties.of(state -> state.getValue(RotatedPillarBlock.AXIS) == Direction.Axis.Y ? wood.woodColor() : wood.barkColor()).strength(8f)
                                 .sound(SoundType.WOOD).strength(8f).requiresCorrectToolForDrops().flammableLikeLogs().hasPostProcess(TFCFBlocks::always).randomTicks(), wood.getBlock(Wood.BlockType.STRIPPED_LOG),
                                 wood.getProductItem(), wood.getStages(), TFCFClimateRanges.LARGE_FRUIT_TREES.get(wood)), blockItem));
-            } else continue;*/
+            } else continue;
         }
         return Map;
     }
@@ -1441,6 +1445,7 @@ public final class TFCFBlocks {
     }
 
     private static <T extends Block> RegistryObject<T> register(String name, Supplier<T> blockSupplier, TFCCreativeTabs.CreativeTabHolder group) {
+        tabsMap.put((Supplier<Block>) blockSupplier, group);
         return register(name, blockSupplier, block -> new BlockItem(block, new Item.Properties()));//.tab(group)));
     }
 

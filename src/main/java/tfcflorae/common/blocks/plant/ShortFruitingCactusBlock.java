@@ -91,7 +91,7 @@ public abstract class ShortFruitingCactusBlock extends ShortCactusBlock implemen
         this.lifecycle = lifecycle;
         this.productItem = productItem;
 
-        lastUpdateTick = Calendars.SERVER.getTicks();
+        lastUpdateTick = 0;// todo Calendars.SERVER.getTicks();
 
         registerDefaultState(getStateDefinition().any().setValue(LIFECYCLE, Lifecycle.HEALTHY).setValue(NATURAL, false));
     }
@@ -109,7 +109,7 @@ public abstract class ShortFruitingCactusBlock extends ShortCactusBlock implemen
         if (getLifecycleForCurrentMonth() != getLifecycleForMonth(Calendars.SERVER.getCalendarMonthOfYear()))
         {
             onUpdate(level, pos, state);
-            lastUpdateTick = Calendars.SERVER.getTicks();
+            lastUpdateTick = 0;// todo Calendars.SERVER.getTicks();
         }
     }
 

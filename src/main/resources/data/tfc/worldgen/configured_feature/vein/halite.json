@@ -1,178 +1,87 @@
 {
   "__comment__": "This file was automatically created by mcresources",
-  "type": "tfc:disc_vein",
+  "type": "tfcflorae:tfc:disc_vein_vein",
   "config": {
-    "rarity": 120,
-    "min_y": {
-      "absolute": 30
-    },
-    "max_y": {
-      "absolute": 90
-    },
-    "size": 30,
-    "density": 0.8,
+    "rarity": 110,
+    "density": 0.85,
+    "min_y": -45,
+    "max_y": -12,
+    "project": true,
+    "project_offset": true,
+    "size": 35,
+    "height": 4,
+    "random_name": "halite",
     "blocks": [
       {
         "replace": [
-          "tfc:rock/raw/shale"
+          "tfcflorae:rock/raw/shale"
         ],
         "with": [
           {
-            "block": "tfc:ore/halite/shale"
+            "block": "tfcflorae:ore/halite/shale"
           }
         ]
       },
       {
         "replace": [
-          "tfc:rock/raw/claystone"
+          "tfcflorae:rock/raw/claystone"
         ],
         "with": [
           {
-            "block": "tfc:ore/halite/claystone"
+            "block": "tfcflorae:ore/halite/claystone"
           }
         ]
       },
       {
         "replace": [
-          "tfc:rock/raw/limestone"
+          "tfcflorae:rock/raw/limestone"
         ],
         "with": [
           {
-            "block": "tfc:ore/halite/limestone"
+            "block": "tfcflorae:ore/halite/limestone"
           }
         ]
       },
       {
         "replace": [
-          "tfc:rock/raw/conglomerate"
+          "tfcflorae:rock/raw/conglomerate"
         ],
         "with": [
           {
-            "block": "tfc:ore/halite/conglomerate"
+            "block": "tfcflorae:ore/halite/conglomerate"
           }
         ]
       },
       {
         "replace": [
-          "tfc:rock/raw/dolomite"
+          "tfcflorae:rock/raw/dolomite"
         ],
         "with": [
           {
-            "block": "tfc:ore/halite/dolomite"
+            "block": "tfcflorae:ore/halite/dolomite"
           }
         ]
       },
       {
         "replace": [
-          "tfc:rock/raw/chert"
+          "tfcflorae:rock/raw/chert"
         ],
         "with": [
           {
-            "block": "tfc:ore/halite/chert"
+            "block": "tfcflorae:ore/halite/chert"
           }
         ]
       },
       {
         "replace": [
-          "tfc:rock/raw/chalk"
+          "tfcflorae:rock/raw/chalk"
         ],
         "with": [
           {
-            "block": "tfc:ore/halite/chalk"
-          }
-        ]
-      },
-      {
-        "replace": [
-          "tfcflorae:rock/raw/laterite"
-        ],
-        "with": [
-          {
-            "block": "tfcflorae:ore/halite/laterite"
-          }
-        ]
-      },
-      {
-        "replace": [
-          "tfcflorae:rock/raw/mudstone"
-        ],
-        "with": [
-          {
-            "block": "tfcflorae:ore/halite/mudstone"
-          }
-        ]
-      },
-      {
-        "replace": [
-          "tfcflorae:rock/raw/sandstone"
-        ],
-        "with": [
-          {
-            "block": "tfcflorae:ore/halite/sandstone"
-          }
-        ]
-      },
-      {
-        "replace": [
-          "tfcflorae:rock/raw/siltstone"
-        ],
-        "with": [
-          {
-            "block": "tfcflorae:ore/halite/siltstone"
-          }
-        ]
-      },
-      {
-        "replace": [
-          "tfcflorae:rock/raw/arkose"
-        ],
-        "with": [
-          {
-            "block": "tfcflorae:ore/halite/arkose"
-          }
-        ]
-      },
-      {
-        "replace": [
-          "tfcflorae:rock/raw/jaspillite"
-        ],
-        "with": [
-          {
-            "block": "tfcflorae:ore/halite/jaspillite"
-          }
-        ]
-      },
-      {
-        "replace": [
-          "tfcflorae:rock/raw/travertine"
-        ],
-        "with": [
-          {
-            "block": "tfcflorae:ore/halite/travertine"
-          }
-        ]
-      },
-      {
-        "replace": [
-          "tfcflorae:rock/raw/wackestone"
-        ],
-        "with": [
-          {
-            "block": "tfcflorae:ore/halite/wackestone"
-          }
-        ]
-      },
-      {
-        "replace": [
-          "tfcflorae:rock/raw/blackband_ironstone"
-        ],
-        "with": [
-          {
-            "block": "tfcflorae:ore/halite/blackband_ironstone"
+            "block": "tfcflorae:ore/halite/chalk"
           }
         ]
       }
-    ],
-    "random_name": "halite"
+    ]
   }
 }

@@ -1,0 +1,34 @@
+{
+  "__comment__": "This file was automatically created by mcresources",
+  "type": "tfc:forest_entry",
+  "config": {
+    "climate": {
+      "min_temperature": 2,
+      "max_temperature": 27,
+      "min_rainfall": 120,
+      "max_rainfall": 270
+    },
+    "groundcover": [
+      {
+        "block": "tfcflorae:wood/twig/messmate"
+      },
+      {
+        "block": "tfcflorae:wood/fallen_leaves/messmate"
+      }
+    ],
+    "normal_tree": "tfcflorae:tree/messmate",
+    "dead_tree": "tfcflorae:tree/messmate_dead",
+    "fallen_log": "tfcflorae:wood/log/messmate",
+    "bush_log": {
+      "Name": "tfcflorae:wood/wood/messmate",
+      "Properties": {
+        "natural": "true",
+        "axis": "y"
+      }
+    },
+    "bush_leaves": "tfcflorae:wood/leaves/messmate",
+    "old_growth_tree": "tfcflorae:tree/messmate_large",
+    "dead_chance": 1,
+    "fallen_tree_chance": 8
+  }
+}

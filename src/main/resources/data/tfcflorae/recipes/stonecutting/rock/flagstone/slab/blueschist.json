@@ -1,9 +1,0 @@
-{
-  "__comment__": "This file was automatically created by mcresources",
-  "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "tfcflorae:rock/flagstone/blueschist"
-  },
-  "result": "tfcflorae:rock/flagstone/slab/blueschist",
-  "count": 2
-}

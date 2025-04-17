@@ -2,6 +2,6 @@
   "__comment__": "This file was automatically created by mcresources",
   "type": "tfc:tall_plant",
   "config": {
-    "block": "tfcflorae:plant/barrel_cactus"
+    "block": "tfc:plant/barrel_cactus"
   }
 }

@@ -1,6 +1,0 @@
-{
-  "type": "tfc:chisel",
-  "ingredient": "tfcflorae:wood/planks/hemlock",
-  "result": "tfcflorae:wood/stairs/hemlock",
-  "mode": "stair"
-}

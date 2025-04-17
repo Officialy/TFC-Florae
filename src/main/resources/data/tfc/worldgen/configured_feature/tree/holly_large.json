@@ -3,15 +3,15 @@
   "type": "tfc:random_tree",
   "config": {
     "structures": [
-      "tfc:holly_large/1",
-      "tfc:holly_large/2",
-      "tfc:holly_large/3"
+      "tfcflorae:holly_large/1",
+      "tfcflorae:holly_large/2",
+      "tfcflorae:holly_large/3"
     ],
     "radius": 2,
     "placement": {
       "width": 2,
       "height": 9,
-      "allow_submerged": false
+      "allow_submerged": true
     }
   }
 }

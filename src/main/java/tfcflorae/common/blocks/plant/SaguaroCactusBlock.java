@@ -112,7 +112,7 @@ public abstract class SaguaroCactusBlock extends PlantBlock implements ILeavesBl
         this.lifecycle = lifecycle;
         this.productItem = productItem;
 
-        lastUpdateTick = Calendars.SERVER.getTicks();
+        lastUpdateTick = 0;// todo Calendars.SERVER.getTicks();
 
         this.registerDefaultState(getStateDefinition().any()
                 .setValue(HORIZONTAL, false)
@@ -256,7 +256,7 @@ public abstract class SaguaroCactusBlock extends PlantBlock implements ILeavesBl
         if (getLifecycleForCurrentMonth() != getLifecycleForMonth(Calendars.SERVER.getCalendarMonthOfYear()))
         {
             onUpdate(serverLevel, blockPos, blockState);
-            lastUpdateTick = Calendars.SERVER.getTicks();
+            lastUpdateTick = 0;// todo Calendars.SERVER.getTicks();
         }
         if (blockState.getValue(AGE) >= 3 && random.nextInt(10) == 0 && blockState.equals(defaultBlockState()) && isGrowBlock(serverLevel.getBlockState(blockPos.below())) && serverLevel.getBlockState(blockPos.above()).isAir())
         {

@@ -3,18 +3,14 @@
   "type": "tfc:pipe_vein",
   "config": {
     "rarity": 220,
-    "min_y": {
-      "absolute": -64
-    },
-    "max_y": {
-      "absolute": 180
-    },
+    "min_y": -64,
+    "max_y": 180,
     "size": 150,
     "density": 0.98,
     "blocks": [
       {
         "replace": [
-          "tfc:rock/raw/granite"
+          "tfcflorae:rock/raw/granite"
         ],
         "with": [
           {
@@ -24,7 +20,7 @@
       },
       {
         "replace": [
-          "tfc:rock/raw/diorite"
+          "tfcflorae:rock/raw/diorite"
         ],
         "with": [
           {
@@ -34,7 +30,7 @@
       },
       {
         "replace": [
-          "tfc:rock/raw/gabbro"
+          "tfcflorae:rock/raw/gabbro"
         ],
         "with": [
           {
@@ -44,7 +40,7 @@
       },
       {
         "replace": [
-          "tfc:rock/raw/shale"
+          "tfcflorae:rock/raw/shale"
         ],
         "with": [
           {
@@ -54,7 +50,7 @@
       },
       {
         "replace": [
-          "tfc:rock/raw/claystone"
+          "tfcflorae:rock/raw/claystone"
         ],
         "with": [
           {
@@ -64,7 +60,7 @@
       },
       {
         "replace": [
-          "tfc:rock/raw/limestone"
+          "tfcflorae:rock/raw/limestone"
         ],
         "with": [
           {
@@ -74,7 +70,7 @@
       },
       {
         "replace": [
-          "tfc:rock/raw/conglomerate"
+          "tfcflorae:rock/raw/conglomerate"
         ],
         "with": [
           {
@@ -84,7 +80,7 @@
       },
       {
         "replace": [
-          "tfc:rock/raw/dolomite"
+          "tfcflorae:rock/raw/dolomite"
         ],
         "with": [
           {
@@ -94,7 +90,7 @@
       },
       {
         "replace": [
-          "tfc:rock/raw/chert"
+          "tfcflorae:rock/raw/chert"
         ],
         "with": [
           {
@@ -104,7 +100,7 @@
       },
       {
         "replace": [
-          "tfc:rock/raw/chalk"
+          "tfcflorae:rock/raw/chalk"
         ],
         "with": [
           {
@@ -114,7 +110,7 @@
       },
       {
         "replace": [
-          "tfc:rock/raw/rhyolite"
+          "tfcflorae:rock/raw/rhyolite"
         ],
         "with": [
           {
@@ -124,7 +120,7 @@
       },
       {
         "replace": [
-          "tfc:rock/raw/basalt"
+          "tfcflorae:rock/raw/basalt"
         ],
         "with": [
           {
@@ -134,7 +130,7 @@
       },
       {
         "replace": [
-          "tfc:rock/raw/andesite"
+          "tfcflorae:rock/raw/andesite"
         ],
         "with": [
           {
@@ -144,7 +140,7 @@
       },
       {
         "replace": [
-          "tfc:rock/raw/dacite"
+          "tfcflorae:rock/raw/dacite"
         ],
         "with": [
           {
@@ -154,7 +150,7 @@
       },
       {
         "replace": [
-          "tfc:rock/raw/quartzite"
+          "tfcflorae:rock/raw/quartzite"
         ],
         "with": [
           {
@@ -164,7 +160,7 @@
       },
       {
         "replace": [
-          "tfc:rock/raw/slate"
+          "tfcflorae:rock/raw/slate"
         ],
         "with": [
           {
@@ -174,7 +170,7 @@
       },
       {
         "replace": [
-          "tfc:rock/raw/phyllite"
+          "tfcflorae:rock/raw/phyllite"
         ],
         "with": [
           {
@@ -184,7 +180,7 @@
       },
       {
         "replace": [
-          "tfc:rock/raw/schist"
+          "tfcflorae:rock/raw/schist"
         ],
         "with": [
           {
@@ -194,7 +190,7 @@
       },
       {
         "replace": [
-          "tfc:rock/raw/gneiss"
+          "tfcflorae:rock/raw/gneiss"
         ],
         "with": [
           {
@@ -204,47 +200,7 @@
       },
       {
         "replace": [
-          "tfc:rock/raw/marble"
-        ],
-        "with": [
-          {
-            "block": "tfcflorae:rock/raw/breccia"
-          }
-        ]
-      },
-      {
-        "replace": [
-          "tfcflorae:rock/raw/cataclasite"
-        ],
-        "with": [
-          {
-            "block": "tfcflorae:rock/raw/breccia"
-          }
-        ]
-      },
-      {
-        "replace": [
-          "tfcflorae:rock/raw/porphyry"
-        ],
-        "with": [
-          {
-            "block": "tfcflorae:rock/raw/breccia"
-          }
-        ]
-      },
-      {
-        "replace": [
-          "tfcflorae:rock/raw/red_granite"
-        ],
-        "with": [
-          {
-            "block": "tfcflorae:rock/raw/breccia"
-          }
-        ]
-      },
-      {
-        "replace": [
-          "tfcflorae:rock/raw/laterite"
+          "tfcflorae:rock/raw/marble"
         ],
         "with": [
           {
@@ -265,6 +221,16 @@
       {
         "replace": [
           "tfcflorae:rock/raw/foidolite"
+        ],
+        "with": [
+          {
+            "block": "tfcflorae:rock/raw/breccia"
+          }
+        ]
+      },
+      {
+        "replace": [
+          "tfcflorae:rock/raw/porphyry"
         ],
         "with": [
           {
@@ -454,6 +420,16 @@
       },
       {
         "replace": [
+          "tfcflorae:rock/raw/cataclasite"
+        ],
+        "with": [
+          {
+            "block": "tfcflorae:rock/raw/breccia"
+          }
+        ]
+      },
+      {
+        "replace": [
           "tfcflorae:rock/raw/mylonite"
         ],
         "with": [
@@ -464,7 +440,7 @@
       },
       {
         "replace": [
-          "tfc:rock/gravel/granite"
+          "tfcflorae:rock/gravel/granite"
         ],
         "with": [
           {
@@ -474,7 +450,7 @@
       },
       {
         "replace": [
-          "tfc:rock/gravel/diorite"
+          "tfcflorae:rock/gravel/diorite"
         ],
         "with": [
           {
@@ -484,7 +460,7 @@
       },
       {
         "replace": [
-          "tfc:rock/gravel/gabbro"
+          "tfcflorae:rock/gravel/gabbro"
         ],
         "with": [
           {
@@ -494,7 +470,7 @@
       },
       {
         "replace": [
-          "tfc:rock/gravel/shale"
+          "tfcflorae:rock/gravel/shale"
         ],
         "with": [
           {
@@ -504,7 +480,7 @@
       },
       {
         "replace": [
-          "tfc:rock/gravel/claystone"
+          "tfcflorae:rock/gravel/claystone"
         ],
         "with": [
           {
@@ -514,7 +490,7 @@
       },
       {
         "replace": [
-          "tfc:rock/gravel/limestone"
+          "tfcflorae:rock/gravel/limestone"
         ],
         "with": [
           {
@@ -524,7 +500,7 @@
       },
       {
         "replace": [
-          "tfc:rock/gravel/conglomerate"
+          "tfcflorae:rock/gravel/conglomerate"
         ],
         "with": [
           {
@@ -534,7 +510,7 @@
       },
       {
         "replace": [
-          "tfc:rock/gravel/dolomite"
+          "tfcflorae:rock/gravel/dolomite"
         ],
         "with": [
           {
@@ -544,7 +520,7 @@
       },
       {
         "replace": [
-          "tfc:rock/gravel/chert"
+          "tfcflorae:rock/gravel/chert"
         ],
         "with": [
           {
@@ -554,7 +530,7 @@
       },
       {
         "replace": [
-          "tfc:rock/gravel/chalk"
+          "tfcflorae:rock/gravel/chalk"
         ],
         "with": [
           {
@@ -564,7 +540,7 @@
       },
       {
         "replace": [
-          "tfc:rock/gravel/rhyolite"
+          "tfcflorae:rock/gravel/rhyolite"
         ],
         "with": [
           {
@@ -574,7 +550,7 @@
       },
       {
         "replace": [
-          "tfc:rock/gravel/basalt"
+          "tfcflorae:rock/gravel/basalt"
         ],
         "with": [
           {
@@ -584,7 +560,7 @@
       },
       {
         "replace": [
-          "tfc:rock/gravel/andesite"
+          "tfcflorae:rock/gravel/andesite"
         ],
         "with": [
           {
@@ -594,7 +570,7 @@
       },
       {
         "replace": [
-          "tfc:rock/gravel/dacite"
+          "tfcflorae:rock/gravel/dacite"
         ],
         "with": [
           {
@@ -604,7 +580,7 @@
       },
       {
         "replace": [
-          "tfc:rock/gravel/quartzite"
+          "tfcflorae:rock/gravel/quartzite"
         ],
         "with": [
           {
@@ -614,7 +590,7 @@
       },
       {
         "replace": [
-          "tfc:rock/gravel/slate"
+          "tfcflorae:rock/gravel/slate"
         ],
         "with": [
           {
@@ -624,7 +600,7 @@
       },
       {
         "replace": [
-          "tfc:rock/gravel/phyllite"
+          "tfcflorae:rock/gravel/phyllite"
         ],
         "with": [
           {
@@ -634,7 +610,7 @@
       },
       {
         "replace": [
-          "tfc:rock/gravel/schist"
+          "tfcflorae:rock/gravel/schist"
         ],
         "with": [
           {
@@ -644,7 +620,7 @@
       },
       {
         "replace": [
-          "tfc:rock/gravel/gneiss"
+          "tfcflorae:rock/gravel/gneiss"
         ],
         "with": [
           {
@@ -654,47 +630,7 @@
       },
       {
         "replace": [
-          "tfc:rock/gravel/marble"
-        ],
-        "with": [
-          {
-            "block": "tfcflorae:rock/raw/breccia"
-          }
-        ]
-      },
-      {
-        "replace": [
-          "tfcflorae:rock/gravel/cataclasite"
-        ],
-        "with": [
-          {
-            "block": "tfcflorae:rock/raw/breccia"
-          }
-        ]
-      },
-      {
-        "replace": [
-          "tfcflorae:rock/gravel/porphyry"
-        ],
-        "with": [
-          {
-            "block": "tfcflorae:rock/raw/breccia"
-          }
-        ]
-      },
-      {
-        "replace": [
-          "tfcflorae:rock/gravel/red_granite"
-        ],
-        "with": [
-          {
-            "block": "tfcflorae:rock/raw/breccia"
-          }
-        ]
-      },
-      {
-        "replace": [
-          "tfcflorae:rock/gravel/laterite"
+          "tfcflorae:rock/gravel/marble"
         ],
         "with": [
           {
@@ -715,6 +651,16 @@
       {
         "replace": [
           "tfcflorae:rock/gravel/foidolite"
+        ],
+        "with": [
+          {
+            "block": "tfcflorae:rock/raw/breccia"
+          }
+        ]
+      },
+      {
+        "replace": [
+          "tfcflorae:rock/gravel/porphyry"
         ],
         "with": [
           {
@@ -904,6 +850,16 @@
       },
       {
         "replace": [
+          "tfcflorae:rock/gravel/cataclasite"
+        ],
+        "with": [
+          {
+            "block": "tfcflorae:rock/raw/breccia"
+          }
+        ]
+      },
+      {
+        "replace": [
           "tfcflorae:rock/gravel/mylonite"
         ],
         "with": [
@@ -914,7 +870,7 @@
       },
       {
         "replace": [
-          "tfc:rock/hardened/granite"
+          "tfcflorae:rock/hardened/granite"
         ],
         "with": [
           {
@@ -924,7 +880,7 @@
       },
       {
         "replace": [
-          "tfc:rock/hardened/diorite"
+          "tfcflorae:rock/hardened/diorite"
         ],
         "with": [
           {
@@ -934,7 +890,7 @@
       },
       {
         "replace": [
-          "tfc:rock/hardened/gabbro"
+          "tfcflorae:rock/hardened/gabbro"
         ],
         "with": [
           {
@@ -944,7 +900,7 @@
       },
       {
         "replace": [
-          "tfc:rock/hardened/shale"
+          "tfcflorae:rock/hardened/shale"
         ],
         "with": [
           {
@@ -954,7 +910,7 @@
       },
       {
         "replace": [
-          "tfc:rock/hardened/claystone"
+          "tfcflorae:rock/hardened/claystone"
         ],
         "with": [
           {
@@ -964,7 +920,7 @@
       },
       {
         "replace": [
-          "tfc:rock/hardened/limestone"
+          "tfcflorae:rock/hardened/limestone"
         ],
         "with": [
           {
@@ -974,7 +930,7 @@
       },
       {
         "replace": [
-          "tfc:rock/hardened/conglomerate"
+          "tfcflorae:rock/hardened/conglomerate"
         ],
         "with": [
           {
@@ -984,7 +940,7 @@
       },
       {
         "replace": [
-          "tfc:rock/hardened/dolomite"
+          "tfcflorae:rock/hardened/dolomite"
         ],
         "with": [
           {
@@ -994,7 +950,7 @@
       },
       {
         "replace": [
-          "tfc:rock/hardened/chert"
+          "tfcflorae:rock/hardened/chert"
         ],
         "with": [
           {
@@ -1004,7 +960,7 @@
       },
       {
         "replace": [
-          "tfc:rock/hardened/chalk"
+          "tfcflorae:rock/hardened/chalk"
         ],
         "with": [
           {
@@ -1014,7 +970,7 @@
       },
       {
         "replace": [
-          "tfc:rock/hardened/rhyolite"
+          "tfcflorae:rock/hardened/rhyolite"
         ],
         "with": [
           {
@@ -1024,7 +980,7 @@
       },
       {
         "replace": [
-          "tfc:rock/hardened/basalt"
+          "tfcflorae:rock/hardened/basalt"
         ],
         "with": [
           {
@@ -1034,7 +990,7 @@
       },
       {
         "replace": [
-          "tfc:rock/hardened/andesite"
+          "tfcflorae:rock/hardened/andesite"
         ],
         "with": [
           {
@@ -1044,7 +1000,7 @@
       },
       {
         "replace": [
-          "tfc:rock/hardened/dacite"
+          "tfcflorae:rock/hardened/dacite"
         ],
         "with": [
           {
@@ -1054,7 +1010,7 @@
       },
       {
         "replace": [
-          "tfc:rock/hardened/quartzite"
+          "tfcflorae:rock/hardened/quartzite"
         ],
         "with": [
           {
@@ -1064,7 +1020,7 @@
       },
       {
         "replace": [
-          "tfc:rock/hardened/slate"
+          "tfcflorae:rock/hardened/slate"
         ],
         "with": [
           {
@@ -1074,7 +1030,7 @@
       },
       {
         "replace": [
-          "tfc:rock/hardened/phyllite"
+          "tfcflorae:rock/hardened/phyllite"
         ],
         "with": [
           {
@@ -1084,7 +1040,7 @@
       },
       {
         "replace": [
-          "tfc:rock/hardened/schist"
+          "tfcflorae:rock/hardened/schist"
         ],
         "with": [
           {
@@ -1094,7 +1050,7 @@
       },
       {
         "replace": [
-          "tfc:rock/hardened/gneiss"
+          "tfcflorae:rock/hardened/gneiss"
         ],
         "with": [
           {
@@ -1104,47 +1060,7 @@
       },
       {
         "replace": [
-          "tfc:rock/hardened/marble"
-        ],
-        "with": [
-          {
-            "block": "tfcflorae:rock/raw/breccia"
-          }
-        ]
-      },
-      {
-        "replace": [
-          "tfcflorae:rock/hardened/cataclasite"
-        ],
-        "with": [
-          {
-            "block": "tfcflorae:rock/raw/breccia"
-          }
-        ]
-      },
-      {
-        "replace": [
-          "tfcflorae:rock/hardened/porphyry"
-        ],
-        "with": [
-          {
-            "block": "tfcflorae:rock/raw/breccia"
-          }
-        ]
-      },
-      {
-        "replace": [
-          "tfcflorae:rock/hardened/red_granite"
-        ],
-        "with": [
-          {
-            "block": "tfcflorae:rock/raw/breccia"
-          }
-        ]
-      },
-      {
-        "replace": [
-          "tfcflorae:rock/hardened/laterite"
+          "tfcflorae:rock/hardened/marble"
         ],
         "with": [
           {
@@ -1165,6 +1081,16 @@
       {
         "replace": [
           "tfcflorae:rock/hardened/foidolite"
+        ],
+        "with": [
+          {
+            "block": "tfcflorae:rock/raw/breccia"
+          }
+        ]
+      },
+      {
+        "replace": [
+          "tfcflorae:rock/hardened/porphyry"
         ],
         "with": [
           {
@@ -1345,6 +1271,16 @@
       {
         "replace": [
           "tfcflorae:rock/hardened/komatiite"
+        ],
+        "with": [
+          {
+            "block": "tfcflorae:rock/raw/breccia"
+          }
+        ]
+      },
+      {
+        "replace": [
+          "tfcflorae:rock/hardened/cataclasite"
         ],
         "with": [
           {

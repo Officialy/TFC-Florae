@@ -1,0 +1,26 @@
+{
+  "__comment__": "This file was automatically created by mcresources",
+  "replace": false,
+  "values": [
+    "tfcflorae:wood/planks/acacia_stairs",
+    "tfcflorae:wood/planks/ash_stairs",
+    "tfcflorae:wood/planks/aspen_stairs",
+    "tfcflorae:wood/planks/birch_stairs",
+    "tfcflorae:wood/planks/blackwood_stairs",
+    "tfcflorae:wood/planks/chestnut_stairs",
+    "tfcflorae:wood/planks/douglas_fir_stairs",
+    "tfcflorae:wood/planks/hickory_stairs",
+    "tfcflorae:wood/planks/kapok_stairs",
+    "tfcflorae:wood/planks/mangrove_stairs",
+    "tfcflorae:wood/planks/maple_stairs",
+    "tfcflorae:wood/planks/oak_stairs",
+    "tfcflorae:wood/planks/palm_stairs",
+    "tfcflorae:wood/planks/pine_stairs",
+    "tfcflorae:wood/planks/rosewood_stairs",
+    "tfcflorae:wood/planks/sequoia_stairs",
+    "tfcflorae:wood/planks/spruce_stairs",
+    "tfcflorae:wood/planks/sycamore_stairs",
+    "tfcflorae:wood/planks/white_cedar_stairs",
+    "tfcflorae:wood/planks/willow_stairs"
+  ]
+}

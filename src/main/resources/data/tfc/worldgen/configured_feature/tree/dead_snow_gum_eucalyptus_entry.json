@@ -1,0 +1,34 @@
+{
+  "__comment__": "This file was automatically created by mcresources",
+  "type": "tfc:forest_entry",
+  "config": {
+    "climate": {
+      "min_temperature": 18,
+      "max_temperature": 39,
+      "min_rainfall": 120,
+      "max_rainfall": 300
+    },
+    "groundcover": [
+      {
+        "block": "tfcflorae:wood/twig/snow_gum_eucalyptus"
+      },
+      {
+        "block": "tfcflorae:wood/fallen_leaves/snow_gum_eucalyptus"
+      }
+    ],
+    "normal_tree": "tfcflorae:tree/snow_gum_eucalyptus",
+    "dead_tree": "tfcflorae:tree/snow_gum_eucalyptus_dead",
+    "fallen_log": "tfcflorae:wood/log/snow_gum_eucalyptus",
+    "bush_log": {
+      "Name": "tfcflorae:wood/wood/snow_gum_eucalyptus",
+      "Properties": {
+        "natural": "true",
+        "axis": "y"
+      }
+    },
+    "bush_leaves": "tfcflorae:wood/leaves/snow_gum_eucalyptus",
+    "old_growth_tree": "tfcflorae:tree/snow_gum_eucalyptus_large",
+    "dead_chance": 1,
+    "fallen_tree_chance": 8
+  }
+}

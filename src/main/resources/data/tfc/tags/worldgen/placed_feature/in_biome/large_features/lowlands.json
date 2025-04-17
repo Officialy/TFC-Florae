@@ -2,10 +2,11 @@
   "__comment__": "This file was automatically created by mcresources",
   "replace": false,
   "values": [
-	  "tfc:fossil",
-	  "#tfc:feature/bamboo_forest",
-    "tfcflorae:fruit_forest",
-	  "tfcflorae:jungle",
-	"tfc:frogspawn_patch"
+    "#tfc:feature/icebergs",
+    "tfc:forest",
+    "tfc:dead_forest",
+    "tfc:rare_bamboo",
+    "tfc:bamboo",
+    "tfc:cave_vegetation"
   ]
 }

@@ -3,16 +3,16 @@
   "type": "tfc:random_tree",
   "config": {
     "structures": [
-      "tfc:beech_large/1",
-      "tfc:beech_large/2",
-      "tfc:beech_large/3",
-      "tfc:beech_large/4"
+      "tfcflorae:beech_large/1",
+      "tfcflorae:beech_large/2",
+      "tfcflorae:beech_large/3",
+      "tfcflorae:beech_large/4"
     ],
     "radius": 2,
     "placement": {
       "width": 2,
       "height": 9,
-      "allow_submerged": false
+      "allow_submerged": true
     }
   }
 }

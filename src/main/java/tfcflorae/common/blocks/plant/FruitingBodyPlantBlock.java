@@ -79,7 +79,7 @@ public class FruitingBodyPlantBlock extends BodyPlantBlock implements ILeavesBlo
         this.lifecycle = lifecycle;
         this.productItem = productItem;
 
-        lastUpdateTick = Calendars.SERVER.getTicks();
+        lastUpdateTick = 0;// todo Calendars.SERVER.getTicks();
 
         registerDefaultState(getStateDefinition().any().setValue(LIFECYCLE, Lifecycle.HEALTHY).setValue(NATURAL, false));
     }
@@ -103,7 +103,7 @@ public class FruitingBodyPlantBlock extends BodyPlantBlock implements ILeavesBlo
         if (getLifecycleForCurrentMonth() != getLifecycleForMonth(Calendars.SERVER.getCalendarMonthOfYear()))
         {
             onUpdate(level, pos, state);
-            lastUpdateTick = Calendars.SERVER.getTicks();
+            lastUpdateTick = 0;// todo Calendars.SERVER.getTicks();
         }
     }
 

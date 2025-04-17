@@ -1,0 +1,34 @@
+{
+  "__comment__": "This file was automatically created by mcresources",
+  "type": "tfc:forest_entry",
+  "config": {
+    "climate": {
+      "min_temperature": 22,
+      "max_temperature": 50,
+      "min_rainfall": 310,
+      "max_rainfall": 500
+    },
+    "groundcover": [
+      {
+        "block": "tfcflorae:wood/twig/purpleheart"
+      },
+      {
+        "block": "tfcflorae:wood/fallen_leaves/purpleheart"
+      }
+    ],
+    "normal_tree": "tfcflorae:tree/purpleheart",
+    "dead_tree": "tfcflorae:tree/purpleheart_dead",
+    "fallen_log": "tfcflorae:wood/log/purpleheart",
+    "bush_log": {
+      "Name": "tfcflorae:wood/wood/purpleheart",
+      "Properties": {
+        "natural": "true",
+        "axis": "y"
+      }
+    },
+    "bush_leaves": "tfcflorae:wood/leaves/purpleheart",
+    "old_growth_tree": "tfcflorae:tree/purpleheart_large",
+    "dead_chance": 1,
+    "fallen_tree_chance": 8
+  }
+}

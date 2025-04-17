@@ -1,109 +1,86 @@
 {
   "__comment__": "This file was automatically created by mcresources",
-  "type": "tfc:cluster_vein",
+  "type": "tfcflorae:cluster_vein",
   "config": {
     "rarity": 60,
-    "min_y": {
-      "absolute": -32
-    },
-    "max_y": {
-      "absolute": 75
-    },
+    "min_y": -32,
+    "max_y": 75,
     "size": 20,
     "density": 0.6,
     "blocks": [
       {
         "replace": [
-          "tfc:rock/raw/rhyolite"
+          "tfcflorae:rock/raw/rhyolite"
         ],
         "with": [
           {
             "weight": 20,
-            "block": "tfc:ore/poor_native_copper/rhyolite"
+            "block": "tfcflorae:ore/poor_native_copper/rhyolite"
           },
           {
             "weight": 50,
-            "block": "tfc:ore/normal_native_copper/rhyolite"
+            "block": "tfcflorae:ore/normal_native_copper/rhyolite"
           },
           {
             "weight": 30,
-            "block": "tfc:ore/rich_native_copper/rhyolite"
+            "block": "tfcflorae:ore/rich_native_copper/rhyolite"
           }
         ]
       },
       {
         "replace": [
-          "tfc:rock/raw/basalt"
+          "tfcflorae:rock/raw/basalt"
         ],
         "with": [
           {
             "weight": 20,
-            "block": "tfc:ore/poor_native_copper/basalt"
+            "block": "tfcflorae:ore/poor_native_copper/basalt"
           },
           {
             "weight": 50,
-            "block": "tfc:ore/normal_native_copper/basalt"
+            "block": "tfcflorae:ore/normal_native_copper/basalt"
           },
           {
             "weight": 30,
-            "block": "tfc:ore/rich_native_copper/basalt"
+            "block": "tfcflorae:ore/rich_native_copper/basalt"
           }
         ]
       },
       {
         "replace": [
-          "tfc:rock/raw/andesite"
+          "tfcflorae:rock/raw/andesite"
         ],
         "with": [
           {
             "weight": 20,
-            "block": "tfc:ore/poor_native_copper/andesite"
+            "block": "tfcflorae:ore/poor_native_copper/andesite"
           },
           {
             "weight": 50,
-            "block": "tfc:ore/normal_native_copper/andesite"
+            "block": "tfcflorae:ore/normal_native_copper/andesite"
           },
           {
             "weight": 30,
-            "block": "tfc:ore/rich_native_copper/andesite"
+            "block": "tfcflorae:ore/rich_native_copper/andesite"
           }
         ]
       },
       {
         "replace": [
-          "tfc:rock/raw/dacite"
+          "tfcflorae:rock/raw/dacite"
         ],
         "with": [
           {
             "weight": 20,
-            "block": "tfc:ore/poor_native_copper/dacite"
+            "block": "tfcflorae:ore/poor_native_copper/dacite"
           },
           {
             "weight": 50,
-            "block": "tfc:ore/normal_native_copper/dacite"
+            "block": "tfcflorae:ore/normal_native_copper/dacite"
           },
           {
             "weight": 30,
-            "block": "tfc:ore/rich_native_copper/dacite"
-          }
-        ]
-      },
-      {
-        "replace": [
-          "tfcflorae:rock/raw/porphyry"
-        ],
-        "with": [
-          {
-            "weight": 20,
-            "block": "tfcflorae:ore/poor_native_copper/porphyry"
-          },
-          {
-            "weight": 50,
-            "block": "tfcflorae:ore/normal_native_copper/porphyry"
-          },
-          {
-            "weight": 30,
-            "block": "tfcflorae:ore/rich_native_copper/porphyry"
+            "block": "tfcflorae:ore/rich_native_copper/dacite"
           }
         ]
       },
@@ -185,10 +162,10 @@
       }
     ],
     "indicator": {
-      "rarity": 10,
+      "rarity": 12,
       "blocks": [
         {
-          "block": "tfc:ore/small_native_copper"
+          "block": "tfcflorae:ore/small_native_copper"
         }
       ]
     },

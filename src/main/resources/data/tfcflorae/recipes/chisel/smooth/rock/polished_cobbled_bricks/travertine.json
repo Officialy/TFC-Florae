@@ -1,6 +1,0 @@
-{
-  "type": "tfc:chisel",
-  "ingredient": "tfcflorae:rock/cobbled_bricks/travertine",
-  "result": "tfcflorae:rock/polished_cobbled_bricks/travertine",
-  "mode": "smooth"
-}

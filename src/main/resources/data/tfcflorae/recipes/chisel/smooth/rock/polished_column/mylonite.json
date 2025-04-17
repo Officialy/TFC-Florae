@@ -1,6 +1,0 @@
-{
-  "type": "tfc:chisel",
-  "ingredient": "tfcflorae:rock/column/mylonite",
-  "result": "tfcflorae:rock/polished_column/mylonite",
-  "mode": "smooth"
-}

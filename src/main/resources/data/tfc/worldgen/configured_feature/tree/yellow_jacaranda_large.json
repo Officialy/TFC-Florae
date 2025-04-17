@@ -3,15 +3,15 @@
   "type": "tfc:random_tree",
   "config": {
     "structures": [
-      "tfc:yellow_jacaranda_large/1",
-      "tfc:yellow_jacaranda_large/2",
-      "tfc:yellow_jacaranda_large/3"
+      "tfcflorae:yellow_jacaranda_large/1",
+      "tfcflorae:yellow_jacaranda_large/2",
+      "tfcflorae:yellow_jacaranda_large/3"
     ],
     "radius": 2,
     "placement": {
       "width": 2,
       "height": 9,
-      "allow_submerged": false
+      "allow_submerged": true
     }
   }
 }

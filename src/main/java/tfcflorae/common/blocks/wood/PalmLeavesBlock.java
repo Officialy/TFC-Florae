@@ -54,13 +54,13 @@ public abstract class PalmLeavesBlock extends TFCFLeavesBlock
 
     public static PalmLeavesBlock create(ExtendedProperties properties, Supplier<? extends Item> productItem, Lifecycle[] lifecycle, int maxDecayDistance, Supplier<ClimateRange> climateRange, @Nullable Supplier<? extends Block> fallenLeaves, @Nullable Supplier<? extends Block> fallenTwig, @Nullable Supplier<? extends Block> sapling, @Nullable Supplier<? extends Block> trunk)
     {
-        final IntegerProperty distanceProperty = getDistanceProperty(maxDecayDistance);
+
         return new PalmLeavesBlock(properties, productItem, lifecycle, maxDecayDistance, climateRange, fallenLeaves, fallenTwig, sapling, trunk)
         {
             @Override
             protected IntegerProperty getDistanceProperty()
             {
-                return distanceProperty;
+                return TFCBlockStateProperties.DISTANCE_9;
             }
         };
     }
@@ -86,15 +86,6 @@ public abstract class PalmLeavesBlock extends TFCFLeavesBlock
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder)
     {
         builder.add(PERSISTENT, getDistanceProperty(), getFluidProperty(), LIFECYCLE, DIRECTION, CORNER_BLOCK, CENTER_BLOCK, TOP_BLOCK);
-    }
-
-    public static IntegerProperty getDistanceProperty(int maxDecayDistance)
-    {
-       /* if (maxDecayDistance >= 7 && maxDecayDistance < 7 + TFCBlockStateProperties.DISTANCES.length)
-        {
-            return TFCBlockStateProperties.DISTANCES[maxDecayDistance - 7 + 1]; // we select one higher than max
-        }*/
-        throw new IllegalArgumentException("No property set for distance: " + maxDecayDistance);
     }
 
     protected abstract IntegerProperty getDistanceProperty();

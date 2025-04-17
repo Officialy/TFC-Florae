@@ -5,675 +5,300 @@
     "blocks": [
       {
         "replace": [
-          "tfc:rock/raw/granite"
+          "tfcflorae:rock/raw/granite"
         ],
         "with": [
           {
-            "block": "tfc:rock/mossy_cobble/granite",
+            "block": "tfcflorae:rock/mossy_cobble/granite",
             "weight": 8
           },
           {
-            "block": "tfc:rock/cobble/granite",
+            "block": "tfcflorae:rock/cobble/granite",
             "weight": 2
           }
         ]
       },
       {
         "replace": [
-          "tfc:rock/raw/diorite"
+          "tfcflorae:rock/raw/diorite"
         ],
         "with": [
           {
-            "block": "tfc:rock/mossy_cobble/diorite",
+            "block": "tfcflorae:rock/mossy_cobble/diorite",
             "weight": 8
           },
           {
-            "block": "tfc:rock/cobble/diorite",
+            "block": "tfcflorae:rock/cobble/diorite",
             "weight": 2
           }
         ]
       },
       {
         "replace": [
-          "tfc:rock/raw/gabbro"
+          "tfcflorae:rock/raw/gabbro"
         ],
         "with": [
           {
-            "block": "tfc:rock/mossy_cobble/gabbro",
+            "block": "tfcflorae:rock/mossy_cobble/gabbro",
             "weight": 8
           },
           {
-            "block": "tfc:rock/cobble/gabbro",
+            "block": "tfcflorae:rock/cobble/gabbro",
             "weight": 2
           }
         ]
       },
       {
         "replace": [
-          "tfc:rock/raw/shale"
+          "tfcflorae:rock/raw/shale"
         ],
         "with": [
           {
-            "block": "tfc:rock/mossy_cobble/shale",
+            "block": "tfcflorae:rock/mossy_cobble/shale",
             "weight": 8
           },
           {
-            "block": "tfc:rock/cobble/shale",
+            "block": "tfcflorae:rock/cobble/shale",
             "weight": 2
           }
         ]
       },
       {
         "replace": [
-          "tfc:rock/raw/claystone"
+          "tfcflorae:rock/raw/claystone"
         ],
         "with": [
           {
-            "block": "tfc:rock/mossy_cobble/claystone",
+            "block": "tfcflorae:rock/mossy_cobble/claystone",
             "weight": 8
           },
           {
-            "block": "tfc:rock/cobble/claystone",
+            "block": "tfcflorae:rock/cobble/claystone",
             "weight": 2
           }
         ]
       },
       {
         "replace": [
-          "tfc:rock/raw/limestone"
+          "tfcflorae:rock/raw/limestone"
         ],
         "with": [
           {
-            "block": "tfc:rock/mossy_cobble/limestone",
+            "block": "tfcflorae:rock/mossy_cobble/limestone",
             "weight": 8
           },
           {
-            "block": "tfc:rock/cobble/limestone",
+            "block": "tfcflorae:rock/cobble/limestone",
             "weight": 2
           }
         ]
       },
       {
         "replace": [
-          "tfc:rock/raw/conglomerate"
+          "tfcflorae:rock/raw/conglomerate"
         ],
         "with": [
           {
-            "block": "tfc:rock/mossy_cobble/conglomerate",
+            "block": "tfcflorae:rock/mossy_cobble/conglomerate",
             "weight": 8
           },
           {
-            "block": "tfc:rock/cobble/conglomerate",
+            "block": "tfcflorae:rock/cobble/conglomerate",
             "weight": 2
           }
         ]
       },
       {
         "replace": [
-          "tfc:rock/raw/dolomite"
+          "tfcflorae:rock/raw/dolomite"
         ],
         "with": [
           {
-            "block": "tfc:rock/mossy_cobble/dolomite",
+            "block": "tfcflorae:rock/mossy_cobble/dolomite",
             "weight": 8
           },
           {
-            "block": "tfc:rock/cobble/dolomite",
+            "block": "tfcflorae:rock/cobble/dolomite",
             "weight": 2
           }
         ]
       },
       {
         "replace": [
-          "tfc:rock/raw/chert"
+          "tfcflorae:rock/raw/chert"
         ],
         "with": [
           {
-            "block": "tfc:rock/mossy_cobble/chert",
+            "block": "tfcflorae:rock/mossy_cobble/chert",
             "weight": 8
           },
           {
-            "block": "tfc:rock/cobble/chert",
+            "block": "tfcflorae:rock/cobble/chert",
             "weight": 2
           }
         ]
       },
       {
         "replace": [
-          "tfc:rock/raw/chalk"
+          "tfcflorae:rock/raw/chalk"
         ],
         "with": [
           {
-            "block": "tfc:rock/mossy_cobble/chalk",
+            "block": "tfcflorae:rock/mossy_cobble/chalk",
             "weight": 8
           },
           {
-            "block": "tfc:rock/cobble/chalk",
+            "block": "tfcflorae:rock/cobble/chalk",
             "weight": 2
           }
         ]
       },
       {
         "replace": [
-          "tfc:rock/raw/rhyolite"
+          "tfcflorae:rock/raw/rhyolite"
         ],
         "with": [
           {
-            "block": "tfc:rock/mossy_cobble/rhyolite",
+            "block": "tfcflorae:rock/mossy_cobble/rhyolite",
             "weight": 8
           },
           {
-            "block": "tfc:rock/cobble/rhyolite",
+            "block": "tfcflorae:rock/cobble/rhyolite",
             "weight": 2
           }
         ]
       },
       {
         "replace": [
-          "tfc:rock/raw/basalt"
+          "tfcflorae:rock/raw/basalt"
         ],
         "with": [
           {
-            "block": "tfc:rock/mossy_cobble/basalt",
+            "block": "tfcflorae:rock/mossy_cobble/basalt",
             "weight": 8
           },
           {
-            "block": "tfc:rock/cobble/basalt",
+            "block": "tfcflorae:rock/cobble/basalt",
             "weight": 2
           }
         ]
       },
       {
         "replace": [
-          "tfc:rock/raw/andesite"
+          "tfcflorae:rock/raw/andesite"
         ],
         "with": [
           {
-            "block": "tfc:rock/mossy_cobble/andesite",
+            "block": "tfcflorae:rock/mossy_cobble/andesite",
             "weight": 8
           },
           {
-            "block": "tfc:rock/cobble/andesite",
+            "block": "tfcflorae:rock/cobble/andesite",
             "weight": 2
           }
         ]
       },
       {
         "replace": [
-          "tfc:rock/raw/dacite"
+          "tfcflorae:rock/raw/dacite"
         ],
         "with": [
           {
-            "block": "tfc:rock/mossy_cobble/dacite",
+            "block": "tfcflorae:rock/mossy_cobble/dacite",
             "weight": 8
           },
           {
-            "block": "tfc:rock/cobble/dacite",
+            "block": "tfcflorae:rock/cobble/dacite",
             "weight": 2
           }
         ]
       },
       {
         "replace": [
-          "tfc:rock/raw/quartzite"
+          "tfcflorae:rock/raw/quartzite"
         ],
         "with": [
           {
-            "block": "tfc:rock/mossy_cobble/quartzite",
+            "block": "tfcflorae:rock/mossy_cobble/quartzite",
             "weight": 8
           },
           {
-            "block": "tfc:rock/cobble/quartzite",
+            "block": "tfcflorae:rock/cobble/quartzite",
             "weight": 2
           }
         ]
       },
       {
         "replace": [
-          "tfc:rock/raw/slate"
+          "tfcflorae:rock/raw/slate"
         ],
         "with": [
           {
-            "block": "tfc:rock/mossy_cobble/slate",
+            "block": "tfcflorae:rock/mossy_cobble/slate",
             "weight": 8
           },
           {
-            "block": "tfc:rock/cobble/slate",
+            "block": "tfcflorae:rock/cobble/slate",
             "weight": 2
           }
         ]
       },
       {
         "replace": [
-          "tfc:rock/raw/phyllite"
+          "tfcflorae:rock/raw/phyllite"
         ],
         "with": [
           {
-            "block": "tfc:rock/mossy_cobble/phyllite",
+            "block": "tfcflorae:rock/mossy_cobble/phyllite",
             "weight": 8
           },
           {
-            "block": "tfc:rock/cobble/phyllite",
+            "block": "tfcflorae:rock/cobble/phyllite",
             "weight": 2
           }
         ]
       },
       {
         "replace": [
-          "tfc:rock/raw/schist"
+          "tfcflorae:rock/raw/schist"
         ],
         "with": [
           {
-            "block": "tfc:rock/mossy_cobble/schist",
+            "block": "tfcflorae:rock/mossy_cobble/schist",
             "weight": 8
           },
           {
-            "block": "tfc:rock/cobble/schist",
+            "block": "tfcflorae:rock/cobble/schist",
             "weight": 2
           }
         ]
       },
       {
         "replace": [
-          "tfc:rock/raw/gneiss"
+          "tfcflorae:rock/raw/gneiss"
         ],
         "with": [
           {
-            "block": "tfc:rock/mossy_cobble/gneiss",
+            "block": "tfcflorae:rock/mossy_cobble/gneiss",
             "weight": 8
           },
           {
-            "block": "tfc:rock/cobble/gneiss",
+            "block": "tfcflorae:rock/cobble/gneiss",
             "weight": 2
           }
         ]
       },
       {
         "replace": [
-          "tfc:rock/raw/marble"
+          "tfcflorae:rock/raw/marble"
         ],
         "with": [
           {
-            "block": "tfc:rock/mossy_cobble/marble",
+            "block": "tfcflorae:rock/mossy_cobble/marble",
             "weight": 8
           },
           {
-            "block": "tfc:rock/cobble/marble",
-            "weight": 2
-          }
-        ]
-      },
-      {
-        "replace": [
-          "tfcflorae:rock/raw/cataclasite"
-        ],
-        "with": [
-          {
-            "block": "tfcflorae:rock/mossy_cobble/cataclasite",
-            "weight": 8
-          },
-          {
-            "block": "tfcflorae:rock/cobble/cataclasite",
-            "weight": 2
-          }
-        ]
-      },
-      {
-        "replace": [
-          "tfcflorae:rock/raw/porphyry"
-        ],
-        "with": [
-          {
-            "block": "tfcflorae:rock/mossy_cobble/porphyry",
-            "weight": 8
-          },
-          {
-            "block": "tfcflorae:rock/cobble/porphyry",
-            "weight": 2
-          }
-        ]
-      },
-      {
-        "replace": [
-          "tfcflorae:rock/raw/red_granite"
-        ],
-        "with": [
-          {
-            "block": "tfcflorae:rock/mossy_cobble/red_granite",
-            "weight": 8
-          },
-          {
-            "block": "tfcflorae:rock/cobble/red_granite",
-            "weight": 2
-          }
-        ]
-      },
-      {
-        "replace": [
-          "tfcflorae:rock/raw/laterite"
-        ],
-        "with": [
-          {
-            "block": "tfcflorae:rock/mossy_cobble/laterite",
-            "weight": 8
-          },
-          {
-            "block": "tfcflorae:rock/cobble/laterite",
-            "weight": 2
-          }
-        ]
-      },
-      {
-        "replace": [
-          "tfcflorae:rock/raw/breccia"
-        ],
-        "with": [
-          {
-            "block": "tfcflorae:rock/mossy_cobble/breccia",
-            "weight": 8
-          },
-          {
-            "block": "tfcflorae:rock/cobble/breccia",
-            "weight": 2
-          }
-        ]
-      },
-      {
-        "replace": [
-          "tfcflorae:rock/raw/foidolite"
-        ],
-        "with": [
-          {
-            "block": "tfcflorae:rock/mossy_cobble/foidolite",
-            "weight": 8
-          },
-          {
-            "block": "tfcflorae:rock/cobble/foidolite",
-            "weight": 2
-          }
-        ]
-      },
-      {
-        "replace": [
-          "tfcflorae:rock/raw/peridotite"
-        ],
-        "with": [
-          {
-            "block": "tfcflorae:rock/mossy_cobble/peridotite",
-            "weight": 8
-          },
-          {
-            "block": "tfcflorae:rock/cobble/peridotite",
-            "weight": 2
-          }
-        ]
-      },
-      {
-        "replace": [
-          "tfcflorae:rock/raw/blaimorite"
-        ],
-        "with": [
-          {
-            "block": "tfcflorae:rock/mossy_cobble/blaimorite",
-            "weight": 8
-          },
-          {
-            "block": "tfcflorae:rock/cobble/blaimorite",
-            "weight": 2
-          }
-        ]
-      },
-      {
-        "replace": [
-          "tfcflorae:rock/raw/boninite"
-        ],
-        "with": [
-          {
-            "block": "tfcflorae:rock/mossy_cobble/boninite",
-            "weight": 8
-          },
-          {
-            "block": "tfcflorae:rock/cobble/boninite",
-            "weight": 2
-          }
-        ]
-      },
-      {
-        "replace": [
-          "tfcflorae:rock/raw/carbonatite"
-        ],
-        "with": [
-          {
-            "block": "tfcflorae:rock/mossy_cobble/carbonatite",
-            "weight": 8
-          },
-          {
-            "block": "tfcflorae:rock/cobble/carbonatite",
-            "weight": 2
-          }
-        ]
-      },
-      {
-        "replace": [
-          "tfcflorae:rock/raw/mudstone"
-        ],
-        "with": [
-          {
-            "block": "tfcflorae:rock/mossy_cobble/mudstone",
-            "weight": 8
-          },
-          {
-            "block": "tfcflorae:rock/cobble/mudstone",
-            "weight": 2
-          }
-        ]
-      },
-      {
-        "replace": [
-          "tfcflorae:rock/raw/sandstone"
-        ],
-        "with": [
-          {
-            "block": "tfcflorae:rock/mossy_cobble/sandstone",
-            "weight": 8
-          },
-          {
-            "block": "tfcflorae:rock/cobble/sandstone",
-            "weight": 2
-          }
-        ]
-      },
-      {
-        "replace": [
-          "tfcflorae:rock/raw/siltstone"
-        ],
-        "with": [
-          {
-            "block": "tfcflorae:rock/mossy_cobble/siltstone",
-            "weight": 8
-          },
-          {
-            "block": "tfcflorae:rock/cobble/siltstone",
-            "weight": 2
-          }
-        ]
-      },
-      {
-        "replace": [
-          "tfcflorae:rock/raw/arkose"
-        ],
-        "with": [
-          {
-            "block": "tfcflorae:rock/mossy_cobble/arkose",
-            "weight": 8
-          },
-          {
-            "block": "tfcflorae:rock/cobble/arkose",
-            "weight": 2
-          }
-        ]
-      },
-      {
-        "replace": [
-          "tfcflorae:rock/raw/jaspillite"
-        ],
-        "with": [
-          {
-            "block": "tfcflorae:rock/mossy_cobble/jaspillite",
-            "weight": 8
-          },
-          {
-            "block": "tfcflorae:rock/cobble/jaspillite",
-            "weight": 2
-          }
-        ]
-      },
-      {
-        "replace": [
-          "tfcflorae:rock/raw/travertine"
-        ],
-        "with": [
-          {
-            "block": "tfcflorae:rock/mossy_cobble/travertine",
-            "weight": 8
-          },
-          {
-            "block": "tfcflorae:rock/cobble/travertine",
-            "weight": 2
-          }
-        ]
-      },
-      {
-        "replace": [
-          "tfcflorae:rock/raw/wackestone"
-        ],
-        "with": [
-          {
-            "block": "tfcflorae:rock/mossy_cobble/wackestone",
-            "weight": 8
-          },
-          {
-            "block": "tfcflorae:rock/cobble/wackestone",
-            "weight": 2
-          }
-        ]
-      },
-      {
-        "replace": [
-          "tfcflorae:rock/raw/blackband_ironstone"
-        ],
-        "with": [
-          {
-            "block": "tfcflorae:rock/mossy_cobble/blackband_ironstone",
-            "weight": 8
-          },
-          {
-            "block": "tfcflorae:rock/cobble/blackband_ironstone",
-            "weight": 2
-          }
-        ]
-      },
-      {
-        "replace": [
-          "tfcflorae:rock/raw/blueschist"
-        ],
-        "with": [
-          {
-            "block": "tfcflorae:rock/mossy_cobble/blueschist",
-            "weight": 8
-          },
-          {
-            "block": "tfcflorae:rock/cobble/blueschist",
-            "weight": 2
-          }
-        ]
-      },
-      {
-        "replace": [
-          "tfcflorae:rock/raw/catlinite"
-        ],
-        "with": [
-          {
-            "block": "tfcflorae:rock/mossy_cobble/catlinite",
-            "weight": 8
-          },
-          {
-            "block": "tfcflorae:rock/cobble/catlinite",
-            "weight": 2
-          }
-        ]
-      },
-      {
-        "replace": [
-          "tfcflorae:rock/raw/greenschist"
-        ],
-        "with": [
-          {
-            "block": "tfcflorae:rock/mossy_cobble/greenschist",
-            "weight": 8
-          },
-          {
-            "block": "tfcflorae:rock/cobble/greenschist",
-            "weight": 2
-          }
-        ]
-      },
-      {
-        "replace": [
-          "tfcflorae:rock/raw/novaculite"
-        ],
-        "with": [
-          {
-            "block": "tfcflorae:rock/mossy_cobble/novaculite",
-            "weight": 8
-          },
-          {
-            "block": "tfcflorae:rock/cobble/novaculite",
-            "weight": 2
-          }
-        ]
-      },
-      {
-        "replace": [
-          "tfcflorae:rock/raw/soapstone"
-        ],
-        "with": [
-          {
-            "block": "tfcflorae:rock/mossy_cobble/soapstone",
-            "weight": 8
-          },
-          {
-            "block": "tfcflorae:rock/cobble/soapstone",
-            "weight": 2
-          }
-        ]
-      },
-      {
-        "replace": [
-          "tfcflorae:rock/raw/komatiite"
-        ],
-        "with": [
-          {
-            "block": "tfcflorae:rock/mossy_cobble/komatiite",
-            "weight": 8
-          },
-          {
-            "block": "tfcflorae:rock/cobble/komatiite",
-            "weight": 2
-          }
-        ]
-      },
-      {
-        "replace": [
-          "tfcflorae:rock/raw/mylonite"
-        ],
-        "with": [
-          {
-            "block": "tfcflorae:rock/mossy_cobble/mylonite",
-            "weight": 8
-          },
-          {
-            "block": "tfcflorae:rock/cobble/mylonite",
+            "block": "tfcflorae:rock/cobble/marble",
             "weight": 2
           }
         ]

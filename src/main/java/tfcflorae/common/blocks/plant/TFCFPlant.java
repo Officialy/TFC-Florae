@@ -535,7 +535,7 @@ public enum TFCFPlant implements RegistryPlant
         FRUITING_TALL_PLANT((plant, type) -> FruitingTallPlantBlock.create(plant, fire(nonSolid(plant).hasPostProcess(TFCFBlocks::always)).randomTicks(), plant.getProductItem(), plant.getStages(), TFCFClimateRanges.SEASONAL_PLANT.get(plant))),
         CACAO((plant, type) -> CacaoPodBlock.create(plant, fire(nonSolid(plant).hasPostProcess(TFCFBlocks::always)).randomTicks().strength(0.2F, 3.0F).sound(SoundType.BAMBOO).noOcclusion())),
 
-        BAMBOO((plant, type) -> BambooPlantBlock.create(plant, ExtendedProperties.of(Blocks.BAMBOO).mapColor(MapColor.PLANT).randomTicks().instabreak().strength(1.0F).sound(SoundType.BAMBOO).noOcclusion().dynamicShape().hasPostProcess(TFCFBlocks::always), plant.stem(), plant.sapling())),
+        BAMBOO((plant, type) -> BambooPlantBlock.create(plant, ExtendedProperties.of(Blocks.BAMBOO).mapColor(MapColor.PLANT).randomTicks().instabreak().strength(1.0F).sound(SoundType.BAMBOO).noOcclusion().hasPostProcess(TFCFBlocks::always), plant.stem(), plant.sapling())),
         BAMBOO_SAPLING((plant, type) ->  BambooSaplingPlantBlock.create(plant, ExtendedProperties.of(Blocks.BAMBOO_SAPLING).randomTicks().instabreak().noCollission().strength(1.0F).sound(SoundType.BAMBOO_SAPLING).hasPostProcess(TFCFBlocks::always), plant.stem())),
 
         // Water
@@ -572,7 +572,7 @@ public enum TFCFPlant implements RegistryPlant
          */
         public static BlockBehaviour.Properties solid()
         {
-            return Block.Properties.copy(Blocks.GRASS).noOcclusion().sound(SoundType.GRASS).randomTicks().hasPostProcess(TFCFBlocks::always);
+            return Block.Properties.copy(Blocks.GRASS).dynamicShape().offsetType(BlockBehaviour.OffsetType.NONE).noOcclusion().sound(SoundType.GRASS).randomTicks().hasPostProcess(TFCFBlocks::always);
         }
 
         public static BlockBehaviour.Properties nonSolid(TFCFPlant plant)

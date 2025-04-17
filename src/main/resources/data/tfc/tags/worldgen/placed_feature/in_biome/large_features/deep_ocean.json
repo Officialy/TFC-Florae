@@ -2,9 +2,6 @@
   "__comment__": "This file was automatically created by mcresources",
   "replace": false,
   "values": [
-	  "#tfc:feature/geode/sapphire",
-    "tfc:ocean/large_dripstone",
-    "tfc:ocean/mossy_boulder",
-    "tfc:small_rock_columns_deep"
+    "#tfc:feature/icebergs"
   ]
 }

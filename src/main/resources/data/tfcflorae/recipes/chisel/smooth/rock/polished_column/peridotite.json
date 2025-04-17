@@ -1,6 +1,0 @@
-{
-  "type": "tfc:chisel",
-  "ingredient": "tfcflorae:rock/column/peridotite",
-  "result": "tfcflorae:rock/polished_column/peridotite",
-  "mode": "smooth"
-}

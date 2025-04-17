@@ -1,0 +1,101 @@
+{
+  "__comment__": "This file was automatically created by mcresources",
+  "type": "tfc:cluster_vein",
+  "config": {
+    "rarity": 32,
+    "density": 0.25,
+    "min_y": 40,
+    "max_y": 130,
+    "size": 20,
+    "random_name": "surface_malachite",
+    "blocks": [
+      {
+        "replace": [
+          "tfcflorae:rock/raw/marble"
+        ],
+        "with": [
+          {
+            "weight": 70,
+            "block": "tfcflorae:ore/poor_malachite/marble"
+          },
+          {
+            "weight": 25,
+            "block": "tfcflorae:ore/normal_malachite/marble"
+          },
+          {
+            "weight": 5,
+            "block": "tfcflorae:ore/rich_malachite/marble"
+          }
+        ]
+      },
+      {
+        "replace": [
+          "tfcflorae:rock/raw/limestone"
+        ],
+        "with": [
+          {
+            "weight": 70,
+            "block": "tfcflorae:ore/poor_malachite/limestone"
+          },
+          {
+            "weight": 25,
+            "block": "tfcflorae:ore/normal_malachite/limestone"
+          },
+          {
+            "weight": 5,
+            "block": "tfcflorae:ore/rich_malachite/limestone"
+          }
+        ]
+      },
+      {
+        "replace": [
+          "tfcflorae:rock/raw/chalk"
+        ],
+        "with": [
+          {
+            "weight": 70,
+            "block": "tfcflorae:ore/poor_malachite/chalk"
+          },
+          {
+            "weight": 25,
+            "block": "tfcflorae:ore/normal_malachite/chalk"
+          },
+          {
+            "weight": 5,
+            "block": "tfcflorae:ore/rich_malachite/chalk"
+          }
+        ]
+      },
+      {
+        "replace": [
+          "tfcflorae:rock/raw/dolomite"
+        ],
+        "with": [
+          {
+            "weight": 70,
+            "block": "tfcflorae:ore/poor_malachite/dolomite"
+          },
+          {
+            "weight": 25,
+            "block": "tfcflorae:ore/normal_malachite/dolomite"
+          },
+          {
+            "weight": 5,
+            "block": "tfcflorae:ore/rich_malachite/dolomite"
+          }
+        ]
+      }
+    ],
+    "indicator": {
+      "rarity": 14,
+      "depth": 35,
+      "underground_rarity": 1,
+      "underground_count": 0,
+      "blocks": [
+        {
+          "block": "tfcflorae:ore/small_malachite"
+        }
+      ]
+    }
+  }
+}

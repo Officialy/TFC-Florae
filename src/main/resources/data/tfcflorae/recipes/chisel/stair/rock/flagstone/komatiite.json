@@ -1,6 +1,0 @@
-{
-  "type": "tfc:chisel",
-  "ingredient": "tfcflorae:rock/flagstone/komatiite",
-  "result": "tfcflorae:rock/flagstone/stairs/komatiite",
-  "mode": "stair"
-}

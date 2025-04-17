@@ -1,6 +1,0 @@
-{
-  "type": "tfc:chisel",
-  "ingredient": "tfcflorae:rock/flagstone/blueschist",
-  "result": "tfcflorae:rock/flagstone_bricks/blueschist",
-  "mode": "smooth"
-}

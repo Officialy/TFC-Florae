@@ -1,0 +1,34 @@
+{
+  "__comment__": "This file was automatically created by mcresources",
+  "type": "tfc:forest_entry",
+  "config": {
+    "climate": {
+      "min_temperature": 18,
+      "max_temperature": 39,
+      "min_rainfall": 120,
+      "max_rainfall": 300
+    },
+    "groundcover": [
+      {
+        "block": "tfcflorae:wood/twig/rainbow_eucalyptus"
+      },
+      {
+        "block": "tfcflorae:wood/fallen_leaves/rainbow_eucalyptus"
+      }
+    ],
+    "normal_tree": "tfcflorae:tree/rainbow_eucalyptus",
+    "dead_tree": "tfcflorae:tree/rainbow_eucalyptus_dead",
+    "fallen_log": "tfcflorae:wood/log/rainbow_eucalyptus",
+    "bush_log": {
+      "Name": "tfcflorae:wood/wood/rainbow_eucalyptus",
+      "Properties": {
+        "natural": "true",
+        "axis": "y"
+      }
+    },
+    "bush_leaves": "tfcflorae:wood/leaves/rainbow_eucalyptus",
+    "old_growth_tree": "tfcflorae:tree/rainbow_eucalyptus_large",
+    "dead_chance": 1,
+    "fallen_tree_chance": 8
+  }
+}

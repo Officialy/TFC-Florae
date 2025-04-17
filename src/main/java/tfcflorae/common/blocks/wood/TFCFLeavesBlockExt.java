@@ -36,24 +36,14 @@ public abstract class TFCFLeavesBlockExt extends TFCLeavesBlock
 
     public static TFCFLeavesBlockExt create(ExtendedProperties properties, int maxDecayDistance, @Nullable Supplier<? extends Block> fallenLeaves, @Nullable Supplier<? extends Block> fallenTwig, @Nullable Supplier<? extends Block> sapling)
     {
-        final IntegerProperty distanceProperty = getDistanceProperty(maxDecayDistance);
         return new TFCFLeavesBlockExt(properties, maxDecayDistance, fallenLeaves, fallenTwig, sapling)
         {
             @Override
             protected IntegerProperty getDistanceProperty()
             {
-                return distanceProperty;
+                return TFCBlockStateProperties.DISTANCE_9;
             }
         };
-    }
-
-    private static IntegerProperty getDistanceProperty(int maxDecayDistance)
-    {
-        /*if (maxDecayDistance >= 7 && maxDecayDistance < 7 + TFCBlockStateProperties.DISTANCES.length)
-        {
-            return TFCBlockStateProperties.DISTANCES[maxDecayDistance - 7 + 1]; // we select one higher than max
-        }*/
-        throw new IllegalArgumentException("No property set for distance: " + maxDecayDistance);
     }
 
     /* The maximum value of the decay property. */

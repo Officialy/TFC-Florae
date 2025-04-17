@@ -1,6 +1,0 @@
-{
-  "type": "tfc:chisel",
-  "ingredient": "tfcflorae:rock/stone_tiles/blueschist",
-  "result": "tfcflorae:rock/stone_tiles/stairs/blueschist",
-  "mode": "stair"
-}

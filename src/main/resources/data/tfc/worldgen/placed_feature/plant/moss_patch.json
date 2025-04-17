@@ -1,9 +1,10 @@
 {
+  "__comment__": "This file was automatically created by mcresources",
   "feature": "tfc:plant/moss_patch",
   "placement": [
     {
       "type": "minecraft:rarity_filter",
-      "chance": 7
+      "chance": 15
     },
     {
       "type": "minecraft:in_square"
@@ -12,7 +13,7 @@
       "type": "tfc:climate",
       "min_temperature": -7,
       "max_temperature": 30,
-      "min_rainfall": 200,
+      "min_rainfall": 250,
       "max_rainfall": 450
     }
   ]

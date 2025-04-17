@@ -57,7 +57,7 @@ public class BambooLogBlock extends LogBlock implements IFluidLoggable
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder)
     {
-        super.createBlockStateDefinition(builder.add(getFluidProperty()));
+        super.createBlockStateDefinition(builder.add(getFluidProperty()).add(NATURAL));
     }
 
     @Override
@@ -69,17 +69,12 @@ public class BambooLogBlock extends LogBlock implements IFluidLoggable
     @Override
     public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context)
     {
-        switch (state.getValue(AXIS))
-        {
-            case X:
-                return AXIS_X_SHAPE;
-            case Y:
-                return AXIS_Y_SHAPE;
-            case Z:
-                return AXIS_Z_SHAPE;
-            default:
-                return SHAPE;
-        }
+        return switch (state.getValue(AXIS)) {
+            case X -> AXIS_X_SHAPE;
+            case Y -> AXIS_Y_SHAPE;
+            case Z -> AXIS_Z_SHAPE;
+            default -> SHAPE;
+        };
     }
 
     @Override

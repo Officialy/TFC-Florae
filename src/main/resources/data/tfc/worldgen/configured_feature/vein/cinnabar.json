@@ -2,127 +2,53 @@
   "__comment__": "This file was automatically created by mcresources",
   "type": "tfc:cluster_vein",
   "config": {
-    "rarity": 90,
-    "min_y": {
-      "absolute": -48
-    },
-    "max_y": {
-      "absolute": 100
-    },
-    "size": 10,
+    "rarity": 14,
     "density": 0.6,
+    "min_y": -70,
+    "max_y": 10,
+    "size": 18,
+    "random_name": "cinnabar",
     "blocks": [
       {
         "replace": [
-          "tfc:rock/raw/rhyolite"
+          "tfcflorae:rock/raw/quartzite"
         ],
         "with": [
           {
-            "block": "tfc:ore/cinnabar/rhyolite"
+            "block": "tfcflorae:ore/cinnabar/quartzite"
           }
         ]
       },
       {
         "replace": [
-          "tfc:rock/raw/basalt"
+          "tfcflorae:rock/raw/phyllite"
         ],
         "with": [
           {
-            "block": "tfc:ore/cinnabar/basalt"
+            "block": "tfcflorae:ore/cinnabar/phyllite"
           }
         ]
       },
       {
         "replace": [
-          "tfc:rock/raw/andesite"
+          "tfcflorae:rock/raw/gneiss"
         ],
         "with": [
           {
-            "block": "tfc:ore/cinnabar/andesite"
+            "block": "tfcflorae:ore/cinnabar/gneiss"
           }
         ]
       },
       {
         "replace": [
-          "tfc:rock/raw/dacite"
+          "tfcflorae:rock/raw/schist"
         ],
         "with": [
           {
-            "block": "tfc:ore/cinnabar/dacite"
-          }
-        ]
-      },
-      {
-        "replace": [
-          "tfcflorae:rock/raw/porphyry"
-        ],
-        "with": [
-          {
-            "block": "tfcflorae:ore/cinnabar/porphyry"
-          }
-        ]
-      },
-      {
-        "replace": [
-          "tfcflorae:rock/raw/peridotite"
-        ],
-        "with": [
-          {
-            "block": "tfcflorae:ore/cinnabar/peridotite"
-          }
-        ]
-      },
-      {
-        "replace": [
-          "tfcflorae:rock/raw/blaimorite"
-        ],
-        "with": [
-          {
-            "block": "tfcflorae:ore/cinnabar/blaimorite"
-          }
-        ]
-      },
-      {
-        "replace": [
-          "tfcflorae:rock/raw/boninite"
-        ],
-        "with": [
-          {
-            "block": "tfcflorae:ore/cinnabar/boninite"
-          }
-        ]
-      },
-      {
-        "replace": [
-          "tfcflorae:rock/raw/carbonatite"
-        ],
-        "with": [
-          {
-            "block": "tfcflorae:ore/cinnabar/carbonatite"
-          }
-        ]
-      },
-      {
-        "replace": [
-          "tfc:rock/raw/quartzite"
-        ],
-        "with": [
-          {
-            "block": "tfc:ore/cinnabar/quartzite"
-          }
-        ]
-      },
-      {
-        "replace": [
-          "tfc:rock/raw/shale"
-        ],
-        "with": [
-          {
-            "block": "tfc:ore/cinnabar/shale"
+            "block": "tfcflorae:ore/cinnabar/schist"
           }
         ]
       }
-    ],
-    "random_name": "cinnabar"
+    ]
   }
 }

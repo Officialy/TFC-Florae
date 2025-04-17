@@ -1,6 +1,0 @@
-{
-  "type": "tfc:chisel",
-  "ingredient": "tfcflorae:wood/planks/walnut",
-  "result": "tfcflorae:wood/stairs/walnut",
-  "mode": "stair"
-}

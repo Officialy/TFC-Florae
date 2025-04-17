@@ -1,0 +1,26 @@
+{
+  "__comment__": "This file was automatically created by mcresources",
+  "replace": false,
+  "values": [
+    "tfcflorae:wood/planks/acacia_slab",
+    "tfcflorae:wood/planks/ash_slab",
+    "tfcflorae:wood/planks/aspen_slab",
+    "tfcflorae:wood/planks/birch_slab",
+    "tfcflorae:wood/planks/blackwood_slab",
+    "tfcflorae:wood/planks/chestnut_slab",
+    "tfcflorae:wood/planks/douglas_fir_slab",
+    "tfcflorae:wood/planks/hickory_slab",
+    "tfcflorae:wood/planks/kapok_slab",
+    "tfcflorae:wood/planks/mangrove_slab",
+    "tfcflorae:wood/planks/maple_slab",
+    "tfcflorae:wood/planks/oak_slab",
+    "tfcflorae:wood/planks/palm_slab",
+    "tfcflorae:wood/planks/pine_slab",
+    "tfcflorae:wood/planks/rosewood_slab",
+    "tfcflorae:wood/planks/sequoia_slab",
+    "tfcflorae:wood/planks/spruce_slab",
+    "tfcflorae:wood/planks/sycamore_slab",
+    "tfcflorae:wood/planks/white_cedar_slab",
+    "tfcflorae:wood/planks/willow_slab"
+  ]
+}

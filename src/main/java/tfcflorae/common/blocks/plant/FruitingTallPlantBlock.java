@@ -92,7 +92,7 @@ public abstract class FruitingTallPlantBlock extends TFCTallGrassBlock implement
         this.lifecycle = lifecycle;
         this.productItem = productItem;
 
-        lastUpdateTick = Calendars.SERVER.getTicks();
+        lastUpdateTick = 0;// todo Calendars.SERVER.getTicks();
 
         registerDefaultState(getStateDefinition().any().setValue(PART, Part.LOWER).setValue(LIFECYCLE, Lifecycle.HEALTHY));
     }
@@ -104,7 +104,7 @@ public abstract class FruitingTallPlantBlock extends TFCTallGrassBlock implement
         if (getLifecycleForCurrentMonth() != getLifecycleForMonth(Calendars.SERVER.getCalendarMonthOfYear()))
         {
             onUpdate(level, pos, state);
-            lastUpdateTick = Calendars.SERVER.getTicks();
+            lastUpdateTick = 0;// todo Calendars.SERVER.getTicks();
         }
         super.randomTick(state, level, pos, random);
     }

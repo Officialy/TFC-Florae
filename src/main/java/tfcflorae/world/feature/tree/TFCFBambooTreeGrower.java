@@ -1,5 +1,6 @@
 package tfcflorae.world.feature.tree;
 
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.util.RandomSource;
 
@@ -10,6 +11,7 @@ import java.util.Locale;
 import net.minecraft.world.level.block.grower.AbstractTreeGrower;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.util.valueproviders.ConstantInt;
+import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
 import net.minecraft.world.level.levelgen.feature.featuresize.TwoLayersFeatureSize;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.RandomSpreadFoliagePlacer;
@@ -19,6 +21,7 @@ import net.minecraft.world.level.levelgen.feature.trunkplacers.StraightTrunkPlac
 import net.dries007.tfc.common.blocks.TFCBlocks;
 import net.dries007.tfc.common.blocks.soil.SoilBlockType;
 import net.dries007.tfc.common.blocks.wood.TFCLeavesBlock;
+import net.minecraftforge.registries.RegistryObject;
 import tfcflorae.common.blocks.TFCFBlocks;
 import tfcflorae.common.blocks.plant.TFCFPlant;
 import tfcflorae.world.feature.TFCFFeatures;
@@ -36,7 +39,7 @@ public class TFCFBambooTreeGrower extends AbstractTreeGrower
     @Override
     protected ResourceKey<ConfiguredFeature<?, ?>> getConfiguredFeature(RandomSource random, boolean bees)
     {
-        ResourceKey<ConfiguredFeature<TreeConfiguration, ?>> feature = TFCFFeatures.config("tree/grower/" + bamboo.name().toLowerCase(Locale.ROOT), TFCFFeatures.BAMBOO_TREE.get(),
+        RegistryObject<ConfiguredFeature<TreeConfiguration, Feature<TreeConfiguration>>> feature = TFCFFeatures.config("tree/grower/" + bamboo.name().toLowerCase(Locale.ROOT), TFCFFeatures.BAMBOO_TREE.get(),
             new TreeConfiguration.TreeConfigurationBuilder(
                 BlockStateProvider.simple(TFCFBlocks.BAMBOO_LOGS.get(bamboo).get().defaultBlockState()),//.setValue(BambooLogBlock.NATURAL, true)),
                 //new WeightedStateProvider(SimpleWeightedRandomList.builder().add(TFCFBlocks.BAMBOO_LOGS.get(bamboo).get().defaultBlockState(), 3).add(TFCFBlocks.BAMBOO_LEAVES.get(bamboo).get().defaultBlockState(), 1)), 
@@ -47,6 +50,6 @@ public class TFCFBambooTreeGrower extends AbstractTreeGrower
                 new TwoLayersFeatureSize(1, 0, 1)).decorators(ImmutableList.of(BambooLeavesDecorator.INSTANCE)).ignoreVines().dirt(BlockStateProvider.simple(TFCBlocks.SOIL.get(SoilBlockType.ROOTED_DIRT).get(SoilBlockType.Variant.LOAM).get().defaultBlockState())).build());
 
 
-        return (ResourceKey) feature; //todo fix cast
+        return ResourceKey.create(Registries.CONFIGURED_FEATURE, feature.getId()); //todo test
     }
 }

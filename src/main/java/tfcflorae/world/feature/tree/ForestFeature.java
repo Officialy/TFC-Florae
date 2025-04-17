@@ -62,8 +62,7 @@ public class ForestFeature extends Feature<ForestConfig>
     }
 
     @Override
-    public boolean place(FeaturePlaceContext<ForestConfig> context)
-    {
+    public boolean place(FeaturePlaceContext<ForestConfig> context) {
         final WorldGenLevel level = context.level();
         final BlockPos pos = context.origin();
         final RandomSource rand = context.random();

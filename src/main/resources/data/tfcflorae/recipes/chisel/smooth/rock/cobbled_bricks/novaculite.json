@@ -1,6 +1,0 @@
-{
-  "type": "tfc:chisel",
-  "ingredient": "tfcflorae:rock/cobble/novaculite",
-  "result": "tfcflorae:rock/cobbled_bricks/novaculite",
-  "mode": "smooth"
-}

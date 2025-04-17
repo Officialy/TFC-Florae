@@ -1,0 +1,12 @@
+{
+  "__comment__": "This file was automatically created by mcresources",
+  "parent": "minecraft:block/lectern",
+  "textures": {
+    "bottom": "tfcflorae:block/wood/planks/chestnut",
+    "base": "tfcflorae:block/wood/lectern/chestnut/base",
+    "front": "tfcflorae:block/wood/lectern/chestnut/front",
+    "sides": "tfcflorae:block/wood/lectern/chestnut/sides",
+    "top": "tfcflorae:block/wood/lectern/chestnut/top",
+    "particle": "tfcflorae:block/wood/lectern/chestnut/sides"
+  }
+}

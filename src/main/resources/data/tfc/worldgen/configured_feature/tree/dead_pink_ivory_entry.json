@@ -1,0 +1,34 @@
+{
+  "__comment__": "This file was automatically created by mcresources",
+  "type": "tfc:forest_entry",
+  "config": {
+    "climate": {
+      "min_temperature": 18,
+      "max_temperature": 31,
+      "min_rainfall": 210,
+      "max_rainfall": 500
+    },
+    "groundcover": [
+      {
+        "block": "tfcflorae:wood/twig/pink_ivory"
+      },
+      {
+        "block": "tfcflorae:wood/fallen_leaves/pink_ivory"
+      }
+    ],
+    "normal_tree": "tfcflorae:tree/pink_ivory",
+    "dead_tree": "tfcflorae:tree/pink_ivory_dead",
+    "fallen_log": "tfcflorae:wood/log/pink_ivory",
+    "bush_log": {
+      "Name": "tfcflorae:wood/wood/pink_ivory",
+      "Properties": {
+        "natural": "true",
+        "axis": "y"
+      }
+    },
+    "bush_leaves": "tfcflorae:wood/leaves/pink_ivory",
+    "old_growth_tree": "tfcflorae:tree/pink_ivory_large",
+    "dead_chance": 1,
+    "fallen_tree_chance": 8
+  }
+}

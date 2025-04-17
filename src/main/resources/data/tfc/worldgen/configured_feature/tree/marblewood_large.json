@@ -3,16 +3,16 @@
   "type": "tfc:random_tree",
   "config": {
     "structures": [
-      "tfc:marblewood_large/1",
-      "tfc:marblewood_large/2",
-      "tfc:marblewood_large/3",
-      "tfc:marblewood_large/4"
+      "tfcflorae:marblewood_large/1",
+      "tfcflorae:marblewood_large/2",
+      "tfcflorae:marblewood_large/3",
+      "tfcflorae:marblewood_large/4"
     ],
     "radius": 2,
     "placement": {
       "width": 2,
       "height": 9,
-      "allow_submerged": false
+      "allow_submerged": true
     }
   }
 }

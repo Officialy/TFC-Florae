@@ -1,8 +1,0 @@
-{
-  "ingredient": {
-    "item": "tfcflorae:mineral/smithsonite"
-  },
-  "heat_capacity": 1.905,
-  "forging_temperature": 252,
-  "welding_temperature": 336
-}

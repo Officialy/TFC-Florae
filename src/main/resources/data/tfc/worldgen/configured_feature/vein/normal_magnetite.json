@@ -1,166 +1,143 @@
 {
   "__comment__": "This file was automatically created by mcresources",
-  "type": "tfc:cluster_vein",
+  "type": "tfcflorae:cluster_vein",
   "config": {
     "rarity": 60,
-    "min_y": {
-      "absolute": -32
-    },
-    "max_y": {
-      "absolute": 75
-    },
+    "min_y": -32,
+    "max_y": 75,
     "size": 20,
     "density": 0.6,
     "blocks": [
       {
         "replace": [
-          "tfc:rock/raw/shale"
+          "tfcflorae:rock/raw/shale"
         ],
         "with": [
           {
             "weight": 20,
-            "block": "tfc:ore/poor_magnetite/shale"
+            "block": "tfcflorae:ore/poor_magnetite/shale"
           },
           {
             "weight": 50,
-            "block": "tfc:ore/normal_magnetite/shale"
+            "block": "tfcflorae:ore/normal_magnetite/shale"
           },
           {
             "weight": 30,
-            "block": "tfc:ore/rich_magnetite/shale"
+            "block": "tfcflorae:ore/rich_magnetite/shale"
           }
         ]
       },
       {
         "replace": [
-          "tfc:rock/raw/claystone"
+          "tfcflorae:rock/raw/claystone"
         ],
         "with": [
           {
             "weight": 20,
-            "block": "tfc:ore/poor_magnetite/claystone"
+            "block": "tfcflorae:ore/poor_magnetite/claystone"
           },
           {
             "weight": 50,
-            "block": "tfc:ore/normal_magnetite/claystone"
+            "block": "tfcflorae:ore/normal_magnetite/claystone"
           },
           {
             "weight": 30,
-            "block": "tfc:ore/rich_magnetite/claystone"
+            "block": "tfcflorae:ore/rich_magnetite/claystone"
           }
         ]
       },
       {
         "replace": [
-          "tfc:rock/raw/limestone"
+          "tfcflorae:rock/raw/limestone"
         ],
         "with": [
           {
             "weight": 20,
-            "block": "tfc:ore/poor_magnetite/limestone"
+            "block": "tfcflorae:ore/poor_magnetite/limestone"
           },
           {
             "weight": 50,
-            "block": "tfc:ore/normal_magnetite/limestone"
+            "block": "tfcflorae:ore/normal_magnetite/limestone"
           },
           {
             "weight": 30,
-            "block": "tfc:ore/rich_magnetite/limestone"
+            "block": "tfcflorae:ore/rich_magnetite/limestone"
           }
         ]
       },
       {
         "replace": [
-          "tfc:rock/raw/conglomerate"
+          "tfcflorae:rock/raw/conglomerate"
         ],
         "with": [
           {
             "weight": 20,
-            "block": "tfc:ore/poor_magnetite/conglomerate"
+            "block": "tfcflorae:ore/poor_magnetite/conglomerate"
           },
           {
             "weight": 50,
-            "block": "tfc:ore/normal_magnetite/conglomerate"
+            "block": "tfcflorae:ore/normal_magnetite/conglomerate"
           },
           {
             "weight": 30,
-            "block": "tfc:ore/rich_magnetite/conglomerate"
+            "block": "tfcflorae:ore/rich_magnetite/conglomerate"
           }
         ]
       },
       {
         "replace": [
-          "tfc:rock/raw/dolomite"
+          "tfcflorae:rock/raw/dolomite"
         ],
         "with": [
           {
             "weight": 20,
-            "block": "tfc:ore/poor_magnetite/dolomite"
+            "block": "tfcflorae:ore/poor_magnetite/dolomite"
           },
           {
             "weight": 50,
-            "block": "tfc:ore/normal_magnetite/dolomite"
+            "block": "tfcflorae:ore/normal_magnetite/dolomite"
           },
           {
             "weight": 30,
-            "block": "tfc:ore/rich_magnetite/dolomite"
+            "block": "tfcflorae:ore/rich_magnetite/dolomite"
           }
         ]
       },
       {
         "replace": [
-          "tfc:rock/raw/chert"
+          "tfcflorae:rock/raw/chert"
         ],
         "with": [
           {
             "weight": 20,
-            "block": "tfc:ore/poor_magnetite/chert"
+            "block": "tfcflorae:ore/poor_magnetite/chert"
           },
           {
             "weight": 50,
-            "block": "tfc:ore/normal_magnetite/chert"
+            "block": "tfcflorae:ore/normal_magnetite/chert"
           },
           {
             "weight": 30,
-            "block": "tfc:ore/rich_magnetite/chert"
+            "block": "tfcflorae:ore/rich_magnetite/chert"
           }
         ]
       },
       {
         "replace": [
-          "tfc:rock/raw/chalk"
+          "tfcflorae:rock/raw/chalk"
         ],
         "with": [
           {
             "weight": 20,
-            "block": "tfc:ore/poor_magnetite/chalk"
+            "block": "tfcflorae:ore/poor_magnetite/chalk"
           },
           {
             "weight": 50,
-            "block": "tfc:ore/normal_magnetite/chalk"
+            "block": "tfcflorae:ore/normal_magnetite/chalk"
           },
           {
             "weight": 30,
-            "block": "tfc:ore/rich_magnetite/chalk"
-          }
-        ]
-      },
-      {
-        "replace": [
-          "tfcflorae:rock/raw/laterite"
-        ],
-        "with": [
-          {
-            "weight": 20,
-            "block": "tfcflorae:ore/poor_magnetite/laterite"
-          },
-          {
-            "weight": 50,
-            "block": "tfcflorae:ore/normal_magnetite/laterite"
-          },
-          {
-            "weight": 30,
-            "block": "tfcflorae:ore/rich_magnetite/laterite"
+            "block": "tfcflorae:ore/rich_magnetite/chalk"
           }
         ]
       },
@@ -318,10 +295,10 @@
       }
     ],
     "indicator": {
-      "rarity": 10,
+      "rarity": 12,
       "blocks": [
         {
-          "block": "tfc:ore/small_magnetite"
+          "block": "tfcflorae:ore/small_magnetite"
         }
       ]
     },

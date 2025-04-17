@@ -2,10 +2,12 @@
   "__comment__": "This file was automatically created by mcresources",
   "type": "tfc:forest_entry",
   "config": {
-    "min_rain": 180,
-    "max_rain": 430,
-    "min_temp": 17,
-    "max_temp": 35,
+    "climate": {
+      "min_temperature": 17,
+      "max_temperature": 35,
+      "min_rainfall": 180,
+      "max_rainfall": 430
+    },
     "groundcover": [
       {
         "block": "tfcflorae:wood/twig/teak"
@@ -14,8 +16,8 @@
         "block": "tfcflorae:wood/fallen_leaves/teak"
       }
     ],
-    "normal_tree": "tfc:tree/teak",
-    "dead_tree": "tfc:tree/teak_dead",
+    "normal_tree": "tfcflorae:tree/teak",
+    "dead_tree": "tfcflorae:tree/teak_dead",
     "fallen_log": "tfcflorae:wood/log/teak",
     "bush_log": {
       "Name": "tfcflorae:wood/wood/teak",
@@ -25,6 +27,6 @@
       }
     },
     "bush_leaves": "tfcflorae:wood/leaves/teak",
-    "old_growth_tree": "tfc:tree/teak_large"
+    "old_growth_tree": "tfcflorae:tree/teak_large"
   }
 }

@@ -77,7 +77,7 @@ public class FruitingTopPlantBlock extends TopPlantBlock implements ILeavesBlock
         this.lifecycle = lifecycle;
         this.productItem = productItem;
 
-        lastUpdateTick = Calendars.SERVER.getTicks();
+        lastUpdateTick = 0;// todo Calendars.SERVER.getTicks();
 
         registerDefaultState(getStateDefinition().any().setValue(LIFECYCLE, Lifecycle.HEALTHY).setValue(NATURAL, false));
     }
@@ -101,7 +101,7 @@ public class FruitingTopPlantBlock extends TopPlantBlock implements ILeavesBlock
         if (getLifecycleForCurrentMonth() != getLifecycleForMonth(Calendars.SERVER.getCalendarMonthOfYear()))
         {
             onUpdate(level, pos, state);
-            lastUpdateTick = Calendars.SERVER.getTicks();
+            lastUpdateTick = 0;// todo Calendars.SERVER.getTicks();
         }
     }
 

@@ -8,225 +8,105 @@
     "replaces_on_fluid_contact": [
       {
         "replace": [
-          "tfc:rock/raw/rhyolite"
+          "tfcflorae:rock/raw/rhyolite"
         ],
         "with": [
           {
-            "block": "tfc:rock/magma/rhyolite",
+            "block": "tfcflorae:rock/magma/rhyolite",
             "weight": 1
           },
           {
-            "block": "tfc:rock/hardened/rhyolite",
+            "block": "tfcflorae:rock/hardened/rhyolite",
             "weight": 2
           }
         ]
       },
       {
         "replace": [
-          "tfc:rock/raw/basalt"
+          "tfcflorae:rock/raw/basalt"
         ],
         "with": [
           {
-            "block": "tfc:rock/magma/basalt",
+            "block": "tfcflorae:rock/magma/basalt",
             "weight": 1
           },
           {
-            "block": "tfc:rock/hardened/basalt",
+            "block": "tfcflorae:rock/hardened/basalt",
             "weight": 2
           }
         ]
       },
       {
         "replace": [
-          "tfc:rock/raw/andesite"
+          "tfcflorae:rock/raw/andesite"
         ],
         "with": [
           {
-            "block": "tfc:rock/magma/andesite",
+            "block": "tfcflorae:rock/magma/andesite",
             "weight": 1
           },
           {
-            "block": "tfc:rock/hardened/andesite",
+            "block": "tfcflorae:rock/hardened/andesite",
             "weight": 2
           }
         ]
       },
       {
         "replace": [
-          "tfc:rock/raw/dacite"
+          "tfcflorae:rock/raw/dacite"
         ],
         "with": [
           {
-            "block": "tfc:rock/magma/dacite",
+            "block": "tfcflorae:rock/magma/dacite",
             "weight": 1
           },
           {
-            "block": "tfc:rock/hardened/dacite",
+            "block": "tfcflorae:rock/hardened/dacite",
             "weight": 2
           }
         ]
       },
       {
         "replace": [
-          "tfcflorae:rock/raw/porphyry"
+          "tfcflorae:rock/raw/granite"
         ],
         "with": [
           {
-            "block": "tfcflorae:rock/magma/porphyry",
+            "block": "tfcflorae:rock/magma/granite",
             "weight": 1
           },
           {
-            "block": "tfcflorae:rock/hardened/porphyry",
+            "block": "tfcflorae:rock/hardened/granite",
             "weight": 2
           }
         ]
       },
       {
         "replace": [
-          "tfcflorae:rock/raw/peridotite"
+          "tfcflorae:rock/raw/diorite"
         ],
         "with": [
           {
-            "block": "tfcflorae:rock/magma/peridotite",
+            "block": "tfcflorae:rock/magma/diorite",
             "weight": 1
           },
           {
-            "block": "tfcflorae:rock/hardened/peridotite",
+            "block": "tfcflorae:rock/hardened/diorite",
             "weight": 2
           }
         ]
       },
       {
         "replace": [
-          "tfcflorae:rock/raw/blaimorite"
+          "tfcflorae:rock/raw/gabbro"
         ],
         "with": [
           {
-            "block": "tfcflorae:rock/magma/blaimorite",
+            "block": "tfcflorae:rock/magma/gabbro",
             "weight": 1
           },
           {
-            "block": "tfcflorae:rock/hardened/blaimorite",
-            "weight": 2
-          }
-        ]
-      },
-      {
-        "replace": [
-          "tfcflorae:rock/raw/boninite"
-        ],
-        "with": [
-          {
-            "block": "tfcflorae:rock/magma/boninite",
-            "weight": 1
-          },
-          {
-            "block": "tfcflorae:rock/hardened/boninite",
-            "weight": 2
-          }
-        ]
-      },
-      {
-        "replace": [
-          "tfcflorae:rock/raw/carbonatite"
-        ],
-        "with": [
-          {
-            "block": "tfcflorae:rock/magma/carbonatite",
-            "weight": 1
-          },
-          {
-            "block": "tfcflorae:rock/hardened/carbonatite",
-            "weight": 2
-          }
-        ]
-      },
-      {
-        "replace": [
-          "tfc:rock/raw/granite"
-        ],
-        "with": [
-          {
-            "block": "tfc:rock/magma/granite",
-            "weight": 1
-          },
-          {
-            "block": "tfc:rock/hardened/granite",
-            "weight": 2
-          }
-        ]
-      },
-      {
-        "replace": [
-          "tfc:rock/raw/diorite"
-        ],
-        "with": [
-          {
-            "block": "tfc:rock/magma/diorite",
-            "weight": 1
-          },
-          {
-            "block": "tfc:rock/hardened/diorite",
-            "weight": 2
-          }
-        ]
-      },
-      {
-        "replace": [
-          "tfc:rock/raw/gabbro"
-        ],
-        "with": [
-          {
-            "block": "tfc:rock/magma/gabbro",
-            "weight": 1
-          },
-          {
-            "block": "tfc:rock/hardened/gabbro",
-            "weight": 2
-          }
-        ]
-      },
-      {
-        "replace": [
-          "tfcflorae:rock/raw/red_granite"
-        ],
-        "with": [
-          {
-            "block": "tfcflorae:rock/magma/red_granite",
-            "weight": 1
-          },
-          {
-            "block": "tfcflorae:rock/hardened/red_granite",
-            "weight": 2
-          }
-        ]
-      },
-      {
-        "replace": [
-          "tfcflorae:rock/raw/breccia"
-        ],
-        "with": [
-          {
-            "block": "tfcflorae:rock/magma/breccia",
-            "weight": 1
-          },
-          {
-            "block": "tfcflorae:rock/hardened/breccia",
-            "weight": 2
-          }
-        ]
-      },
-      {
-        "replace": [
-          "tfcflorae:rock/raw/foidolite"
-        ],
-        "with": [
-          {
-            "block": "tfcflorae:rock/magma/foidolite",
-            "weight": 1
-          },
-          {
-            "block": "tfcflorae:rock/hardened/foidolite",
+            "block": "tfcflorae:rock/hardened/gabbro",
             "weight": 2
           }
         ]

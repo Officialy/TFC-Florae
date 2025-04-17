@@ -3,15 +3,15 @@
   "type": "tfc:random_tree",
   "config": {
     "structures": [
-      "tfc:fever_large/1",
-      "tfc:fever_large/2",
-      "tfc:fever_large/3"
+      "tfcflorae:fever_large/1",
+      "tfcflorae:fever_large/2",
+      "tfcflorae:fever_large/3"
     ],
     "radius": 2,
     "placement": {
       "width": 2,
       "height": 9,
-      "allow_submerged": false
+      "allow_submerged": true
     }
   }
 }

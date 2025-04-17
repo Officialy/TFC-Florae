@@ -60,6 +60,7 @@ import net.dries007.tfc.world.chunkdata.ChunkData;
 import net.dries007.tfc.world.chunkdata.ChunkDataProvider;
 
 import tfcflorae.Config;
+import tfcflorae.TFCFlorae;
 import tfcflorae.common.blockentities.SilkmothNestBlockEntity;
 import tfcflorae.common.blocks.TFCFBlocks;
 import tfcflorae.common.entities.Silkmoth;
@@ -83,24 +84,14 @@ public abstract class TFCFLeavesBlock extends TFCLeavesBlock implements IBushBlo
 
     public static TFCFLeavesBlock create(ExtendedProperties properties, Supplier<? extends Item> productItem, Lifecycle[] lifecycle, int maxDecayDistance, Supplier<ClimateRange> climateRange, @Nullable Supplier<? extends Block> fallenLeaves, @Nullable Supplier<? extends Block> fallenTwig, @Nullable Supplier<? extends Block> sapling)
     {
-        final IntegerProperty distanceProperty = getDistanceProperty(maxDecayDistance);
         return new TFCFLeavesBlock(properties, productItem, lifecycle, maxDecayDistance, climateRange, fallenLeaves, fallenTwig, sapling)
         {
             @Override
             protected IntegerProperty getDistanceProperty()
             {
-                return distanceProperty;
+                return TFCBlockStateProperties.DISTANCE_9;
             }
         };
-    }
-
-    public static IntegerProperty getDistanceProperty(int maxDecayDistance)
-    {
-    /*    if (maxDecayDistance >= 7 && maxDecayDistance < 7 + TFCBlockStateProperties.DISTANCES.length)
-        {
-            return TFCBlockStateProperties.DISTANCES[maxDecayDistance - 7 + 1]; // we select one higher than max
-        }*/
-        throw new IllegalArgumentException("No property set for distance: " + maxDecayDistance);
     }
 
     /* The maximum value of the decay property. */
@@ -128,10 +119,11 @@ public abstract class TFCFLeavesBlock extends TFCLeavesBlock implements IBushBlo
         this.fallenLeaves = fallenLeaves;
         this.fallenTwig = fallenTwig;
         this.sapling = sapling;
-
-        lastUpdateTick = Calendars.SERVER.getTicks();
+//        lastUpdateTick = 0;// todo Calendars.SERVER.getTicks();
+        lastUpdateTick = 0;
 
         registerDefaultState(getStateDefinition().any().setValue(PERSISTENT, false).setValue(LIFECYCLE, Lifecycle.HEALTHY));
+
     }
 
     @Override
@@ -228,7 +220,7 @@ public abstract class TFCFLeavesBlock extends TFCLeavesBlock implements IBushBlo
             if (currentLifecycle != expectedLifecycle && (level.getRawBrightness(pos, 0) >= 11 || level.isDay()))
             {
                 onUpdate(level, pos, state);
-                lastUpdateTick = Calendars.SERVER.getTicks();
+                lastUpdateTick = 0;// todo Calendars.SERVER.getTicks();
             }
             if (this == TFCFBlocks.WOODS_SEASONAL_LEAVES.get(TFCFWood.MULBERRY).get() && !level.isDay() && state.getValue(LIFECYCLE) != Lifecycle.DORMANT)
             {

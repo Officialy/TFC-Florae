@@ -1,64 +1,50 @@
 {
   "__comment__": "This file was automatically created by mcresources",
-  "type": "tfc:disc_vein",
+  "type": "tfcflorae:disc_vein",
   "config": {
     "rarity": 25,
-    "min_y": {
-      "absolute": 80
-    },
-    "max_y": {
-      "absolute": 180
-    },
+    "min_y": 80,
+    "max_y": 180,
     "size": 14,
     "density": 0.4,
     "blocks": [
       {
         "replace": [
-          "tfc:rock/raw/rhyolite"
+          "tfcflorae:rock/raw/rhyolite"
         ],
         "with": [
           {
-            "block": "tfc:ore/sulfur/rhyolite"
+            "block": "tfcflorae:ore/sulfur/rhyolite"
           }
         ]
       },
       {
         "replace": [
-          "tfc:rock/raw/basalt"
+          "tfcflorae:rock/raw/basalt"
         ],
         "with": [
           {
-            "block": "tfc:ore/sulfur/basalt"
+            "block": "tfcflorae:ore/sulfur/basalt"
           }
         ]
       },
       {
         "replace": [
-          "tfc:rock/raw/andesite"
+          "tfcflorae:rock/raw/andesite"
         ],
         "with": [
           {
-            "block": "tfc:ore/sulfur/andesite"
+            "block": "tfcflorae:ore/sulfur/andesite"
           }
         ]
       },
       {
         "replace": [
-          "tfc:rock/raw/dacite"
+          "tfcflorae:rock/raw/dacite"
         ],
         "with": [
           {
-            "block": "tfc:ore/sulfur/dacite"
-          }
-        ]
-      },
-      {
-        "replace": [
-          "tfcflorae:rock/raw/porphyry"
-        ],
-        "with": [
-          {
-            "block": "tfcflorae:ore/sulfur/porphyry"
+            "block": "tfcflorae:ore/sulfur/dacite"
           }
         ]
       },
@@ -104,41 +90,31 @@
       },
       {
         "replace": [
-          "tfc:rock/raw/granite"
+          "tfcflorae:rock/raw/granite"
         ],
         "with": [
           {
-            "block": "tfc:ore/sulfur/granite"
+            "block": "tfcflorae:ore/sulfur/granite"
           }
         ]
       },
       {
         "replace": [
-          "tfc:rock/raw/diorite"
+          "tfcflorae:rock/raw/diorite"
         ],
         "with": [
           {
-            "block": "tfc:ore/sulfur/diorite"
+            "block": "tfcflorae:ore/sulfur/diorite"
           }
         ]
       },
       {
         "replace": [
-          "tfc:rock/raw/gabbro"
+          "tfcflorae:rock/raw/gabbro"
         ],
         "with": [
           {
-            "block": "tfc:ore/sulfur/gabbro"
-          }
-        ]
-      },
-      {
-        "replace": [
-          "tfcflorae:rock/raw/red_granite"
-        ],
-        "with": [
-          {
-            "block": "tfcflorae:ore/sulfur/red_granite"
+            "block": "tfcflorae:ore/sulfur/gabbro"
           }
         ]
       },
@@ -159,6 +135,16 @@
         "with": [
           {
             "block": "tfcflorae:ore/sulfur/foidolite"
+          }
+        ]
+      },
+      {
+        "replace": [
+          "tfcflorae:rock/raw/porphyry"
+        ],
+        "with": [
+          {
+            "block": "tfcflorae:ore/sulfur/porphyry"
           }
         ]
       }

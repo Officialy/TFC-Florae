@@ -1,0 +1,12 @@
+{
+  "__comment__": "This file was automatically created by mcresources",
+  "parent": "minecraft:block/lectern",
+  "textures": {
+    "bottom": "tfcflorae:block/wood/planks/coconut_palm",
+    "base": "tfcflorae:block/wood/lectern/coconut_palm/base",
+    "front": "tfcflorae:block/wood/lectern/coconut_palm/front",
+    "sides": "tfcflorae:block/wood/lectern/coconut_palm/sides",
+    "top": "tfcflorae:block/wood/lectern/coconut_palm/top",
+    "particle": "tfcflorae:block/wood/lectern/coconut_palm/sides"
+  }
+}

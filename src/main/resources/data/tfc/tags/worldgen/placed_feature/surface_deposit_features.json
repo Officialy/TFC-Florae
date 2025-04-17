@@ -1,0 +1,10 @@
+{
+  "__comment__": "This file was automatically created by mcresources",
+  "replace": false,
+  "values": [
+    "tfcflorae:native_copper_deposit",
+    "tfcflorae:cassiterite_deposit",
+    "tfcflorae:native_silver_deposit",
+    "tfcflorae:native_gold_deposit"
+  ]
+}

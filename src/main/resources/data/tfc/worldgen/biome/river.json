@@ -1,9 +1,7 @@
 {
   "__comment__": "This file was automatically created by mcresources",
-  "precipitation": "rain",
-  "category": "river",
+  "has_precipitation": true,
   "temperature": 0.5,
-  "temperature_modifier": "none",
   "downfall": 0.5,
   "effects": {
     "fog_color": 12638463,
@@ -13,87 +11,36 @@
   },
   "carvers": {
     "air": [
-      "tfc:cave_caverns",
-      "tfc:crack_caverns",
       "tfc:cave",
       "tfc:canyon"
     ],
     "liquid": []
   },
   "features": [
-    [
-      "tfc:in_biome/erosion"
-    ],
-    [
-      "tfc:in_biome/all_lakes"
-    ],
-    [
-      "tfc:in_biome/soil_discs/river"
-    ],
-    [
-      "tfc:in_biome/underground_structures"
-    ],
-    [
-      "tfc:in_biome/surface_structures"
-    ],
-    [
-      "tfc:in_biome/strongholds"
-    ],
-    [
-      "tfc:in_biome/veins"
-    ],
-    [
-      "tfc:in_biome/underground_decoration"
-    ],
-    [
-      "tfc:in_biome/large_features/river"
-    ],
-    [
-      "tfc:in_biome/surface_decoration/river"
-    ],
-    [
-      "tfc:in_biome/top_layer_modification"
-    ]
+    "#tfc:in_biome/erosion",
+    "#tfc:in_biome/all_lakes",
+    "#tfc:in_biome/soil_discs/river",
+    "#tfc:in_biome/underground_structures",
+    "#tfc:in_biome/surface_structures",
+    "#tfc:in_biome/strongholds",
+    "#tfc:in_biome/veins",
+    "#tfc:in_biome/underground_decoration",
+    "#tfc:in_biome/large_features/river",
+    "#tfc:in_biome/surface_decoration/river",
+    "#tfc:in_biome/top_layer_modification"
   ],
-  "starts": [],
   "spawners": {
-    "ambient": [
-      {
-        "type": "minecraft:bat",
-        "maxCount": 8,
-        "minCount": 8,
-        "weight": 10
-      }
-    ],
     "water_ambient": [
       {
-        "type": "tfcflorae:lake_trout",
+        "type": "tfc:lake_trout",
         "weight": 10,
         "minCount": 2,
         "maxCount": 4
       },
       {
-        "type": "tfcflorae:rainbow_trout",
+        "type": "tfc:rainbow_trout",
         "weight": 10,
         "minCount": 2,
-        "maxCount": 4
-      },
-      {
-        "type": "tfc:salmon",
-        "weight": 10,
-        "minCount": 2,
-        "maxCount": 6
-      },
-      {
-        "type": "tfc:bluegill",
-        "weight": 10,
-        "minCount": 2,
-        "maxCount": 4
-      },
-      {
-        "type": "tfc:crayfish",
-        "weight": 3,
-        "minCount": 1,
         "maxCount": 4
       }
     ],
@@ -131,14 +78,8 @@
     ],
     "creature": [
       {
-        "type": "tfc:direwolf",
-        "weight": 1,
-        "minCount": 3,
-        "maxCount": 7
-      },
-      {
-        "type": "tfc:moose",
-        "weight": 1,
+        "type": "tfc:crocodile",
+        "weight": 20,
         "minCount": 1,
         "maxCount": 1
       },
@@ -233,6 +174,12 @@
         "maxCount": 1
       },
       {
+        "type": "tfc:tiger",
+        "weight": 2,
+        "minCount": 1,
+        "maxCount": 1
+      },
+      {
         "type": "tfc:rabbit",
         "weight": 3,
         "minCount": 1,
@@ -257,22 +204,82 @@
         "maxCount": 2
       },
       {
-        "type": "tfc:deer",
+        "type": "tfc:wildebeest",
+        "weight": 2,
+        "minCount": 1,
+        "maxCount": 2
+      },
+      {
+        "type": "tfc:moose",
+        "weight": 1,
+        "minCount": 1,
+        "maxCount": 1
+      },
+      {
+        "type": "tfc:bongo",
+        "weight": 3,
+        "minCount": 2,
+        "maxCount": 4
+      },
+      {
+        "type": "tfc:caribou",
         "weight": 3,
         "minCount": 2,
         "maxCount": 4
       },
       {
         "type": "tfc:deer",
+        "weight": 3,
+        "minCount": 2,
+        "maxCount": 4
+      },
+      {
+        "type": "tfc:gazelle",
+        "weight": 3,
+        "minCount": 2,
+        "maxCount": 4
+      },
+      {
+        "type": "tfc:grouse",
         "weight": 1,
-        "minCount": 1,
-        "maxCount": 1
+        "minCount": 2,
+        "maxCount": 4
+      },
+      {
+        "type": "tfc:pheasant",
+        "weight": 1,
+        "minCount": 2,
+        "maxCount": 4
+      },
+      {
+        "type": "tfc:turkey",
+        "weight": 1,
+        "minCount": 2,
+        "maxCount": 4
+      },
+      {
+        "type": "tfc:peafowl",
+        "weight": 1,
+        "minCount": 2,
+        "maxCount": 4
       },
       {
         "type": "tfc:wolf",
         "weight": 1,
         "minCount": 6,
         "maxCount": 9
+      },
+      {
+        "type": "tfc:hyena",
+        "weight": 1,
+        "minCount": 5,
+        "maxCount": 9
+      },
+      {
+        "type": "tfc:direwolf",
+        "weight": 1,
+        "minCount": 3,
+        "maxCount": 7
       },
       {
         "type": "tfc:donkey",
@@ -293,20 +300,13 @@
         "maxCount": 3
       },
       {
-        "type": "tfcflorae:frog",
-        "weight": 2,
-        "minCount": 1,
-        "maxCount": 4
-      },
-      {
-        "type": "tfcflorae:tadpole",
-        "weight": 2,
+        "type": "tfc:frog",
+        "weight": 1,
         "minCount": 2,
-        "maxCount": 8
+        "maxCount": 4
       }
     ]
   },
-  "player_spawn_friendly": false,
   "creature_spawn_probability": 0.08,
   "spawn_costs": {}
 }

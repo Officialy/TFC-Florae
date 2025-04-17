@@ -117,7 +117,7 @@ public abstract class TFCFJoshuaLeavesBlock extends SeasonalPlantBlock implement
         this.wood = wood;
         this.properties = properties;
 
-        lastUpdateTick = Calendars.SERVER.getTicks();
+        lastUpdateTick = 0;// todo Calendars.SERVER.getTicks();
 
         registerDefaultState(stateDefinition.any().setValue(AGE, 0).setValue(FACING, Direction.UP).setValue(PERSISTENT, false).setValue(LIFECYCLE, Lifecycle.HEALTHY));
     }
@@ -245,7 +245,7 @@ public abstract class TFCFJoshuaLeavesBlock extends SeasonalPlantBlock implement
                 if (currentLifecycle != expectedLifecycle && (level.getRawBrightness(pos, 0) >= 11 || Calendars.SERVER.getCalendarDayTime() == level.getDayTime()))
                 {
                     onUpdate(level, pos, state);
-                    lastUpdateTick = Calendars.SERVER.getTicks();
+                    lastUpdateTick = 0;// todo Calendars.SERVER.getTicks();
                 }
             }
         }

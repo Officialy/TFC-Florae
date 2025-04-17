@@ -1,6 +1,0 @@
-{
-  "type": "tfc:chisel",
-  "ingredient": "tfcflorae:rock/cobbled_bricks/peridotite",
-  "result": "tfcflorae:rock/cobbled_bricks/stairs/peridotite",
-  "mode": "stair"
-}

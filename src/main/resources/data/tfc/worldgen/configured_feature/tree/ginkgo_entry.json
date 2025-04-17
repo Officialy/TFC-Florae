@@ -2,10 +2,12 @@
   "__comment__": "This file was automatically created by mcresources",
   "type": "tfc:forest_entry",
   "config": {
-    "min_rain": 240,
-    "max_rain": 550,
-    "min_temp": 6,
-    "max_temp": 20,
+    "climate": {
+      "min_temperature": 6,
+      "max_temperature": 20,
+      "min_rainfall": 240,
+      "max_rainfall": 550
+    },
     "groundcover": [
       {
         "block": "tfcflorae:wood/twig/ginkgo"
@@ -14,8 +16,8 @@
         "block": "tfcflorae:wood/fallen_leaves/ginkgo"
       }
     ],
-    "normal_tree": "tfc:tree/ginkgo",
-    "dead_tree": "tfc:tree/ginkgo_dead",
+    "normal_tree": "tfcflorae:tree/ginkgo",
+    "dead_tree": "tfcflorae:tree/ginkgo_dead",
     "fallen_log": "tfcflorae:wood/log/ginkgo",
     "bush_log": {
       "Name": "tfcflorae:wood/wood/ginkgo",
@@ -25,6 +27,6 @@
       }
     },
     "bush_leaves": "tfcflorae:wood/leaves/ginkgo",
-    "old_growth_tree": "tfc:tree/ginkgo_large"
+    "old_growth_tree": "tfcflorae:tree/ginkgo_large"
   }
 }

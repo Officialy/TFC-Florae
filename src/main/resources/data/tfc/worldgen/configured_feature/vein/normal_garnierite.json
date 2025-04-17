@@ -2,44 +2,81 @@
   "__comment__": "This file was automatically created by mcresources",
   "type": "tfc:cluster_vein",
   "config": {
-    "rarity": 70,
-    "min_y": {
-      "absolute": -32
-    },
-    "max_y": {
-      "absolute": 60
-    },
-    "size": 15,
-    "density": 0.6,
+    "rarity": 25,
+    "density": 0.3,
+    "min_y": -80,
+    "max_y": 0,
+    "size": 18,
+    "random_name": "normal_garnierite",
     "blocks": [
       {
         "replace": [
-          "tfc:rock/raw/gabbro"
+          "tfcflorae:rock/raw/granite"
         ],
         "with": [
           {
-            "weight": 20,
-            "block": "tfc:ore/poor_garnierite/gabbro"
+            "weight": 35,
+            "block": "tfcflorae:ore/poor_garnierite/granite"
           },
           {
-            "weight": 50,
-            "block": "tfc:ore/normal_garnierite/gabbro"
+            "weight": 40,
+            "block": "tfcflorae:ore/normal_garnierite/granite"
           },
           {
-            "weight": 30,
-            "block": "tfc:ore/rich_garnierite/gabbro"
+            "weight": 25,
+            "block": "tfcflorae:ore/rich_garnierite/granite"
+          }
+        ]
+      },
+      {
+        "replace": [
+          "tfcflorae:rock/raw/diorite"
+        ],
+        "with": [
+          {
+            "weight": 35,
+            "block": "tfcflorae:ore/poor_garnierite/diorite"
+          },
+          {
+            "weight": 40,
+            "block": "tfcflorae:ore/normal_garnierite/diorite"
+          },
+          {
+            "weight": 25,
+            "block": "tfcflorae:ore/rich_garnierite/diorite"
+          }
+        ]
+      },
+      {
+        "replace": [
+          "tfcflorae:rock/raw/gabbro"
+        ],
+        "with": [
+          {
+            "weight": 35,
+            "block": "tfcflorae:ore/poor_garnierite/gabbro"
+          },
+          {
+            "weight": 40,
+            "block": "tfcflorae:ore/normal_garnierite/gabbro"
+          },
+          {
+            "weight": 25,
+            "block": "tfcflorae:ore/rich_garnierite/gabbro"
           }
         ]
       }
     ],
     "indicator": {
-      "rarity": 10,
+      "rarity": 12,
+      "depth": 35,
+      "underground_rarity": 1,
+      "underground_count": 0,
       "blocks": [
         {
-          "block": "tfc:ore/small_garnierite"
+          "block": "tfcflorae:ore/small_garnierite"
         }
       ]
-    },
-    "random_name": "normal_garnierite"
+    }
   }
 }

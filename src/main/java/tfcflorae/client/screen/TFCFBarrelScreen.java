@@ -2,6 +2,7 @@ package tfcflorae.client.screen;
 
 import java.util.function.Consumer;
 import com.mojang.blaze3d.vertex.PoseStack;
+import net.dries007.tfc.client.screen.button.BarrelSealButton;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.Tooltip;
@@ -27,7 +28,6 @@ import net.dries007.tfc.util.calendar.Calendars;
 import net.dries007.tfc.util.calendar.ICalendar;
 
 import org.jetbrains.annotations.Nullable;
-import tfcflorae.client.screen.button.TFCFBarrelSealButton;
 import tfcflorae.common.blockentities.TFCFBarrelBlockEntity;
 import tfcflorae.common.blocks.devices.TFCFBarrelBlock;
 import tfcflorae.common.container.TFCFBarrelContainer;
@@ -51,7 +51,7 @@ public class TFCFBarrelScreen extends BlockEntityScreen<TFCFBarrelBlockEntity, T
     public void init()
     {
         super.init();
-        addRenderableWidget(new TFCFBarrelSealButton(blockEntity, getGuiLeft(), getGuiTop(), this.isSealed() ? UNSEAL : SEAL){
+        addRenderableWidget(new BarrelSealButton(blockEntity, getGuiLeft(), getGuiTop(), this.isSealed() ? UNSEAL : SEAL){
            /* @Override
             public void setTooltip(@Nullable Tooltip pTooltip) {
                 renderTooltip(poseStack, *//*isSealed() ? UNSEAL : SEAL,*//* x, y);

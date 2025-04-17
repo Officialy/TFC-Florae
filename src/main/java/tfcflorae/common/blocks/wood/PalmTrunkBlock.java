@@ -102,7 +102,7 @@ public class PalmTrunkBlock extends TFCPalmTrunkBlock implements IBushBlock, Hoe
             {
                 if (currentLifecycle != expectedLifecycle && (level.getRawBrightness(pos, 0) >= 11 || level.isDay()))
                 {
-                    lastUpdateTick = Calendars.SERVER.getTicks();
+                    lastUpdateTick = 0;// todo Calendars.SERVER.getTicks();
                     onUpdate(level, pos, state);
                 }
                 if (getCooldown(level, cooldown))

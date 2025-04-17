@@ -1,5 +1,6 @@
 {
-  "parent": "tfcflorae:block/wood/vertical",
+  "__comment__": "This file was automatically created by mcresources",
+  "parent": "tfc:block/wood/support/vertical",
   "textures": {
     "texture": "tfcflorae:block/wood/sheet/walnut",
     "particle": "tfcflorae:block/wood/sheet/walnut"

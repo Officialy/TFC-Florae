@@ -1,98 +1,71 @@
 {
   "__comment__": "This file was automatically created by mcresources",
-  "type": "tfc:cluster_vein",
+  "type": "tfcflorae:cluster_vein",
   "config": {
     "rarity": 60,
-    "min_y": {
-      "absolute": -32
-    },
-    "max_y": {
-      "absolute": 75
-    },
+    "min_y": -32,
+    "max_y": 75,
     "size": 20,
     "density": 0.6,
     "blocks": [
       {
         "replace": [
-          "tfc:rock/raw/granite"
+          "tfcflorae:rock/raw/granite"
         ],
         "with": [
           {
             "weight": 20,
-            "block": "tfc:ore/poor_cassiterite/granite"
+            "block": "tfcflorae:ore/poor_cassiterite/granite"
           },
           {
             "weight": 50,
-            "block": "tfc:ore/normal_cassiterite/granite"
+            "block": "tfcflorae:ore/normal_cassiterite/granite"
           },
           {
             "weight": 30,
-            "block": "tfc:ore/rich_cassiterite/granite"
+            "block": "tfcflorae:ore/rich_cassiterite/granite"
           },
           {
             "weight": 11,
-            "block": "tfc:ore/topaz/granite"
+            "block": "tfcflorae:ore/topaz/granite"
           }
         ]
       },
       {
         "replace": [
-          "tfc:rock/raw/diorite"
+          "tfcflorae:rock/raw/diorite"
         ],
         "with": [
           {
             "weight": 20,
-            "block": "tfc:ore/poor_cassiterite/diorite"
+            "block": "tfcflorae:ore/poor_cassiterite/diorite"
           },
           {
             "weight": 50,
-            "block": "tfc:ore/normal_cassiterite/diorite"
+            "block": "tfcflorae:ore/normal_cassiterite/diorite"
           },
           {
             "weight": 30,
-            "block": "tfc:ore/rich_cassiterite/diorite"
+            "block": "tfcflorae:ore/rich_cassiterite/diorite"
           }
         ]
       },
       {
         "replace": [
-          "tfc:rock/raw/gabbro"
+          "tfcflorae:rock/raw/gabbro"
         ],
         "with": [
           {
             "weight": 20,
-            "block": "tfc:ore/poor_cassiterite/gabbro"
+            "block": "tfcflorae:ore/poor_cassiterite/gabbro"
           },
           {
             "weight": 50,
-            "block": "tfc:ore/normal_cassiterite/gabbro"
+            "block": "tfcflorae:ore/normal_cassiterite/gabbro"
           },
           {
             "weight": 30,
-            "block": "tfc:ore/rich_cassiterite/gabbro"
-          }
-        ]
-      },
-      {
-        "replace": [
-          "tfcflorae:rock/raw/red_granite"
-        ],
-        "with": [
-          {
-            "weight": 20,
-            "block": "tfcflorae:ore/poor_cassiterite/red_granite"
-          },
-          {
-            "weight": 50,
-            "block": "tfcflorae:ore/normal_cassiterite/red_granite"
-          },
-          {
-            "weight": 30,
-            "block": "tfcflorae:ore/rich_cassiterite/red_granite"
-          },
-          {
-            "weight": 11,
-            "block": "tfcflorae:ore/topaz/red_granite"
+            "block": "tfcflorae:ore/rich_cassiterite/gabbro"
           }
         ]
       },
@@ -133,13 +106,32 @@
             "block": "tfcflorae:ore/rich_cassiterite/foidolite"
           }
         ]
+      },
+      {
+        "replace": [
+          "tfcflorae:rock/raw/porphyry"
+        ],
+        "with": [
+          {
+            "weight": 20,
+            "block": "tfcflorae:ore/poor_cassiterite/porphyry"
+          },
+          {
+            "weight": 50,
+            "block": "tfcflorae:ore/normal_cassiterite/porphyry"
+          },
+          {
+            "weight": 30,
+            "block": "tfcflorae:ore/rich_cassiterite/porphyry"
+          }
+        ]
       }
     ],
     "indicator": {
-      "rarity": 10,
+      "rarity": 12,
       "blocks": [
         {
-          "block": "tfc:ore/small_cassiterite"
+          "block": "tfcflorae:ore/small_cassiterite"
         }
       ]
     },

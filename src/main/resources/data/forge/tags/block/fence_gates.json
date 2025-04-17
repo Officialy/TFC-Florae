@@ -1,0 +1,26 @@
+{
+  "__comment__": "This file was automatically created by mcresources",
+  "replace": false,
+  "values": [
+    "tfcflorae:wood/planks/acacia_fence_gate",
+    "tfcflorae:wood/planks/ash_fence_gate",
+    "tfcflorae:wood/planks/aspen_fence_gate",
+    "tfcflorae:wood/planks/birch_fence_gate",
+    "tfcflorae:wood/planks/blackwood_fence_gate",
+    "tfcflorae:wood/planks/chestnut_fence_gate",
+    "tfcflorae:wood/planks/douglas_fir_fence_gate",
+    "tfcflorae:wood/planks/hickory_fence_gate",
+    "tfcflorae:wood/planks/kapok_fence_gate",
+    "tfcflorae:wood/planks/mangrove_fence_gate",
+    "tfcflorae:wood/planks/maple_fence_gate",
+    "tfcflorae:wood/planks/oak_fence_gate",
+    "tfcflorae:wood/planks/palm_fence_gate",
+    "tfcflorae:wood/planks/pine_fence_gate",
+    "tfcflorae:wood/planks/rosewood_fence_gate",
+    "tfcflorae:wood/planks/sequoia_fence_gate",
+    "tfcflorae:wood/planks/spruce_fence_gate",
+    "tfcflorae:wood/planks/sycamore_fence_gate",
+    "tfcflorae:wood/planks/white_cedar_fence_gate",
+    "tfcflorae:wood/planks/willow_fence_gate"
+  ]
+}

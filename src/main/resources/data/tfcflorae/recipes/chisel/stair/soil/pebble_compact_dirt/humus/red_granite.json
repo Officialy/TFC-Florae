@@ -1,6 +1,0 @@
-{
-  "type": "tfc:chisel",
-  "ingredient": "tfcflorae:pebble_compact_dirt/humus/red_granite",
-  "result": "tfcflorae:pebble_compact_dirt/humus/stairs/red_granite",
-  "mode": "stair"
-}

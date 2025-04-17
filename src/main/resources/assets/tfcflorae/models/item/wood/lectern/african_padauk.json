@@ -1,3 +1,4 @@
 {
-  "parent": "tfcflorae:block/wood/lectern/african_padauk"
+  "__comment__": "This file was automatically created by mcresources",
+  "parent": "tfc:block/wood/lectern/african_padauk"
 }

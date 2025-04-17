@@ -111,7 +111,7 @@ public abstract class PitahayaBlock extends PlantBlock implements ILeavesBlock, 
         this.lifecycle = lifecycle;
         this.productItem = productItem;
 
-        lastUpdateTick = Calendars.SERVER.getTicks();
+        lastUpdateTick = 0;// todo Calendars.SERVER.getTicks();
 
         registerDefaultState(getStateDefinition().any().setValue(FACING, Direction.NORTH).setValue(TOP, false).setValue(LIFECYCLE, Lifecycle.HEALTHY));
     }
@@ -195,7 +195,7 @@ public abstract class PitahayaBlock extends PlantBlock implements ILeavesBlock, 
         if (getLifecycleForCurrentMonth() != getLifecycleForMonth(Calendars.SERVER.getCalendarMonthOfYear()))
         {
             onUpdate(level, pos, state);
-            lastUpdateTick = Calendars.SERVER.getTicks();
+            lastUpdateTick = 0;// todo Calendars.SERVER.getTicks();
         }
         if (random.nextDouble() < TFCConfig.SERVER.plantGrowthChance.get() && state.getValue(AGE) >= 3 && (level.getBlockState(pos.above()).isAir() || EnvironmentHelpers.isWorldgenReplaceable(level.getBlockState(pos.above()))) && 
             (Helpers.isBlock(attachedState, BlockTags.LOGS) || Helpers.isBlock(attachedState, TFCTags.Blocks.WILD_CROP_GROWS_ON)) && (level.getBlockState(pos.below()).is(this) || (Helpers.isBlock(level.getBlockState(pos.below()), TFCTags.Blocks.GRASS_PLANTABLE_ON) || Helpers.isBlock(level.getBlockState(pos.below()), TFCTags.Blocks.BUSH_PLANTABLE_ON) || Helpers.isBlock(level.getBlockState(pos.below()), TFCTags.Blocks.WILD_CROP_GROWS_ON))))

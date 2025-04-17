@@ -96,6 +96,7 @@ public final class TFCFItems
     );
 
     // Rock Stuff
+    public static final Map<TFCFFood, RegistryObject<Item>> FOOD = foodMapper();
 
     public static final Map<TFCFRock, RegistryObject<Item>> BRICKS = Helpers.mapOfKeys(TFCFRock.class, type ->
         register("brick/" + type.name(), ROCK_STUFFS)
@@ -104,7 +105,7 @@ public final class TFCFItems
     // Food
 
     public static final RegistryObject<Item> COCONUT = register("food/coconut", TFCCreativeTabs.FOOD);
-    public static final Map<TFCFFood, RegistryObject<Item>> FOOD = foodMapper();
+
 
     // Wood
 

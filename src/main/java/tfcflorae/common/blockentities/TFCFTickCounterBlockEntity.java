@@ -47,7 +47,7 @@ public class TFCFTickCounterBlockEntity extends TFCBlockEntity
 
     public void resetCounter()
     {
-        lastUpdateTick = Calendars.SERVER.getTicks();
+        lastUpdateTick = 0;// todo Calendars.SERVER.getTicks();
         setChanged();
     }
 

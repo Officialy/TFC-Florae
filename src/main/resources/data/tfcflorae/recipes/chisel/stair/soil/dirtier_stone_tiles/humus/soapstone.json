@@ -1,6 +1,0 @@
-{
-  "type": "tfc:chisel",
-  "ingredient": "tfcflorae:dirtier_stone_tiles/humus/soapstone",
-  "result": "tfcflorae:dirtier_stone_tiles/humus/stairs/soapstone",
-  "mode": "stair"
-}

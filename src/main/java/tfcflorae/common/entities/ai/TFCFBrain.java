@@ -36,14 +36,14 @@ public class TFCFBrain
     public static final DeferredRegister<SensorType<?>> SENSOR_TYPES = DeferredRegister.create(ForgeRegistries.SENSOR_TYPES, TFCFlorae.MOD_ID);
     public static final DeferredRegister<PoiType> POI_TYPES = DeferredRegister.create(ForgeRegistries.POI_TYPES, TFCFlorae.MOD_ID);
 
-    public static final RegistryObject<Activity> SNIFF = registerActivity("sniff");
-    public static final RegistryObject<Activity> INVESTIGATE = registerActivity("investigate");
-    public static final RegistryObject<Activity> ROAR = registerActivity("roar");
-    public static final RegistryObject<Activity> EMERGE = registerActivity("emerge");
-    public static final RegistryObject<Activity> TONGUE = registerActivity("tongue");
-    public static final RegistryObject<Activity> DIG = registerActivity("dig");
-    public static final RegistryObject<Activity> SWIM = registerActivity("swim");
-    public static final RegistryObject<Activity> LAY_SPAWN = registerActivity("lay_spawn");
+    public static final RegistryObject<Activity> SNIFF = registerActivity("snif");
+    public static final RegistryObject<Activity> INVESTIGATE = registerActivity("investigat");
+    public static final RegistryObject<Activity> ROAR = registerActivity("roa");
+    public static final RegistryObject<Activity> EMERGE = registerActivity("emerg");
+    public static final RegistryObject<Activity> TONGUE = registerActivity("tongu");
+    public static final RegistryObject<Activity> DIG = registerActivity("di");
+    public static final RegistryObject<Activity> SWIM = registerActivity("swi");
+    public static final RegistryObject<Activity> LAY_SPAWN = registerActivity("lay_spaw");
 
     public static final RegistryObject<MemoryModuleType<Unit>> IS_IN_WATER_MEMORY = registerMemory("is_in_water", Codec.unit(Unit.INSTANCE));
     public static final RegistryObject<MemoryModuleType<Unit>> IS_PREGNANT = registerMemory("is_pregnant", Codec.unit(Unit.INSTANCE));

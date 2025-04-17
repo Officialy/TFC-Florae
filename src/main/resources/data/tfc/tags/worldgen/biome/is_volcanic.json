@@ -2,13 +2,10 @@
   "__comment__": "This file was automatically created by mcresources",
   "replace": false,
   "values": [
-    "tfc:alpine_mountains",
-    "tfc:alpine_highlands",
-    "tfc:calderas",
-    "tfc:canyon_river",
-    "tfc:thermal_canyons",
-    "tfc:seamounts",
-    "tfc:guyots",
-    "tfc:barrier_reef"
+    "tfc:canyons",
+    "tfc:volcanic_mountains",
+    "tfc:volcanic_oceanic_mountains",
+    "tfc:volcanic_mountain_lake",
+    "tfc:volcanic_oceanic_mountain_lake"
   ]
 }

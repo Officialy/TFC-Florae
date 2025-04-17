@@ -3,15 +3,15 @@
   "type": "tfc:random_tree",
   "config": {
     "structures": [
-      "tfc:ginkgo_large/1",
-      "tfc:ginkgo_large/2",
-      "tfc:ginkgo_large/3"
+      "tfcflorae:ginkgo_large/1",
+      "tfcflorae:ginkgo_large/2",
+      "tfcflorae:ginkgo_large/3"
     ],
     "radius": 2,
     "placement": {
       "width": 2,
       "height": 9,
-      "allow_submerged": false
+      "allow_submerged": true
     }
   }
 }

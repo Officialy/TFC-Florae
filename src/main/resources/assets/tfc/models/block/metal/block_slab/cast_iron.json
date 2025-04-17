@@ -1,0 +1,8 @@
+{
+  "__comment__": "This file was automatically created by mcresources",
+  "parent": "block/block",
+  "textures": {
+    "all": "tfc:block/metal/full/cast_iron",
+    "particle": "tfc:block/metal/full/cast_iron"
+  }
+}

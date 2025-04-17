@@ -1,6 +1,6 @@
 {
   "__comment__": "This file was automatically created by mcresources",
-  "feature": "tfc:mossy_boulder",
+  "feature": "tfcflorae:mossy_boulder",
   "placement": [
     {
       "type": "minecraft:rarity_filter",

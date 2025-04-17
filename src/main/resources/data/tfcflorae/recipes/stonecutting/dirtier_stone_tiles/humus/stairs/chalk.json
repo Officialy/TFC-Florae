@@ -1,9 +1,0 @@
-{
-  "__comment__": "This file was automatically created by mcresources",
-  "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "tfcflorae:dirtier_stone_tiles/humus/chalk"
-  },
-  "result": "tfcflorae:dirtier_stone_tiles/humus/stairs/chalk",
-  "count": 1
-}

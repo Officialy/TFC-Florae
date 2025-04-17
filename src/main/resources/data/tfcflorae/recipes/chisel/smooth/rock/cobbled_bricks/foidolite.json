@@ -1,6 +1,0 @@
-{
-  "type": "tfc:chisel",
-  "ingredient": "tfcflorae:rock/cobble/foidolite",
-  "result": "tfcflorae:rock/cobbled_bricks/foidolite",
-  "mode": "smooth"
-}

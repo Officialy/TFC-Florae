@@ -2,10 +2,12 @@
   "__comment__": "This file was automatically created by mcresources",
   "type": "tfc:forest_entry",
   "config": {
-    "min_rain": 270,
-    "max_rain": 500,
-    "min_temp": 23,
-    "max_temp": 42,
+    "climate": {
+      "min_temperature": 23,
+      "max_temperature": 42,
+      "min_rainfall": 270,
+      "max_rainfall": 500
+    },
     "groundcover": [
       {
         "block": "tfcflorae:wood/twig/mahogany"
@@ -14,8 +16,8 @@
         "block": "tfcflorae:wood/fallen_leaves/mahogany"
       }
     ],
-    "normal_tree": "tfc:tree/mahogany",
-    "dead_tree": "tfc:tree/mahogany_dead",
+    "normal_tree": "tfcflorae:tree/mahogany",
+    "dead_tree": "tfcflorae:tree/mahogany_dead",
     "fallen_log": "tfcflorae:wood/log/mahogany",
     "bush_log": {
       "Name": "tfcflorae:wood/wood/mahogany",
@@ -25,6 +27,6 @@
       }
     },
     "bush_leaves": "tfcflorae:wood/leaves/mahogany",
-    "old_growth_tree": "tfc:tree/mahogany_large"
+    "old_growth_tree": "tfcflorae:tree/mahogany_large"
   }
 }

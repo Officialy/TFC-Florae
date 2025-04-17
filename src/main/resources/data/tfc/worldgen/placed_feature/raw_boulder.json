@@ -1,6 +1,6 @@
 {
   "__comment__": "This file was automatically created by mcresources",
-  "feature": "tfc:raw_boulder",
+  "feature": "tfcflorae:raw_boulder",
   "placement": [
     {
       "type": "minecraft:rarity_filter",

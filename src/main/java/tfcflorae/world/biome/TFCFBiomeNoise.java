@@ -1,7 +1,5 @@
 package tfcflorae.world.biome;
 
-
-
 import net.minecraft.util.Mth;
 
 import net.dries007.tfc.world.BiomeNoiseSampler;

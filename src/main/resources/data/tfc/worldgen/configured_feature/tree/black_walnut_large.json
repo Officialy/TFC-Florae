@@ -3,15 +3,15 @@
   "type": "tfc:random_tree",
   "config": {
     "structures": [
-      "tfc:black_walnut_large/1",
-      "tfc:black_walnut_large/2",
-      "tfc:black_walnut_large/3"
+      "tfcflorae:black_walnut_large/1",
+      "tfcflorae:black_walnut_large/2",
+      "tfcflorae:black_walnut_large/3"
     ],
     "radius": 2,
     "placement": {
       "width": 2,
       "height": 9,
-      "allow_submerged": false
+      "allow_submerged": true
     }
   }
 }

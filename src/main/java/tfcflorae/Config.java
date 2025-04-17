@@ -24,7 +24,9 @@ public class Config
     private static <C> C register(ModConfig.Type type, Function<ForgeConfigSpec.Builder, C> factory)
     {
         Pair<C, ForgeConfigSpec> specPair = new ForgeConfigSpec.Builder().configure(factory);
-        if (!Helpers.BOOTSTRAP_ENVIRONMENT) ModLoadingContext.get().registerConfig(type, specPair.getRight());
+        if (!Helpers.BOOTSTRAP_ENVIRONMENT) {
+            ModLoadingContext.get().registerConfig(type, specPair.getRight());
+        }
         return specPair.getLeft();
     }
 

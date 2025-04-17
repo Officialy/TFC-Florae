@@ -2,10 +2,12 @@
   "__comment__": "This file was automatically created by mcresources",
   "type": "tfc:forest_entry",
   "config": {
-    "min_rain": 70,
-    "max_rain": 220,
-    "min_temp": 19,
-    "max_temp": 50,
+    "climate": {
+      "min_temperature": 19,
+      "max_temperature": 50,
+      "min_rainfall": 70,
+      "max_rainfall": 220
+    },
     "groundcover": [
       {
         "block": "tfcflorae:wood/twig/fever"
@@ -14,8 +16,8 @@
         "block": "tfcflorae:wood/fallen_leaves/fever"
       }
     ],
-    "normal_tree": "tfc:tree/fever",
-    "dead_tree": "tfc:tree/fever_dead",
+    "normal_tree": "tfcflorae:tree/fever",
+    "dead_tree": "tfcflorae:tree/fever_dead",
     "fallen_log": "tfcflorae:wood/log/fever",
     "bush_log": {
       "Name": "tfcflorae:wood/wood/fever",
@@ -25,6 +27,6 @@
       }
     },
     "bush_leaves": "tfcflorae:wood/leaves/fever",
-    "old_growth_tree": "tfc:tree/fever_large"
+    "old_growth_tree": "tfcflorae:tree/fever_large"
   }
 }

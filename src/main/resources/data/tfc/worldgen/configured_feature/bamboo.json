@@ -1,5 +1,6 @@
 {
-  "type": "tfcflorae:bamboo",
+  "__comment__": "This file was automatically created by mcresources",
+  "type": "minecraft:bamboo",
   "config": {
     "probability": 0.2
   }

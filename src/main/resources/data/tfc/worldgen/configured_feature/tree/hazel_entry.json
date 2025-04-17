@@ -2,10 +2,12 @@
   "__comment__": "This file was automatically created by mcresources",
   "type": "tfc:forest_entry",
   "config": {
-    "min_rain": 60,
-    "max_rain": 400,
-    "min_temp": -10,
-    "max_temp": 14,
+    "climate": {
+      "min_temperature": -10,
+      "max_temperature": 14,
+      "min_rainfall": 60,
+      "max_rainfall": 400
+    },
     "groundcover": [
       {
         "block": "tfcflorae:wood/twig/hazel"
@@ -14,8 +16,8 @@
         "block": "tfcflorae:wood/fallen_leaves/hazel"
       }
     ],
-    "normal_tree": "tfc:tree/hazel",
-    "dead_tree": "tfc:tree/hazel_dead",
+    "normal_tree": "tfcflorae:tree/hazel",
+    "dead_tree": "tfcflorae:tree/hazel_dead",
     "fallen_log": "tfcflorae:wood/log/hazel",
     "bush_log": {
       "Name": "tfcflorae:wood/wood/hazel",
@@ -25,6 +27,6 @@
       }
     },
     "bush_leaves": "tfcflorae:wood/leaves/hazel",
-    "old_growth_tree": "tfc:tree/hazel_large"
+    "old_growth_tree": "tfcflorae:tree/hazel_large"
   }
 }

@@ -4,12 +4,8 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 
 import com.mojang.serialization.Codec;
-import net.minecraft.core.Registry;
-import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.TreeFeature;
 import net.minecraft.world.level.levelgen.feature.configurations.*;
@@ -41,6 +37,8 @@ import static tfcflorae.TFCFlorae.MOD_ID;
 public class TFCFFeatures
 {
     public static final DeferredRegister<Feature<?>> FEATURES = DeferredRegister.create(ForgeRegistries.FEATURES, MOD_ID);
+    public static final DeferredRegister<ConfiguredFeature<?, ?>> CONFIGURED_FEATURES = DeferredRegister.create(Registries.CONFIGURED_FEATURE, MOD_ID);
+
     public static final TFCFAbstractDeferredRegistry<TrunkPlacerType<?>> TRUNK_DECOR = TFCFDeferredRegistry.create(BuiltInRegistries.TRUNK_PLACER_TYPE, MOD_ID);
     public static final TFCFAbstractDeferredRegistry<TreeDecoratorType<?>> LEAF_DECOR = TFCFDeferredRegistry.create(BuiltInRegistries.TREE_DECORATOR_TYPE, MOD_ID);
 
@@ -109,8 +107,8 @@ public class TFCFFeatures
         return FEATURES.register(name, () -> factory.apply(codec));
     }
 
-    public static <FC extends FeatureConfiguration, F extends Feature<FC>> ResourceKey<ConfiguredFeature<FC, ?>> config(String key, F feature, FC configuration)
+    public static  <FC extends FeatureConfiguration, F extends Feature<FC>> RegistryObject<ConfiguredFeature<FC, F>> config(String key, F feature, FC configuration)
     {
-        return null;// Registry.register(Registries.CONFIGURED_FEATURE, new ResourceLocation(MOD_ID + ":" + key), new ConfiguredFeature<>(feature, configuration));
+        return CONFIGURED_FEATURES.register(MOD_ID + ":" + key, () -> new ConfiguredFeature<>(feature, configuration));
     }
 }

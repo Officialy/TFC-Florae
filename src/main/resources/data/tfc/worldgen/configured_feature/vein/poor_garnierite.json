@@ -1,90 +1,67 @@
 {
   "__comment__": "This file was automatically created by mcresources",
-  "type": "tfc:cluster_vein",
+  "type": "tfcflorae:cluster_vein",
   "config": {
     "rarity": 100,
-    "min_y": {
-      "absolute": 0
-    },
-    "max_y": {
-      "absolute": 100
-    },
+    "min_y": 0,
+    "max_y": 100,
     "size": 12,
     "density": 0.4,
     "blocks": [
       {
         "replace": [
-          "tfc:rock/raw/granite"
+          "tfcflorae:rock/raw/granite"
         ],
         "with": [
           {
             "weight": 60,
-            "block": "tfc:ore/poor_garnierite/granite"
+            "block": "tfcflorae:ore/poor_garnierite/granite"
           },
           {
             "weight": 30,
-            "block": "tfc:ore/normal_garnierite/granite"
+            "block": "tfcflorae:ore/normal_garnierite/granite"
           },
           {
             "weight": 10,
-            "block": "tfc:ore/rich_garnierite/granite"
+            "block": "tfcflorae:ore/rich_garnierite/granite"
           }
         ]
       },
       {
         "replace": [
-          "tfc:rock/raw/diorite"
+          "tfcflorae:rock/raw/diorite"
         ],
         "with": [
           {
             "weight": 60,
-            "block": "tfc:ore/poor_garnierite/diorite"
+            "block": "tfcflorae:ore/poor_garnierite/diorite"
           },
           {
             "weight": 30,
-            "block": "tfc:ore/normal_garnierite/diorite"
+            "block": "tfcflorae:ore/normal_garnierite/diorite"
           },
           {
             "weight": 10,
-            "block": "tfc:ore/rich_garnierite/diorite"
+            "block": "tfcflorae:ore/rich_garnierite/diorite"
           }
         ]
       },
       {
         "replace": [
-          "tfc:rock/raw/gabbro"
+          "tfcflorae:rock/raw/gabbro"
         ],
         "with": [
           {
             "weight": 60,
-            "block": "tfc:ore/poor_garnierite/gabbro"
+            "block": "tfcflorae:ore/poor_garnierite/gabbro"
           },
           {
             "weight": 30,
-            "block": "tfc:ore/normal_garnierite/gabbro"
+            "block": "tfcflorae:ore/normal_garnierite/gabbro"
           },
           {
             "weight": 10,
-            "block": "tfc:ore/rich_garnierite/gabbro"
-          }
-        ]
-      },
-      {
-        "replace": [
-          "tfcflorae:rock/raw/red_granite"
-        ],
-        "with": [
-          {
-            "weight": 60,
-            "block": "tfcflorae:ore/poor_garnierite/red_granite"
-          },
-          {
-            "weight": 30,
-            "block": "tfcflorae:ore/normal_garnierite/red_granite"
-          },
-          {
-            "weight": 10,
-            "block": "tfcflorae:ore/rich_garnierite/red_granite"
+            "block": "tfcflorae:ore/rich_garnierite/gabbro"
           }
         ]
       },
@@ -125,13 +102,32 @@
             "block": "tfcflorae:ore/rich_garnierite/foidolite"
           }
         ]
+      },
+      {
+        "replace": [
+          "tfcflorae:rock/raw/porphyry"
+        ],
+        "with": [
+          {
+            "weight": 60,
+            "block": "tfcflorae:ore/poor_garnierite/porphyry"
+          },
+          {
+            "weight": 30,
+            "block": "tfcflorae:ore/normal_garnierite/porphyry"
+          },
+          {
+            "weight": 10,
+            "block": "tfcflorae:ore/rich_garnierite/porphyry"
+          }
+        ]
       }
     ],
     "indicator": {
-      "rarity": 10,
+      "rarity": 12,
       "blocks": [
         {
-          "block": "tfc:ore/small_garnierite"
+          "block": "tfcflorae:ore/small_garnierite"
         }
       ]
     },

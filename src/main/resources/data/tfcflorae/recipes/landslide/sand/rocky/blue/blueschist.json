@@ -1,7 +1,0 @@
-{
-  "type": "tfc:landslide",
-  "ingredient": [
-    "tfcflorae:sand/rocky/blue/blueschist"
-  ],
-  "result": "tfcflorae:sand/rocky/blue/blueschist"
-}
